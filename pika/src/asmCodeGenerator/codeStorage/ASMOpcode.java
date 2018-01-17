@@ -150,7 +150,7 @@ public enum ASMOpcode {
 	// any line whose first character is "#" is treated as a comment (and ignored).
 	// any string after the opcode and (optional) argument on a line is considered a comment.
 
-	public static final int ASMIntSize = 4;
+	public static final int ASMIntSize = 4;	
 	public static final int ASMFloatSize = 8;
 	
 	

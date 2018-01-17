@@ -1,4 +1,4 @@
-package applications.tests;
+ package applications.tests;
 
 import static applications.tests.FixtureDefinitions.SEMANTIC_INPUT_FILENAME;
 import static applications.tests.FixtureDefinitions.SEMANTIC_EXPECTED_FILENAME;
