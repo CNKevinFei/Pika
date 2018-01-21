@@ -59,4 +59,10 @@ public class LocatedChar {
 	public boolean isWhitespace() {
 		return Character.isWhitespace(character);
 	}
+	public boolean isCommentStart() {
+		return isChar('#');
+	}
+	public boolean isCommentEnd() {
+		return isChar('#');
+	}
 }

@@ -1,13 +1,2 @@
-/applications/
-/asmCodeGenerator/
-/inputHandler/
 /lexicalAnalyzer/
-/logging/
-/optimizer/
-/parseTree/
-/parser/
-/semanticAnalyzer/
-/symbolTable/
-/tests/
-/tokens/
-/test.class
+/inputHandler/

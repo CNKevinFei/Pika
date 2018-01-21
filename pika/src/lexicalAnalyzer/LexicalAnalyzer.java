@@ -41,6 +41,9 @@ public class LexicalAnalyzer extends ScannerImp implements Scanner {
 		else if(ch.isLowerCase()) {
 			return scanIdentifier(ch);
 		}
+		else if(ch.isCommentStart()) {
+			return scanComment(ch);
+		}
 		else if(isPunctuatorStart(ch)) {
 			return PunctuatorScanner.scan(ch, input);
 		}
@@ -108,7 +111,26 @@ public class LexicalAnalyzer extends ScannerImp implements Scanner {
 		input.pushback(c);
 	}
 	
+	//////////////////////////////////////////////////////////////////////////////
+	// Comment lexical analysis
 	
+	private Token scanComment(LocatedChar firstChar) {
+		LocatedChar c = input.next();
+		int startLine = firstChar.getLocation().getLineNumber();
+		int currentLine = startLine;
+		
+		
+		while((!c.isCommentEnd()) && startLine == currentLine) {
+			c=input.next();
+			currentLine = c.getLocation().getLineNumber();
+		}
+		
+		if(!c.isCommentEnd())
+			input.pushback(c);
+		
+		return findNextToken();
+		
+	}
 	//////////////////////////////////////////////////////////////////////////////
 	// Punctuator lexical analysis	
 	// old method left in to show a simple scanning method.
