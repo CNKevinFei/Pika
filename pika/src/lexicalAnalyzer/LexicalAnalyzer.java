@@ -14,6 +14,7 @@ import tokens.NullToken;
 import tokens.IntegerToken;
 import tokens.FloatToken;
 import tokens.StringToken;
+import tokens.CharacterToken;
 import tokens.Token;
 
 import static lexicalAnalyzer.PunctuatorScanningAids.*;
@@ -48,9 +49,9 @@ public class LexicalAnalyzer extends ScannerImp implements Scanner {
 		else if(ch.isString()) {
 			return scanString(ch);
 		}
-		/*else if(ch.isChracter()) {
-			return scanChracter(ch);
-		}*/
+		else if(ch.isChracter()) {
+			return scanCharacter(ch);
+		}
 		else if(ch.isLetter()) {
 			return scanIdentifier(ch);
 		}
@@ -188,7 +189,16 @@ public class LexicalAnalyzer extends ScannerImp implements Scanner {
 		
 	}
 	
+	//////////////////////////////////////////////////////////////////////////////
+	// Character lexical analysis
 	
+	private Token scanCharacter(LocatedChar firstChar) {
+		char character = input.next().getCharacter();
+		LocatedChar end = input.next();		
+		
+		return CharacterToken.make(firstChar.getLocation(), character);
+		
+	}
 	//////////////////////////////////////////////////////////////////////////////
 	// Identifier and keyword lexical analysis	
 
