@@ -52,7 +52,7 @@ public class LexicalAnalyzer extends ScannerImp implements Scanner {
 		else if(ch.isChracter()) {
 			return scanCharacter(ch);
 		}
-		else if(ch.isLetter()) {
+		else if(ch.isIdentifierBeginning()) {
 			return scanIdentifier(ch);
 		}
 		else if(ch.isCommentStart()) {
@@ -205,7 +205,7 @@ public class LexicalAnalyzer extends ScannerImp implements Scanner {
 	private Token scanIdentifier(LocatedChar firstChar) {
 		StringBuffer buffer = new StringBuffer();
 		buffer.append(firstChar.getCharacter());
-		appendSubsequentLowercase(buffer);
+		appendSubsequentLetter(buffer);
 
 		String lexeme = buffer.toString();
 		if(Keyword.isAKeyword(lexeme)) {
@@ -215,9 +215,9 @@ public class LexicalAnalyzer extends ScannerImp implements Scanner {
 			return IdentifierToken.make(firstChar.getLocation(), lexeme);
 		}
 	}
-	private void appendSubsequentLowercase(StringBuffer buffer) {
+	private void appendSubsequentLetter(StringBuffer buffer) {
 		LocatedChar c = input.next();
-		while(c.isLowerCase()) {
+		while(c.isLetter()) {
 			buffer.append(c.getCharacter());
 			c = input.next();
 		}
