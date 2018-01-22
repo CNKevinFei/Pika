@@ -4,6 +4,7 @@ exec {
 	const nickels  :=  7.
 	const pennies  := 17.
 	const string := "hello kitty*const print \n".
+	const char := ^t^.
     
 	const value := quarters * -25 +
     			 dimes    * 10 +
@@ -14,7 +15,7 @@ exec {
 	const ncoins := quarters + dimes + nickels + pennies.
 	print ncoins, _n_.
     
-	const moredimes := dimes > nickels.
+	const moredimes := dimes >= nickels.
 	print moredimes, _n_.
 
 	const boot := _true_.

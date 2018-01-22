@@ -3,3 +3,5 @@
 /tokens/
 /parseTree/
 /parser/
+/asmCodeGenerator/
+/semanticAnalyzer/
