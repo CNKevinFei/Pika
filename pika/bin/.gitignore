@@ -1,2 +1,5 @@
 /lexicalAnalyzer/
 /inputHandler/
+/tokens/
+/parseTree/
+/parser/

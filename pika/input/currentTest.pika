@@ -1,10 +1,11 @@
 exec {
-	const quarters :=  6.
+	const quarters :=  -6.
 	const dimes    :=  3.
 	const nickels  :=  7.
 	const pennies  := 17.
+	const string := "hello kitty*const print \n".
     
-	const value := quarters * 25 +
+	const value := quarters * -25 +
     			 dimes    * 10 +
     			 nickels  *  5 +
     			 pennies.
@@ -17,7 +18,7 @@ exec {
 	print moredimes, _n_.
 
 	const boot := _true_.
-	const boof := _false_.
+	const boof := _true_.
     
 	print boot; boof, _n_.
 	print boot, boof, _n_.

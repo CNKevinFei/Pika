@@ -11,12 +11,16 @@ import inputHandler.TextLocation;
 import tokens.IdentifierToken;
 import tokens.LextantToken;
 import tokens.NullToken;
-import tokens.NumberToken;
+import tokens.IntegerToken;
+import tokens.FloatToken;
+import tokens.StringToken;
 import tokens.Token;
 
 import static lexicalAnalyzer.PunctuatorScanningAids.*;
 
 public class LexicalAnalyzer extends ScannerImp implements Scanner {
+	private boolean isLastPunctuator = false;
+	
 	public static LexicalAnalyzer make(String filename) {
 		InputHandler handler = InputHandler.fromFilename(filename);
 		PushbackCharStream charStream = PushbackCharStream.make(handler);
@@ -34,17 +38,27 @@ public class LexicalAnalyzer extends ScannerImp implements Scanner {
 	@Override
 	protected Token findNextToken() {
 		LocatedChar ch = nextNonWhitespaceChar();
+		boolean tem = isLastPunctuator;
 		
-		if(ch.isDigit()) {
+		isLastPunctuator = false;
+		
+		if(ch.isDigit() || (ch.isSign()&&tem) ||ch.isChar('.')) {
 			return scanNumber(ch);
 		}
-		else if(ch.isLowerCase()) {
+		else if(ch.isString()) {
+			return scanString(ch);
+		}
+		/*else if(ch.isChracter()) {
+			return scanChracter(ch);
+		}*/
+		else if(ch.isLetter()) {
 			return scanIdentifier(ch);
 		}
 		else if(ch.isCommentStart()) {
 			return scanComment(ch);
 		}
 		else if(isPunctuatorStart(ch)) {
+			isLastPunctuator = true;
 			return PunctuatorScanner.scan(ch, input);
 		}
 		else if(isEndOfInput(ch)) {
@@ -67,15 +81,49 @@ public class LexicalAnalyzer extends ScannerImp implements Scanner {
 	
 	
 	//////////////////////////////////////////////////////////////////////////////
-	// Integer lexical analysis	
+	// Integer/Float lexical analysis	
 
 	private Token scanNumber(LocatedChar firstChar) {
 		StringBuffer buffer = new StringBuffer();
+		LocatedChar point = firstChar;
+		boolean isInt = true;
+		
 		buffer.append(firstChar.getCharacter());
 		appendSubsequentDigits(buffer);
+		point = appendPoint(buffer);
+		appendSubsequentDigits(buffer);
 		
-		return NumberToken.make(firstChar.getLocation(), buffer.toString());
+		if(point!=null || firstChar.isChar('.'))
+			isInt = false;
+		
+		if(buffer.charAt(buffer.length()-1)=='.') {
+			if(point==null)
+				input.pushback(firstChar);
+			else
+				input.pushback(point);
+			
+			isInt = true;
+			
+			buffer = buffer.deleteCharAt(buffer.length()-1);
+		}
+		
+		if(buffer.length()==0) {
+			firstChar = input.next();
+		
+			return PunctuatorScanner.scan(firstChar, input);
+		}
+		
+		else if(isInt) {
+			return IntegerToken.make(firstChar.getLocation(), buffer.toString());
+		}
+		else {
+			appendExponent(buffer);
+			
+			return FloatToken.make(firstChar.getLocation(), buffer.toString());
+		}
+		
 	}
+	
 	private void appendSubsequentDigits(StringBuffer buffer) {
 		LocatedChar c = input.next();
 		while(c.isDigit()) {
@@ -83,6 +131,61 @@ public class LexicalAnalyzer extends ScannerImp implements Scanner {
 			c = input.next();
 		}
 		input.pushback(c);
+	}
+	
+	
+	private LocatedChar appendPoint(StringBuffer buffer) {
+		LocatedChar c = input.next();
+		//System.out.println(c.getCharacter());
+		if(c.isChar('.'))
+			buffer.append(c.getCharacter());
+		else {
+			input.pushback(c);
+			c = null;
+		}
+			
+		return c;
+	}
+	
+	private void appendExponent(StringBuffer buffer) {
+		LocatedChar c = input.next();
+		
+		if(c.isChar('E')) {
+			buffer.append(c.getCharacter());
+			
+			c = input.next();
+			if(c.isChar('+') | c.isChar('-'))
+				buffer.append(c.getCharacter());
+			else
+				input.pushback(c);
+			
+			appendSubsequentDigits(buffer);
+		}
+		else
+			input.pushback(c);
+	}
+	
+	
+	//////////////////////////////////////////////////////////////////////////////
+	// String lexical analysis
+	
+	private Token scanString(LocatedChar firstChar) {
+		StringBuffer buffer = new StringBuffer();
+		appendCharacter(buffer);
+		
+		return StringToken.make(firstChar.getLocation(), buffer.toString());
+	}
+	
+	private void appendCharacter(StringBuffer buffer) {
+		LocatedChar c = input.next();
+		
+		while(!c.isString())
+		{
+			buffer.append(c.getCharacter());
+			c = input.next();
+		}
+			
+		
 	}
 	
 	
