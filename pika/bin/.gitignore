@@ -1,8 +1,2 @@
-/lexicalAnalyzer/
-/inputHandler/
-/tokens/
 /parseTree/
 /parser/
-/asmCodeGenerator/
-/semanticAnalyzer/
-/applications/

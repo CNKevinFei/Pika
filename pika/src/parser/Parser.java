@@ -8,6 +8,7 @@ import parseTree.nodeTypes.BinaryOperatorNode;
 import parseTree.nodeTypes.BooleanConstantNode;
 import parseTree.nodeTypes.MainBlockNode;
 import parseTree.nodeTypes.DeclarationNode;
+import parseTree.nodeTypes.AssignmentStatementNode;
 import parseTree.nodeTypes.ErrorNode;
 import parseTree.nodeTypes.IdentifierNode;
 import parseTree.nodeTypes.IntegerConstantNode;
@@ -104,6 +105,12 @@ public class Parser {
 		if(startsDeclaration(nowReading)) {
 			return parseDeclaration();
 		}
+		if(startsMainBlock(nowReading)) {
+			return parseMainBlock();
+		}
+		if(startsAssignmentStatement(nowReading)) {
+			return parseAssignmentStatement();
+		}
 		if(startsPrintStatement(nowReading)) {
 			return parsePrintStatement();
 		}
@@ -111,7 +118,9 @@ public class Parser {
 	}
 	private boolean startsStatement(Token token) {
 		return startsPrintStatement(token) ||
-			   startsDeclaration(token);
+			   startsDeclaration(token) ||
+			   startsMainBlock(token)||
+			   startsAssignmentStatement(token);
 	}
 	
 	// printStmt -> PRINT printExpressionList .
@@ -211,7 +220,28 @@ public class Parser {
 		return token.isLextant(Keyword.CONST) || token.isLextant(Keyword.VAR);
 	}
 
-
+	// Assignment Statement
+	private ParseNode parseAssignmentStatement() {
+		if(!startsAssignmentStatement(nowReading)) {
+			syntaxErrorNode("assignment statement");
+		}
+		
+		ParseNode leftIdentifier = parseIdentifier();
+		Token assign = nowReading;
+		expect(Punctuator.ASSIGN);
+		
+		if(!startsExpression(nowReading)) {
+			syntaxErrorNode("expression");
+		}
+		ParseNode rightExpression = parseExpression();
+		readToken();
+		System.out.println(nowReading.fullString());
+		return AssignmentStatementNode.withChildren(assign, leftIdentifier, rightExpression);
+	}
+	
+	private boolean startsAssignmentStatement(Token token) {
+		return startsIdentifier(token);
+	}
 	
 	///////////////////////////////////////////////////////////
 	// expressions

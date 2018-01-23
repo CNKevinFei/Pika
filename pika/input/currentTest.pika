@@ -7,12 +7,19 @@ exec {
 	const chr := ^t^.
 	var VArIble_$098 := -6.1E-3.
     
+    quarters := 9 + (5+3).
 	const value := quarters / 25 -
     			 dimes    / 10 +
     			 nickels  /  5 +
     			 pennies.
 	print value, _n_.
-    #
+    {
+    	const dimes    :=  3.
+		const nickels  :=  7.
+		const pennies  := 17.
+		const str := "hello kitty*const print \n".
+		const chr := ^t^.
+    }
 	const ncoins := quarters + dimes + nickels + pennies.
 	print ncoins, _n_.
     
