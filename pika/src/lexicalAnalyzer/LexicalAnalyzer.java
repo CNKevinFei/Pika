@@ -59,8 +59,11 @@ public class LexicalAnalyzer extends ScannerImp implements Scanner {
 			return scanComment(ch);
 		}
 		else if(isPunctuatorStart(ch)) {
-			isLastPunctuator = true;
-			return PunctuatorScanner.scan(ch, input);
+			Token token = PunctuatorScanner.scan(ch, input);
+			if(!token.isLextant(Punctuator.CLOSE_BRACKET, Punctuator.CLOSE_PARENTHESES)) {
+				isLastPunctuator = true;
+			}
+			return token;
 		}
 		else if(isEndOfInput(ch)) {
 			return NullToken.make(ch.getLocation());
