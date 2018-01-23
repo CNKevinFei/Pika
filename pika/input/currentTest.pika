@@ -30,5 +30,5 @@ exec {
 	const boof := _true_.
     
 	print boot; boof, _n_.
-	print boot, boof, _n_.
+	print boot, boof, _n_, _t_.
 }

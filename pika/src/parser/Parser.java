@@ -17,6 +17,7 @@ import parseTree.nodeTypes.CharConstantNode;
 import parseTree.nodeTypes.StringConstantNode;
 import parseTree.nodeTypes.TypeConstantNode;
 import parseTree.nodeTypes.NewlineNode;
+import parseTree.nodeTypes.TabNode;
 import parseTree.nodeTypes.PrintStatementNode;
 import parseTree.nodeTypes.ProgramNode;
 import parseTree.nodeTypes.SpaceNode;
@@ -165,10 +166,15 @@ public class Parser {
 			ParseNode child = new NewlineNode(previouslyRead);
 			parent.appendChild(child);
 		}
+		else if(nowReading.isLextant(Keyword.TAB)) {
+			readToken();
+			ParseNode child = new TabNode(previouslyRead);
+			parent.appendChild(child);
+		}
 		// else we interpret the printExpression as epsilon, and do nothing
 	}
 	private boolean startsPrintExpression(Token token) {
-		return startsExpression(token) || token.isLextant(Keyword.NEWLINE) ;
+		return startsExpression(token) || token.isLextant(Keyword.NEWLINE) || token.isLextant(Keyword.TAB) ;
 	}
 	
 	
@@ -198,6 +204,7 @@ public class Parser {
 	private boolean startsPrintSeparator(Token token) {
 		return token.isLextant(Punctuator.SEPARATOR, Punctuator.SPACE) ;
 	}
+	
 	
 	
 	// declaration -> CONST identifier := expression or VAR identifier := expression.
