@@ -242,7 +242,7 @@ public class Parser {
 		}
 		ParseNode rightExpression = parseExpression();
 		readToken();
-		System.out.println(nowReading.fullString());
+		
 		return AssignmentStatementNode.withChildren(assign, leftIdentifier, rightExpression);
 	}
 	
