@@ -1,2 +1,6 @@
 /parseTree/
 /parser/
+/semanticAnalyzer/
+/asmCodeGenerator/
+/symbolTable/
+/applications/

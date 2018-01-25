@@ -1,0 +1,10 @@
+exec {
+	var x := ^g^ .
+
+	{
+		var y := 16 + 5.
+
+	}
+	print x, _t_.
+	x := "hello".
+}

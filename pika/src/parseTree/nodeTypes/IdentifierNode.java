@@ -2,6 +2,7 @@ package parseTree.nodeTypes;
 
 import parseTree.ParseNode;
 import parseTree.ParseNodeVisitor;
+import lexicalAnalyzer.Keyword;
 import logging.PikaLogger;
 import symbolTable.Binding;
 import symbolTable.Scope;
@@ -10,6 +11,7 @@ import tokens.Token;
 
 public class IdentifierNode extends ParseNode {
 	private Binding binding;
+	private Token conOrVar;
 	private Scope declarationScope;
 
 	public IdentifierNode(Token token) {
@@ -40,6 +42,12 @@ public class IdentifierNode extends ParseNode {
 	}
 	public Binding getBinding() {
 		return binding;
+	}
+	public void setConOrVar(Token token) {
+		this.conOrVar = token;
+	}
+	public Token getConOrVar() {
+		return conOrVar;
 	}
 	
 ////////////////////////////////////////////////////////////
@@ -73,5 +81,15 @@ public class IdentifierNode extends ParseNode {
 		
 	public void accept(ParseNodeVisitor visitor) {
 		visitor.visit(this);
+	}
+
+///////////////////////////////////////////////////////////
+// satisfy the conditions for assignment
+	
+	public boolean satisfy(ParseNode value) {
+		if(conOrVar.isLextant(Keyword.VAR) && this.getType() == value.getType())
+			return true;
+		
+		return false;
 	}
 }

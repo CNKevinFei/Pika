@@ -35,8 +35,8 @@ public class PikaSemanticChecker extends PikaApplication {
 	public static void checkFileSemantics(String filename, PrintStream out) throws FileNotFoundException {
 		Scanner scanner         = LexicalAnalyzer.make(filename);
 		ParseNode syntaxTree    = Parser.parse(scanner);
-		//ParseNode decoratedTree = SemanticAnalyzer.analyze(syntaxTree);
+		ParseNode decoratedTree = SemanticAnalyzer.analyze(syntaxTree);
 		
-		out.print(syntaxTree);
+		out.print(decoratedTree);
 	}
 }

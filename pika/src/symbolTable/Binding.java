@@ -1,6 +1,7 @@
 package symbolTable;
 
 import asmCodeGenerator.codeStorage.ASMCodeFragment;
+import tokens.Token;
 import inputHandler.TextLocation;
 import semanticAnalyzer.types.PrimitiveType;
 import semanticAnalyzer.types.Type;
@@ -9,14 +10,16 @@ public class Binding {
 	private Type type;
 	private TextLocation textLocation;
 	private MemoryLocation memoryLocation;
+	private Token conOrVar;
 	private String lexeme;
 	
-	public Binding(Type type, TextLocation location, MemoryLocation memoryLocation, String lexeme) {
+	public Binding(Type type, TextLocation location, MemoryLocation memoryLocation, String lexeme, Token token) {
 		super();
 		this.type = type;
 		this.textLocation = location;
 		this.memoryLocation = memoryLocation;
 		this.lexeme = lexeme;
+		this.conOrVar = token;
 	}
 	
 
@@ -38,6 +41,9 @@ public class Binding {
 	public MemoryLocation getMemoryLocation() {
 		return memoryLocation;
 	}
+	public Token getConOrVar() {
+		return conOrVar;
+	}
 	public void generateAddress(ASMCodeFragment code) {
 		memoryLocation.generateAddress(code, "%% " + lexeme);
 	}
@@ -55,7 +61,8 @@ public class Binding {
 			super(PrimitiveType.ERROR,
 					TextLocation.nullInstance(),
 					MemoryLocation.nullInstance(),
-					"the-null-binding");
+					"the-null-binding",
+					null);
 		}
 		public static NullBinding getInstance() {
 			if(instance==null)

@@ -6,7 +6,9 @@ import java.util.List;
 import java.util.Map;
 
 import semanticAnalyzer.types.Type;
-
+import semanticAnalyzer.types.PrimitiveType;
+import lexicalAnalyzer.Punctuator;
+import asmCodeGenerator.codeStorage.*;
 
 public class FunctionSignatures extends ArrayList<FunctionSignature> {
 	private static final long serialVersionUID = -4907792488209670697L;
@@ -67,10 +69,69 @@ public class FunctionSignatures extends ArrayList<FunctionSignature> {
 		// here's one example to get you started with FunctionSignatures: the signatures for addition.		
 		// for this to work, you should statically import PrimitiveType.*
 
-//		new FunctionSignatures(Punctuator.ADD,
-//		    new FunctionSignature(ASMOpcode.Add, INTEGER, INTEGER, INTEGER),
-//		    new FunctionSignature(ASMOpcode.FAdd, FLOAT, FLOAT, FLOAT)
-//		);
+		new FunctionSignatures(Punctuator.ADD,
+		    new FunctionSignature(ASMOpcode.Add, PrimitiveType.INTEGER, PrimitiveType.INTEGER, PrimitiveType.INTEGER),
+		    new FunctionSignature(ASMOpcode.FAdd, PrimitiveType.FLOAT, PrimitiveType.FLOAT, PrimitiveType.FLOAT)
+		);
+		
+		new FunctionSignatures(Punctuator.SUBTRACT,
+			    new FunctionSignature(ASMOpcode.Subtract, PrimitiveType.INTEGER, PrimitiveType.INTEGER, PrimitiveType.INTEGER),
+			    new FunctionSignature(ASMOpcode.FSubtract, PrimitiveType.FLOAT, PrimitiveType.FLOAT, PrimitiveType.FLOAT)
+		);
+		
+		new FunctionSignatures(Punctuator.MULTIPLY,
+			    new FunctionSignature(ASMOpcode.Multiply, PrimitiveType.INTEGER, PrimitiveType.INTEGER, PrimitiveType.INTEGER),
+			    new FunctionSignature(ASMOpcode.FMultiply, PrimitiveType.FLOAT, PrimitiveType.FLOAT, PrimitiveType.FLOAT)
+		);
+		
+		new FunctionSignatures(Punctuator.DIVIDE,
+			    new FunctionSignature(ASMOpcode.Divide, PrimitiveType.INTEGER, PrimitiveType.INTEGER, PrimitiveType.INTEGER),
+			    new FunctionSignature(ASMOpcode.FDivide, PrimitiveType.FLOAT, PrimitiveType.FLOAT, PrimitiveType.FLOAT)
+		);
+		
+		new FunctionSignatures(Punctuator.GREATER,
+			    new FunctionSignature(1, PrimitiveType.INTEGER, PrimitiveType.INTEGER, PrimitiveType.BOOLEAN),
+			    new FunctionSignature(1, PrimitiveType.FLOAT, PrimitiveType.FLOAT, PrimitiveType.BOOLEAN),
+			    new FunctionSignature(1, PrimitiveType.CHAR, PrimitiveType.CHAR, PrimitiveType.BOOLEAN)
+		);
+		
+		new FunctionSignatures(Punctuator.GREATEROREQUAL,
+			    new FunctionSignature(1, PrimitiveType.INTEGER, PrimitiveType.INTEGER, PrimitiveType.BOOLEAN),
+			    new FunctionSignature(1, PrimitiveType.FLOAT, PrimitiveType.FLOAT, PrimitiveType.BOOLEAN),
+			    new FunctionSignature(1, PrimitiveType.CHAR, PrimitiveType.CHAR, PrimitiveType.BOOLEAN)
+		);
+		
+		new FunctionSignatures(Punctuator.SMALLER,
+			    new FunctionSignature(1, PrimitiveType.INTEGER, PrimitiveType.INTEGER, PrimitiveType.BOOLEAN),
+			    new FunctionSignature(1, PrimitiveType.FLOAT, PrimitiveType.FLOAT, PrimitiveType.BOOLEAN),
+			    new FunctionSignature(1, PrimitiveType.CHAR, PrimitiveType.CHAR, PrimitiveType.BOOLEAN)
+		);
+		
+		new FunctionSignatures(Punctuator.SMALLEROREQUAL,
+			    new FunctionSignature(1, PrimitiveType.INTEGER, PrimitiveType.INTEGER, PrimitiveType.BOOLEAN),
+			    new FunctionSignature(1, PrimitiveType.FLOAT, PrimitiveType.FLOAT, PrimitiveType.BOOLEAN),
+			    new FunctionSignature(1, PrimitiveType.CHAR, PrimitiveType.CHAR, PrimitiveType.BOOLEAN)
+		);
+		
+		new FunctionSignatures(Punctuator.EQUAL,
+			    new FunctionSignature(1, PrimitiveType.BOOLEAN, PrimitiveType.BOOLEAN, PrimitiveType.BOOLEAN),
+			    new FunctionSignature(1, PrimitiveType.STRING, PrimitiveType.STRING, PrimitiveType.BOOLEAN)
+		);
+		
+		new FunctionSignatures(Punctuator.OPEN_BRACKET,
+				new FunctionSignature(1, PrimitiveType.CHAR, PrimitiveType.INTEGER, PrimitiveType.INTEGER),
+				new FunctionSignature(1, PrimitiveType.INTEGER, PrimitiveType.CHAR, PrimitiveType.CHAR),
+				new FunctionSignature(1, PrimitiveType.INTEGER, PrimitiveType.FLOAT, PrimitiveType.FLOAT),
+				new FunctionSignature(1, PrimitiveType.FLOAT, PrimitiveType.INTEGER, PrimitiveType.INTEGER),
+				new FunctionSignature(1, PrimitiveType.INTEGER, PrimitiveType.BOOLEAN, PrimitiveType.BOOLEAN),
+				new FunctionSignature(1, PrimitiveType.CHAR, PrimitiveType.BOOLEAN, PrimitiveType.BOOLEAN),
+				new FunctionSignature(1, PrimitiveType.INTEGER, PrimitiveType.INTEGER, PrimitiveType.INTEGER),
+				new FunctionSignature(1, PrimitiveType.CHAR, PrimitiveType.CHAR, PrimitiveType.CHAR),
+				new FunctionSignature(1, PrimitiveType.FLOAT, PrimitiveType.FLOAT, PrimitiveType.FLOAT),
+				new FunctionSignature(1, PrimitiveType.BOOLEAN, PrimitiveType.BOOLEAN, PrimitiveType.BOOLEAN),
+				new FunctionSignature(1, PrimitiveType.STRING, PrimitiveType.STRING, PrimitiveType.STRING)
+		);
+		
 		
 		// First, we use the operator itself (in this case the Punctuator ADD) as the key.
 		// Then, we give that key two signatures: one an (INT x INT -> INT) and the other
