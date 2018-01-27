@@ -1,5 +1,10 @@
 exec {
-	var x := 0.
-	var y:=2.
-	var z := y/x.
+	var x := 5.
+	{
+		const x :=5.
+		var y := 5.5.
+		x := _n_.
+		print x,_n_.
+	}
+	print x,_n_.
 }

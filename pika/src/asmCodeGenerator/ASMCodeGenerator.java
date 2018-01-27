@@ -292,7 +292,13 @@ public class ASMCodeGenerator {
 			code.add(Label, arg2Label);
 			code.append(arg2);
 			code.add(Label, subLabel);
-			code.add(Subtract);
+			if(node.child(0).getType() == PrimitiveType.FLOAT) {
+				code.add(FSubtract);
+				code.add(ConvertI);
+			}
+			else {
+				code.add(Subtract);
+			}
 			
 			if(node.getOperator() == Punctuator.GREATER) {
 				code.add(JumpPos, trueLabel);
@@ -359,7 +365,13 @@ public class ASMCodeGenerator {
 			
 			if(node.getOperator() == Punctuator.DIVIDE) {
 				code.add(Duplicate);
-				code.add(JumpFalse, RunTime.INTEGER_DIVIDE_BY_ZERO_RUNTIME_ERROR);
+				if(node.child(1).getType()==PrimitiveType.FLOAT) {
+					code.add(ConvertI);
+					code.add(JumpFalse, RunTime.FLOAT_DIVIDE_BY_ZERO_RUNTIME_ERROR);
+				}
+				else {
+					code.add(JumpFalse, RunTime.INTEGER_DIVIDE_BY_ZERO_RUNTIME_ERROR);
+				}
 			}
 			ASMOpcode opcode = opcodeForOperator(node.getOperator(),node.getType());
 			code.add(opcode);							// type-dependent! (opcode is different for floats and for ints)
