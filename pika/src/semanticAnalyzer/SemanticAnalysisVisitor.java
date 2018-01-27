@@ -19,6 +19,7 @@ import tokens.LextantToken;
 import tokens.Token;
 
 class SemanticAnalysisVisitor extends ParseNodeVisitor.Default {
+	private int stringBlockSize = 0;
 	@Override
 	public void visitLeave(ParseNode node) {
 		throw new RuntimeException("Node class unimplemented in SemanticAnalysisVisitor: " + node.getClass());
@@ -32,6 +33,7 @@ class SemanticAnalysisVisitor extends ParseNodeVisitor.Default {
 	}
 	public void visitLeave(ProgramNode node) {
 		leaveScope(node);
+		node.setStringBlocksize(this.stringBlockSize);
 	}
 	public void visitEnter(MainBlockNode node) {
 		enterSubscope(node);
@@ -78,6 +80,9 @@ class SemanticAnalysisVisitor extends ParseNodeVisitor.Default {
 	public void visitLeave(AssignmentStatementNode node) {
 		IdentifierNode identifier = (IdentifierNode) node.child(0);
 		ParseNode value = node.child(1);
+		
+		Type assignmentType = identifier.getType();
+		node.setType(assignmentType);
 		
 		if(!identifier.satisfy(value)) {
 			node.setType(PrimitiveType.ERROR);
@@ -135,6 +140,10 @@ class SemanticAnalysisVisitor extends ParseNodeVisitor.Default {
 	@Override
 	public void visit(StringConstantNode node) {
 		node.setType(PrimitiveType.STRING);
+		
+		int size = node.getValue().length()+1;
+		node.setLocation(this.stringBlockSize, size);
+		this.stringBlockSize = this.stringBlockSize + size;
 	}
 	@Override
 	public void visit(CharConstantNode node) {
@@ -188,6 +197,7 @@ class SemanticAnalysisVisitor extends ParseNodeVisitor.Default {
 		Scope scope = identifierNode.getLocalScope();
 		Binding binding = scope.createBinding(identifierNode, type);
 		identifierNode.setBinding(binding);
+		
 	}
 	
 	///////////////////////////////////////////////////////////////////////////

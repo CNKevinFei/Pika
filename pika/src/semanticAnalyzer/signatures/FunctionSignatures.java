@@ -114,19 +114,30 @@ public class FunctionSignatures extends ArrayList<FunctionSignature> {
 		);
 		
 		new FunctionSignatures(Punctuator.EQUAL,
+				new FunctionSignature(1, PrimitiveType.INTEGER, PrimitiveType.INTEGER, PrimitiveType.BOOLEAN), 
+				new FunctionSignature(1, PrimitiveType.FLOAT, PrimitiveType.FLOAT, PrimitiveType.BOOLEAN),
+				new FunctionSignature(1, PrimitiveType.CHAR, PrimitiveType.CHAR, PrimitiveType.BOOLEAN),
+			    new FunctionSignature(1, PrimitiveType.BOOLEAN, PrimitiveType.BOOLEAN, PrimitiveType.BOOLEAN),
+			    new FunctionSignature(1, PrimitiveType.STRING, PrimitiveType.STRING, PrimitiveType.BOOLEAN)
+		);
+		
+		new FunctionSignatures(Punctuator.NOTEQUAL,
+				new FunctionSignature(1, PrimitiveType.INTEGER, PrimitiveType.INTEGER, PrimitiveType.BOOLEAN), 
+				new FunctionSignature(1, PrimitiveType.FLOAT, PrimitiveType.FLOAT, PrimitiveType.BOOLEAN),
+				new FunctionSignature(1, PrimitiveType.CHAR, PrimitiveType.CHAR, PrimitiveType.BOOLEAN),
 			    new FunctionSignature(1, PrimitiveType.BOOLEAN, PrimitiveType.BOOLEAN, PrimitiveType.BOOLEAN),
 			    new FunctionSignature(1, PrimitiveType.STRING, PrimitiveType.STRING, PrimitiveType.BOOLEAN)
 		);
 		
 		new FunctionSignatures(Punctuator.OPEN_BRACKET,
-				new FunctionSignature(1, PrimitiveType.CHAR, PrimitiveType.INTEGER, PrimitiveType.INTEGER),
-				new FunctionSignature(1, PrimitiveType.INTEGER, PrimitiveType.CHAR, PrimitiveType.CHAR),
-				new FunctionSignature(1, PrimitiveType.INTEGER, PrimitiveType.FLOAT, PrimitiveType.FLOAT),
-				new FunctionSignature(1, PrimitiveType.FLOAT, PrimitiveType.INTEGER, PrimitiveType.INTEGER),
-				new FunctionSignature(1, PrimitiveType.INTEGER, PrimitiveType.BOOLEAN, PrimitiveType.BOOLEAN),
-				new FunctionSignature(1, PrimitiveType.CHAR, PrimitiveType.BOOLEAN, PrimitiveType.BOOLEAN),
-				new FunctionSignature(1, PrimitiveType.INTEGER, PrimitiveType.INTEGER, PrimitiveType.INTEGER),
-				new FunctionSignature(1, PrimitiveType.CHAR, PrimitiveType.CHAR, PrimitiveType.CHAR),
+				new FunctionSignature(0, PrimitiveType.CHAR, PrimitiveType.INTEGER, PrimitiveType.INTEGER),
+				new FunctionSignature(0, PrimitiveType.INTEGER, PrimitiveType.CHAR, PrimitiveType.CHAR),
+				new FunctionSignature(0, PrimitiveType.INTEGER, PrimitiveType.FLOAT, PrimitiveType.FLOAT),
+				new FunctionSignature(0, PrimitiveType.FLOAT, PrimitiveType.INTEGER, PrimitiveType.INTEGER),
+				new FunctionSignature(0, PrimitiveType.INTEGER, PrimitiveType.BOOLEAN, PrimitiveType.BOOLEAN),
+				new FunctionSignature(0, PrimitiveType.CHAR, PrimitiveType.BOOLEAN, PrimitiveType.BOOLEAN),
+				new FunctionSignature(0, PrimitiveType.INTEGER, PrimitiveType.INTEGER, PrimitiveType.INTEGER),
+				new FunctionSignature(0, PrimitiveType.CHAR, PrimitiveType.CHAR, PrimitiveType.CHAR),
 				new FunctionSignature(1, PrimitiveType.FLOAT, PrimitiveType.FLOAT, PrimitiveType.FLOAT),
 				new FunctionSignature(1, PrimitiveType.BOOLEAN, PrimitiveType.BOOLEAN, PrimitiveType.BOOLEAN),
 				new FunctionSignature(1, PrimitiveType.STRING, PrimitiveType.STRING, PrimitiveType.STRING)

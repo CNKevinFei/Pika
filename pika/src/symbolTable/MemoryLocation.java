@@ -5,6 +5,7 @@ import asmCodeGenerator.runtime.RunTime;
 
 public class MemoryLocation {
 	public static final String GLOBAL_VARIABLE_BLOCK = RunTime.GLOBAL_MEMORY_BLOCK;
+	public static final String STRING_CONSTANT_BLOCK = RunTime.STRING_CONSTANT_BLOCK;
 	public static final String FRAME_POINTER = "Frame pointer not yet implemented in RunTime.";
 	
 	private MemoryAccessMethod accessor;

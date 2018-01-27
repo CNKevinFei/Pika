@@ -35,6 +35,7 @@ public class ASMCodeGenerator {
 		
 		code.append( RunTime.getEnvironment() );
 		code.append( globalVariableBlockASM() );
+		code.append( stringConstantBlock());
 		code.append( programASM() );
 //		code.append( MemoryManager.codeForAfterApplication() );
 		
@@ -48,6 +49,12 @@ public class ASMCodeGenerator {
 		ASMCodeFragment code = new ASMCodeFragment(GENERATES_VOID);
 		code.add(DLabel, RunTime.GLOBAL_MEMORY_BLOCK);
 		code.add(DataZ, globalBlockSize);
+		return code;
+	}
+	private ASMCodeFragment stringConstantBlock() {
+
+		ASMCodeFragment code = new ASMCodeFragment(GENERATES_VOID);
+		code.add(DLabel, RunTime.STRING_CONSTANT_BLOCK);
 		return code;
 	}
 	private ASMCodeFragment programASM() {
@@ -129,9 +136,18 @@ public class ASMCodeGenerator {
 			if(node.getType() == PrimitiveType.INTEGER) {
 				code.add(LoadI);
 			}	
+			else if(node.getType() == PrimitiveType.FLOAT) {
+				code.add(LoadF);
+			}
 			else if(node.getType() == PrimitiveType.BOOLEAN) {
 				code.add(LoadC);
 			}	
+			else if(node.getType() == PrimitiveType.CHAR) {
+				code.add(LoadC);
+			}	
+			else if(node.getType() == PrimitiveType.STRING) {
+				code.add(LoadI);
+			}
 			else {
 				assert false : "node " + node;
 			}
@@ -180,9 +196,25 @@ public class ASMCodeGenerator {
 			code.add(PushD, RunTime.SPACE_PRINT_FORMAT);
 			code.add(Printf);
 		}
+		public void visit(TabNode node) {
+			newVoidCode(node);
+			code.add(PushD, RunTime.TAB_PRINT_FORMAT);
+			code.add(Printf);
+		}
 		
 
 		public void visitLeave(DeclarationNode node) {
+			newVoidCode(node);
+			ASMCodeFragment lvalue = removeAddressCode(node.child(0));	
+			ASMCodeFragment rvalue = removeValueCode(node.child(1));
+			
+			code.append(lvalue);
+			code.append(rvalue);
+			
+			Type type = node.getType();
+			code.add(opcodeForStore(type));
+		}
+		public void visitLeave(AssignmentStatementNode node) {
 			newVoidCode(node);
 			ASMCodeFragment lvalue = removeAddressCode(node.child(0));	
 			ASMCodeFragment rvalue = removeValueCode(node.child(1));
@@ -197,8 +229,17 @@ public class ASMCodeGenerator {
 			if(type == PrimitiveType.INTEGER) {
 				return StoreI;
 			}
+			if(type == PrimitiveType.FLOAT) {
+				return StoreF;
+			}
 			if(type == PrimitiveType.BOOLEAN) {
 				return StoreC;
+			}
+			if(type == PrimitiveType.CHAR) {
+				return StoreC;
+			}
+			if(type == PrimitiveType.STRING) {
+				return StoreI;
 			}
 			assert false: "Type " + type + " unimplemented in opcodeForStore()";
 			return null;
@@ -210,12 +251,25 @@ public class ASMCodeGenerator {
 		public void visitLeave(BinaryOperatorNode node) {
 			Lextant operator = node.getOperator();
 
-			if(operator == Punctuator.GREATER) {
+			if(isComparison(operator)) {
 				visitComparisonOperatorNode(node, operator);
+			}
+			else if(operator == Punctuator.OPEN_BRACKET) {
+				visitCastNode(node);
 			}
 			else {
 				visitNormalBinaryOperatorNode(node);
 			}
+		}
+		
+		private boolean isComparison(Lextant operator) {
+			if(operator == Punctuator.GREATER || operator == Punctuator.SMALLER || 
+					operator == Punctuator.GREATEROREQUAL || operator == Punctuator.SMALLEROREQUAL ||
+					operator == Punctuator.EQUAL || operator == Punctuator.NOTEQUAL) {
+				return true;
+			}
+			return false;
+				
 		}
 		private void visitComparisonOperatorNode(BinaryOperatorNode node,
 				Lextant operator) {
@@ -240,9 +294,32 @@ public class ASMCodeGenerator {
 			code.add(Label, subLabel);
 			code.add(Subtract);
 			
-			code.add(JumpPos, trueLabel);
-			code.add(Jump, falseLabel);
-
+			if(node.getOperator() == Punctuator.GREATER) {
+				code.add(JumpPos, trueLabel);
+				code.add(Jump, falseLabel);
+			}
+			else if(node.getOperator() == Punctuator.SMALLER) {
+				code.add(JumpNeg, trueLabel);
+				code.add(Jump, falseLabel);
+			}
+			else if(node.getOperator() == Punctuator.EQUAL) {
+				code.add(JumpFalse, trueLabel);
+				code.add(Jump, falseLabel);
+			}
+			else if(node.getOperator() == Punctuator.NOTEQUAL) {
+				code.add(JumpFalse, falseLabel);
+				code.add(Jump, trueLabel);
+			}
+			else if(node.getOperator() == Punctuator.GREATEROREQUAL) {
+				code.add(JumpNeg, falseLabel);
+				code.add(Jump, trueLabel);
+			}
+			else if(node.getOperator() == Punctuator.SMALLEROREQUAL) {
+				code.add(JumpPos, falseLabel);
+				code.add(Jump, trueLabel);
+			}
+			
+			
 			code.add(Label, trueLabel);
 			code.add(PushI, 1);
 			code.add(Jump, joinLabel);
@@ -252,6 +329,26 @@ public class ASMCodeGenerator {
 			code.add(Label, joinLabel);
 
 		}
+		
+		private void visitCastNode(BinaryOperatorNode node) {
+			newValueCode(node);
+			ASMCodeFragment value = removeValueCode(node.child(0));
+			code.append(value);
+			
+			if(node.child(0).getType()==PrimitiveType.FLOAT && node.child(1).getType()==PrimitiveType.INTEGER) {
+				code.add(ConvertI);
+			}
+			else if(node.child(0).getType()==PrimitiveType.INTEGER && node.child(1).getType()==PrimitiveType.FLOAT) {
+				code.add(ConvertF);
+			}
+			else if(node.child(1).getType()==PrimitiveType.BOOLEAN) {
+				code.add(PushI,1);
+				code.add(And);
+			}
+			
+			//code.add(opcodeForStore(node.child(1).getType()));
+		}
+		
 		private void visitNormalBinaryOperatorNode(BinaryOperatorNode node) {
 			newValueCode(node);
 			ASMCodeFragment arg1 = removeValueCode(node.child(0));
@@ -260,18 +357,37 @@ public class ASMCodeGenerator {
 			code.append(arg1);
 			code.append(arg2);
 			
-			ASMOpcode opcode = opcodeForOperator(node.getOperator());
+			if(node.getOperator() == Punctuator.DIVIDE) {
+				code.add(Duplicate);
+				code.add(JumpFalse, RunTime.INTEGER_DIVIDE_BY_ZERO_RUNTIME_ERROR);
+			}
+			ASMOpcode opcode = opcodeForOperator(node.getOperator(),node.getType());
 			code.add(opcode);							// type-dependent! (opcode is different for floats and for ints)
 		}
-		private ASMOpcode opcodeForOperator(Lextant lextant) {
+		private ASMOpcode opcodeForOperator(Lextant lextant, Type type) {
 			assert(lextant instanceof Punctuator);
 			Punctuator punctuator = (Punctuator)lextant;
-			switch(punctuator) {
-			case ADD: 	   		return Add;				// type-dependent!
-			case MULTIPLY: 		return Multiply;		// type-dependent!
-			default:
-				assert false : "unimplemented operator in opcodeForOperator";
+			if(type == PrimitiveType.INTEGER) {
+				switch(punctuator) {
+				case ADD: 	   		return Add;			
+				case SUBTRACT:		return Subtract;
+				case MULTIPLY: 		return Multiply;
+				case DIVIDE:		return Divide;
+				default:
+					assert false : "unimplemented operator in opcodeForOperator";
+				}
 			}
+			else if(type == PrimitiveType.FLOAT) {
+				switch(punctuator) {
+				case ADD: 	   		return FAdd;			
+				case SUBTRACT:		return FSubtract;
+				case MULTIPLY: 		return FMultiply;
+				case DIVIDE:		return FDivide;
+				default:
+					assert false : "unimplemented operator in opcodeForOperator";
+				}
+			}
+			
 			return null;
 		}
 
@@ -284,6 +400,14 @@ public class ASMCodeGenerator {
 		public void visit(CharConstantNode node) {
 			newValueCode(node);
 			code.add(PushI, node.getValue());
+		}
+		public void visit(StringConstantNode node) {
+			newValueCode(node);
+			
+			code.add(DataS, node.getValue());
+			code.add(PushD, RunTime.STRING_CONSTANT_BLOCK);
+			code.add(PushI, node.getOffset());
+			code.add(Add);
 		}
 		public void visit(IdentifierNode node) {
 			newAddressCode(node);

@@ -1,10 +1,5 @@
 exec {
-	var x := ^g^ .
-
-	{
-		var y := 16 + 5.
-
-	}
-	print x, _t_.
-	x := "hello".
+	var x := 0.
+	var y:=2.
+	var z := y/x.
 }
