@@ -114,7 +114,10 @@ public class Parser {
 		return startsPrintStatement(token) ||
 			   startsDeclaration(token) ||
 			   startsMainBlock(token)||
-			   startsAssignmentStatement(token);
+			   startsAssignmentStatement(token)||
+			   startsIfStatement(token)||
+			   startsWhileStatement(token)||
+			   startsReleaseStatement(token);
 	}
 	
 	// printStmt -> PRINT printExpressionList .
@@ -211,6 +214,10 @@ public class Parser {
 		
 		ParseNode identifier = parseIdentifier();
 		expect(Punctuator.ASSIGN);
+		
+		if(!startsExpression(nowReading)) {
+			return syntaxErrorNode("expression");
+		}
 		ParseNode initializer = parseExpression();
 		expect(Punctuator.TERMINATOR);
 		
@@ -223,7 +230,7 @@ public class Parser {
 	// Assignment Statement
 	private ParseNode parseAssignmentStatement() {
 		if(!startsAssignmentStatement(nowReading)) {
-			syntaxErrorNode("assignment statement");
+			return syntaxErrorNode("assignment statement");
 		}
 		
 		ParseNode leftIdentifier = parseVariable();
@@ -231,10 +238,10 @@ public class Parser {
 		expect(Punctuator.ASSIGN);
 		
 		if(!startsExpression(nowReading)) {
-			syntaxErrorNode("expression");
+			return syntaxErrorNode("expression");
 		}
 		ParseNode rightExpression = parseExpression();
-		readToken();
+		expect(Punctuator.TERMINATOR);
 		
 		return AssignmentStatementNode.withChildren(assign, leftIdentifier, rightExpression);
 	}
@@ -248,6 +255,7 @@ public class Parser {
 	private ParseNode parseIfStatement() {
 		Token token = nowReading;
 		expect(Keyword.IF);
+		
 		if(!startsParenthesesExpression(nowReading)) {
 			return syntaxErrorNode("if statement");
 		}
@@ -314,6 +322,7 @@ public class Parser {
 		expect(Keyword.RELEASE);
 		
 		ParseNode expr = parseExpression();
+		expect(Punctuator.TERMINATOR);
 		
 		return new ReleaseStatementNode(token, expr);
 	}
@@ -504,18 +513,19 @@ public class Parser {
 		ParseNode left = parseExpression();
 		if(nowReading.isLextant(Punctuator.SEPARATOR, Punctuator.CLOSE_BRACKET)) {
 			Token token;
+			ParseNode right;
 			
 			while(nowReading.isLextant(Punctuator.SEPARATOR)) {
 				token = nowReading;
 				readToken();
-				ParseNode right = parseExpression();
+				right = parseExpression();
 				
 				left = BinaryOperatorNode.withChildren(token, left, right);
 			}
 			
 			expect(Punctuator.CLOSE_BRACKET);
 			
-			return new ExpressionListNode(left);
+			return new ExpressionListNode(bracket, left);
 		}
 		else if(nowReading.isLextant(Punctuator.VERTICAL)) {
 			readToken();
@@ -535,10 +545,11 @@ public class Parser {
 	}
 	// !(expression)
 	private ParseNode parseNotExpression() {
+		Token token = nowReading;
 		expect(Punctuator.NOT);
 		ParseNode expr = parseExpression();
 		
-		return new NotExpressionNode(expr);
+		return new NotExpressionNode(token, expr);
 	}
 	
 	private boolean startsNotExpression(Token token) {
@@ -547,10 +558,11 @@ public class Parser {
 	
 	// length expression
 	private ParseNode parseLengthExpression() {
+		Token token = nowReading;
 		expect(Keyword.LENGTH);
 		ParseNode expr = parseExpression();
 		
-		return new LengthExpressionNode(expr);
+		return new LengthExpressionNode(token, expr);
 	}
 	
 	private boolean startsLengthExpression(Token token) {
@@ -575,10 +587,11 @@ public class Parser {
 	
 	// clone expression
 	private ParseNode parseCloneExpression() {
+		Token token = nowReading;
 		expect(Keyword.CLONE);
 		ParseNode expr = parseExpression();
 		
-		return new CloneExpressionNode(expr); 
+		return new CloneExpressionNode(token,expr); 
 	}
 	private boolean startsCloneExpression(Token token) {
 		return token.isLextant(Keyword.CLONE);
@@ -602,6 +615,7 @@ public class Parser {
 	
 	private ParseNode parseArrayType() {
 		int arrayLayer = 0;
+		Token token =nowReading;
 		
 		while(nowReading.isLextant(Punctuator.OPEN_BRACKET)) {
 			readToken();
@@ -611,7 +625,7 @@ public class Parser {
 		if(!nowReading.isLextant(Keyword.INT, Keyword.FLOAT, Keyword.STRING, Keyword.CHAR, Keyword.BOOL, Keyword.RAT)) {
 			return syntaxErrorNode("array type");
 		}
-		ParseNode node = new ArrayTypeConstantNode(arrayLayer, new TypeConstantNode(nowReading));
+		ParseNode node = new ArrayTypeConstantNode(token, arrayLayer, new TypeConstantNode(nowReading));
 		readToken();
 		
 		while(arrayLayer!=0) {

@@ -6,8 +6,9 @@ import tokens.Token;
 
 public class LengthExpressionNode extends ParseNode {
 
-	public LengthExpressionNode(Token token) {
+	public LengthExpressionNode(Token token, ParseNode node) {
 		super(token);
+		this.appendChild(node);
 	}
 	public LengthExpressionNode(ParseNode node) {
 		super(node);

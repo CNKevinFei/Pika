@@ -6,8 +6,9 @@ import tokens.Token;
 
 public class ExpressionListNode extends ParseNode {
 
-	public ExpressionListNode(Token token) {
+	public ExpressionListNode(Token token, ParseNode node) {
 		super(token);
+		this.appendChild(node);
 	}
 	public ExpressionListNode(ParseNode node) {
 		super(node);

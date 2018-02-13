@@ -1,22 +1,6 @@
 package parseTree;
 
-import parseTree.nodeTypes.BinaryOperatorNode;
-import parseTree.nodeTypes.BooleanConstantNode;
-import parseTree.nodeTypes.MainBlockNode;
-import parseTree.nodeTypes.DeclarationNode;
-import parseTree.nodeTypes.AssignmentStatementNode;
-import parseTree.nodeTypes.ErrorNode;
-import parseTree.nodeTypes.IdentifierNode;
-import parseTree.nodeTypes.IntegerConstantNode;
-import parseTree.nodeTypes.FloatConstantNode;
-import parseTree.nodeTypes.CharConstantNode;
-import parseTree.nodeTypes.StringConstantNode;
-import parseTree.nodeTypes.TypeConstantNode;
-import parseTree.nodeTypes.NewlineNode;
-import parseTree.nodeTypes.TabNode;
-import parseTree.nodeTypes.PrintStatementNode;
-import parseTree.nodeTypes.ProgramNode;
-import parseTree.nodeTypes.SpaceNode;
+import parseTree.nodeTypes.*;
 
 // Visitor pattern with pre- and post-order visits
 public interface ParseNodeVisitor {
@@ -42,8 +26,31 @@ public interface ParseNodeVisitor {
 	
 	void visitEnter(ProgramNode node);
 	void visitLeave(ProgramNode node);
-
-
+	
+	void visitEnter(ArrayIndexVariableNode node);
+	void visitLeave(ArrayIndexVariableNode node);
+	
+	void visitEnter(CloneExpressionNode node);
+	void visitLeave(CloneExpressionNode node);
+	
+	void visitEnter(ExpressionListNode node);
+	void visitLeave(ExpressionListNode node);
+	
+	void visitEnter(IfStatementNode node);
+	void visitLeave(IfStatementNode node);
+	
+	void visitEnter(LengthExpressionNode node);
+	void visitLeave(LengthExpressionNode node);
+	
+	void visitEnter(NotExpressionNode node);
+	void visitLeave(NotExpressionNode node);
+	
+	void visitEnter(ReleaseStatementNode node);
+	void visitLeave(ReleaseStatementNode node);
+	
+	void visitEnter(WhileStatementNode node);
+	void visitLeave(WhileStatementNode node);
+	
 	// leaf nodes: visitLeaf only
 	void visit(BooleanConstantNode node);
 	void visit(ErrorNode node);
@@ -56,6 +63,7 @@ public interface ParseNodeVisitor {
 	void visit(NewlineNode node);
 	void visit(TabNode node);
 	void visit(SpaceNode node);
+	void visit(ArrayTypeConstantNode node);
 
 	
 	public static class Default implements ParseNodeVisitor
@@ -113,6 +121,54 @@ public interface ParseNodeVisitor {
 		public void visitLeave(ProgramNode node) {
 			defaultVisitLeave(node);
 		}
+		public void visitEnter(ArrayIndexVariableNode node) {
+			defaultVisitEnter(node);
+		}
+		public void visitLeave(ArrayIndexVariableNode node) {
+			defaultVisitLeave(node);
+		}
+		public void visitEnter(CloneExpressionNode node) {
+			defaultVisitEnter(node);
+		}
+		public void visitLeave(CloneExpressionNode node) {
+			defaultVisitLeave(node);
+		}
+		public void visitEnter(ExpressionListNode node) {
+			defaultVisitEnter(node);
+		}
+		public void visitLeave(ExpressionListNode node) {
+			defaultVisitLeave(node);
+		}
+		public void visitEnter(IfStatementNode node) {
+			defaultVisitEnter(node);
+		}
+		public void visitLeave(IfStatementNode node) {
+			defaultVisitLeave(node);
+		}
+		public void visitEnter(LengthExpressionNode node) {
+			defaultVisitEnter(node);
+		}
+		public void visitLeave(LengthExpressionNode node) {
+			defaultVisitLeave(node);
+		}
+		public void visitEnter(NotExpressionNode node) {
+			defaultVisitEnter(node);
+		}
+		public void visitLeave(NotExpressionNode node) {
+			defaultVisitLeave(node);
+		}
+		public void visitEnter(ReleaseStatementNode node) {
+			defaultVisitEnter(node);
+		}
+		public void visitLeave(ReleaseStatementNode node) {
+			defaultVisitLeave(node);
+		}
+		public void visitEnter(WhileStatementNode node) {
+			defaultVisitEnter(node);
+		}
+		public void visitLeave(WhileStatementNode node) {
+			defaultVisitLeave(node);
+		}
 		
 
 		public void visit(BooleanConstantNode node) {
@@ -146,6 +202,9 @@ public interface ParseNodeVisitor {
 			defaultVisitForLeaf(node);
 		}
 		public void visit(SpaceNode node) {
+			defaultVisitForLeaf(node);
+		}
+		public void visit(ArrayTypeConstantNode node) {
 			defaultVisitForLeaf(node);
 		}
 	}

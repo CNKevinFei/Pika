@@ -6,8 +6,9 @@ import tokens.Token;
 
 public class CloneExpressionNode extends ParseNode {
 
-	public CloneExpressionNode(Token token) {
+	public CloneExpressionNode(Token token, ParseNode node) {
 		super(token);
+		this.appendChild(node);
 	}
 	public CloneExpressionNode(ParseNode node) {
 		super(node);
