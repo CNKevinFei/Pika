@@ -233,7 +233,7 @@ public class Parser {
 			return syntaxErrorNode("assignment statement");
 		}
 		
-		ParseNode leftIdentifier = parseVariable();
+		ParseNode leftIdentifier = parseExpression();
 		Token assign = nowReading;
 		expect(Punctuator.ASSIGN);
 		
@@ -247,7 +247,7 @@ public class Parser {
 	}
 	
 	private boolean startsAssignmentStatement(Token token) {
-		return startsVariable(token);
+		return startsExpression(token);
 	}
 	
 	///////////////////////////////////////////////////////////
@@ -447,21 +447,122 @@ public class Parser {
 			return syntaxErrorNode("multiplicativeOrDivisionExpression");
 		}
 		
-		ParseNode left = parseAtomicExpression();
+		ParseNode left = parseUnaryOperatorExpression();
 		while(nowReading.isLextant(Punctuator.MULTIPLY, Punctuator.DIVIDE, Punctuator.OVER, Punctuator.EXPRESSOVER, Punctuator.RATIONALIZE)) {
 			Token multiplicativeToken = nowReading;
 			readToken();
-			ParseNode right = parseAtomicExpression();
+			ParseNode right = parseUnaryOperatorExpression();
 			
 			left = BinaryOperatorNode.withChildren(multiplicativeToken, left, right);
 		}
 		return left;
 	}
 	private boolean startsMultiplicativeOrDivisionOrRationalExpression(Token token) {
-		return startsAtomicExpression(token);
+		return startsUnaryOperatorExpression(token);
 	}
 	
-	// atomicExpression -> literal || (expression) || [expression | type] || !expression || arrayIndexing || length expression || arrayExpression
+	// unary operator
+	private ParseNode parseUnaryOperatorExpression() {
+		if(!startsUnaryOperatorExpression(nowReading)) {
+			return syntaxErrorNode("unary operator expression");
+		}
+		
+		if(startsCloneExpression(nowReading)) {
+			return parseCloneExpression();
+		}
+		else if(startsNotExpression(nowReading)) {
+			return parseNotExpression();
+		}
+		else if(startsLengthExpression(nowReading)) {
+			return parseLengthExpression();
+		}
+		else {
+			return parseArrayIndexExpression();
+		}
+	}
+	
+	private boolean startsUnaryOperatorExpression(Token token) {
+		return startsArrayIndexExpression(token)||startsCloneExpression(token)||startsNotExpression(token)||startsLengthExpression(token);
+	}
+	
+	// clone expression
+	private ParseNode parseCloneExpression() {
+		Token token = nowReading;
+		ParseNode expr;
+		
+		expect(Keyword.CLONE);
+		
+		if(nowReading.isLextant(Keyword.CLONE)) {
+			expr = parseCloneExpression();
+		}
+		else {
+			expr = parseArrayIndexExpression();
+		}
+		
+		return new CloneExpressionNode(token,expr); 
+	}
+	
+	private boolean startsCloneExpression(Token token) {
+		return token.isLextant(Keyword.CLONE);
+	}
+	
+	// !(expression)
+	private ParseNode parseNotExpression() {
+		Token token = nowReading;
+		ParseNode expr;
+		
+		expect(Punctuator.NOT);
+		
+		if(nowReading.isLextant(Punctuator.NOT)) {
+			expr = parseNotExpression();
+		}
+		else {
+			expr = parseArrayIndexExpression();
+		}
+		
+			
+		return new NotExpressionNode(token, expr);
+	}
+		
+	private boolean startsNotExpression(Token token) {
+		return token.isLextant(Punctuator.NOT);
+	}
+		
+	// length expression
+	private ParseNode parseLengthExpression() {
+		Token token = nowReading;
+		expect(Keyword.LENGTH);
+		ParseNode expr = parseArrayIndexExpression();
+			
+		return new LengthExpressionNode(token, expr);
+	}
+		
+	private boolean startsLengthExpression(Token token) {
+		return token.isLextant(Keyword.LENGTH);
+	}
+	
+	// array index expression
+	private ParseNode parseArrayIndexExpression() {
+		if(!startsArrayIndexExpression(nowReading)) {
+			return syntaxErrorNode("array index");
+		}
+		
+		ParseNode arrayVariable = parseAtomicExpression();
+		ParseNode indexValue;
+		while (nowReading.isLextant(Punctuator.OPEN_BRACKET)) {
+			expect(Punctuator.OPEN_BRACKET);
+			indexValue = parseExpression();
+			expect(Punctuator.CLOSE_BRACKET);
+			arrayVariable = BinaryOperatorNode.withChildren(LextantToken.fakeToken("array index", Punctuator.ARRAY_INDEX), arrayVariable, indexValue);
+		}
+		
+		return arrayVariable;
+	}
+	
+	private boolean startsArrayIndexExpression(Token token) {
+		return startsAtomicExpression(token);
+	}
+	// atomicExpression -> literal || (expression) || [expression | type]
 	private ParseNode parseAtomicExpression() {
 		if(!startsAtomicExpression(nowReading)) {
 			return syntaxErrorNode("atomic expression");
@@ -473,26 +574,18 @@ public class Parser {
 		else if(startsBracketExpression(nowReading)) {
 			return parseBracketExpression();
 		}
-		else if(startsNotExpression(nowReading)) {
-			return parseNotExpression();
-		}
-		else if(startsLengthExpression(nowReading)) {
-			return parseLengthExpression();
-		}
 		else if(startsNewExpression(nowReading)) {
 			return parseNewExpression();
-		}
-		else if(startsCloneExpression(nowReading)) {
-			return parseCloneExpression();
 		}
 		else {
 			return parseLiteral();
 		}
 	}
 	private boolean startsAtomicExpression(Token token) {
-		return startsLiteral(token) || startsParenthesesExpression(token) || startsBracketExpression(token) || startsNotExpression(token) || startsLengthExpression(token) || startsNewExpression(token) || startsCloneExpression(token);
+		return startsLiteral(token) || startsParenthesesExpression(token) || startsBracketExpression(token) || startsNewExpression(token);
 	}
-	
+		
+		
 	// (expression) -> expression
 	private ParseNode parseParenthesesExpression() {
 		expect(Punctuator.OPEN_PARENTHESES);	
@@ -541,33 +634,9 @@ public class Parser {
 	}
 	
 	private boolean startsBracketExpression(Token token) {
-		return token.isLextant(Punctuator.OPEN_BRACKET);
-	}
-	// !(expression)
-	private ParseNode parseNotExpression() {
-		Token token = nowReading;
-		expect(Punctuator.NOT);
-		ParseNode expr = parseExpression();
-		
-		return new NotExpressionNode(token, expr);
+		return token.isLextant(Punctuator.OPEN_BRACKET)&&!(previouslyRead instanceof IdentifierToken);
 	}
 	
-	private boolean startsNotExpression(Token token) {
-		return token.isLextant(Punctuator.NOT);
-	}
-	
-	// length expression
-	private ParseNode parseLengthExpression() {
-		Token token = nowReading;
-		expect(Keyword.LENGTH);
-		ParseNode expr = parseExpression();
-		
-		return new LengthExpressionNode(token, expr);
-	}
-	
-	private boolean startsLengthExpression(Token token) {
-		return token.isLextant(Keyword.LENGTH);
-	}
 	
 	//new expression
 	private ParseNode parseNewExpression() {
@@ -583,18 +652,6 @@ public class Parser {
 	
 	private boolean startsNewExpression(Token token) {
 		return token.isLextant(Keyword.NEW);
-	}
-	
-	// clone expression
-	private ParseNode parseCloneExpression() {
-		Token token = nowReading;
-		expect(Keyword.CLONE);
-		ParseNode expr = parseExpression();
-		
-		return new CloneExpressionNode(token,expr); 
-	}
-	private boolean startsCloneExpression(Token token) {
-		return token.isLextant(Keyword.CLONE);
 	}
 	
 	// type (terminal)
@@ -652,8 +709,8 @@ public class Parser {
 		if(startsFloatNumber(nowReading)) {
 			return parseFloatNumber();
 		}
-		if(startsVariable(nowReading)) {
-			return parseVariable();
+		if(startsIdentifier(nowReading)) {
+			return parseIdentifier();
 		}
 		if(startsBooleanConstant(nowReading)) {
 			return parseBooleanConstant();
@@ -668,7 +725,7 @@ public class Parser {
 		return syntaxErrorNode("literal");
 	}
 	private boolean startsLiteral(Token token) {
-		return startsIntNumber(token) || startsVariable(token) || startsBooleanConstant(token) || startsStringConstant(token)
+		return startsIntNumber(token) || startsIdentifier(token) || startsBooleanConstant(token) || startsStringConstant(token)
 				|| startsCharConstant(token) || startsFloatNumber(token);
 	}
 
@@ -684,28 +741,7 @@ public class Parser {
 		return token instanceof IntegerToken;
 	}
 
-	//variable
-	private ParseNode parseVariable() {
-		ParseNode variable = parseIdentifier();
-		ParseNode index;
-		
-		while(nowReading.isLextant(Punctuator.OPEN_BRACKET)) {
-			readToken();
-			if(!startsExpression(nowReading)) {
-				return syntaxErrorNode("index expression");
-			}
-			
-			index = parseExpression();
-			variable = new ArrayIndexVariableNode(variable, index);
-			expect(Punctuator.CLOSE_BRACKET);
-		}
-		
-		return variable;
-	}
-	
-	private boolean startsVariable(Token token) {
-		return startsIdentifier(token);
-	}
+
 	// identifier (terminal)
 	private ParseNode parseIdentifier() {
 		if(!startsIdentifier(nowReading)) {

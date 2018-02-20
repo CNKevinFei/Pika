@@ -1,5 +1,5 @@
 exec {
-	var x := new [[[int]]](5).
+	var x := [1,2,3,4].
+	var y := !!!!!!_true_.
 	
-	release x.
 }

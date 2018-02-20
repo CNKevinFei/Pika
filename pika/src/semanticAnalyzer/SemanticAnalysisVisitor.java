@@ -118,6 +118,28 @@ class SemanticAnalysisVisitor extends ParseNodeVisitor.Default {
 		return token.getLextant();
 	}
 
+	///////////////////////////////////////////////////////////////////////////
+	// control flow statements
+	@Override
+	public void visitLeave(IfStatementNode node) {
+		ParseNode condition = node.child(0);
+		
+		if(!condition.getType().equals(PrimitiveType.BOOLEAN)) {
+			logError("If statement needs a boolean type condition at Location:"+node.getToken().getLocation());
+			node.setType(PrimitiveType.ERROR);
+		}
+	}
+	
+	@Override
+	public void visitLeave(WhileStatementNode node) {
+		ParseNode condition = node.child(0);
+		
+		System.out.println("hello");
+		if(!condition.getType().equals(PrimitiveType.BOOLEAN)) {
+			logError("While statement needs a boolean type expression as condition at Location:"+node.getToken().getLocation());
+			node.setType(PrimitiveType.ERROR);
+		}
+	}
 
 	///////////////////////////////////////////////////////////////////////////
 	// simple leaf nodes

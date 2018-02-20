@@ -12,6 +12,10 @@ public final class LextantToken extends TokenImp {
 		this.lextant = lextant;
 	}
 	
+	public static LextantToken fakeToken(String lexeme, Lextant lextant) {
+		return new LextantToken(TextLocation.nullInstance(),lexeme, lextant);
+	}
+	
 	public Lextant getLextant() {
 		return lextant;
 	}
