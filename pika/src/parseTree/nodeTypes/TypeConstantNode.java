@@ -1,7 +1,9 @@
 package parseTree.nodeTypes;
 
+import lexicalAnalyzer.Keyword;
 import parseTree.ParseNode;
 import parseTree.ParseNodeVisitor;
+import semanticAnalyzer.types.*;
 import tokens.LextantToken;
 import tokens.Token;
 

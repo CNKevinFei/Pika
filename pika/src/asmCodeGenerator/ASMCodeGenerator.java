@@ -341,10 +341,10 @@ public class ASMCodeGenerator {
 			ASMCodeFragment value = removeValueCode(node.child(0));
 			code.append(value);
 			
-			if(node.child(0).getType()==PrimitiveType.FLOAT && node.child(1).getType()==PrimitiveType.INTEGER) {
+			if(node.child(0).getType()==PrimitiveType.FLOAT && node.getType()==PrimitiveType.INTEGER) {
 				code.add(ConvertI);
 			}
-			else if(node.child(0).getType()==PrimitiveType.INTEGER && node.child(1).getType()==PrimitiveType.FLOAT) {
+			else if(node.child(0).getType()==PrimitiveType.INTEGER && node.getType()==PrimitiveType.FLOAT) {
 				code.add(ConvertF);
 			}
 			else if(node.child(1).getType()==PrimitiveType.BOOLEAN) {

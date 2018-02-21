@@ -605,8 +605,8 @@ public class Parser {
 		expect(Punctuator.OPEN_BRACKET);
 		ParseNode left = parseExpression();
 		if(nowReading.isLextant(Punctuator.SEPARATOR, Punctuator.CLOSE_BRACKET)) {
-			Token token;
 			ParseNode right;
+			Token token;
 			
 			while(nowReading.isLextant(Punctuator.SEPARATOR)) {
 				token = nowReading;
@@ -618,7 +618,7 @@ public class Parser {
 			
 			expect(Punctuator.CLOSE_BRACKET);
 			
-			return new ExpressionListNode(bracket, left);
+			return new ExpressionListNode(LextantToken.fakeToken("Expression List", Punctuator.EXPRESSION_LIST), left);
 		}
 		else if(nowReading.isLextant(Punctuator.VERTICAL)) {
 			readToken();
@@ -671,29 +671,11 @@ public class Parser {
 	}
 	
 	private ParseNode parseArrayType() {
-		int arrayLayer = 0;
-		Token token =nowReading;
-		
-		while(nowReading.isLextant(Punctuator.OPEN_BRACKET)) {
-			readToken();
-			arrayLayer++;
-		}
-		
-		if(!nowReading.isLextant(Keyword.INT, Keyword.FLOAT, Keyword.STRING, Keyword.CHAR, Keyword.BOOL, Keyword.RAT)) {
-			return syntaxErrorNode("array type");
-		}
-		ParseNode node = new ArrayTypeConstantNode(token, arrayLayer, new TypeConstantNode(nowReading));
-		readToken();
-		
-		while(arrayLayer!=0) {
-			if(!nowReading.isLextant(Punctuator.CLOSE_BRACKET)) {
-				return syntaxErrorNode("array type");
-			}
-			readToken();
-			arrayLayer--;
-		}
-		
-		return node;
+		Token token = nowReading;
+		expect(Punctuator.OPEN_BRACKET);
+		ParseNode type = parseType();
+		expect(Punctuator.CLOSE_BRACKET);
+		return new ArrayTypeConstantNode(token, type);
 	}
 	
 	

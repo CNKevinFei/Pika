@@ -27,8 +27,6 @@ public interface ParseNodeVisitor {
 	void visitEnter(ProgramNode node);
 	void visitLeave(ProgramNode node);
 	
-	void visitEnter(ArrayIndexVariableNode node);
-	void visitLeave(ArrayIndexVariableNode node);
 	
 	void visitEnter(CloneExpressionNode node);
 	void visitLeave(CloneExpressionNode node);
@@ -36,8 +34,6 @@ public interface ParseNodeVisitor {
 	void visitEnter(ExpressionListNode node);
 	void visitLeave(ExpressionListNode node);
 	
-	void visitEnter(IfStatementNode node);
-	void visitLeave(IfStatementNode node);
 	
 	void visitEnter(LengthExpressionNode node);
 	void visitLeave(LengthExpressionNode node);
@@ -48,8 +44,14 @@ public interface ParseNodeVisitor {
 	void visitEnter(ReleaseStatementNode node);
 	void visitLeave(ReleaseStatementNode node);
 	
+	void visitEnter(IfStatementNode node);
+	void visitLeave(IfStatementNode node);
+	
 	void visitEnter(WhileStatementNode node);
 	void visitLeave(WhileStatementNode node);
+	
+	void visitEnter(ArrayTypeConstantNode node);
+	void visitLeave(ArrayTypeConstantNode node);
 	
 	// leaf nodes: visitLeaf only
 	void visit(BooleanConstantNode node);
@@ -63,7 +65,6 @@ public interface ParseNodeVisitor {
 	void visit(NewlineNode node);
 	void visit(TabNode node);
 	void visit(SpaceNode node);
-	void visit(ArrayTypeConstantNode node);
 
 	
 	public static class Default implements ParseNodeVisitor
@@ -121,12 +122,6 @@ public interface ParseNodeVisitor {
 		public void visitLeave(ProgramNode node) {
 			defaultVisitLeave(node);
 		}
-		public void visitEnter(ArrayIndexVariableNode node) {
-			defaultVisitEnter(node);
-		}
-		public void visitLeave(ArrayIndexVariableNode node) {
-			defaultVisitLeave(node);
-		}
 		public void visitEnter(CloneExpressionNode node) {
 			defaultVisitEnter(node);
 		}
@@ -169,6 +164,12 @@ public interface ParseNodeVisitor {
 		public void visitLeave(WhileStatementNode node) {
 			defaultVisitLeave(node);
 		}
+		public void visitEnter(ArrayTypeConstantNode node) {
+			defaultVisitEnter(node);
+		}
+		public void visitLeave(ArrayTypeConstantNode node) {
+			defaultVisitLeave(node);
+		}
 		
 
 		public void visit(BooleanConstantNode node) {
@@ -204,8 +205,6 @@ public interface ParseNodeVisitor {
 		public void visit(SpaceNode node) {
 			defaultVisitForLeaf(node);
 		}
-		public void visit(ArrayTypeConstantNode node) {
-			defaultVisitForLeaf(node);
-		}
+		
 	}
 }

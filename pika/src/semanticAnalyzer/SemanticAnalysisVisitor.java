@@ -1,9 +1,11 @@
 package semanticAnalyzer;
 
 import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.List;
 
 import lexicalAnalyzer.Lextant;
+import lexicalAnalyzer.Punctuator;
 import lexicalAnalyzer.Keyword;
 import logging.PikaLogger;
 import parseTree.ParseNode;
@@ -12,7 +14,9 @@ import parseTree.nodeTypes.*;
 import semanticAnalyzer.signatures.FunctionSignature;
 import semanticAnalyzer.signatures.FunctionSignatures;
 import semanticAnalyzer.types.PrimitiveType;
+import semanticAnalyzer.types.ArrayType;
 import semanticAnalyzer.types.Type;
+import semanticAnalyzer.PromotionType;
 import symbolTable.Binding;
 import symbolTable.Scope;
 import tokens.LextantToken;
@@ -78,15 +82,59 @@ class SemanticAnalysisVisitor extends ParseNodeVisitor.Default {
 	}
 	@Override
 	public void visitLeave(AssignmentStatementNode node) {
-		IdentifierNode identifier = (IdentifierNode) node.child(0);
+		ParseNode variable = node.child(0);
 		ParseNode value = node.child(1);
 		
-		Type assignmentType = identifier.getType();
+		if(!((variable instanceof IdentifierNode)||(variable.getToken().isLextant(Punctuator.ARRAY_INDEX)))) {
+			logError("left value is not targetable at "+node.getToken().getLocation());
+			node.setType(PrimitiveType.ERROR);
+		}
+		
+		Type assignmentType = variable.getType();
 		node.setType(assignmentType);
 		
-		if(!identifier.satisfy(value)) {
+		if(variable instanceof IdentifierNode && !((IdentifierNode)variable).satisfy(value)) {
+			
+			if(PromotionType.canPromote(value.getType())&&(PromotionType.hasChildren((PrimitiveType)(value.getType()), Arrays.asList((PrimitiveType)assignmentType)))) {
+				Token token;
+				if(assignmentType.equivalent(PrimitiveType.INTEGER))
+					token = LextantToken.fakeToken("int", Keyword.INT);
+				else if(assignmentType.equivalent(PrimitiveType.FLOAT))
+					token = LextantToken.fakeToken("float", Keyword.FLOAT);
+				else if(assignmentType.equivalent(PrimitiveType.RATIONAL))
+					token = LextantToken.fakeToken("rational", Keyword.RAT);
+				else
+				{
+					token = null;
+					logError("assignment statement");
+				}
+				node.replaceChild(node.child(1), BinaryOperatorNode.withChildren(LextantToken.fakeToken("type cast", Punctuator.OPEN_BRACKET), node.child(1), new TypeConstantNode(token)));
+				node.child(1).setType(assignmentType);
+				return;
+			}
 			node.setType(PrimitiveType.ERROR);
-			logError("Assignment of "+"\""+value.getType()+"\""+" to "+"\""+identifier.getConOrVar()+" "+identifier.getType()+"\""+" failed.");
+			logError("Assignment of "+"\""+value.getType()+"\""+" to "+"\""+((IdentifierNode)variable).getConOrVar()+" "+variable.getType()+"\""+" failed.");
+		}
+		else if(variable.getToken().isLextant(Punctuator.ARRAY_INDEX)&&!(value.getType().equivalent(variable.getType()))) {
+			if(PromotionType.canPromote(value.getType())&&(PromotionType.hasChildren((PrimitiveType)(value.getType()), Arrays.asList((PrimitiveType)assignmentType)))) {
+				Token token;
+				if(assignmentType.equivalent(PrimitiveType.INTEGER))
+					token = LextantToken.fakeToken("int", Keyword.INT);
+				else if(assignmentType.equivalent(PrimitiveType.FLOAT))
+					token = LextantToken.fakeToken("float", Keyword.FLOAT);
+				else if(assignmentType.equivalent(PrimitiveType.RATIONAL))
+					token = LextantToken.fakeToken("rational", Keyword.RAT);
+				else
+				{
+					token = null;
+					logError("assignment statement");
+				}
+				node.replaceChild(node.child(1), BinaryOperatorNode.withChildren(LextantToken.fakeToken("type cast", Punctuator.OPEN_BRACKET), node.child(1), new TypeConstantNode(token)));
+				node.child(1).setType(assignmentType);
+				return;
+			}
+			node.setType(PrimitiveType.ERROR);
+			logError("Assignment of "+"\""+value.getType()+"\""+" to "+"\""+" "+variable.getType()+"\""+" failed.");
 		}
 	}
 	
@@ -104,20 +152,220 @@ class SemanticAnalysisVisitor extends ParseNodeVisitor.Default {
 		FunctionSignatures signatures = FunctionSignatures.signaturesOf(operator);
 		FunctionSignature signature = signatures.acceptingSignature(childTypes);
 		
+		
 		if(signature.accepts(childTypes)) {
 			node.setType(signature.resultType());
 			node.setSignature(signature);
+			return;
 		}
-		else {
-			typeCheckError(node, childTypes);
-			node.setType(PrimitiveType.ERROR);
+		
+		if(PromotionType.canPromote(node.child(0).getType())) {
+			
+			List<PrimitiveType> matchingType = new ArrayList<PrimitiveType>();
+			int number = 1;
+			PromotionType promotionType = PromotionType.getPromotionTypeObject((PrimitiveType)node.child(0).getType());
+			
+			while(promotionType.getSuccessor(number)!=null&&!(promotionType.getSuccessor(number).isEmpty())) {
+				matchingType.clear();
+				List<PrimitiveType> type = promotionType.getSuccessor(number);
+				number++;
+				
+				for(PrimitiveType T:type) {
+					signature = signatures.acceptingSignature(Arrays.asList(T, right.getType()));
+					if(signature.accepts(Arrays.asList(T, right.getType()))) {
+						matchingType.add(T);
+					}
+				}
+				
+				for(PrimitiveType T:matchingType) {
+					if(PromotionType.isChildren(T, matchingType)) {
+						signature = signatures.acceptingSignature(Arrays.asList(T, right.getType()));
+						if(signature.accepts(Arrays.asList(T, right.getType()))) {
+							node.setType(signature.resultType());
+							node.setSignature(signature);
+							Token token;
+							if(T.equivalent(PrimitiveType.INTEGER))
+								token = LextantToken.fakeToken("int", Keyword.INT);
+							else if(T.equivalent(PrimitiveType.FLOAT))
+								token = LextantToken.fakeToken("float", Keyword.FLOAT);
+							else if(T.equivalent(PrimitiveType.RATIONAL))
+								token = LextantToken.fakeToken("rational", Keyword.RAT);
+							else
+							{
+								token = null;
+								logError("type promotion");
+							}
+							node.replaceChild(node.child(0),BinaryOperatorNode.withChildren(LextantToken.fakeToken("type cast", Punctuator.OPEN_BRACKET), node.child(0), new TypeConstantNode(token)));
+							node.child(0).setType(T);
+							return;
+						}
+					}
+				}
+			}
+			
 		}
+		
+		if(PromotionType.canPromote(node.child(1).getType())) {
+			List<PrimitiveType> matchingType = new ArrayList<PrimitiveType>();
+			int number = 1;
+			PromotionType promotionType = PromotionType.getPromotionTypeObject((PrimitiveType)node.child(1).getType());
+			
+			while(promotionType.getSuccessor(number)!=null&&!(promotionType.getSuccessor(number).isEmpty())) {
+				matchingType.clear();
+				List<PrimitiveType> type = promotionType.getSuccessor(number);
+				number++;
+				
+				for(PrimitiveType T:type) {
+					signature = signatures.acceptingSignature(Arrays.asList(left.getType(),T));
+					if(signature.accepts(Arrays.asList(left.getType(),T))) {
+						matchingType.add(T);
+					}
+				}
+				
+				for(PrimitiveType T:matchingType) {
+					if(PromotionType.isChildren(T, matchingType)) {
+						signature = signatures.acceptingSignature(Arrays.asList(left.getType(), T));
+						if(signature.accepts(Arrays.asList(left.getType(), T))) {
+							node.setType(signature.resultType());
+							node.setSignature(signature);
+							Token token;
+							if(T.equivalent(PrimitiveType.INTEGER))
+								token = LextantToken.fakeToken("int", Keyword.INT);
+							else if(T.equivalent(PrimitiveType.FLOAT))
+								token = LextantToken.fakeToken("float", Keyword.FLOAT);
+							else if(T.equivalent(PrimitiveType.RATIONAL))
+								token = LextantToken.fakeToken("rational", Keyword.RAT);
+							else
+							{
+								token = null;
+								logError("type promotion");
+							}
+							node.replaceChild(node.child(1),BinaryOperatorNode.withChildren(LextantToken.fakeToken("type cast", Punctuator.OPEN_BRACKET), node.child(1), new TypeConstantNode(token)));
+							node.child(1).setType(T);
+							return;
+						}
+					}
+				}
+			}
+			
+			
+		}
+		
+		if(PromotionType.canPromote(node.child(0).getType())&&PromotionType.canPromote(node.child(1).getType())) {
+			List<PrimitiveType> typeA = PromotionType.getAllChildren((PrimitiveType)node.child(0).getType());
+			List<PrimitiveType> typeB = PromotionType.getAllChildren((PrimitiveType)node.child(1).getType());
+			List<PrimitiveType> matchingTypeA = new ArrayList<PrimitiveType>();
+			List<PrimitiveType> matchingTypeB = new ArrayList<PrimitiveType>();
+			
+			for(PrimitiveType A:typeA) {
+				for(PrimitiveType B:typeB) {
+					signature = signatures.acceptingSignature(Arrays.asList(A, B));
+					if(signature.accepts(Arrays.asList(A,B))) {
+						matchingTypeA.add(A);
+						matchingTypeB.add(B);
+					}
+				}
+			}
+			
+			for(PrimitiveType A:matchingTypeA) {
+				if(PromotionType.isChildren(A, matchingTypeA)) {
+					for(PrimitiveType B:matchingTypeB) {
+						signature = signatures.acceptingSignature(Arrays.asList(A, B));
+						if(signature.accepts(Arrays.asList(A,B))) {
+							node.setType(signature.resultType());
+							node.setSignature(signature);
+							
+							int index = 0;
+							for(PrimitiveType T:Arrays.asList(A,B)) {
+								Token token;
+								if(T.equivalent(PrimitiveType.INTEGER))
+									token = LextantToken.fakeToken("int", Keyword.INT);
+								else if(T.equivalent(PrimitiveType.FLOAT))
+									token = LextantToken.fakeToken("float", Keyword.FLOAT);
+								else if(T.equivalent(PrimitiveType.RATIONAL))
+									token = LextantToken.fakeToken("rational", Keyword.RAT);
+								else
+								{
+									token = null;
+									logError("type promotion");
+								}
+								node.replaceChild(node.child(index),BinaryOperatorNode.withChildren(LextantToken.fakeToken("type cast", Punctuator.OPEN_BRACKET), node.child(index), new TypeConstantNode(token)));
+								node.child(index).setType(T);
+								index++;
+							}
+							return;
+						}
+					}
+					typeCheckError(node, childTypes);
+					node.setType(PrimitiveType.ERROR);
+				}
+			}
+		}
+		
 	}
 	private Lextant operatorFor(BinaryOperatorNode node) {
 		LextantToken token = (LextantToken) node.getToken();
 		return token.getLextant();
 	}
-
+	
+	///////////////////////////////////////////////////////////////////////////
+	// expression list
+	@Override
+	public void visitLeave(ExpressionListNode node) {
+		node.setType(new ArrayType(node.child(0).getType()));
+	}
+	
+	///////////////////////////////////////////////////////////////////////////
+	// unary operator expressions
+	@Override
+	public void visitLeave(CloneExpressionNode node) {
+		Type type = node.child(0).getType();
+		
+		if(!(type instanceof ArrayType)) {
+			logError("clone target is not array type at "+node.child(0).getToken().getLocation());
+			node.setType(PrimitiveType.ERROR);
+		}
+		else {
+			node.setType(type);
+		}
+	}
+	
+	@Override
+	public void visitLeave(NotExpressionNode node) {
+		Type type = node.child(0).getType();
+		
+		if(!(type.equivalent(PrimitiveType.BOOLEAN))) {
+			logError("not expression target is not bool type at "+node.child(0).getToken().getLocation());
+			node.setType(PrimitiveType.ERROR);
+		}
+		else{
+			node.setType(PrimitiveType.BOOLEAN);
+		}
+	}
+	
+	@Override
+	public void visitLeave(LengthExpressionNode node) {
+		Type type = node.child(0).getType();
+		
+		if(!(type instanceof ArrayType)) {
+			logError("length expression target is not array type at "+node.child(0).getToken().getLocation());
+			node.setType(PrimitiveType.ERROR);
+		}
+		else {
+			node.setType(PrimitiveType.INTEGER);
+		}
+	}
+	///////////////////////////////////////////////////////////////////////////
+	// release statements
+	@Override
+	public void visitLeave(ReleaseStatementNode node) {
+		Type type = node.child(0).getType();
+		
+		if(!(type instanceof ArrayType)) {
+			logError("release target is not array type at "+node.child(0).getToken().getLocation());
+			node.setType(PrimitiveType.ERROR);
+		}
+	}
 	///////////////////////////////////////////////////////////////////////////
 	// control flow statements
 	@Override
@@ -134,13 +382,21 @@ class SemanticAnalysisVisitor extends ParseNodeVisitor.Default {
 	public void visitLeave(WhileStatementNode node) {
 		ParseNode condition = node.child(0);
 		
-		System.out.println("hello");
 		if(!condition.getType().equals(PrimitiveType.BOOLEAN)) {
 			logError("While statement needs a boolean type expression as condition at Location:"+node.getToken().getLocation());
 			node.setType(PrimitiveType.ERROR);
 		}
 	}
 
+	///////////////////////////////////////////////////////////////////////////
+	// array type
+	@Override
+	public void visitLeave(ArrayTypeConstantNode node) {
+		Type type = node.child(0).getType();
+		
+		node.setType(new ArrayType(type));
+	}
+	
 	///////////////////////////////////////////////////////////////////////////
 	// simple leaf nodes
 	@Override

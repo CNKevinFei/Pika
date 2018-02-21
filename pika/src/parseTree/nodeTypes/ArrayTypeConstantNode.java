@@ -6,18 +6,10 @@ import parseTree.ParseNodeVisitor;
 
 
 public class ArrayTypeConstantNode extends ParseNode{
-	private int layerNum;
 	
-	public ArrayTypeConstantNode(Token token, int layer, ParseNode type) {
+	public ArrayTypeConstantNode(Token token, ParseNode type) {
 		super(token);
-		layerNum = layer;
 		this.appendChild(type);
-	}
-	
-	////////////////////////////////////////////////////////////
-	// return layer number
-	public int getLayerNum() {
-		return layerNum;
 	}
 	
 	///////////////////////////////////////////////////////////
