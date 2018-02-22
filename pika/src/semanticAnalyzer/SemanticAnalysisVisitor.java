@@ -74,6 +74,11 @@ class SemanticAnalysisVisitor extends ParseNodeVisitor.Default {
 		ParseNode initializer = node.child(1);
 		
 		Type declarationType = initializer.getType();
+		if(declarationType == PrimitiveType.NO_TYPE) {
+			logError("Variable cannot be declared with an empty expression list.");
+			node.setType(PrimitiveType.ERROR);
+			return;
+		}
 		node.setType(declarationType);
 		
 		identifier.setType(declarationType);
@@ -201,6 +206,11 @@ class SemanticAnalysisVisitor extends ParseNodeVisitor.Default {
 						}
 					}
 				}
+				
+				if(matchingType.size()!=0) {
+					logError("promotion fails.");
+					node.setType(PrimitiveType.ERROR);
+				}
 			}
 			
 		}
@@ -245,6 +255,10 @@ class SemanticAnalysisVisitor extends ParseNodeVisitor.Default {
 							return;
 						}
 					}
+				}
+				if(matchingType.size()!=0) {
+					logError("promotion fails.");
+					node.setType(PrimitiveType.ERROR);
 				}
 			}
 			
@@ -296,11 +310,17 @@ class SemanticAnalysisVisitor extends ParseNodeVisitor.Default {
 							return;
 						}
 					}
-					typeCheckError(node, childTypes);
-					node.setType(PrimitiveType.ERROR);
 				}
 			}
+			
+			if(matchingTypeA.size()!=0) {
+				logError("promotion fails.");
+				node.setType(PrimitiveType.ERROR);
+			}
 		}
+		
+		logError("no matching type for operator at "+ node.getToken().getLocation());
+		node.setType(PrimitiveType.ERROR);
 		
 	}
 	private Lextant operatorFor(BinaryOperatorNode node) {
@@ -312,7 +332,13 @@ class SemanticAnalysisVisitor extends ParseNodeVisitor.Default {
 	// expression list
 	@Override
 	public void visitLeave(ExpressionListNode node) {
+		if(node.nChildren()==0) {
+			node.setType(PrimitiveType.NO_TYPE);
+		}
+		else {
 		node.setType(new ArrayType(node.child(0).getType()));
+		}
+		
 	}
 	
 	///////////////////////////////////////////////////////////////////////////

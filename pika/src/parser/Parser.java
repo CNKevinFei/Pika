@@ -603,6 +603,11 @@ public class Parser {
 	private ParseNode parseBracketExpression() {
 		Token bracket = nowReading;
 		expect(Punctuator.OPEN_BRACKET);
+		
+		if(nowReading.isLextant(Punctuator.CLOSE_BRACKET)) {
+			expect(Punctuator.CLOSE_BRACKET);
+			return new ExpressionListNode(LextantToken.fakeToken("Expression List", Punctuator.EXPRESSION_LIST));
+		}
 		ParseNode left = parseExpression();
 		if(nowReading.isLextant(Punctuator.SEPARATOR, Punctuator.CLOSE_BRACKET)) {
 			ParseNode right;

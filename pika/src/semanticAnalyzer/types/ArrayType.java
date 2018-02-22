@@ -6,16 +6,7 @@ public class ArrayType implements Type{
 	
 	public ArrayType(Type type) {
 		this.subType = type;
-		sizeInByte = 16;
-	}
-	
-	public void setSize(int length) {
-		if(subType instanceof ArrayType) {
-			sizeInByte = length*4;
-		}
-		else {
-			sizeInByte = length*subType.getSize();
-		}
+		sizeInByte = 4;
 	}
 	
 	public int getSize() {

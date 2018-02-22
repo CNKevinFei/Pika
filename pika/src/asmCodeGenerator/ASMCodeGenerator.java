@@ -1,17 +1,21 @@
 package asmCodeGenerator;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
 import asmCodeGenerator.codeStorage.ASMCodeFragment;
 import asmCodeGenerator.codeStorage.ASMOpcode;
 import asmCodeGenerator.runtime.RunTime;
+import asmCodeGenerator.runtime.MemoryManager;
+import lexicalAnalyzer.Keyword;
 import lexicalAnalyzer.Lextant;
 import lexicalAnalyzer.Punctuator;
 import parseTree.*;
 import parseTree.nodeTypes.*;
 import semanticAnalyzer.types.PrimitiveType;
 import semanticAnalyzer.types.Type;
+import semanticAnalyzer.types.ArrayType;
 import symbolTable.Binding;
 import symbolTable.Scope;
 import static asmCodeGenerator.codeStorage.ASMCodeFragment.CodeType.*;
@@ -37,7 +41,7 @@ public class ASMCodeGenerator {
 		code.append( globalVariableBlockASM() );
 		code.append( stringConstantBlock());
 		code.append( programASM() );
-//		code.append( MemoryManager.codeForAfterApplication() );
+		code.append( MemoryManager.codeForAfterApplication() );
 		
 		return code;
 	}
@@ -241,10 +245,78 @@ public class ASMCodeGenerator {
 			if(type == PrimitiveType.STRING) {
 				return StoreI;
 			}
+			if(type instanceof ArrayType) {
+				return StoreI;
+			}
 			assert false: "Type " + type + " unimplemented in opcodeForStore()";
 			return null;
 		}
 
+		///////////////////////////////////////////////////////////////////////////
+		// release statement
+		public void visitLeave(ReleaseStatementNode node) {
+			newVoidCode(node);
+			ASMCodeFragment value = removeValueCode(node.child(0));
+			
+			code.append(value);
+			//[...recordAddr]
+			code.add(Call, MemoryManager.MEM_ARRAY_RELEASE);
+			//[...]
+		}
+		///////////////////////////////////////////////////////////////////////////
+		// clone expression
+		public void visitLeave(CloneExpressionNode node) {
+			
+		}
+		///////////////////////////////////////////////////////////////////////////
+		// expression list
+		public void visitLeave(ExpressionListNode node) {
+			newValueCode(node);
+			ASMCodeFragment value = removeValueCode(node.child(0));
+			
+			code.append(value);
+			
+			
+			int size = ((ArrayType)(node.getType())).getSubType().getSize();
+			int length = 0;
+			
+			if(node.nChildren()!=0) {
+				length = 1;
+				ParseNode child = node.child(0);
+				while((child instanceof BinaryOperatorNode) && ((BinaryOperatorNode)child).getOperator() == Punctuator.SEPARATOR) {
+					length++;
+					child = child.child(0);
+				}
+			}
+			
+			code.add(PushI, MemoryManager.MEM_ARRAY_HEADER);
+			code.add(PushI, size*length);
+			code.add(Add);
+			code.add(Call, MemoryManager.MEM_MANAGER_ALLOCATE);
+			code.add(PushI, size);
+			code.add(PushI, length);
+			if(((ArrayType)(node.getType())).getSubType() == PrimitiveType.STRING || ((ArrayType)(node.getType())).getSubType() instanceof ArrayType) {
+				code.add(PushI, 4);
+			}
+			else {
+				code.add(PushI, 0);
+			}
+			
+			//[...blockAddr, size, length, status]
+			code.add(Call, MemoryManager.MEM_STORE_ARRAY_HEADER);
+			code.add(PushI, 1);
+			//[...blockAddr, length, flag]
+			if(size==1) {
+				code.add(Call, MemoryManager.MEM_STORE_ARRAY_ONE_BYTE);
+			}
+			else if(size==4) {
+				code.add(Call, MemoryManager.MEM_STORE_ARRAY_FOUR_BYTE);
+			}
+			else if(size==8) {
+				code.add(Call, MemoryManager.MEM_STORE_ARRAY_EIGHT_BYTE);
+			}
+			
+		}
 
 		///////////////////////////////////////////////////////////////////////////
 		// expressions
@@ -256,6 +328,17 @@ public class ASMCodeGenerator {
 			}
 			else if(operator == Punctuator.OPEN_BRACKET) {
 				visitCastNode(node);
+			}
+			else if(operator == Keyword.NEW) {
+				visitNewNode(node);
+			}
+			else if(operator == Punctuator.SEPARATOR) {
+				newValueCode(node);
+				ASMCodeFragment arg1 = removeValueCode(node.child(0));
+				ASMCodeFragment arg2 = removeValueCode(node.child(1));
+				
+				code.append(arg1);
+				code.append(arg2);
 			}
 			else {
 				visitNormalBinaryOperatorNode(node);
@@ -270,6 +353,45 @@ public class ASMCodeGenerator {
 			}
 			return false;
 				
+		}
+		
+		private void visitNewNode(BinaryOperatorNode node) {
+			newValueCode(node);
+			Type type = ((ArrayType)(node.getType())).getSubType();
+			int size = type.getSize();
+			ASMCodeFragment value = removeValueCode(node.child(1));
+			
+			code.append(value);
+			code.add(Duplicate);
+			code.add(PushI, size);
+			code.add(Multiply);
+			code.add(PushI, MemoryManager.MEM_ARRAY_HEADER);
+			code.add(Add);
+			code.add(Call, MemoryManager.MEM_MANAGER_ALLOCATE);
+			code.add(Exchange);
+			code.add(PushI, size);
+			code.add(Exchange);
+			if(((ArrayType)(node.getType())).getSubType() == PrimitiveType.STRING || ((ArrayType)(node.getType())).getSubType() instanceof ArrayType) {
+				code.add(PushI, 4);
+			}
+			else {
+				code.add(PushI, 0);
+			}
+			
+			//[...blockAddr, blockAddr, size, length, status]
+			code.add(Call, MemoryManager.MEM_STORE_ARRAY_HEADER);
+			code.add(PushI, 0);
+			//[...blockAddr, length, flag]
+			if(size==1) {
+				code.add(Call, MemoryManager.MEM_STORE_ARRAY_ONE_BYTE);
+			}
+			else if(size==4) {
+				code.add(Call, MemoryManager.MEM_STORE_ARRAY_FOUR_BYTE);
+			}
+			else if(size==8) {
+				code.add(Call, MemoryManager.MEM_STORE_ARRAY_EIGHT_BYTE);
+			}
+			
 		}
 		private void visitComparisonOperatorNode(BinaryOperatorNode node,
 				Lextant operator) {
@@ -416,10 +538,40 @@ public class ASMCodeGenerator {
 		public void visit(StringConstantNode node) {
 			newValueCode(node);
 			
-			code.add(DataS, node.getValue());
+			code.add(PushI, node.getValue().length() + MemoryManager.MEM_STRING_RECORD_EXTRA);
+			
+			// [ ...recordSize]
+			code.add(Call, MemoryManager.MEM_MANAGER_ALLOCATE);  
+			code.add(Duplicate);
+			//[ ...blockAddr, blockAddr]
+			
+			code.add(PushI, node.getValue().length());
+			
+			//[ ...blockAddr, blockAddr, length]
+			code.add(Call, MemoryManager.MEM_STORE_STRING_HEADER);
+			//[ ...blockAddr]
+		
+			for(int i = 0; i<=node.getValue().length(); i++) {
+				code.add(Duplicate);
+				code.add(PushI, i);
+				code.add(PushI, MemoryManager.MEM_STRING_CONTENT_OFFSET);
+				code.add(Add);
+				code.add(Add);
+				if(i!=node.getValue().length()) {
+					code.add(PushI, (node.getValue()).charAt(i));
+				}
+				else {
+					code.add(PushI, 0);
+				}
+				code.add(StoreC);
+			}
+			
+			
+			
+			/*code.add(DataS, node.getValue());
 			code.add(PushD, RunTime.STRING_CONSTANT_BLOCK);
 			code.add(PushI, node.getOffset());
-			code.add(Add);
+			code.add(Add);*/
 		}
 		public void visit(IdentifierNode node) {
 			newAddressCode(node);

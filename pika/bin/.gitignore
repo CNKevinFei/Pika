@@ -1,6 +1,5 @@
+/asmCodeGenerator/
 /semanticAnalyzer/
 /parser/
-/asmCodeGenerator/
-/lexicalAnalyzer/
-/tokens/
 /parseTree/
+/.DS_Store

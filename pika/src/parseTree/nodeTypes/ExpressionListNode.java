@@ -10,6 +10,9 @@ public class ExpressionListNode extends ParseNode {
 		super(token);
 		this.appendChild(node);
 	}
+	public ExpressionListNode(Token token) {
+		super(token);
+	}
 	public ExpressionListNode(ParseNode node) {
 		super(node);
 		this.appendChild(node);

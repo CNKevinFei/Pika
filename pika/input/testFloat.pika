@@ -1,8 +1,7 @@
 exec {
-	var x := 1.0.
-	var y := 1.
+	var x := [new [int](1), new [int](2)].
+	var y := 5.
 	
-	x := ^a^+^a^.
-	
+	release x.
 	
 }

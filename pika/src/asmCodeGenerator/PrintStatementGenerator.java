@@ -1,10 +1,6 @@
 package asmCodeGenerator;
 
-import static asmCodeGenerator.codeStorage.ASMOpcode.Jump;
-import static asmCodeGenerator.codeStorage.ASMOpcode.JumpTrue;
-import static asmCodeGenerator.codeStorage.ASMOpcode.Label;
-import static asmCodeGenerator.codeStorage.ASMOpcode.Printf;
-import static asmCodeGenerator.codeStorage.ASMOpcode.PushD;
+import static asmCodeGenerator.codeStorage.ASMOpcode.*;
 import parseTree.ParseNode;
 import parseTree.nodeTypes.NewlineNode;
 import parseTree.nodeTypes.PrintStatementNode;
@@ -14,6 +10,7 @@ import semanticAnalyzer.types.PrimitiveType;
 import semanticAnalyzer.types.Type;
 import asmCodeGenerator.ASMCodeGenerator.CodeVisitor;
 import asmCodeGenerator.codeStorage.ASMCodeFragment;
+import asmCodeGenerator.runtime.MemoryManager;
 import asmCodeGenerator.runtime.RunTime;
 
 public class PrintStatementGenerator {
@@ -32,6 +29,13 @@ public class PrintStatementGenerator {
 			if(child instanceof NewlineNode || child instanceof SpaceNode || child instanceof TabNode) {
 				ASMCodeFragment childCode = visitor.removeVoidCode(child);
 				code.append(childCode);
+			}
+			else if(child.getType() == PrimitiveType.STRING) {
+				code.append(visitor.removeValueCode(child));
+				code.add(PushI, MemoryManager.MEM_STRING_CONTENT_OFFSET);
+				code.add(Add);
+				code.add(PushD, printFormat(child.getType()));
+				code.add(Printf);
 			}
 			else {
 				appendPrintCode(child);

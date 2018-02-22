@@ -72,6 +72,39 @@ public class MemoryManager {
 	private static final String MMGR_NEWBLOCK_BLOCK = "$mmgr-newblock-block";
 	private static final String MMGR_NEWBLOCK_SIZE =  "$mmgr-newblock-size";
 
+	// locals and subroutine tag for store string record
+	public static final String MEM_STORE_STRING_HEADER = "-mem-store-string-header";
+	public static final String MEM_STORE_STRING_RETURN_ADDRESS = "$mem-string-return";
+	
+	// locals and subroutine tag for store array record
+	public static final String MEM_STORE_ARRAY_HEADER = "-mem-store-array-header";
+	private static final String MEM_STORE_ARRAY_RETURN_ADDRESS = "$mem-array-return";
+	public static final String MEM_STORE_ARRAY_ONE_BYTE = "-mem-store-array-one-byte";
+	public static final String MEM_STORE_ARRAY_FOUR_BYTE = "-mem-store-array-four-byte";
+	public static final String MEM_STORE_ARRAY_EIGHT_BYTE = "-mem-store-array-eight-byte";
+	private static final String MEM_STORE_ARRAY_ONE_BYTE_RETURN_ADDRESS = "$mem-store-array-one-byte-return";
+	private static final String MEM_STORE_ARRAY_FOUR_BYTE_RETURN_ADDRESS = "$mem-store-array-four-byte-return";
+	private static final String MEM_STORE_ARRAY_EIGHT_BYTE_RETURN_ADDRESS = "$mem-store-array-eight-byte-return";
+	private static final String MEM_STORE_ARRAY_BLOCK = "$mem-store-array-block";
+	private static final String MEM_STORE_ARRAY_LENGTH = "$mem-store-array-length";
+	private static final String MEM_STORE_ARRAY_LOOP_ONE = "$mem-store-array-loop-one";
+	private static final String MEM_STORE_ARRAY_LOOP_END_ONE = "$mem-store-array-loop-end-one";
+	private static final String MEM_STORE_ARRAY_LOOP_FOUR = "$mem-store-array-loop-four";
+	private static final String MEM_STORE_ARRAY_LOOP_END_FOUR = "$mem-store-array-loop-end-four";
+	private static final String MEM_STORE_ARRAY_LOOP_EIGHT = "$mem-store-array-loop-eight";
+	private static final String MEM_STORE_ARRAY_LOOP_END_EIGHT = "$mem-store-array-loop-end-eight";
+	private static final String MEM_STORE_ARRAY_BLOCK_HEADER = "$mem-store-array-block-header";
+	private static final String MEM_STORE_ARRAY_STATUS_HEADER = "$mem-store-array-status-header";
+	private static final String MEM_STORE_ARRAY_LENGTH_HEADER = "$mem-store-array-length-header";
+	private static final String MEM_STORE_ARRAY_SIZE_HEADER = "$mem-store-array-size-header";
+	private static final String MEM_STORE_ARRAY_FLAG = "$mem-store-array-flag";
+	private static final String MEM_STORE_ARRAY_EMPTY_ONE = "-mem-store-array-empty-one";
+	private static final String MEM_STORE_ARRAY_EMPTY_FOUR = "-mem-store-array-empty-four";
+	private static final String MEM_STORE_ARRAY_EMPTY_EIGHT = "-mem-store-array-empty-eight";
+		
+	// locals and subroutine tag for array record release
+	public static final String MEM_ARRAY_RELEASE = "-mem-array-release";
+	
 	// a tag is:
 	//		prev/next ptr:	4 bytes
 	//		size:			4 bytes
@@ -81,6 +114,19 @@ public class MemoryManager {
 	private static final int TAG_POINTER_OFFSET = 0;
 	private static final int TAG_SIZE_OFFSET = 4;
 	private static final int TAG_AVAIL_OFFSET = 8;
+	
+	// extra information for string record
+	public static final int MEM_STRING_RECORD_EXTRA = 13;
+	private static final int MEM_STRING_STATUS_OFFSET = 4;
+	private static final int MEM_STRING_LENGTH_OFFSET = 8;
+	public static final int MEM_STRING_CONTENT_OFFSET = 12;
+	
+	// extra information for array record
+	public static final int MEM_ARRAY_HEADER = 16;
+	private static final int MEM_ARRAY_STATUS_OFFSET = 4;
+	private static final int MEM_ARRAY_SIZE_OFFSET = 8;
+	private static final int MEM_ARRAY_LENGTH_OFFSET = 12;
+	public static final int MEM_ARRAY_CONTENT_OFFSET = 16;
 	
 	// the only tunable parameter.
 	private static final int MEM_MANAGER_WASTE_TOLERANCE = MMGR_TWICE_TAG_SIZE + 8;
@@ -124,6 +170,12 @@ public class MemoryManager {
 		frag.append(subroutineAllocate());
 		frag.append(subroutineDeallocate());
 		frag.append(subroutineRemoveBlock());
+		frag.append(subroutineStoreStringHeader());
+		frag.append(subroutineStoreArrayHeader());
+		frag.append(subroutineStoreArrayOneByte());
+		frag.append(subroutineStoreArrayFourByte());
+		frag.append(subroutineStoreArrayEightByte());
+		frag.append(subroutineArrayRelease());
 		if(DEBUGGING) {
 			frag.append(subroutineDebugPrintBlock());
 			frag.append(subroutineDebugPrintFreeList());
@@ -463,6 +515,227 @@ public class MemoryManager {
 		loadIFrom(frag, MMGR_DEALLOC_RETURN_ADDRESS);
 		frag.add(Return);
 		return frag;
+	}
+	
+	// [ ...blockAddr, length] -> [ ...]
+	private static ASMCodeFragment subroutineStoreStringHeader() {
+		ASMCodeFragment frag = new ASMCodeFragment(GENERATES_VOID);
+		
+		frag.add(Label, MEM_STORE_STRING_HEADER);
+			declareI(frag, MEM_STORE_STRING_RETURN_ADDRESS);
+			
+			storeITo(frag, MEM_STORE_STRING_RETURN_ADDRESS);
+			frag.add(Exchange);
+			
+			frag.add(Duplicate);
+			frag.add(PushI,6);
+			frag.add(StoreI);
+			
+			frag.add(Duplicate);
+			frag.add(PushI, MEM_STRING_STATUS_OFFSET);
+			frag.add(Add);
+			frag.add(PushI,9);
+			frag.add(StoreI);
+			
+			frag.add(PushI, MEM_STRING_LENGTH_OFFSET);
+			frag.add(Add);
+			frag.add(Exchange);
+			frag.add(StoreI);
+			
+			loadIFrom(frag, MEM_STORE_STRING_RETURN_ADDRESS);
+			frag.add(Return);
+			
+		return frag;		
+	}
+	
+	//[...blockAddr, size, length, status]
+	// [...blockAddr, length, blockAddr, size, blockAddr, status, blockAddr]->[...length]
+	private static ASMCodeFragment subroutineStoreArrayHeader() {
+		ASMCodeFragment frag = new ASMCodeFragment(GENERATES_VOID);
+		
+		frag.add(Label, MEM_STORE_ARRAY_HEADER);
+			declareI(frag, MEM_STORE_ARRAY_RETURN_ADDRESS);
+			declareI(frag, MEM_STORE_ARRAY_BLOCK_HEADER);
+			declareI(frag, MEM_STORE_ARRAY_STATUS_HEADER);
+			declareI(frag, MEM_STORE_ARRAY_LENGTH_HEADER);
+			declareI(frag, MEM_STORE_ARRAY_SIZE_HEADER);
+		
+			storeITo(frag, MEM_STORE_ARRAY_RETURN_ADDRESS);
+			storeITo(frag, MEM_STORE_ARRAY_STATUS_HEADER);
+			storeITo(frag, MEM_STORE_ARRAY_LENGTH_HEADER);
+			storeITo(frag, MEM_STORE_ARRAY_SIZE_HEADER);
+			storeITo(frag, MEM_STORE_ARRAY_BLOCK_HEADER);
+			
+			loadIFrom(frag, MEM_STORE_ARRAY_BLOCK_HEADER);
+			frag.add(PushI, 7);
+			frag.add(StoreI);
+			
+			loadIFrom(frag, MEM_STORE_ARRAY_BLOCK_HEADER);
+			frag.add(PushI, MEM_ARRAY_STATUS_OFFSET);
+			frag.add(Add);
+			loadIFrom(frag, MEM_STORE_ARRAY_STATUS_HEADER);
+			frag.add(StoreI);
+			
+			loadIFrom(frag, MEM_STORE_ARRAY_BLOCK_HEADER);
+			frag.add(PushI, MEM_ARRAY_SIZE_OFFSET);
+			frag.add(Add);
+			loadIFrom(frag, MEM_STORE_ARRAY_SIZE_HEADER);
+			frag.add(StoreI);
+			
+			loadIFrom(frag, MEM_STORE_ARRAY_BLOCK_HEADER);
+			frag.add(PushI, MEM_ARRAY_LENGTH_OFFSET);
+			frag.add(Add);
+			loadIFrom(frag, MEM_STORE_ARRAY_LENGTH_HEADER);
+			frag.add(StoreI);
+			
+			loadIFrom(frag, MEM_STORE_ARRAY_BLOCK_HEADER);
+			loadIFrom(frag, MEM_STORE_ARRAY_LENGTH_HEADER);
+			loadIFrom(frag, MEM_STORE_ARRAY_RETURN_ADDRESS);
+			frag.add(Return);
+			
+		return frag;
+	}
+	
+	private static ASMCodeFragment subroutineStoreArrayOneByte() {
+		ASMCodeFragment frag = new ASMCodeFragment(GENERATES_VOID);
+		
+		frag.add(Label, MEM_STORE_ARRAY_ONE_BYTE);
+			declareI(frag, MEM_STORE_ARRAY_ONE_BYTE_RETURN_ADDRESS);
+			declareI(frag, MEM_STORE_ARRAY_LENGTH);
+			declareI(frag, MEM_STORE_ARRAY_BLOCK);
+			declareI(frag, MEM_STORE_ARRAY_FLAG);
+		
+			storeITo(frag, MEM_STORE_ARRAY_ONE_BYTE_RETURN_ADDRESS);
+			storeITo(frag, MEM_STORE_ARRAY_FLAG);
+			storeITo(frag, MEM_STORE_ARRAY_LENGTH);
+			storeITo(frag, MEM_STORE_ARRAY_BLOCK);
+			
+			
+			frag.add(Label, MEM_STORE_ARRAY_LOOP_ONE);
+				loadIFrom(frag, MEM_STORE_ARRAY_LENGTH);
+				frag.add(JumpFalse, MEM_STORE_ARRAY_LOOP_END_ONE);
+				loadIFrom(frag, MEM_STORE_ARRAY_LENGTH);
+				frag.add(PushI, 1);
+				frag.add(Subtract);
+				storeITo(frag, MEM_STORE_ARRAY_LENGTH);
+				loadIFrom(frag, MEM_STORE_ARRAY_LENGTH);
+				loadIFrom(frag, MEM_STORE_ARRAY_BLOCK);
+				frag.add(PushI, MEM_ARRAY_CONTENT_OFFSET);
+				frag.add(Add);
+				frag.add(Add);
+				loadIFrom(frag, MEM_STORE_ARRAY_FLAG);
+				frag.add(JumpFalse, MEM_STORE_ARRAY_EMPTY_ONE);
+				frag.add(Exchange);
+				frag.add(StoreC);
+				frag.add(Jump,MEM_STORE_ARRAY_LOOP_ONE);
+				frag.add(Label, MEM_STORE_ARRAY_EMPTY_ONE);
+				frag.add(PushI, 0);
+				frag.add(StoreC);
+				frag.add(Jump,MEM_STORE_ARRAY_LOOP_ONE);
+				
+				
+				
+			frag.add(Label, MEM_STORE_ARRAY_LOOP_END_ONE);
+			loadIFrom(frag, MEM_STORE_ARRAY_BLOCK);
+			loadIFrom(frag, MEM_STORE_ARRAY_ONE_BYTE_RETURN_ADDRESS);
+			frag.add(Return);
+			
+			return frag;
+	}
+	
+	//[...blockAddr, length]
+	private static ASMCodeFragment subroutineStoreArrayFourByte() {
+		ASMCodeFragment frag = new ASMCodeFragment(GENERATES_VOID);
+		
+		frag.add(Label, MEM_STORE_ARRAY_FOUR_BYTE);
+			declareI(frag, MEM_STORE_ARRAY_FOUR_BYTE_RETURN_ADDRESS);
+		
+			storeITo(frag, MEM_STORE_ARRAY_FOUR_BYTE_RETURN_ADDRESS);
+			storeITo(frag, MEM_STORE_ARRAY_FLAG);
+			storeITo(frag, MEM_STORE_ARRAY_LENGTH);
+			storeITo(frag, MEM_STORE_ARRAY_BLOCK);
+			
+			
+			frag.add(Label, MEM_STORE_ARRAY_LOOP_FOUR);
+				loadIFrom(frag, MEM_STORE_ARRAY_LENGTH);
+				frag.add(JumpFalse, MEM_STORE_ARRAY_LOOP_END_FOUR);
+				loadIFrom(frag, MEM_STORE_ARRAY_LENGTH);
+				frag.add(PushI, 1);
+				frag.add(Subtract); //[...length-1]
+				storeITo(frag, MEM_STORE_ARRAY_LENGTH);
+				loadIFrom(frag, MEM_STORE_ARRAY_LENGTH);
+				frag.add(PushI, 4);
+				frag.add(Multiply); //[...4*(length)]
+				loadIFrom(frag, MEM_STORE_ARRAY_BLOCK); //[...4*(length), blockAddr]
+				frag.add(PushI, MEM_ARRAY_CONTENT_OFFSET); //[...4*(length), blockAddr, contentOff]
+				frag.add(Add);
+				frag.add(Add);
+				loadIFrom(frag, MEM_STORE_ARRAY_FLAG);
+				frag.add(JumpFalse, MEM_STORE_ARRAY_EMPTY_FOUR);
+				frag.add(Exchange);
+				frag.add(StoreI);
+				frag.add(Jump,MEM_STORE_ARRAY_LOOP_FOUR);
+				frag.add(Label, MEM_STORE_ARRAY_EMPTY_FOUR);
+				frag.add(PushI, 0);
+				frag.add(StoreI);
+				frag.add(Jump,MEM_STORE_ARRAY_LOOP_FOUR);
+				
+				
+			frag.add(Label, MEM_STORE_ARRAY_LOOP_END_FOUR);
+			loadIFrom(frag, MEM_STORE_ARRAY_BLOCK);
+			loadIFrom(frag, MEM_STORE_ARRAY_FOUR_BYTE_RETURN_ADDRESS);
+			frag.add(Return);
+			
+			return frag;
+	}
+	
+	private static ASMCodeFragment subroutineStoreArrayEightByte() {
+		ASMCodeFragment frag = new ASMCodeFragment(GENERATES_VOID);
+		
+		frag.add(Label, MEM_STORE_ARRAY_EIGHT_BYTE);
+			declareI(frag, MEM_STORE_ARRAY_EIGHT_BYTE_RETURN_ADDRESS);
+		
+			storeITo(frag, MEM_STORE_ARRAY_EIGHT_BYTE_RETURN_ADDRESS);
+			storeITo(frag, MEM_STORE_ARRAY_FLAG);
+			storeITo(frag, MEM_STORE_ARRAY_LENGTH);
+			storeITo(frag, MEM_STORE_ARRAY_BLOCK);
+			
+			
+			frag.add(Label, MEM_STORE_ARRAY_LOOP_EIGHT);
+				loadIFrom(frag, MEM_STORE_ARRAY_LENGTH);
+				frag.add(JumpFalse, MEM_STORE_ARRAY_LOOP_END_EIGHT);
+				loadIFrom(frag, MEM_STORE_ARRAY_LENGTH);
+				frag.add(PushI, 1);
+				frag.add(Subtract);
+				storeITo(frag, MEM_STORE_ARRAY_LENGTH);
+				loadIFrom(frag, MEM_STORE_ARRAY_LENGTH);
+				frag.add(PushI, 8);
+				frag.add(Multiply);
+				loadIFrom(frag, MEM_STORE_ARRAY_BLOCK);
+				frag.add(PushI, MEM_ARRAY_CONTENT_OFFSET);
+				frag.add(Add);
+				frag.add(Add);
+				loadIFrom(frag, MEM_STORE_ARRAY_FLAG);
+				frag.add(JumpFalse, MEM_STORE_ARRAY_EMPTY_EIGHT);
+				frag.add(Exchange);
+				frag.add(StoreF);
+				frag.add(Jump,MEM_STORE_ARRAY_LOOP_EIGHT);
+				frag.add(Label, MEM_STORE_ARRAY_EMPTY_EIGHT);
+				frag.add(PushF, 0.0);
+				frag.add(StoreF);
+				frag.add(Jump,MEM_STORE_ARRAY_LOOP_EIGHT);
+				
+				
+			frag.add(Label, MEM_STORE_ARRAY_LOOP_END_EIGHT);
+			loadIFrom(frag, MEM_STORE_ARRAY_BLOCK);
+			loadIFrom(frag, MEM_STORE_ARRAY_EIGHT_BYTE_RETURN_ADDRESS);
+			frag.add(Return);
+			
+			return frag;
+	}
+	// [...]
+	private static ASMCodeFragment subroutineArrayRelease() {
+		
 	}
 	
 ////////////////////////////////////////////////////////////////////////////////////
