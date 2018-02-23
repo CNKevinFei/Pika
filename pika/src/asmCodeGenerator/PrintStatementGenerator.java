@@ -37,6 +37,11 @@ public class PrintStatementGenerator {
 				code.add(PushD, printFormat(child.getType()));
 				code.add(Printf);
 			}
+			else if(child.getType() == PrimitiveType.RATIONAL) {
+				code.append(visitor.removeValueCode(child));
+				code.add(Call, MemoryManager.MEM_RAT_PRINT);
+			}
+			else if(child)
 			else {
 				appendPrintCode(child);
 			}

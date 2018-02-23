@@ -143,7 +143,13 @@ public class FunctionSignatures extends ArrayList<FunctionSignature> {
 				new FunctionSignature(0, PrimitiveType.CHAR, PrimitiveType.CHAR, PrimitiveType.CHAR),
 				new FunctionSignature(1, PrimitiveType.FLOAT, PrimitiveType.FLOAT, PrimitiveType.FLOAT),
 				new FunctionSignature(1, PrimitiveType.BOOLEAN, PrimitiveType.BOOLEAN, PrimitiveType.BOOLEAN),
-				new FunctionSignature(1, PrimitiveType.STRING, PrimitiveType.STRING, PrimitiveType.STRING)
+				new FunctionSignature(1, PrimitiveType.STRING, PrimitiveType.STRING, PrimitiveType.STRING),
+				new FunctionSignature(1, PrimitiveType.RATIONAL, PrimitiveType.FLOAT, PrimitiveType.FLOAT),
+				new FunctionSignature(1, PrimitiveType.RATIONAL, PrimitiveType.INTEGER, PrimitiveType.INTEGER),
+				new FunctionSignature(1, PrimitiveType.RATIONAL, PrimitiveType.RATIONAL, PrimitiveType.RATIONAL),
+				new FunctionSignature(1, PrimitiveType.CHAR, PrimitiveType.RATIONAL, PrimitiveType.RATIONAL),
+				new FunctionSignature(1, PrimitiveType.INTEGER, PrimitiveType.RATIONAL, PrimitiveType.RATIONAL),
+				new FunctionSignature(1, PrimitiveType.FLOAT, PrimitiveType.RATIONAL, PrimitiveType.RATIONAL)
 		);
 		
 		new FunctionSignatures(Punctuator.AND,

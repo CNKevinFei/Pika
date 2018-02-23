@@ -80,6 +80,8 @@ public class ASMCodeGenerator {
 	protected class CodeVisitor extends ParseNodeVisitor.Default {
 		private Map<ParseNode, ASMCodeFragment> codeMap;
 		ASMCodeFragment code;
+		int ifNum = 1;
+		int whileNum = 1;
 		
 		public CodeVisitor() {
 			codeMap = new HashMap<ParseNode, ASMCodeFragment>();
@@ -152,6 +154,17 @@ public class ASMCodeGenerator {
 			else if(node.getType() == PrimitiveType.STRING) {
 				code.add(LoadI);
 			}
+			else if(node.getType() == PrimitiveType.RATIONAL) {
+				code.add(Duplicate);
+				code.add(LoadI);
+				code.add(Exchange);
+				code.add(PushI,4);
+				code.add(Add);
+				code.add(LoadI);
+			}
+			else if(node.getType() instanceof ArrayType) {
+				code.add(LoadI);
+			}
 			else {
 				assert false : "node " + node;
 			}
@@ -182,6 +195,8 @@ public class ASMCodeGenerator {
 				code.append(childCode);
 			}
 		}
+		
+		
 
 		///////////////////////////////////////////////////////////////////////////
 		// statements and declarations
@@ -216,7 +231,15 @@ public class ASMCodeGenerator {
 			code.append(rvalue);
 			
 			Type type = node.getType();
-			code.add(opcodeForStore(type));
+			
+			if(type == PrimitiveType.RATIONAL) {
+				code.add(Call, MemoryManager.MEM_RAT_STORE);
+			}
+			else {
+				code.add(opcodeForStore(type));
+			}
+			
+			
 		}
 		public void visitLeave(AssignmentStatementNode node) {
 			newVoidCode(node);
@@ -227,7 +250,13 @@ public class ASMCodeGenerator {
 			code.append(rvalue);
 			
 			Type type = node.getType();
-			code.add(opcodeForStore(type));
+			if(type == PrimitiveType.RATIONAL) {
+				code.add(Call, MemoryManager.MEM_RAT_STORE);
+			}
+			else {
+				code.add(opcodeForStore(type));
+			}
+
 		}
 		private ASMOpcode opcodeForStore(Type type) {
 			if(type == PrimitiveType.INTEGER) {
@@ -253,6 +282,44 @@ public class ASMCodeGenerator {
 		}
 
 		///////////////////////////////////////////////////////////////////////////
+		// control flow statements
+		public void visitLeave(IfStatementNode node) {
+			newVoidCode(node);
+			ASMCodeFragment condition = removeValueCode(node.child(0));
+			ASMCodeFragment trueContent = removeVoidCode(node.child(1));
+			
+			code.append(condition);
+			code.add(JumpFalse, "$ELSE"+this.ifNum);
+			code.append(trueContent);
+			code.add(Jump, "$IFEND"+this.ifNum);
+			code.add(Label, "$ELSE"+this.ifNum);
+				if(node.nChildren()==3) {
+					code.append(removeVoidCode(node.child(2)));
+				}
+			code.add(Label, "$IFEND"+this.ifNum);
+			
+			this.ifNum++;
+			
+		}
+		
+		public void visitLeave(WhileStatementNode node) {
+			newVoidCode(node);
+			ASMCodeFragment condition = removeValueCode(node.child(0));
+			ASMCodeFragment content = removeVoidCode(node.child(1));
+			
+			code.add(Label, "$WhileLoop"+this.whileNum);
+				code.append(condition);
+				code.add(JumpFalse, "$WhileEnd"+this.whileNum);
+				code.append(content);
+				code.add(Jump, "$WhileLoop"+this.whileNum);
+				
+			code.add(Label, "$WhileEnd"+this.whileNum);
+		}
+		
+		
+		
+		
+		///////////////////////////////////////////////////////////////////////////
 		// release statement
 		public void visitLeave(ReleaseStatementNode node) {
 			newVoidCode(node);
@@ -263,10 +330,17 @@ public class ASMCodeGenerator {
 			code.add(Call, MemoryManager.MEM_ARRAY_RELEASE);
 			//[...]
 		}
+		
 		///////////////////////////////////////////////////////////////////////////
 		// clone expression
 		public void visitLeave(CloneExpressionNode node) {
+			newValueCode(node);
+			ASMCodeFragment value = removeValueCode(node.child(0));
 			
+			code.append(value);
+			//[...recordAddr]
+			code.add(Call,MemoryManager.MEM_ARRAY_CLONE);
+			//[...cloneAddr]
 		}
 		///////////////////////////////////////////////////////////////////////////
 		// expression list
@@ -339,6 +413,78 @@ public class ASMCodeGenerator {
 				
 				code.append(arg1);
 				code.append(arg2);
+			}
+			else if(operator == Punctuator.OVER) {
+				newValueCode(node);
+				ASMCodeFragment arg1 = removeValueCode(node.child(0));
+				ASMCodeFragment arg2 = removeValueCode(node.child(1));
+				
+				code.append(arg1);
+				code.append(arg2);
+				code.add(Duplicate);
+				code.add(JumpFalse, RunTime.RAT_WITH_ZERO_DENOMINATOR_RUNTIME_ERROR);
+				code.add(Call, MemoryManager.MEM_RAT_GCD);
+			}
+			else if(operator == Punctuator.EXPRESSOVER) {
+				newValueCode(node);
+				ASMCodeFragment arg1 = removeValueCode(node.child(0));
+				ASMCodeFragment arg2 = removeValueCode(node.child(1));
+				
+				if(node.child(0).getType() == PrimitiveType.RATIONAL) {
+					code.append(arg1);
+					code.add(Exchange);
+					code.append(arg2);
+					code.add(Multiply);
+					code.add(Exchange);
+					code.add(Divide);
+				}
+				if(node.child(0).getType() == PrimitiveType.FLOAT) {
+					code.append(arg1);
+					code.append(arg2);
+					code.add(ConvertF);
+					code.add(FMultiply);
+					code.add(ConvertI);
+					
+				}
+			}
+			else if(operator == Punctuator.RATIONALIZE) {
+				newValueCode(node);
+				ASMCodeFragment arg1 = removeValueCode(node.child(0));
+				ASMCodeFragment arg2 = removeValueCode(node.child(1));
+				
+				if(node.child(0).getType() == PrimitiveType.RATIONAL) {
+					code.append(arg1);
+					code.add(Exchange);
+					code.append(arg2);
+					code.add(Multiply);
+					code.add(Exchange);
+					
+					code.add(Call, MemoryManager.MEM_RAT_AID);
+					code.add(Call, MemoryManager.MEM_RAT_GCD);
+				}
+				if(node.child(0).getType() == PrimitiveType.FLOAT) {
+					code.append(arg2);
+					code.add(Duplicate);
+					code.append(arg1);
+					code.add(Exchange);
+					code.add(ConvertF);
+					code.add(FMultiply);
+					code.add(ConvertI);
+					code.add(Exchange);
+					
+					code.add(Call, MemoryManager.MEM_RAT_GCD);
+				}
+			}
+			else if(operator == Punctuator.ARRAY_INDEX) {
+				newValueCode(node);
+				ASMCodeFragment arg1 = removeValueCode(node.child(0));
+				ASMCodeFragment arg2 = removeValueCode(node.child(1));
+				
+				code.append(arg1);
+				code.append(arg2);
+				//[...arrayAddr, index]
+				code.add(Call, MemoryManager.MEM_ARRAY_INDEX);
+				//[...value]
 			}
 			else {
 				visitNormalBinaryOperatorNode(node);
@@ -473,6 +619,31 @@ public class ASMCodeGenerator {
 				code.add(PushI,1);
 				code.add(And);
 			}
+			else if(node.child(0).getType()==PrimitiveType.RATIONAL && node.getType()==PrimitiveType.FLOAT) {
+				code.add(ConvertF);
+				code.add(Exchange);
+				code.add(ConvertF);
+				code.add(Exchange);
+				code.add(FDivide);
+			}
+			else if(node.child(0).getType()==PrimitiveType.RATIONAL && node.getType()==PrimitiveType.INTEGER) {
+				code.add(Divide);
+			}
+			else if(node.child(0).getType()==PrimitiveType.INTEGER && node.getType()==PrimitiveType.RATIONAL) {
+				code.add(PushI, 1);
+			}
+			else if(node.child(0).getType()==PrimitiveType.CHAR && node.getType()==PrimitiveType.RATIONAL) {
+				code.add(PushI, 1);
+			}
+			else if(node.child(0).getType()==PrimitiveType.FLOAT && node.getType()==PrimitiveType.RATIONAL) {
+				code.add(PushF, 223092870);
+				code.add(FMultiply);
+				code.add(PushI, 223092870);
+				
+				code.add(Call, MemoryManager.MEM_RAT_GCD);
+			}
+			
+			
 			
 			//code.add(opcodeForStore(node.child(1).getType()));
 		}
@@ -484,6 +655,23 @@ public class ASMCodeGenerator {
 			
 			code.append(arg1);
 			code.append(arg2);
+			
+			if(node.getType() == PrimitiveType.RATIONAL) {
+				if(node.getOperator() == Punctuator.ADD) {
+					code.add(Call, MemoryManager.MEM_RAT_ADD);
+				}
+				else if(node.getOperator() == Punctuator.SUBTRACT) {
+					System.out.println("hello");
+					code.add(Call, MemoryManager.MEM_RAT_SUBTRACT);
+				}
+				else if(node.getOperator() == Punctuator.DIVIDE) {
+					code.add(Call, MemoryManager.MEM_RAT_DIVIDE);
+				}else if(node.getOperator() == Punctuator.MULTIPLY) {
+					code.add(Call, MemoryManager.MEM_RAT_MULTIPLY);
+				}
+				
+				return;
+			}
 			
 			if(node.getOperator() == Punctuator.DIVIDE) {
 				code.add(Duplicate);
@@ -525,6 +713,27 @@ public class ASMCodeGenerator {
 			return null;
 		}
 
+		///////////////////////////////////////////////////////////////////////////
+		// !()
+		public void visitLeave(NotExpressionNode node) {
+			newValueCode(node);
+			ASMCodeFragment arg = removeValueCode(node.child(0));
+			
+			code.append(arg);
+			code.add(BNegate);
+		}
+		
+		///////////////////////////////////////////////////////////////////////////
+		// length
+		public void visitLeave(LengthExpressionNode node) {
+			newValueCode(node);
+			ASMCodeFragment arg = removeValueCode(node.child(0));
+			
+			code.append(arg);
+			code.add(PushI, MemoryManager.MEM_ARRAY_LENGTH_OFFSET);
+			code.add(Add);
+			code.add(LoadI);
+		}
 		///////////////////////////////////////////////////////////////////////////
 		// leaf nodes (ErrorNode not necessary)
 		public void visit(BooleanConstantNode node) {

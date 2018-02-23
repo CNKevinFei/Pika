@@ -1,7 +1,4 @@
 exec {
-	var x := [new [int](1), new [int](2)].
-	var y := 5.
-	
-	release x.
+	print (-7)//(8)/(-7)//(5).
 	
 }

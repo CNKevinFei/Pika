@@ -104,6 +104,101 @@ public class MemoryManager {
 		
 	// locals and subroutine tag for array record release
 	public static final String MEM_ARRAY_RELEASE = "-mem-array-release";
+	private static final String MEM_ARRAY_RELEASE_RETURN_ADDRESS = "$mem-array-release-return-address";
+	private static final String MEM_ARRAY_RELEASE_ARRAY_ADDRESS = "$mem-array-release-array-address";
+	private static final String MEM_ARRAY_RELEASE_ARRAY_LENGTH = "$mem-array-release-array-length";
+	private static final String MEM_ARRAY_RELEASE_NOT_REF = "$mem-array-release-not-ref";
+	private static final String MEM_ARRAY_RELEASE_LOOP = "$mem-array-release-loop";
+	private static final String MEM_ARRAY_RELEASE_END = "$mem-array-release-end";
+	
+	// locals and subroutine tag for array record clone
+	public static final String MEM_ARRAY_CLONE = "-mem-array-clone";
+	private static final String MEM_ARRAY_CLONE_RETURN_ADDRESS = "$mem-array-clone-return-address";
+	private static final String MEM_ARRAY_CLONE_ARRAY_ADDRESS = "$mem-array-clone-array-address";
+	private static final String MEM_ARRAY_CLONE_RESULT_ADDRESS = "$mem-array-clone-result-address";
+	private static final String MEM_ARRAY_CLONE_RECORD_SIZE = "$mem-array-clone-record-size";
+	private static final String MEM_ARRAY_CLONE_LOOP = "$mem-array-clone-loop";
+	private static final String MEM_ARRAY_CLONE_END = "$mem-array-clone-end";
+	
+	// locals and subroutine tag for array record index
+	public static final String MEM_ARRAY_INDEX = "-mem-array-index";
+	private static final String MEM_ARRAY_INDEX_RETURN_ADDRESS = "$mem-array-index-return-address";
+	private static final String MEM_ARRAY_INDEX_NUM = "$mem-array-index-num";
+	private static final String MEM_ARRAY_INDEX_ARRAY_ADDRESS = "$mem-array-index-array-address";
+	private static final String MEM_ARRAY_INDEX_SIZE = "$mem-array-index-size";
+	private static final String MEM_ARRAY_INDEX_ONE = "$mem-array-index-one";
+	private static final String MEM_ARRAY_INDEX_FOUR = "$mem-array-index-four";
+	private static final String MEM_ARRAY_INDEX_EIGHT = "$mem-array-index-eight";
+	private static final String MEM_ARRAY_INDEX_END = "$mem-array-index-end";
+	
+	// local and subroutine tags for rational GCD
+	public static final String MEM_RAT_GCD = "-mem-rat-GCD";
+	private static final String MEM_RAT_GCD_RETURN_ADDRESS = "$mem-rat-gcd-return-address";
+	private static final String MEM_RAT_GCD_NUMERATOR = "$mem-rat-gcd-numerator";
+	private static final String MEM_RAT_GCD_DENOMINATOR = "$mem-rat-gcd-denominator";
+	private static final String MEM_RAT_GCD_A = "$mem-rat-gcd-a";
+	private static final String MEM_RAT_GCD_B = "$mem-rat-gcd-b";
+	private static final String MEM_RAT_GCD_LOOP = "$mem-rat-gcd-loop";
+	private static final  String MEM_RAT_GCD_END = "$mem-rat-gcd-end";
+	private static final  String MEM_RAT_GCD_NEG = "$mem-rat-gcd-neg";
+	
+	// local and subroutine tags for rational store
+	public static final String MEM_RAT_STORE = "-mem-rat-store";
+	private static final String MEM_RAT_STORE_RETURN_ADDRESS = "$mem-rat-store-return-address";
+	private static final String MEM_RAT_STORE_TARGET_ADDRESS = "$mem-rat-store-target-address";
+	private static final String MEM_RAT_STORE_NUMERATOR = "$mem-rat-store-numerator";
+	private static final String MEM_RAT_STORE_DENOMINATOR = "$mem-rat-store-denominator";
+	
+	// local and subroutine tags for rational aids
+	public static final String MEM_RAT_AID = "-mem-rat-aid";
+	private static final String MEM_RAT_AID_RETURN_ADDRESS = "$mem-rat-aid-return-address";
+	private static final String MEM_RAT_AID_A = "$mem-rat-aid-a";
+	private static final String MEM_RAT_AID_B = "$mem-rat-aid-b";
+	
+	// local and subroutine tags for rational print
+	public static final String MEM_RAT_PRINT = "-mem-rat-print";
+	private static final String MEM_RAT_PRINT_RETURN_ADDRESS = "$mem-rat-print-return-address";
+	private static final String MEM_RAT_PRINT_A = "$mem-rat-print-a";
+	private static final String MEM_RAT_PRINT_B = "$mem-rat-print-b";
+	private static final String MEM_RAT_PRINT_NEG = "$mem-rat-print-neg";
+	private static final String MEM_RAT_PRINT_RAT = "$mem-rat-print-rat";
+	private static final String MEM_RAT_PRINT_END = "$mem-rat-print-end";
+	private static final String MEM_RAT_PRINT_CON = "$mem-rat-print-con";
+	
+	// local and subroutine tags for rational add
+	public static final String MEM_RAT_ADD = "-mem-rat-add";
+	private static final String MEM_RAT_ADD_RETURN_ADDRESS = "$mem-rat-add-return-address";
+	private static final String MEM_RAT_ADD_A_NUM = "$mem-rat-add-a-num";
+	private static final String MEM_RAT_ADD_A_DEN = "$mem-rat-add-a-den";
+	private static final String MEM_RAT_ADD_B_NUM = "$mem-rat-add-b-num";
+	private static final String MEM_RAT_ADD_B_DEN = "$mem-rat-add-b-den";
+	
+	// local and subroutine tags for rational subtract
+	public static final String MEM_RAT_SUBTRACT = "-mem-rat-subtract";
+	private static final String MEM_RAT_SUBTRACT_RETURN_ADDRESS = "$mem-rat-subtract-return-address";
+	private static final String MEM_RAT_SUBTRACT_A_NUM = "$mem-rat-subtract-a-num";
+	private static final String MEM_RAT_SUBTRACT_A_DEN = "$mem-rat-subtract-a-den";
+	private static final String MEM_RAT_SUBTRACT_B_NUM = "$mem-rat-subtract-b-num";
+	private static final String MEM_RAT_SUBTRACT_B_DEN = "$mem-rat-subtract-b-den";
+	
+	// local and subroutine tags for rational multiply
+	public static final String MEM_RAT_MULTIPLY = "-mem-rat-multiply";
+	private static final String MEM_RAT_MULTIPLY_RETURN_ADDRESS = "$mem-rat-multiply-return-address";
+	private static final String MEM_RAT_MULTIPLY_A_NUM = "$mem-rat-multiply-a-num";
+	private static final String MEM_RAT_MULTIPLY_A_DEN = "$mem-rat-multiply-a-den";
+	private static final String MEM_RAT_MULTIPLY_B_NUM = "$mem-rat-multiply-b-num";
+	private static final String MEM_RAT_MULTIPLY_B_DEN = "$mem-rat-multiply-b-den";
+		
+	// local and subroutine tags for rational divide
+	public static final String MEM_RAT_DIVIDE = "-mem-rat-divide";
+	private static final String MEM_RAT_DIVIDE_RETURN_ADDRESS = "$mem-rat-divide-return-address";
+	private static final String MEM_RAT_DIVIDE_A_NUM = "$mem-rat-divide-a-num";
+	private static final String MEM_RAT_DIVIDE_A_DEN = "$mem-rat-divide-a-den";
+	private static final String MEM_RAT_DIVIDE_B_NUM = "$mem-rat-divide-b-num";
+	private static final String MEM_RAT_DIVIDE_B_DEN = "$mem-rat-divide-b-den";
+	
+	
+	
 	
 	// a tag is:
 	//		prev/next ptr:	4 bytes
@@ -125,7 +220,7 @@ public class MemoryManager {
 	public static final int MEM_ARRAY_HEADER = 16;
 	private static final int MEM_ARRAY_STATUS_OFFSET = 4;
 	private static final int MEM_ARRAY_SIZE_OFFSET = 8;
-	private static final int MEM_ARRAY_LENGTH_OFFSET = 12;
+	public static final int MEM_ARRAY_LENGTH_OFFSET = 12;
 	public static final int MEM_ARRAY_CONTENT_OFFSET = 16;
 	
 	// the only tunable parameter.
@@ -176,6 +271,16 @@ public class MemoryManager {
 		frag.append(subroutineStoreArrayFourByte());
 		frag.append(subroutineStoreArrayEightByte());
 		frag.append(subroutineArrayRelease());
+		frag.append(subroutineArrayClone());
+		frag.append(subroutineArrayIndex());
+		frag.append(subroutineRatGCD());
+		frag.append(subroutineRatStore());
+		frag.append(subroutineRatAid());
+		frag.append(subroutineRatPrint());
+		frag.append(subroutineRatAdd());
+		frag.append(subroutineRatSubtract());
+		frag.append(subroutineRatMultiply());
+		frag.append(subroutineRatDivide());
 		if(DEBUGGING) {
 			frag.append(subroutineDebugPrintBlock());
 			frag.append(subroutineDebugPrintFreeList());
@@ -733,10 +838,545 @@ public class MemoryManager {
 			
 			return frag;
 	}
-	// [...]
+	// [...arrayAddr(ret)]
 	private static ASMCodeFragment subroutineArrayRelease() {
+		ASMCodeFragment frag = new ASMCodeFragment(GENERATES_VOID);
+		
+		frag.add(Label, MEM_ARRAY_RELEASE);
+			declareI(frag, MEM_ARRAY_RELEASE_RETURN_ADDRESS);
+			declareI(frag, MEM_ARRAY_RELEASE_ARRAY_ADDRESS);
+			declareI(frag, MEM_ARRAY_RELEASE_ARRAY_LENGTH);
+			
+			storeITo(frag, MEM_ARRAY_RELEASE_RETURN_ADDRESS);
+			storeITo(frag, MEM_ARRAY_RELEASE_ARRAY_ADDRESS);
+			
+			//[...arrayAddr]
+			loadIFrom(frag, MEM_ARRAY_RELEASE_ARRAY_ADDRESS);
+			frag.add(PushI, MEM_ARRAY_STATUS_OFFSET);
+			frag.add(Add);
+			frag.add(LoadI);
+			//[...arrayAddr, flag]
+			
+			frag.add(JumpFalse, MEM_ARRAY_RELEASE_NOT_REF);
+			loadIFrom(frag, MEM_ARRAY_RELEASE_ARRAY_ADDRESS);
+			frag.add(PushI, MEM_ARRAY_LENGTH_OFFSET);
+			frag.add(Add);
+			frag.add(LoadI);
+				// [...length]
+			storeITo(frag, MEM_ARRAY_RELEASE_ARRAY_LENGTH);
+				// [...length]
+			
+			frag.add(Label, MEM_ARRAY_RELEASE_LOOP);
+				loadIFrom(frag, MEM_ARRAY_RELEASE_ARRAY_LENGTH);
+				frag.add(JumpFalse, MEM_ARRAY_RELEASE_END);
+				loadIFrom(frag, MEM_ARRAY_RELEASE_ARRAY_LENGTH);
+				frag.add(PushI, 1);
+				frag.add(Subtract);
+				storeITo(frag, MEM_ARRAY_RELEASE_ARRAY_LENGTH);
+				
+				loadIFrom(frag, MEM_ARRAY_RELEASE_ARRAY_LENGTH);
+				//[...length]
+				
+				loadIFrom(frag, MEM_ARRAY_RELEASE_ARRAY_ADDRESS);
+				frag.add(PushI, MEM_ARRAY_SIZE_OFFSET);
+				frag.add(Add);
+				frag.add(LoadI);
+				//[...length, size]
+				
+				frag.add(Multiply);
+				//[...offset]
+				
+				frag.add(PushI, MEM_ARRAY_CONTENT_OFFSET);
+				loadIFrom(frag, MEM_ARRAY_RELEASE_ARRAY_ADDRESS);
+				frag.add(Add);
+				frag.add(Add);
+				
+				//[...address]
+				frag.add(LoadI);
+				//[...arrayAddr]
+				loadIFrom(frag, MEM_ARRAY_RELEASE_RETURN_ADDRESS);
+				frag.add(Exchange);
+				loadIFrom(frag, MEM_ARRAY_RELEASE_ARRAY_ADDRESS);
+				frag.add(Exchange);
+				loadIFrom(frag, MEM_ARRAY_RELEASE_ARRAY_LENGTH);
+				frag.add(Exchange);
+				frag.add(Call, MEM_ARRAY_RELEASE);
+				storeITo(frag, MEM_ARRAY_RELEASE_ARRAY_LENGTH);
+				storeITo(frag, MEM_ARRAY_RELEASE_ARRAY_ADDRESS);
+				storeITo(frag, MEM_ARRAY_RELEASE_RETURN_ADDRESS);
+				frag.add(Jump, MEM_ARRAY_RELEASE_LOOP);
+				
+				
+			
+			frag.add(Label, MEM_ARRAY_RELEASE_NOT_REF);
+				loadIFrom(frag, MEM_ARRAY_RELEASE_ARRAY_ADDRESS);
+				frag.add(Call, MEM_MANAGER_DEALLOCATE);
+				
+				
+			frag.add(Label, MEM_ARRAY_RELEASE_END);
+				loadIFrom(frag, MEM_ARRAY_RELEASE_RETURN_ADDRESS);
+				frag.add(Return);
+			
+				
+			return frag;
 		
 	}
+	
+	//[...arrayAddr]
+	private static ASMCodeFragment subroutineArrayClone() {
+		ASMCodeFragment frag = new ASMCodeFragment(GENERATES_VOID);
+		
+		frag.add(Label, MEM_ARRAY_CLONE);
+			declareI(frag, MEM_ARRAY_CLONE_RETURN_ADDRESS);
+			declareI(frag, MEM_ARRAY_CLONE_ARRAY_ADDRESS);
+			declareI(frag, MEM_ARRAY_CLONE_RESULT_ADDRESS);
+			declareI(frag, MEM_ARRAY_CLONE_RECORD_SIZE);
+			
+			
+			storeITo(frag, MEM_ARRAY_CLONE_RETURN_ADDRESS);
+			storeITo(frag, MEM_ARRAY_CLONE_ARRAY_ADDRESS);
+			
+			loadIFrom(frag, MEM_ARRAY_CLONE_ARRAY_ADDRESS);
+			frag.add(PushI, MEM_ARRAY_LENGTH_OFFSET);
+			frag.add(Add);
+			frag.add(LoadI);
+			//[...length]
+			loadIFrom(frag, MEM_ARRAY_CLONE_ARRAY_ADDRESS);
+			frag.add(PushI, MEM_ARRAY_SIZE_OFFSET);
+			frag.add(Add);
+			frag.add(LoadI);
+			//[...length, size]
+			
+			frag.add(Multiply);
+			//[...contentSize]
+			frag.add(PushI, MEM_ARRAY_HEADER);
+			frag.add(Add);
+			storeITo(frag, MEM_ARRAY_CLONE_RECORD_SIZE);
+			loadIFrom(frag, MEM_ARRAY_CLONE_RECORD_SIZE);
+			//[...recordSize]
+			
+			frag.add(Call, MEM_MANAGER_ALLOCATE);
+			//[...cloneAddr]
+			storeITo(frag, MEM_ARRAY_CLONE_RESULT_ADDRESS);
+			
+			frag.add(Label, MEM_ARRAY_CLONE_LOOP);
+				loadIFrom(frag, MEM_ARRAY_CLONE_RECORD_SIZE);
+				frag.add(JumpFalse, MEM_ARRAY_CLONE_END);
+				loadIFrom(frag, MEM_ARRAY_CLONE_RECORD_SIZE);
+				frag.add(PushI,1);
+				frag.add(Subtract);
+				storeITo(frag, MEM_ARRAY_CLONE_RECORD_SIZE);
+				loadIFrom(frag, MEM_ARRAY_CLONE_RECORD_SIZE);
+				loadIFrom(frag, MEM_ARRAY_CLONE_ARRAY_ADDRESS);
+				frag.add(Add);
+				frag.add(LoadC);
+				
+				loadIFrom(frag, MEM_ARRAY_CLONE_RECORD_SIZE);
+				loadIFrom(frag, MEM_ARRAY_CLONE_RESULT_ADDRESS);
+				frag.add(Add);
+				frag.add(Exchange);
+				frag.add(StoreC);
+
+				frag.add(Jump, MEM_ARRAY_CLONE_LOOP);
+				
+			frag.add(Label, MEM_ARRAY_CLONE_END);
+				loadIFrom(frag, MEM_ARRAY_CLONE_RESULT_ADDRESS);
+				loadIFrom(frag, MEM_ARRAY_CLONE_RETURN_ADDRESS);
+				frag.add(Return);
+				
+			return frag;
+			
+	}
+	
+	//[...arrayAddr, index]
+	private static ASMCodeFragment subroutineArrayIndex() {
+		ASMCodeFragment frag = new ASMCodeFragment(GENERATES_VOID);
+		
+		frag.add(Label, MEM_ARRAY_INDEX);
+			declareI(frag, MEM_ARRAY_INDEX_RETURN_ADDRESS);
+			declareI(frag, MEM_ARRAY_INDEX_ARRAY_ADDRESS);
+			declareI(frag, MEM_ARRAY_INDEX_NUM);
+			declareI(frag, MEM_ARRAY_INDEX_SIZE);
+			
+			storeITo(frag, MEM_ARRAY_INDEX_RETURN_ADDRESS);
+			storeITo(frag, MEM_ARRAY_INDEX_NUM);
+			storeITo(frag, MEM_ARRAY_INDEX_ARRAY_ADDRESS);
+			
+			loadIFrom(frag, MEM_ARRAY_INDEX_ARRAY_ADDRESS);
+			frag.add(PushI, MEM_ARRAY_SIZE_OFFSET);
+			frag.add(Add);
+			frag.add(LoadI);
+			//[...size]
+			storeITo(frag, MEM_ARRAY_INDEX_SIZE);
+			loadIFrom(frag, MEM_ARRAY_INDEX_SIZE);
+			loadIFrom(frag, MEM_ARRAY_INDEX_NUM);
+			//[...size,index]
+			frag.add(Multiply);
+			frag.add(PushI, MEM_ARRAY_HEADER);
+			loadIFrom(frag, MEM_ARRAY_INDEX_ARRAY_ADDRESS);
+			frag.add(Add);
+			frag.add(Add);
+			//[...elementAddr]
+			
+			loadIFrom(frag, MEM_ARRAY_INDEX_SIZE);
+			frag.add(PushI, 1);
+			frag.add(Subtract);
+			frag.add(JumpFalse, MEM_ARRAY_INDEX_ONE);
+			loadIFrom(frag, MEM_ARRAY_INDEX_SIZE);
+			frag.add(PushI, 4);
+			frag.add(Subtract);
+			frag.add(JumpFalse, MEM_ARRAY_INDEX_FOUR);
+			loadIFrom(frag, MEM_ARRAY_INDEX_SIZE);
+			frag.add(PushI, 8);
+			frag.add(Subtract);
+			frag.add(JumpFalse, MEM_ARRAY_INDEX_EIGHT);
+			
+			frag.add(Label, MEM_ARRAY_INDEX_ONE);
+				frag.add(LoadC);
+				frag.add(Jump, MEM_ARRAY_INDEX_END);
+				
+			frag.add(Label, MEM_ARRAY_INDEX_FOUR);
+				frag.add(LoadI);
+				frag.add(Jump, MEM_ARRAY_INDEX_END);
+				
+			frag.add(Label, MEM_ARRAY_INDEX_EIGHT);
+				frag.add(LoadF);
+				frag.add(Jump, MEM_ARRAY_INDEX_END);
+				
+			frag.add(Label, MEM_ARRAY_INDEX_END);
+				loadIFrom(frag, MEM_ARRAY_INDEX_RETURN_ADDRESS);
+				frag.add(Return);
+				
+			return frag;
+	}
+	
+	// [int,int]
+	private static ASMCodeFragment subroutineRatGCD() {
+		ASMCodeFragment frag = new ASMCodeFragment(GENERATES_VOID);
+		
+		frag.add(Label, MEM_RAT_GCD);
+			declareI(frag, MEM_RAT_GCD_RETURN_ADDRESS);
+			declareI(frag, MEM_RAT_GCD_NUMERATOR);
+			declareI(frag, MEM_RAT_GCD_DENOMINATOR);
+			declareI(frag, MEM_RAT_GCD_A);
+			declareI(frag, MEM_RAT_GCD_B);
+			
+			storeITo(frag, MEM_RAT_GCD_RETURN_ADDRESS);
+			storeITo(frag, MEM_RAT_GCD_DENOMINATOR);
+			storeITo(frag, MEM_RAT_GCD_NUMERATOR);
+			
+			loadIFrom(frag, MEM_RAT_GCD_NUMERATOR);
+			storeITo(frag, MEM_RAT_GCD_A);
+			loadIFrom(frag, MEM_RAT_GCD_DENOMINATOR);
+			storeITo(frag, MEM_RAT_GCD_B);
+			
+			frag.add(Label, MEM_RAT_GCD_LOOP);
+				loadIFrom(frag, MEM_RAT_GCD_B);
+				frag.add(JumpFalse, MEM_RAT_GCD_END);
+				loadIFrom(frag, MEM_RAT_GCD_B);
+				loadIFrom(frag, MEM_RAT_GCD_A);
+				loadIFrom(frag, MEM_RAT_GCD_B);
+				frag.add(Remainder);
+				storeITo(frag, MEM_RAT_GCD_B);
+				storeITo(frag, MEM_RAT_GCD_A);
+				frag.add(Jump, MEM_RAT_GCD_LOOP);
+				
+			frag.add(Label, MEM_RAT_GCD_END);
+				loadIFrom(frag, MEM_RAT_GCD_NUMERATOR);
+				loadIFrom(frag, MEM_RAT_GCD_A);
+				frag.add(Divide);
+				frag.add(JumpNeg, MEM_RAT_GCD_NEG);
+				loadIFrom(frag, MEM_RAT_GCD_NUMERATOR);
+				loadIFrom(frag, MEM_RAT_GCD_A);
+				frag.add(Divide);
+				loadIFrom(frag, MEM_RAT_GCD_DENOMINATOR);
+				loadIFrom(frag, MEM_RAT_GCD_A);
+				frag.add(Divide);
+				
+				loadIFrom(frag, MEM_RAT_GCD_RETURN_ADDRESS);
+				frag.add(Return);
+				
+			frag.add(Label, MEM_RAT_GCD_NEG);
+				loadIFrom(frag, MEM_RAT_GCD_NUMERATOR);
+				loadIFrom(frag, MEM_RAT_GCD_A);
+				frag.add(Divide);
+				frag.add(Negate);
+				loadIFrom(frag, MEM_RAT_GCD_DENOMINATOR);
+				loadIFrom(frag, MEM_RAT_GCD_A);
+				frag.add(Divide);
+				frag.add(Negate);
+			
+				loadIFrom(frag, MEM_RAT_GCD_RETURN_ADDRESS);
+				frag.add(Return);
+				
+			return frag;
+	}
+	
+	private static ASMCodeFragment subroutineRatStore() {
+		ASMCodeFragment frag = new ASMCodeFragment(GENERATES_VOID);
+		
+		frag.add(Label, MEM_RAT_STORE);
+			declareI(frag, MEM_RAT_STORE_RETURN_ADDRESS);
+			declareI(frag, MEM_RAT_STORE_NUMERATOR);
+			declareI(frag, MEM_RAT_STORE_DENOMINATOR);
+			declareI(frag, MEM_RAT_STORE_TARGET_ADDRESS);
+			
+			storeITo(frag, MEM_RAT_STORE_RETURN_ADDRESS);
+			storeITo(frag, MEM_RAT_STORE_DENOMINATOR);
+			storeITo(frag, MEM_RAT_STORE_NUMERATOR);
+			storeITo(frag, MEM_RAT_STORE_TARGET_ADDRESS);
+			
+			loadIFrom(frag, MEM_RAT_STORE_TARGET_ADDRESS);
+			loadIFrom(frag, MEM_RAT_STORE_NUMERATOR);
+			frag.add(StoreI);
+			
+			loadIFrom(frag, MEM_RAT_STORE_TARGET_ADDRESS);
+			frag.add(PushI, 4);
+			frag.add(Add);
+			loadIFrom(frag, MEM_RAT_STORE_DENOMINATOR);
+			frag.add(StoreI);
+			
+			loadIFrom(frag, MEM_RAT_STORE_RETURN_ADDRESS);
+			frag.add(Return);
+			
+			return frag;
+	}
+	
+	private static ASMCodeFragment subroutineRatAid() {
+		ASMCodeFragment frag = new ASMCodeFragment(GENERATES_VOID);
+		
+		frag.add(Label, MEM_RAT_AID);
+			declareI(frag, MEM_RAT_AID_RETURN_ADDRESS);
+			declareI(frag, MEM_RAT_AID_A);
+			declareI(frag, MEM_RAT_AID_B);
+			
+			storeITo(frag, MEM_RAT_AID_RETURN_ADDRESS);
+			storeITo(frag, MEM_RAT_AID_B);
+			storeITo(frag, MEM_RAT_AID_A);
+			
+			loadIFrom(frag, MEM_RAT_AID_A);
+			loadIFrom(frag, MEM_RAT_AID_B);
+			frag.add(Divide);
+			loadIFrom(frag, MEM_RAT_AID_B);
+			
+			loadIFrom(frag, MEM_RAT_AID_RETURN_ADDRESS);
+			
+			frag.add(Return);
+			
+			return frag;
+	}
+	
+	private static ASMCodeFragment subroutineRatPrint() {
+		ASMCodeFragment frag = new ASMCodeFragment(GENERATES_VOID);
+		
+		frag.add(Label, MEM_RAT_PRINT);
+			declareI(frag, MEM_RAT_PRINT_RETURN_ADDRESS);
+			declareI(frag, MEM_RAT_PRINT_A);
+			declareI(frag, MEM_RAT_PRINT_B);
+	
+			storeITo(frag, MEM_RAT_PRINT_RETURN_ADDRESS);
+			storeITo(frag, MEM_RAT_PRINT_B);
+			storeITo(frag, MEM_RAT_PRINT_A);
+			
+			loadIFrom(frag, MEM_RAT_PRINT_A);
+			loadIFrom(frag, MEM_RAT_PRINT_B);
+			frag.add(Divide);
+			
+			frag.add(JumpFalse, MEM_RAT_PRINT_NEG);
+			loadIFrom(frag, MEM_RAT_PRINT_A);
+			loadIFrom(frag, MEM_RAT_PRINT_B);
+			frag.add(Divide);
+			frag.add(PushD, RunTime.INTEGER_PRINT_FORMAT);
+			frag.add(Printf);
+			
+			frag.add(Label, MEM_RAT_PRINT_RAT);
+			loadIFrom(frag, MEM_RAT_PRINT_A);
+			loadIFrom(frag, MEM_RAT_PRINT_B);
+			frag.add(Remainder);
+			
+			frag.add(JumpFalse, MEM_RAT_PRINT_END);
+			frag.add(PushI, 95);
+			frag.add(PushD, RunTime.CHAR_PRINT_FORMAT);
+			frag.add(Printf);
+			
+			loadIFrom(frag, MEM_RAT_PRINT_A);
+			loadIFrom(frag, MEM_RAT_PRINT_B);
+			frag.add(Remainder);
+			frag.add(PushD, RunTime.INTEGER_PRINT_FORMAT);
+			frag.add(Printf);
+			
+			frag.add(PushI, 47);
+			frag.add(PushD, RunTime.CHAR_PRINT_FORMAT);
+			frag.add(Printf);
+			
+			loadIFrom(frag, MEM_RAT_PRINT_B);
+			loadIFrom(frag, MEM_RAT_PRINT_B);
+			frag.add(JumpPos, MEM_RAT_PRINT_CON);
+			frag.add(Negate);
+			frag.add(Label, MEM_RAT_PRINT_CON);
+			frag.add(PushD, RunTime.INTEGER_PRINT_FORMAT);
+			frag.add(Printf);
+			
+			frag.add(Jump, MEM_RAT_PRINT_END);
+			
+			frag.add(Label, MEM_RAT_PRINT_END);
+				loadIFrom(frag, MEM_RAT_PRINT_RETURN_ADDRESS);
+				frag.add(Return);
+			
+			frag.add(Label, MEM_RAT_PRINT_NEG);
+				loadIFrom(frag, MEM_RAT_PRINT_B);
+				frag.add(JumpPos, MEM_RAT_PRINT_RAT);
+				frag.add(PushI, 45);
+				frag.add(PushD, RunTime.CHAR_PRINT_FORMAT);
+				frag.add(Printf);
+				frag.add(Jump, MEM_RAT_PRINT_RAT);
+				
+			return frag;
+				
+	}
+	
+	private static ASMCodeFragment subroutineRatAdd() {
+		ASMCodeFragment frag = new ASMCodeFragment(GENERATES_VOID);
+		
+		frag.add(Label, MEM_RAT_ADD);
+			declareI(frag, MEM_RAT_ADD_RETURN_ADDRESS);
+			declareI(frag, MEM_RAT_ADD_A_NUM);
+			declareI(frag, MEM_RAT_ADD_A_DEN);
+			declareI(frag, MEM_RAT_ADD_B_NUM);
+			declareI(frag, MEM_RAT_ADD_B_DEN);
+			
+			storeITo(frag, MEM_RAT_ADD_RETURN_ADDRESS);
+			storeITo(frag, MEM_RAT_ADD_B_DEN);
+			storeITo(frag, MEM_RAT_ADD_B_NUM);
+			storeITo(frag, MEM_RAT_ADD_A_DEN);
+			storeITo(frag, MEM_RAT_ADD_A_NUM);
+			
+			loadIFrom(frag, MEM_RAT_ADD_A_NUM);
+			loadIFrom(frag, MEM_RAT_ADD_B_DEN);
+			frag.add(Multiply);
+			
+			loadIFrom(frag, MEM_RAT_ADD_B_NUM);
+			loadIFrom(frag, MEM_RAT_ADD_A_DEN);
+			frag.add(Multiply);
+			
+			frag.add(Add);
+			
+			loadIFrom(frag, MEM_RAT_ADD_A_DEN);
+			loadIFrom(frag, MEM_RAT_ADD_B_DEN);
+			frag.add(Multiply);
+			
+			frag.add(Call,MEM_RAT_GCD);
+			
+			loadIFrom(frag, MEM_RAT_ADD_RETURN_ADDRESS);
+			frag.add(Return);;
+			
+			return frag;
+	}
+	
+	private static ASMCodeFragment subroutineRatSubtract() {
+		ASMCodeFragment frag = new ASMCodeFragment(GENERATES_VOID);
+		
+		frag.add(Label, MEM_RAT_SUBTRACT);
+			declareI(frag, MEM_RAT_SUBTRACT_RETURN_ADDRESS);
+			declareI(frag, MEM_RAT_SUBTRACT_A_NUM);
+			declareI(frag, MEM_RAT_SUBTRACT_A_DEN);
+			declareI(frag, MEM_RAT_SUBTRACT_B_NUM);
+			declareI(frag, MEM_RAT_SUBTRACT_B_DEN);
+			
+			storeITo(frag, MEM_RAT_SUBTRACT_RETURN_ADDRESS);
+			storeITo(frag, MEM_RAT_SUBTRACT_B_DEN);
+			storeITo(frag, MEM_RAT_SUBTRACT_B_NUM);
+			storeITo(frag, MEM_RAT_SUBTRACT_A_DEN);
+			storeITo(frag, MEM_RAT_SUBTRACT_A_NUM);
+			
+			loadIFrom(frag, MEM_RAT_SUBTRACT_A_NUM);
+			loadIFrom(frag, MEM_RAT_SUBTRACT_B_DEN);
+			frag.add(Multiply);
+			
+			loadIFrom(frag, MEM_RAT_SUBTRACT_B_NUM);
+			loadIFrom(frag, MEM_RAT_SUBTRACT_A_DEN);
+			frag.add(Multiply);
+			
+			frag.add(Subtract);
+			
+			loadIFrom(frag, MEM_RAT_SUBTRACT_A_DEN);
+			loadIFrom(frag, MEM_RAT_SUBTRACT_B_DEN);
+			frag.add(Multiply);
+			
+			frag.add(Call,MEM_RAT_GCD);
+			
+			loadIFrom(frag, MEM_RAT_SUBTRACT_RETURN_ADDRESS);
+			frag.add(Return);
+			
+			return frag;
+	}
+	
+	private static ASMCodeFragment subroutineRatMultiply() {
+		ASMCodeFragment frag = new ASMCodeFragment(GENERATES_VOID);
+		
+		frag.add(Label, MEM_RAT_MULTIPLY);
+			declareI(frag, MEM_RAT_MULTIPLY_RETURN_ADDRESS);
+			declareI(frag, MEM_RAT_MULTIPLY_A_NUM);
+			declareI(frag, MEM_RAT_MULTIPLY_A_DEN);
+			declareI(frag, MEM_RAT_MULTIPLY_B_NUM);
+			declareI(frag, MEM_RAT_MULTIPLY_B_DEN);
+			
+			storeITo(frag, MEM_RAT_MULTIPLY_RETURN_ADDRESS);
+			storeITo(frag, MEM_RAT_MULTIPLY_B_DEN);
+			storeITo(frag, MEM_RAT_MULTIPLY_B_NUM);
+			storeITo(frag, MEM_RAT_MULTIPLY_A_DEN);
+			storeITo(frag, MEM_RAT_MULTIPLY_A_NUM);
+			
+			loadIFrom(frag, MEM_RAT_MULTIPLY_A_NUM);
+			loadIFrom(frag, MEM_RAT_MULTIPLY_B_NUM);
+			frag.add(Multiply);
+			
+			loadIFrom(frag, MEM_RAT_MULTIPLY_A_DEN);
+			loadIFrom(frag, MEM_RAT_MULTIPLY_B_DEN);
+			frag.add(Multiply);
+			
+			frag.add(Call,MEM_RAT_GCD);
+			
+			loadIFrom(frag, MEM_RAT_MULTIPLY_RETURN_ADDRESS);
+			frag.add(Return);
+			
+			return frag;
+	}
+	
+	private static ASMCodeFragment subroutineRatDivide() {
+		ASMCodeFragment frag = new ASMCodeFragment(GENERATES_VOID);
+		
+		frag.add(Label, MEM_RAT_DIVIDE);
+			declareI(frag, MEM_RAT_DIVIDE_RETURN_ADDRESS);
+			declareI(frag, MEM_RAT_DIVIDE_A_NUM);
+			declareI(frag, MEM_RAT_DIVIDE_A_DEN);
+			declareI(frag, MEM_RAT_DIVIDE_B_NUM);
+			declareI(frag, MEM_RAT_DIVIDE_B_DEN);
+			
+			storeITo(frag, MEM_RAT_DIVIDE_RETURN_ADDRESS);
+			storeITo(frag, MEM_RAT_DIVIDE_B_DEN);
+			storeITo(frag, MEM_RAT_DIVIDE_B_NUM);
+			storeITo(frag, MEM_RAT_DIVIDE_A_DEN);
+			storeITo(frag, MEM_RAT_DIVIDE_A_NUM);
+			
+
+			loadIFrom(frag, MEM_RAT_DIVIDE_A_NUM);
+			loadIFrom(frag, MEM_RAT_DIVIDE_B_DEN);
+			frag.add(Multiply);
+			
+			loadIFrom(frag, MEM_RAT_DIVIDE_A_DEN);
+			loadIFrom(frag, MEM_RAT_DIVIDE_B_NUM);
+			frag.add(Multiply);
+			
+			frag.add(Call,MEM_RAT_GCD);
+			
+			loadIFrom(frag, MEM_RAT_DIVIDE_RETURN_ADDRESS);
+			frag.add(Return);
+			
+			return frag;
+	}
+			
+			
 	
 ////////////////////////////////////////////////////////////////////////////////////
 //Macros: these get inlined into the subroutines defined above.

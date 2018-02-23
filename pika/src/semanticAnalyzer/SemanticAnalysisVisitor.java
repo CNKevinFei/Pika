@@ -470,6 +470,9 @@ class SemanticAnalysisVisitor extends ParseNodeVisitor.Default {
 		else if(node.getToken().isLextant(Keyword.STRING)) {
 			node.setType(PrimitiveType.STRING);
 		}
+		else if(node.getToken().isLextant(Keyword.RAT)) {
+			node.setType(PrimitiveType.RATIONAL);
+		}
 	}
 	@Override
 	public void visit(NewlineNode node) {

@@ -142,53 +142,70 @@
         Label        $$f-divide-by-zero        
         PushD        $errors-float-divide-by-zero 
         Jump         $$general-runtime-error   
+        DLabel       $errors-rat-divide-by-zero 
+        DataC        114                       %% "rat divide by zero"
+        DataC        97                        
+        DataC        116                       
+        DataC        32                        
+        DataC        100                       
+        DataC        105                       
+        DataC        118                       
+        DataC        105                       
+        DataC        100                       
+        DataC        101                       
+        DataC        32                        
+        DataC        98                        
+        DataC        121                       
+        DataC        32                        
+        DataC        122                       
+        DataC        101                       
+        DataC        114                       
+        DataC        111                       
+        DataC        0                         
+        Label        $$r-divide-by-zero        
+        PushD        $errors-rat-divide-by-zero 
+        Jump         $$general-runtime-error   
+        DLabel       $errors-denominator-zero  
+        DataC        100                       %% "denominator is zero"
+        DataC        101                       
+        DataC        110                       
+        DataC        111                       
+        DataC        109                       
+        DataC        105                       
+        DataC        110                       
+        DataC        97                        
+        DataC        116                       
+        DataC        111                       
+        DataC        114                       
+        DataC        32                        
+        DataC        105                       
+        DataC        115                       
+        DataC        32                        
+        DataC        122                       
+        DataC        101                       
+        DataC        114                       
+        DataC        111                       
+        DataC        0                         
+        Label        $$r-denominator-zero      
+        PushD        $errors-denominator-zero  
+        Jump         $$general-runtime-error   
         DLabel       $usable-memory-start      
         DLabel       $global-memory-block      
-        DataZ        4                         
+        DataZ        0                         
         DLabel       $string-constant-memory   
         Label        $$main                    
-        PushD        $global-memory-block      
-        PushI        0                         
-        Add                                    %% x
-        PushI        1                         
-        Duplicate                              
-        PushI        4                         
-        Multiply                               
-        PushI        16                        
-        Add                                    
-        Call         -mem-manager-allocate     
-        Exchange                               
-        PushI        4                         
-        Exchange                               
-        PushI        0                         
-        Call         -mem-store-array-header   
-        PushI        0                         
-        Call         -mem-store-array-four-byte 
-        PushI        2                         
-        Duplicate                              
-        PushI        4                         
-        Multiply                               
-        PushI        16                        
-        Add                                    
-        Call         -mem-manager-allocate     
-        Exchange                               
-        PushI        4                         
-        Exchange                               
-        PushI        0                         
-        Call         -mem-store-array-header   
-        PushI        0                         
-        Call         -mem-store-array-four-byte 
-        PushI        16                        
+        PushI        -7                        
         PushI        8                         
-        Add                                    
-        Call         -mem-manager-allocate     
-        PushI        4                         
-        PushI        2                         
-        PushI        4                         
-        Call         -mem-store-array-header   
-        PushI        1                         
-        Call         -mem-store-array-four-byte 
-        StoreI                                 
+        Duplicate                              
+        JumpFalse    $$r-denominator-zero      
+        Call         -mem-rat-GCD              
+        PushI        -7                        
+        PushI        5                         
+        Duplicate                              
+        JumpFalse    $$r-denominator-zero      
+        Call         -mem-rat-GCD              
+        Call         -mem-rat-divide           
+        Call         -mem-rat-print            
         Halt                                   
         Label        -mem-manager-make-tags    
         DLabel       $mmgr-tags-size           
@@ -837,6 +854,607 @@
         PushD        $mem-store-array-block    
         LoadI                                  
         PushD        $mem-store-array-eight-byte-return 
+        LoadI                                  
+        Return                                 
+        Label        -mem-array-release        
+        DLabel       $mem-array-release-return-address 
+        DataZ        4                         
+        DLabel       $mem-array-release-array-address 
+        DataZ        4                         
+        DLabel       $mem-array-release-array-length 
+        DataZ        4                         
+        PushD        $mem-array-release-return-address 
+        Exchange                               
+        StoreI                                 
+        PushD        $mem-array-release-array-address 
+        Exchange                               
+        StoreI                                 
+        PushD        $mem-array-release-array-address 
+        LoadI                                  
+        PushI        4                         
+        Add                                    
+        LoadI                                  
+        JumpFalse    $mem-array-release-not-ref 
+        PushD        $mem-array-release-array-address 
+        LoadI                                  
+        PushI        12                        
+        Add                                    
+        LoadI                                  
+        PushD        $mem-array-release-array-length 
+        Exchange                               
+        StoreI                                 
+        Label        $mem-array-release-loop   
+        PushD        $mem-array-release-array-length 
+        LoadI                                  
+        JumpFalse    $mem-array-release-end    
+        PushD        $mem-array-release-array-length 
+        LoadI                                  
+        PushI        1                         
+        Subtract                               
+        PushD        $mem-array-release-array-length 
+        Exchange                               
+        StoreI                                 
+        PushD        $mem-array-release-array-length 
+        LoadI                                  
+        PushD        $mem-array-release-array-address 
+        LoadI                                  
+        PushI        8                         
+        Add                                    
+        LoadI                                  
+        Multiply                               
+        PushI        16                        
+        PushD        $mem-array-release-array-address 
+        LoadI                                  
+        Add                                    
+        Add                                    
+        LoadI                                  
+        PushD        $mem-array-release-return-address 
+        LoadI                                  
+        Exchange                               
+        PushD        $mem-array-release-array-address 
+        LoadI                                  
+        Exchange                               
+        PushD        $mem-array-release-array-length 
+        LoadI                                  
+        Exchange                               
+        Call         -mem-array-release        
+        PushD        $mem-array-release-array-length 
+        Exchange                               
+        StoreI                                 
+        PushD        $mem-array-release-array-address 
+        Exchange                               
+        StoreI                                 
+        PushD        $mem-array-release-return-address 
+        Exchange                               
+        StoreI                                 
+        Jump         $mem-array-release-loop   
+        Label        $mem-array-release-not-ref 
+        PushD        $mem-array-release-array-address 
+        LoadI                                  
+        Call         -mem-manager-deallocate   
+        Label        $mem-array-release-end    
+        PushD        $mem-array-release-return-address 
+        LoadI                                  
+        Return                                 
+        Label        -mem-array-clone          
+        DLabel       $mem-array-clone-return-address 
+        DataZ        4                         
+        DLabel       $mem-array-clone-array-address 
+        DataZ        4                         
+        DLabel       $mem-array-clone-result-address 
+        DataZ        4                         
+        DLabel       $mem-array-clone-record-size 
+        DataZ        4                         
+        PushD        $mem-array-clone-return-address 
+        Exchange                               
+        StoreI                                 
+        PushD        $mem-array-clone-array-address 
+        Exchange                               
+        StoreI                                 
+        PushD        $mem-array-clone-array-address 
+        LoadI                                  
+        PushI        12                        
+        Add                                    
+        LoadI                                  
+        PushD        $mem-array-clone-array-address 
+        LoadI                                  
+        PushI        8                         
+        Add                                    
+        LoadI                                  
+        Multiply                               
+        PushI        16                        
+        Add                                    
+        PushD        $mem-array-clone-record-size 
+        Exchange                               
+        StoreI                                 
+        PushD        $mem-array-clone-record-size 
+        LoadI                                  
+        Call         -mem-manager-allocate     
+        PushD        $mem-array-clone-result-address 
+        Exchange                               
+        StoreI                                 
+        Label        $mem-array-clone-loop     
+        PushD        $mem-array-clone-record-size 
+        LoadI                                  
+        JumpFalse    $mem-array-clone-end      
+        PushD        $mem-array-clone-record-size 
+        LoadI                                  
+        PushI        1                         
+        Subtract                               
+        PushD        $mem-array-clone-record-size 
+        Exchange                               
+        StoreI                                 
+        PushD        $mem-array-clone-record-size 
+        LoadI                                  
+        PushD        $mem-array-clone-array-address 
+        LoadI                                  
+        Add                                    
+        LoadC                                  
+        PushD        $mem-array-clone-record-size 
+        LoadI                                  
+        PushD        $mem-array-clone-result-address 
+        LoadI                                  
+        Add                                    
+        Exchange                               
+        StoreC                                 
+        Jump         $mem-array-clone-loop     
+        Label        $mem-array-clone-end      
+        PushD        $mem-array-clone-result-address 
+        LoadI                                  
+        PushD        $mem-array-clone-return-address 
+        LoadI                                  
+        Return                                 
+        Label        -mem-array-index          
+        DLabel       $mem-array-index-return-address 
+        DataZ        4                         
+        DLabel       $mem-array-index-array-address 
+        DataZ        4                         
+        DLabel       $mem-array-index-num      
+        DataZ        4                         
+        DLabel       $mem-array-index-size     
+        DataZ        4                         
+        PushD        $mem-array-index-return-address 
+        Exchange                               
+        StoreI                                 
+        PushD        $mem-array-index-num      
+        Exchange                               
+        StoreI                                 
+        PushD        $mem-array-index-array-address 
+        Exchange                               
+        StoreI                                 
+        PushD        $mem-array-index-array-address 
+        LoadI                                  
+        PushI        8                         
+        Add                                    
+        LoadI                                  
+        PushD        $mem-array-index-size     
+        Exchange                               
+        StoreI                                 
+        PushD        $mem-array-index-size     
+        LoadI                                  
+        PushD        $mem-array-index-num      
+        LoadI                                  
+        Multiply                               
+        PushI        16                        
+        PushD        $mem-array-index-array-address 
+        LoadI                                  
+        Add                                    
+        Add                                    
+        PushD        $mem-array-index-size     
+        LoadI                                  
+        PushI        1                         
+        Subtract                               
+        JumpFalse    $mem-array-index-one      
+        PushD        $mem-array-index-size     
+        LoadI                                  
+        PushI        4                         
+        Subtract                               
+        JumpFalse    $mem-array-index-four     
+        PushD        $mem-array-index-size     
+        LoadI                                  
+        PushI        8                         
+        Subtract                               
+        JumpFalse    $mem-array-index-eight    
+        Label        $mem-array-index-one      
+        LoadC                                  
+        Jump         $mem-array-index-end      
+        Label        $mem-array-index-four     
+        LoadI                                  
+        Jump         $mem-array-index-end      
+        Label        $mem-array-index-eight    
+        LoadF                                  
+        Jump         $mem-array-index-end      
+        Label        $mem-array-index-end      
+        PushD        $mem-array-index-return-address 
+        LoadI                                  
+        Return                                 
+        Label        -mem-rat-GCD              
+        DLabel       $mem-rat-gcd-return-address 
+        DataZ        4                         
+        DLabel       $mem-rat-gcd-numerator    
+        DataZ        4                         
+        DLabel       $mem-rat-gcd-denominator  
+        DataZ        4                         
+        DLabel       $mem-rat-gcd-a            
+        DataZ        4                         
+        DLabel       $mem-rat-gcd-b            
+        DataZ        4                         
+        PushD        $mem-rat-gcd-return-address 
+        Exchange                               
+        StoreI                                 
+        PushD        $mem-rat-gcd-denominator  
+        Exchange                               
+        StoreI                                 
+        PushD        $mem-rat-gcd-numerator    
+        Exchange                               
+        StoreI                                 
+        PushD        $mem-rat-gcd-numerator    
+        LoadI                                  
+        PushD        $mem-rat-gcd-a            
+        Exchange                               
+        StoreI                                 
+        PushD        $mem-rat-gcd-denominator  
+        LoadI                                  
+        PushD        $mem-rat-gcd-b            
+        Exchange                               
+        StoreI                                 
+        Label        $mem-rat-gcd-loop         
+        PushD        $mem-rat-gcd-b            
+        LoadI                                  
+        JumpFalse    $mem-rat-gcd-end          
+        PushD        $mem-rat-gcd-b            
+        LoadI                                  
+        PushD        $mem-rat-gcd-a            
+        LoadI                                  
+        PushD        $mem-rat-gcd-b            
+        LoadI                                  
+        Remainder                              
+        PushD        $mem-rat-gcd-b            
+        Exchange                               
+        StoreI                                 
+        PushD        $mem-rat-gcd-a            
+        Exchange                               
+        StoreI                                 
+        Jump         $mem-rat-gcd-loop         
+        Label        $mem-rat-gcd-end          
+        PushD        $mem-rat-gcd-numerator    
+        LoadI                                  
+        PushD        $mem-rat-gcd-a            
+        LoadI                                  
+        Divide                                 
+        JumpNeg      $mem-rat-gcd-neg          
+        PushD        $mem-rat-gcd-numerator    
+        LoadI                                  
+        PushD        $mem-rat-gcd-a            
+        LoadI                                  
+        Divide                                 
+        PushD        $mem-rat-gcd-denominator  
+        LoadI                                  
+        PushD        $mem-rat-gcd-a            
+        LoadI                                  
+        Divide                                 
+        PushD        $mem-rat-gcd-return-address 
+        LoadI                                  
+        Return                                 
+        Label        $mem-rat-gcd-neg          
+        PushD        $mem-rat-gcd-numerator    
+        LoadI                                  
+        PushD        $mem-rat-gcd-a            
+        LoadI                                  
+        Divide                                 
+        Negate                                 
+        PushD        $mem-rat-gcd-denominator  
+        LoadI                                  
+        PushD        $mem-rat-gcd-a            
+        LoadI                                  
+        Divide                                 
+        Negate                                 
+        PushD        $mem-rat-gcd-return-address 
+        LoadI                                  
+        Return                                 
+        Label        -mem-rat-store            
+        DLabel       $mem-rat-store-return-address 
+        DataZ        4                         
+        DLabel       $mem-rat-store-numerator  
+        DataZ        4                         
+        DLabel       $mem-rat-store-denominator 
+        DataZ        4                         
+        DLabel       $mem-rat-store-target-address 
+        DataZ        4                         
+        PushD        $mem-rat-store-return-address 
+        Exchange                               
+        StoreI                                 
+        PushD        $mem-rat-store-denominator 
+        Exchange                               
+        StoreI                                 
+        PushD        $mem-rat-store-numerator  
+        Exchange                               
+        StoreI                                 
+        PushD        $mem-rat-store-target-address 
+        Exchange                               
+        StoreI                                 
+        PushD        $mem-rat-store-target-address 
+        LoadI                                  
+        PushD        $mem-rat-store-numerator  
+        LoadI                                  
+        StoreI                                 
+        PushD        $mem-rat-store-target-address 
+        LoadI                                  
+        PushI        4                         
+        Add                                    
+        PushD        $mem-rat-store-denominator 
+        LoadI                                  
+        StoreI                                 
+        PushD        $mem-rat-store-return-address 
+        LoadI                                  
+        Return                                 
+        Label        -mem-rat-aid              
+        DLabel       $mem-rat-aid-return-address 
+        DataZ        4                         
+        DLabel       $mem-rat-aid-a            
+        DataZ        4                         
+        DLabel       $mem-rat-aid-b            
+        DataZ        4                         
+        PushD        $mem-rat-aid-return-address 
+        Exchange                               
+        StoreI                                 
+        PushD        $mem-rat-aid-b            
+        Exchange                               
+        StoreI                                 
+        PushD        $mem-rat-aid-a            
+        Exchange                               
+        StoreI                                 
+        PushD        $mem-rat-aid-a            
+        LoadI                                  
+        PushD        $mem-rat-aid-b            
+        LoadI                                  
+        Divide                                 
+        PushD        $mem-rat-aid-b            
+        LoadI                                  
+        PushD        $mem-rat-aid-return-address 
+        LoadI                                  
+        Return                                 
+        Label        -mem-rat-print            
+        DLabel       $mem-rat-print-return-address 
+        DataZ        4                         
+        DLabel       $mem-rat-print-a          
+        DataZ        4                         
+        DLabel       $mem-rat-print-b          
+        DataZ        4                         
+        PushD        $mem-rat-print-return-address 
+        Exchange                               
+        StoreI                                 
+        PushD        $mem-rat-print-b          
+        Exchange                               
+        StoreI                                 
+        PushD        $mem-rat-print-a          
+        Exchange                               
+        StoreI                                 
+        PushD        $mem-rat-print-a          
+        LoadI                                  
+        PushD        $mem-rat-print-b          
+        LoadI                                  
+        Divide                                 
+        JumpFalse    $mem-rat-print-neg        
+        PushD        $mem-rat-print-a          
+        LoadI                                  
+        PushD        $mem-rat-print-b          
+        LoadI                                  
+        Divide                                 
+        PushD        $print-format-integer     
+        Printf                                 
+        Label        $mem-rat-print-rat        
+        PushD        $mem-rat-print-a          
+        LoadI                                  
+        PushD        $mem-rat-print-b          
+        LoadI                                  
+        Remainder                              
+        JumpFalse    $mem-rat-print-end        
+        PushI        95                        
+        PushD        $print-format-char        
+        Printf                                 
+        PushD        $mem-rat-print-a          
+        LoadI                                  
+        PushD        $mem-rat-print-b          
+        LoadI                                  
+        Remainder                              
+        PushD        $print-format-integer     
+        Printf                                 
+        PushI        47                        
+        PushD        $print-format-char        
+        Printf                                 
+        PushD        $mem-rat-print-b          
+        LoadI                                  
+        PushD        $mem-rat-print-b          
+        LoadI                                  
+        JumpPos      $mem-rat-print-con        
+        Negate                                 
+        Label        $mem-rat-print-con        
+        PushD        $print-format-integer     
+        Printf                                 
+        Jump         $mem-rat-print-end        
+        Label        $mem-rat-print-end        
+        PushD        $mem-rat-print-return-address 
+        LoadI                                  
+        Return                                 
+        Label        $mem-rat-print-neg        
+        PushD        $mem-rat-print-b          
+        LoadI                                  
+        JumpPos      $mem-rat-print-rat        
+        PushI        45                        
+        PushD        $print-format-char        
+        Printf                                 
+        Jump         $mem-rat-print-rat        
+        Label        -mem-rat-add              
+        DLabel       $mem-rat-add-return-address 
+        DataZ        4                         
+        DLabel       $mem-rat-add-a-num        
+        DataZ        4                         
+        DLabel       $mem-rat-add-a-den        
+        DataZ        4                         
+        DLabel       $mem-rat-add-b-num        
+        DataZ        4                         
+        DLabel       $mem-rat-add-b-den        
+        DataZ        4                         
+        PushD        $mem-rat-add-return-address 
+        Exchange                               
+        StoreI                                 
+        PushD        $mem-rat-add-b-den        
+        Exchange                               
+        StoreI                                 
+        PushD        $mem-rat-add-b-num        
+        Exchange                               
+        StoreI                                 
+        PushD        $mem-rat-add-a-den        
+        Exchange                               
+        StoreI                                 
+        PushD        $mem-rat-add-a-num        
+        Exchange                               
+        StoreI                                 
+        PushD        $mem-rat-add-a-num        
+        LoadI                                  
+        PushD        $mem-rat-add-b-den        
+        LoadI                                  
+        Multiply                               
+        PushD        $mem-rat-add-b-num        
+        LoadI                                  
+        PushD        $mem-rat-add-a-den        
+        LoadI                                  
+        Multiply                               
+        Add                                    
+        PushD        $mem-rat-add-a-den        
+        LoadI                                  
+        PushD        $mem-rat-add-b-den        
+        LoadI                                  
+        Multiply                               
+        Call         -mem-rat-GCD              
+        PushD        $mem-rat-add-return-address 
+        LoadI                                  
+        Return                                 
+        Label        -mem-rat-subtract         
+        DLabel       $mem-rat-subtract-return-address 
+        DataZ        4                         
+        DLabel       $mem-rat-subtract-a-num   
+        DataZ        4                         
+        DLabel       $mem-rat-subtract-a-den   
+        DataZ        4                         
+        DLabel       $mem-rat-subtract-b-num   
+        DataZ        4                         
+        DLabel       $mem-rat-subtract-b-den   
+        DataZ        4                         
+        PushD        $mem-rat-subtract-return-address 
+        Exchange                               
+        StoreI                                 
+        PushD        $mem-rat-subtract-b-den   
+        Exchange                               
+        StoreI                                 
+        PushD        $mem-rat-subtract-b-num   
+        Exchange                               
+        StoreI                                 
+        PushD        $mem-rat-subtract-a-den   
+        Exchange                               
+        StoreI                                 
+        PushD        $mem-rat-subtract-a-num   
+        Exchange                               
+        StoreI                                 
+        PushD        $mem-rat-subtract-a-num   
+        LoadI                                  
+        PushD        $mem-rat-subtract-b-den   
+        LoadI                                  
+        Multiply                               
+        PushD        $mem-rat-subtract-b-num   
+        LoadI                                  
+        PushD        $mem-rat-subtract-a-den   
+        LoadI                                  
+        Multiply                               
+        Subtract                               
+        PushD        $mem-rat-subtract-a-den   
+        LoadI                                  
+        PushD        $mem-rat-subtract-b-den   
+        LoadI                                  
+        Multiply                               
+        Call         -mem-rat-GCD              
+        PushD        $mem-rat-subtract-return-address 
+        LoadI                                  
+        Return                                 
+        Label        -mem-rat-multiply         
+        DLabel       $mem-rat-multiply-return-address 
+        DataZ        4                         
+        DLabel       $mem-rat-multiply-a-num   
+        DataZ        4                         
+        DLabel       $mem-rat-multiply-a-den   
+        DataZ        4                         
+        DLabel       $mem-rat-multiply-b-num   
+        DataZ        4                         
+        DLabel       $mem-rat-multiply-b-den   
+        DataZ        4                         
+        PushD        $mem-rat-multiply-return-address 
+        Exchange                               
+        StoreI                                 
+        PushD        $mem-rat-multiply-b-den   
+        Exchange                               
+        StoreI                                 
+        PushD        $mem-rat-multiply-b-num   
+        Exchange                               
+        StoreI                                 
+        PushD        $mem-rat-multiply-a-den   
+        Exchange                               
+        StoreI                                 
+        PushD        $mem-rat-multiply-a-num   
+        Exchange                               
+        StoreI                                 
+        PushD        $mem-rat-multiply-a-num   
+        LoadI                                  
+        PushD        $mem-rat-multiply-b-num   
+        LoadI                                  
+        Multiply                               
+        PushD        $mem-rat-multiply-a-den   
+        LoadI                                  
+        PushD        $mem-rat-multiply-b-den   
+        LoadI                                  
+        Multiply                               
+        Call         -mem-rat-GCD              
+        PushD        $mem-rat-multiply-return-address 
+        LoadI                                  
+        Return                                 
+        Label        -mem-rat-divide           
+        DLabel       $mem-rat-divide-return-address 
+        DataZ        4                         
+        DLabel       $mem-rat-divide-a-num     
+        DataZ        4                         
+        DLabel       $mem-rat-divide-a-den     
+        DataZ        4                         
+        DLabel       $mem-rat-divide-b-num     
+        DataZ        4                         
+        DLabel       $mem-rat-divide-b-den     
+        DataZ        4                         
+        PushD        $mem-rat-divide-return-address 
+        Exchange                               
+        StoreI                                 
+        PushD        $mem-rat-divide-b-den     
+        Exchange                               
+        StoreI                                 
+        PushD        $mem-rat-divide-b-num     
+        Exchange                               
+        StoreI                                 
+        PushD        $mem-rat-divide-a-den     
+        Exchange                               
+        StoreI                                 
+        PushD        $mem-rat-divide-a-num     
+        Exchange                               
+        StoreI                                 
+        PushD        $mem-rat-divide-a-num     
+        LoadI                                  
+        PushD        $mem-rat-divide-b-den     
+        LoadI                                  
+        Multiply                               
+        PushD        $mem-rat-divide-a-den     
+        LoadI                                  
+        PushD        $mem-rat-divide-b-num     
+        LoadI                                  
+        Multiply                               
+        Call         -mem-rat-GCD              
+        PushD        $mem-rat-divide-return-address 
         LoadI                                  
         Return                                 
         DLabel       $heap-memory              
