@@ -404,7 +404,7 @@ public class Parser {
 		}
 		
 		ParseNode left = parseAdditiveOrSubtractExpression();
-		if(nowReading.isLextant( Punctuator.SMALLER , Punctuator.SMALLEROREQUAL 
+		while(nowReading.isLextant( Punctuator.SMALLER , Punctuator.SMALLEROREQUAL 
 				, Punctuator.GREATER , Punctuator.GREATEROREQUAL 
 				,Punctuator.EQUAL, Punctuator.NOTEQUAL)
 				) {
@@ -412,7 +412,7 @@ public class Parser {
 			readToken();
 			ParseNode right = parseAdditiveOrSubtractExpression();
 			
-			return BinaryOperatorNode.withChildren(compareToken, left, right);
+			left =  BinaryOperatorNode.withChildren(compareToken, left, right);
 		}
 		return left;
 

@@ -624,6 +624,10 @@ public class ASMCodeGenerator {
 			if(node.child(0).getType()==PrimitiveType.FLOAT && node.getType()==PrimitiveType.INTEGER) {
 				code.add(ConvertI);
 			}
+			else if(node.child(0).getType()==PrimitiveType.INTEGER && node.getType()==PrimitiveType.CHAR) {
+				code.add(PushI, 127);
+				code.add(BTAnd);
+			}
 			else if(node.child(0).getType()==PrimitiveType.INTEGER && node.getType()==PrimitiveType.FLOAT) {
 				code.add(ConvertF);
 			}

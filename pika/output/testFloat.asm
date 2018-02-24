@@ -311,60 +311,56 @@
         Jump         $$general-runtime-error   
         DLabel       $usable-memory-start      
         DLabel       $global-memory-block      
-        DataZ        8                         
+        DataZ        2                         
         DLabel       $string-constant-memory   
         Label        $$main                    
         PushD        $global-memory-block      
         PushI        0                         
-        Add                                    %% x
+        Add                                    %% result
+        Label        -compare-1-arg1           
+        PushF        5.500000                  
+        Label        -compare-1-arg2           
+        PushF        4.900000                  
+        Label        -compare-1-sub            
+        FSubtract                              
+        ConvertI                               
+        JumpPos      -compare-1-false          
+        Jump         -compare-1-true           
+        Label        -compare-1-true           
         PushI        1                         
-        Duplicate                              
+        Jump         -compare-1-join           
+        Label        -compare-1-false          
+        PushI        0                         
+        Jump         -compare-1-join           
+        Label        -compare-1-join           
+        StoreC                                 
+        PushD        $global-memory-block      
         PushI        1                         
-        Multiply                               
-        PushI        16                        
-        Add                                    
-        Call         -mem-manager-allocate     
-        Exchange                               
+        Add                                    %% knownType
+        PushI        0                         
+        StoreC                                 
+        PushD        $global-memory-block      
         PushI        1                         
-        Exchange                               
-        PushI        0                         
-        Call         -mem-store-array-header   
-        PushI        0                         
-        Call         -mem-store-array-one-byte 
-        StoreI                                 
-        PushD        $global-memory-block      
-        PushI        4                         
-        Add                                    %% y
+        Add                                    %% knownType
         PushD        $global-memory-block      
         PushI        0                         
-        Add                                    %% x
-        LoadI                                  
-        Call         -mem-array-clone          
-        StoreI                                 
-        PushD        $global-memory-block      
-        PushI        0                         
-        Add                                    %% x
-        LoadI                                  
-        PushI        0                         
-        PushI        0                         
-        Call         -mem-array-index          
-        PushI        97                        
+        Add                                    %% result
+        LoadC                                  
         StoreC                                 
         PushD        $global-memory-block      
         PushI        0                         
-        Add                                    %% x
-        LoadI                                  
-        Call         -mem-array-char-print     
-        PushD        $global-memory-block      
-        PushI        0                         
-        Add                                    %% x
-        LoadI                                  
-        Call         -mem-array-release        
-        PushD        $global-memory-block      
-        PushI        4                         
-        Add                                    %% y
-        LoadI                                  
-        Call         -mem-array-char-print     
+        Add                                    %% result
+        LoadC                                  
+        JumpTrue     -print-boolean-2-true     
+        PushD        $boolean-false-string     
+        Jump         -print-boolean-2-join     
+        Label        -print-boolean-2-true     
+        PushD        $boolean-true-string      
+        Label        -print-boolean-2-join     
+        PushD        $print-format-boolean     
+        Printf                                 
+        PushD        $print-format-newline     
+        Printf                                 
         Halt                                   
         Label        -mem-manager-make-tags    
         DLabel       $mmgr-tags-size           

@@ -1,12 +1,6 @@
 exec {
-
-	var x := new [char](1).
-	var y := clone x.
-	
-	x[0] := ^a^.
-	print x.
-	
-	release x.
-	print y.
-	
+    const result := 5.5 <= 4.9.
+    var knownType := _false_.
+     knownType := result.
+    print result, _n_.
 }
