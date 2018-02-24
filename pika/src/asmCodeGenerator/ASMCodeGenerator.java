@@ -574,34 +574,63 @@ public class ASMCodeGenerator {
 			code.add(Label, subLabel);
 			if(node.child(0).getType() == PrimitiveType.FLOAT) {
 				code.add(FSubtract);
-				code.add(ConvertI);
 			}
 			else {
 				code.add(Subtract);
 			}
 			
 			if(node.getOperator() == Punctuator.GREATER) {
-				code.add(JumpPos, trueLabel);
+				if(node.child(0).getType() == PrimitiveType.FLOAT) {
+					code.add(JumpFPos, trueLabel);
+				}
+				else {
+					code.add(JumpPos, trueLabel);
+				}
 				code.add(Jump, falseLabel);
 			}
 			else if(node.getOperator() == Punctuator.SMALLER) {
-				code.add(JumpNeg, trueLabel);
+				if(node.child(0).getType() == PrimitiveType.FLOAT) {
+					code.add(JumpFNeg, trueLabel);
+				}
+				else {
+					code.add(JumpNeg, trueLabel);
+				}
 				code.add(Jump, falseLabel);
 			}
 			else if(node.getOperator() == Punctuator.EQUAL) {
-				code.add(JumpFalse, trueLabel);
+				if(node.child(0).getType() == PrimitiveType.FLOAT) {
+					code.add(JumpFZero, trueLabel);
+				}
+				else {
+					code.add(JumpFalse, trueLabel);
+				}
 				code.add(Jump, falseLabel);
 			}
 			else if(node.getOperator() == Punctuator.NOTEQUAL) {
-				code.add(JumpFalse, falseLabel);
+				if(node.child(0).getType() == PrimitiveType.FLOAT) {
+					code.add(JumpFZero, falseLabel);
+				}
+				else {
+					code.add(JumpFalse, falseLabel);
+				}
 				code.add(Jump, trueLabel);
 			}
 			else if(node.getOperator() == Punctuator.GREATEROREQUAL) {
-				code.add(JumpNeg, falseLabel);
+				if(node.child(0).getType() == PrimitiveType.FLOAT) {
+					code.add(JumpFNeg, falseLabel);
+				}
+				else {
+					code.add(JumpNeg, falseLabel);
+				}
 				code.add(Jump, trueLabel);
 			}
 			else if(node.getOperator() == Punctuator.SMALLEROREQUAL) {
-				code.add(JumpPos, falseLabel);
+				if(node.child(0).getType() == PrimitiveType.FLOAT) {
+					code.add(JumpFPos, falseLabel);
+				}
+				else {
+					code.add(JumpPos, falseLabel);
+				}
 				code.add(Jump, trueLabel);
 			}
 			

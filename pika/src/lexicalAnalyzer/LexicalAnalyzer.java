@@ -97,8 +97,10 @@ public class LexicalAnalyzer extends ScannerImp implements Scanner {
 		point = appendPoint(buffer);
 		appendSubsequentDigits(buffer);
 		
-		if(point!=null || firstChar.isChar('.'))
+		if(point!=null || firstChar.isChar('.')) {
 			isInt = false;
+		}
+			
 		
 		if(buffer.charAt(buffer.length()-1)=='.') {
 			if(point==null)
@@ -106,7 +108,8 @@ public class LexicalAnalyzer extends ScannerImp implements Scanner {
 			else
 				input.pushback(point);
 			
-			isInt = true;
+			if(!firstChar.isChar('.'))
+				isInt = true;
 			
 			buffer = buffer.deleteCharAt(buffer.length()-1);
 		}
@@ -205,7 +208,11 @@ public class LexicalAnalyzer extends ScannerImp implements Scanner {
 		LocatedChar end = input.next();	
 		
 		if(!end.isChar('^')) {
-			charConstantLexicalError(firstChar.getLocation());
+			charConstantTooLongLexicalError(firstChar.getLocation());
+		}
+		
+		if(character > 126 || character < 32) {
+			charConstantInvalidLexicalError(firstChar.getLocation());
 		}
 		
 		return CharacterToken.make(firstChar.getLocation(), character);
@@ -220,7 +227,9 @@ public class LexicalAnalyzer extends ScannerImp implements Scanner {
 		appendSubsequentLetter(buffer);
 
 		String lexeme = buffer.toString();
+		
 		if(Keyword.isAKeyword(lexeme)) {
+			this.isLastPunctuator = true;
 			return LextantToken.make(firstChar.getLocation(), lexeme, Keyword.forLexeme(lexeme));
 		}
 		else {
@@ -320,9 +329,13 @@ public class LexicalAnalyzer extends ScannerImp implements Scanner {
 		PikaLogger log = PikaLogger.getLogger("compiler.lexicalAnalyzer");
 		log.severe("Lexical error: Identifier " + str + " is longer than 32 characters.");
 	}
-	private void charConstantLexicalError(TextLocation location) {
+	private void charConstantTooLongLexicalError(TextLocation location) {
 		PikaLogger log = PikaLogger.getLogger("compiler.lexicalAnalyzer");
 		log.severe("Lexical error: character constant too long at line " + location.getLineNumber() + " position " + location.getPosition() + ".");
+	}
+	private void charConstantInvalidLexicalError(TextLocation location) {
+		PikaLogger log = PikaLogger.getLogger("compiler.lexicalAnalyzer");
+		log.severe("Lexical error: character constant is not valid at line " + location.getLineNumber() + " position " + location.getPosition() + ".");
 	}
 	private void stringLexicalError(TextLocation location) {
 		PikaLogger log = PikaLogger.getLogger("compiler.lexicalAnalyzer");

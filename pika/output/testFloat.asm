@@ -311,53 +311,21 @@
         Jump         $$general-runtime-error   
         DLabel       $usable-memory-start      
         DLabel       $global-memory-block      
-        DataZ        2                         
+        DataZ        0                         
         DLabel       $string-constant-memory   
         Label        $$main                    
-        PushD        $global-memory-block      
-        PushI        0                         
-        Add                                    %% result
-        Label        -compare-1-arg1           
-        PushF        5.500000                  
-        Label        -compare-1-arg2           
-        PushF        4.900000                  
-        Label        -compare-1-sub            
-        FSubtract                              
-        ConvertI                               
-        JumpPos      -compare-1-false          
-        Jump         -compare-1-true           
-        Label        -compare-1-true           
-        PushI        1                         
-        Jump         -compare-1-join           
-        Label        -compare-1-false          
-        PushI        0                         
-        Jump         -compare-1-join           
-        Label        -compare-1-join           
-        StoreC                                 
-        PushD        $global-memory-block      
-        PushI        1                         
-        Add                                    %% knownType
-        PushI        0                         
-        StoreC                                 
-        PushD        $global-memory-block      
-        PushI        1                         
-        Add                                    %% knownType
-        PushD        $global-memory-block      
-        PushI        0                         
-        Add                                    %% result
-        LoadC                                  
-        StoreC                                 
-        PushD        $global-memory-block      
-        PushI        0                         
-        Add                                    %% result
-        LoadC                                  
-        JumpTrue     -print-boolean-2-true     
-        PushD        $boolean-false-string     
-        Jump         -print-boolean-2-join     
-        Label        -print-boolean-2-true     
-        PushD        $boolean-true-string      
-        Label        -print-boolean-2-join     
-        PushD        $print-format-boolean     
+        PushI        -592654                   
+        PushD        $print-format-integer     
+        Printf                                 
+        PushD        $print-format-newline     
+        Printf                                 
+        PushI        3999999                   
+        PushD        $print-format-integer     
+        Printf                                 
+        PushD        $print-format-newline     
+        Printf                                 
+        PushI        1234                      
+        PushD        $print-format-integer     
         Printf                                 
         PushD        $print-format-newline     
         Printf                                 

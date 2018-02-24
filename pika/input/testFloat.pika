@@ -1,6 +1,5 @@
 exec {
-    const result := 5.5 <= 4.9.
-    var knownType := _false_.
-     knownType := result.
-    print result, _n_.
+	print -592654, _n_.
+	print 3999999, _n_.
+	print 1234, _n_.
 }
