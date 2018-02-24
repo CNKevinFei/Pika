@@ -369,7 +369,7 @@ public class ASMCodeGenerator {
 			code.add(Call, MemoryManager.MEM_MANAGER_ALLOCATE);
 			code.add(PushI, size);
 			code.add(PushI, length);
-			if(((ArrayType)(node.getType())).getSubType() == PrimitiveType.STRING || ((ArrayType)(node.getType())).getSubType() instanceof ArrayType) {
+			if(((ArrayType)(node.getType())).getSubType() instanceof ArrayType) {
 				code.add(PushI, 4);
 			}
 			else {
@@ -383,7 +383,13 @@ public class ASMCodeGenerator {
 			if(size==1) {
 				code.add(Call, MemoryManager.MEM_STORE_ARRAY_ONE_BYTE);
 			}
-			else if(size==4) {
+			else if(size==4 || ((ArrayType)(node.getType())).getSubType() == PrimitiveType.RATIONAL) {
+				if( ((ArrayType)(node.getType())).getSubType() == PrimitiveType.RATIONAL) {
+					code.add(Exchange);
+					code.add(PushI, 2);
+					code.add(Multiply);
+					code.add(Exchange);
+				}
 				code.add(Call, MemoryManager.MEM_STORE_ARRAY_FOUR_BYTE);
 			}
 			else if(size==8) {
@@ -476,13 +482,19 @@ public class ASMCodeGenerator {
 				}
 			}
 			else if(operator == Punctuator.ARRAY_INDEX) {
-				newValueCode(node);
+				newAddressCode(node);
 				ASMCodeFragment arg1 = removeValueCode(node.child(0));
 				ASMCodeFragment arg2 = removeValueCode(node.child(1));
 				
 				code.append(arg1);
 				code.append(arg2);
-				//[...arrayAddr, index]
+				if(((ArrayType)(node.child(0).getType())).getSubType()==PrimitiveType.RATIONAL) {
+					code.add(PushI, 1);
+				}
+				else {
+					code.add(PushI, 0);
+				}
+				//[...arrayAddr, index, flag]
 				code.add(Call, MemoryManager.MEM_ARRAY_INDEX);
 				//[...value]
 			}

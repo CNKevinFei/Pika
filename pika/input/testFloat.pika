@@ -1,4 +1,12 @@
 exec {
-	print (-7)//(8)/(-7)//(5).
+
+	var x := new [char](1).
+	var y := clone x.
+	
+	x[0] := ^a^.
+	print x.
+	
+	release x.
+	print y.
 	
 }

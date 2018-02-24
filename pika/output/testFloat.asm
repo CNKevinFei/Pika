@@ -189,23 +189,182 @@
         Label        $$r-denominator-zero      
         PushD        $errors-denominator-zero  
         Jump         $$general-runtime-error   
+        DLabel       $errors-index-neg         
+        DataC        97                        %% "array index is negative."
+        DataC        114                       
+        DataC        114                       
+        DataC        97                        
+        DataC        121                       
+        DataC        32                        
+        DataC        105                       
+        DataC        110                       
+        DataC        100                       
+        DataC        101                       
+        DataC        120                       
+        DataC        32                        
+        DataC        105                       
+        DataC        115                       
+        DataC        32                        
+        DataC        110                       
+        DataC        101                       
+        DataC        103                       
+        DataC        97                        
+        DataC        116                       
+        DataC        105                       
+        DataC        118                       
+        DataC        101                       
+        DataC        46                        
+        DataC        0                         
+        Label        $$a-index-negative        
+        PushD        $errors-index-neg         
+        Jump         $$general-runtime-error   
+        DLabel       $errors-index-exceed      
+        DataC        97                        %% "array index exceeds."
+        DataC        114                       
+        DataC        114                       
+        DataC        97                        
+        DataC        121                       
+        DataC        32                        
+        DataC        105                       
+        DataC        110                       
+        DataC        100                       
+        DataC        101                       
+        DataC        120                       
+        DataC        32                        
+        DataC        101                       
+        DataC        120                       
+        DataC        99                        
+        DataC        101                       
+        DataC        101                       
+        DataC        100                       
+        DataC        115                       
+        DataC        46                        
+        DataC        0                         
+        Label        $$a-index-exceed          
+        PushD        $errors-index-exceed      
+        Jump         $$general-runtime-error   
+        DLabel       $errors-record-error      
+        DataC        97                        %% "array record is not valid."
+        DataC        114                       
+        DataC        114                       
+        DataC        97                        
+        DataC        121                       
+        DataC        32                        
+        DataC        114                       
+        DataC        101                       
+        DataC        99                        
+        DataC        111                       
+        DataC        114                       
+        DataC        100                       
+        DataC        32                        
+        DataC        105                       
+        DataC        115                       
+        DataC        32                        
+        DataC        110                       
+        DataC        111                       
+        DataC        116                       
+        DataC        32                        
+        DataC        118                       
+        DataC        97                        
+        DataC        108                       
+        DataC        105                       
+        DataC        100                       
+        DataC        46                        
+        DataC        0                         
+        DLabel       $errors-record-deleted-error 
+        DataC        97                        %% "array record has been deleted."
+        DataC        114                       
+        DataC        114                       
+        DataC        97                        
+        DataC        121                       
+        DataC        32                        
+        DataC        114                       
+        DataC        101                       
+        DataC        99                        
+        DataC        111                       
+        DataC        114                       
+        DataC        100                       
+        DataC        32                        
+        DataC        104                       
+        DataC        97                        
+        DataC        115                       
+        DataC        32                        
+        DataC        98                        
+        DataC        101                       
+        DataC        101                       
+        DataC        110                       
+        DataC        32                        
+        DataC        100                       
+        DataC        101                       
+        DataC        108                       
+        DataC        101                       
+        DataC        116                       
+        DataC        101                       
+        DataC        100                       
+        DataC        46                        
+        DataC        0                         
+        Label        $$a-record-error          
+        PushD        $errors-record-error      
+        Jump         $$general-runtime-error   
+        Label        $$a-record-deleted-error  
+        PushD        $errors-record-deleted-error 
+        Jump         $$general-runtime-error   
         DLabel       $usable-memory-start      
         DLabel       $global-memory-block      
-        DataZ        0                         
+        DataZ        8                         
         DLabel       $string-constant-memory   
         Label        $$main                    
-        PushI        -7                        
-        PushI        8                         
+        PushD        $global-memory-block      
+        PushI        0                         
+        Add                                    %% x
+        PushI        1                         
         Duplicate                              
-        JumpFalse    $$r-denominator-zero      
-        Call         -mem-rat-GCD              
-        PushI        -7                        
-        PushI        5                         
-        Duplicate                              
-        JumpFalse    $$r-denominator-zero      
-        Call         -mem-rat-GCD              
-        Call         -mem-rat-divide           
-        Call         -mem-rat-print            
+        PushI        1                         
+        Multiply                               
+        PushI        16                        
+        Add                                    
+        Call         -mem-manager-allocate     
+        Exchange                               
+        PushI        1                         
+        Exchange                               
+        PushI        0                         
+        Call         -mem-store-array-header   
+        PushI        0                         
+        Call         -mem-store-array-one-byte 
+        StoreI                                 
+        PushD        $global-memory-block      
+        PushI        4                         
+        Add                                    %% y
+        PushD        $global-memory-block      
+        PushI        0                         
+        Add                                    %% x
+        LoadI                                  
+        Call         -mem-array-clone          
+        StoreI                                 
+        PushD        $global-memory-block      
+        PushI        0                         
+        Add                                    %% x
+        LoadI                                  
+        PushI        0                         
+        PushI        0                         
+        Call         -mem-array-index          
+        PushI        97                        
+        StoreC                                 
+        PushD        $global-memory-block      
+        PushI        0                         
+        Add                                    %% x
+        LoadI                                  
+        Call         -mem-array-char-print     
+        PushD        $global-memory-block      
+        PushI        0                         
+        Add                                    %% x
+        LoadI                                  
+        Call         -mem-array-release        
+        PushD        $global-memory-block      
+        PushI        4                         
+        Add                                    %% y
+        LoadI                                  
+        Call         -mem-array-char-print     
         Halt                                   
         Label        -mem-manager-make-tags    
         DLabel       $mmgr-tags-size           
@@ -871,9 +1030,29 @@
         StoreI                                 
         PushD        $mem-array-release-array-address 
         LoadI                                  
+        Call         -mem-arrya-record-valid   
+        PushD        $mem-array-release-array-address 
+        LoadI                                  
         PushI        4                         
         Add                                    
         LoadI                                  
+        PushI        2                         
+        Add                                    
+        PushD        $mem-array-release-array-address 
+        LoadI                                  
+        PushI        4                         
+        Add                                    
+        Exchange                               
+        StoreI                                 
+        PushD        $mem-array-release-array-address 
+        LoadI                                  
+        PushD        $mem-array-release-array-address 
+        LoadI                                  
+        PushI        4                         
+        Add                                    
+        LoadI                                  
+        PushI        4                         
+        BTAnd                                  
         JumpFalse    $mem-array-release-not-ref 
         PushD        $mem-array-release-array-address 
         LoadI                                  
@@ -1013,7 +1192,12 @@
         DataZ        4                         
         DLabel       $mem-array-index-size     
         DataZ        4                         
+        DLabel       $mem-array-index-flag     
+        DataZ        4                         
         PushD        $mem-array-index-return-address 
+        Exchange                               
+        StoreI                                 
+        PushD        $mem-array-index-flag     
         Exchange                               
         StoreI                                 
         PushD        $mem-array-index-num      
@@ -1022,6 +1206,20 @@
         PushD        $mem-array-index-array-address 
         Exchange                               
         StoreI                                 
+        PushD        $mem-array-index-num      
+        LoadI                                  
+        JumpNeg      $$a-index-negative        
+        PushD        $mem-array-index-array-address 
+        LoadI                                  
+        PushI        12                        
+        Add                                    
+        LoadI                                  
+        PushI        1                         
+        Subtract                               
+        PushD        $mem-array-index-num      
+        LoadI                                  
+        Subtract                               
+        JumpNeg      $$a-index-exceed          
         PushD        $mem-array-index-array-address 
         LoadI                                  
         PushI        8                         
@@ -1040,31 +1238,6 @@
         LoadI                                  
         Add                                    
         Add                                    
-        PushD        $mem-array-index-size     
-        LoadI                                  
-        PushI        1                         
-        Subtract                               
-        JumpFalse    $mem-array-index-one      
-        PushD        $mem-array-index-size     
-        LoadI                                  
-        PushI        4                         
-        Subtract                               
-        JumpFalse    $mem-array-index-four     
-        PushD        $mem-array-index-size     
-        LoadI                                  
-        PushI        8                         
-        Subtract                               
-        JumpFalse    $mem-array-index-eight    
-        Label        $mem-array-index-one      
-        LoadC                                  
-        Jump         $mem-array-index-end      
-        Label        $mem-array-index-four     
-        LoadI                                  
-        Jump         $mem-array-index-end      
-        Label        $mem-array-index-eight    
-        LoadF                                  
-        Jump         $mem-array-index-end      
-        Label        $mem-array-index-end      
         PushD        $mem-array-index-return-address 
         LoadI                                  
         Return                                 
@@ -1455,6 +1628,964 @@
         Multiply                               
         Call         -mem-rat-GCD              
         PushD        $mem-rat-divide-return-address 
+        LoadI                                  
+        Return                                 
+        Label        -mem-array-int-print      
+        DLabel       $mem-array-int-return-address 
+        DataZ        4                         
+        DLabel       $mem-array-int-array-address 
+        DataZ        4                         
+        DLabel       $mem-array-int-end-array-address 
+        DataZ        4                         
+        DLabel       $mem-array-int-length     
+        DataZ        4                         
+        DLabel       $mem-array-int-size       
+        DataZ        4                         
+        PushD        $mem-array-int-return-address 
+        Exchange                               
+        StoreI                                 
+        PushD        $mem-array-int-array-address 
+        Exchange                               
+        StoreI                                 
+        PushD        $mem-array-int-array-address 
+        LoadI                                  
+        Call         -mem-arrya-record-valid   
+        PushD        $mem-array-int-array-address 
+        LoadI                                  
+        PushI        4                         
+        Add                                    
+        LoadI                                  
+        PushI        91                        
+        PushD        $print-format-char        
+        Printf                                 
+        PushD        $mem-array-int-array-address 
+        LoadI                                  
+        PushI        12                        
+        Add                                    
+        LoadI                                  
+        PushD        $mem-array-int-length     
+        Exchange                               
+        StoreI                                 
+        PushD        $mem-array-int-array-address 
+        LoadI                                  
+        PushI        8                         
+        Add                                    
+        LoadI                                  
+        PushD        $mem-array-int-size       
+        Exchange                               
+        StoreI                                 
+        PushD        $mem-array-int-array-address 
+        LoadI                                  
+        PushI        16                        
+        PushD        $mem-array-int-length     
+        LoadI                                  
+        PushD        $mem-array-int-size       
+        LoadI                                  
+        Multiply                               
+        Add                                    
+        Add                                    
+        PushD        $mem-array-int-end-array-address 
+        Exchange                               
+        StoreI                                 
+        JumpPos      $mem-array-int-array      
+        Label        $mem-array-int-loop       
+        PushD        $mem-array-int-length     
+        LoadI                                  
+        JumpFalse    $mem-array-int-print-end  
+        PushD        $mem-array-int-end-array-address 
+        LoadI                                  
+        PushD        $mem-array-int-length     
+        LoadI                                  
+        PushD        $mem-array-int-size       
+        LoadI                                  
+        Multiply                               
+        Subtract                               
+        LoadI                                  
+        PushD        $print-format-integer     
+        Printf                                 
+        PushD        $mem-array-int-length     
+        LoadI                                  
+        PushI        1                         
+        Subtract                               
+        PushD        $mem-array-int-length     
+        Exchange                               
+        StoreI                                 
+        PushD        $mem-array-int-length     
+        LoadI                                  
+        JumpFalse    $mem-array-int-loop       
+        PushI        44                        
+        PushD        $print-format-char        
+        Printf                                 
+        PushI        32                        
+        PushD        $print-format-char        
+        Printf                                 
+        Jump         $mem-array-int-loop       
+        Label        $mem-array-int-array      
+        PushD        $mem-array-int-length     
+        LoadI                                  
+        JumpFalse    $mem-array-int-print-end  
+        PushD        $mem-array-int-return-address 
+        LoadI                                  
+        PushD        $mem-array-int-array-address 
+        LoadI                                  
+        PushD        $mem-array-int-end-array-address 
+        LoadI                                  
+        PushD        $mem-array-int-length     
+        LoadI                                  
+        PushD        $mem-array-int-size       
+        LoadI                                  
+        PushD        $mem-array-int-end-array-address 
+        LoadI                                  
+        PushD        $mem-array-int-length     
+        LoadI                                  
+        PushD        $mem-array-int-size       
+        LoadI                                  
+        Multiply                               
+        Subtract                               
+        LoadI                                  
+        Call         -mem-array-int-print      
+        PushD        $mem-array-int-size       
+        Exchange                               
+        StoreI                                 
+        PushD        $mem-array-int-length     
+        Exchange                               
+        StoreI                                 
+        PushD        $mem-array-int-end-array-address 
+        Exchange                               
+        StoreI                                 
+        PushD        $mem-array-int-array-address 
+        Exchange                               
+        StoreI                                 
+        PushD        $mem-array-int-return-address 
+        Exchange                               
+        StoreI                                 
+        PushD        $mem-array-int-length     
+        LoadI                                  
+        PushI        1                         
+        Subtract                               
+        PushD        $mem-array-int-length     
+        Exchange                               
+        StoreI                                 
+        PushD        $mem-array-int-length     
+        LoadI                                  
+        JumpFalse    $mem-array-int-array      
+        PushI        44                        
+        PushD        $print-format-char        
+        Printf                                 
+        PushI        32                        
+        PushD        $print-format-char        
+        Printf                                 
+        Jump         $mem-array-int-array      
+        Label        $mem-array-int-print-end  
+        PushI        93                        
+        PushD        $print-format-char        
+        Printf                                 
+        PushD        $mem-array-int-return-address 
+        LoadI                                  
+        Return                                 
+        Label        -mem-array-float-print    
+        DLabel       $mem-array-float-return-address 
+        DataZ        4                         
+        DLabel       $mem-array-float-array-address 
+        DataZ        4                         
+        DLabel       $mem-array-float-end-array-address 
+        DataZ        4                         
+        DLabel       $mem-array-float-length   
+        DataZ        4                         
+        DLabel       $mem-array-float-size     
+        DataZ        4                         
+        PushD        $mem-array-float-return-address 
+        Exchange                               
+        StoreI                                 
+        PushD        $mem-array-float-array-address 
+        Exchange                               
+        StoreI                                 
+        PushD        $mem-array-float-array-address 
+        LoadI                                  
+        Call         -mem-arrya-record-valid   
+        PushD        $mem-array-float-array-address 
+        LoadI                                  
+        PushI        4                         
+        Add                                    
+        LoadI                                  
+        PushI        91                        
+        PushD        $print-format-char        
+        Printf                                 
+        PushD        $mem-array-float-array-address 
+        LoadI                                  
+        PushI        12                        
+        Add                                    
+        LoadI                                  
+        PushD        $mem-array-float-length   
+        Exchange                               
+        StoreI                                 
+        PushD        $mem-array-float-array-address 
+        LoadI                                  
+        PushI        8                         
+        Add                                    
+        LoadI                                  
+        PushD        $mem-array-float-size     
+        Exchange                               
+        StoreI                                 
+        PushD        $mem-array-float-array-address 
+        LoadI                                  
+        PushI        16                        
+        PushD        $mem-array-float-length   
+        LoadI                                  
+        PushD        $mem-array-float-size     
+        LoadI                                  
+        Multiply                               
+        Add                                    
+        Add                                    
+        PushD        $mem-array-float-end-array-address 
+        Exchange                               
+        StoreI                                 
+        JumpPos      $mem-array-float-array    
+        Label        $mem-array-float-loop     
+        PushD        $mem-array-float-length   
+        LoadI                                  
+        JumpFalse    $mem-array-float-print-end 
+        PushD        $mem-array-float-end-array-address 
+        LoadI                                  
+        PushD        $mem-array-float-length   
+        LoadI                                  
+        PushD        $mem-array-float-size     
+        LoadI                                  
+        Multiply                               
+        Subtract                               
+        LoadF                                  
+        PushD        $print-format-float       
+        Printf                                 
+        PushD        $mem-array-float-length   
+        LoadI                                  
+        PushI        1                         
+        Subtract                               
+        PushD        $mem-array-float-length   
+        Exchange                               
+        StoreI                                 
+        PushD        $mem-array-float-length   
+        LoadI                                  
+        JumpFalse    $mem-array-float-loop     
+        PushI        44                        
+        PushD        $print-format-char        
+        Printf                                 
+        PushI        32                        
+        PushD        $print-format-char        
+        Printf                                 
+        Jump         $mem-array-float-loop     
+        Label        $mem-array-float-array    
+        PushD        $mem-array-float-length   
+        LoadI                                  
+        JumpFalse    $mem-array-float-print-end 
+        PushD        $mem-array-float-return-address 
+        LoadI                                  
+        PushD        $mem-array-float-array-address 
+        LoadI                                  
+        PushD        $mem-array-float-end-array-address 
+        LoadI                                  
+        PushD        $mem-array-float-length   
+        LoadI                                  
+        PushD        $mem-array-float-size     
+        LoadI                                  
+        PushD        $mem-array-float-end-array-address 
+        LoadI                                  
+        PushD        $mem-array-float-length   
+        LoadI                                  
+        PushD        $mem-array-float-size     
+        LoadI                                  
+        Multiply                               
+        Subtract                               
+        LoadI                                  
+        Call         -mem-array-float-print    
+        PushD        $mem-array-float-size     
+        Exchange                               
+        StoreI                                 
+        PushD        $mem-array-float-length   
+        Exchange                               
+        StoreI                                 
+        PushD        $mem-array-float-end-array-address 
+        Exchange                               
+        StoreI                                 
+        PushD        $mem-array-float-array-address 
+        Exchange                               
+        StoreI                                 
+        PushD        $mem-array-float-return-address 
+        Exchange                               
+        StoreI                                 
+        PushD        $mem-array-float-length   
+        LoadI                                  
+        PushI        1                         
+        Subtract                               
+        PushD        $mem-array-float-length   
+        Exchange                               
+        StoreI                                 
+        PushD        $mem-array-float-length   
+        LoadI                                  
+        JumpFalse    $mem-array-float-array    
+        PushI        44                        
+        PushD        $print-format-char        
+        Printf                                 
+        PushI        32                        
+        PushD        $print-format-char        
+        Printf                                 
+        Jump         $mem-array-float-array    
+        Label        $mem-array-float-print-end 
+        PushI        93                        
+        PushD        $print-format-char        
+        Printf                                 
+        PushD        $mem-array-float-return-address 
+        LoadI                                  
+        Return                                 
+        Label        -mem-array-char-print     
+        DLabel       $mem-array-char-return-address 
+        DataZ        4                         
+        DLabel       $mem-array-char-array-address 
+        DataZ        4                         
+        DLabel       $mem-array-char-end-array-address 
+        DataZ        4                         
+        DLabel       $mem-array-char-length    
+        DataZ        4                         
+        DLabel       $mem-array-char-size      
+        DataZ        4                         
+        PushD        $mem-array-char-return-address 
+        Exchange                               
+        StoreI                                 
+        PushD        $mem-array-char-array-address 
+        Exchange                               
+        StoreI                                 
+        PushD        $mem-array-char-array-address 
+        LoadI                                  
+        Call         -mem-arrya-record-valid   
+        PushD        $mem-array-char-array-address 
+        LoadI                                  
+        PushI        4                         
+        Add                                    
+        LoadI                                  
+        PushI        91                        
+        PushD        $print-format-char        
+        Printf                                 
+        PushD        $mem-array-char-array-address 
+        LoadI                                  
+        PushI        12                        
+        Add                                    
+        LoadI                                  
+        PushD        $mem-array-char-length    
+        Exchange                               
+        StoreI                                 
+        PushD        $mem-array-char-array-address 
+        LoadI                                  
+        PushI        8                         
+        Add                                    
+        LoadI                                  
+        PushD        $mem-array-char-size      
+        Exchange                               
+        StoreI                                 
+        PushD        $mem-array-char-array-address 
+        LoadI                                  
+        PushI        16                        
+        PushD        $mem-array-char-length    
+        LoadI                                  
+        PushD        $mem-array-char-size      
+        LoadI                                  
+        Multiply                               
+        Add                                    
+        Add                                    
+        PushD        $mem-array-char-end-array-address 
+        Exchange                               
+        StoreI                                 
+        JumpPos      $mem-array-char-array     
+        Label        $mem-array-char-loop      
+        PushD        $mem-array-char-length    
+        LoadI                                  
+        JumpFalse    $mem-array-char-print-end 
+        PushD        $mem-array-char-end-array-address 
+        LoadI                                  
+        PushD        $mem-array-char-length    
+        LoadI                                  
+        PushD        $mem-array-char-size      
+        LoadI                                  
+        Multiply                               
+        Subtract                               
+        LoadC                                  
+        PushD        $print-format-char        
+        Printf                                 
+        PushD        $mem-array-char-length    
+        LoadI                                  
+        PushI        1                         
+        Subtract                               
+        PushD        $mem-array-char-length    
+        Exchange                               
+        StoreI                                 
+        PushD        $mem-array-char-length    
+        LoadI                                  
+        JumpFalse    $mem-array-char-loop      
+        PushI        44                        
+        PushD        $print-format-char        
+        Printf                                 
+        PushI        32                        
+        PushD        $print-format-char        
+        Printf                                 
+        Jump         $mem-array-char-loop      
+        Label        $mem-array-char-array     
+        PushD        $mem-array-char-length    
+        LoadI                                  
+        JumpFalse    $mem-array-char-print-end 
+        PushD        $mem-array-char-return-address 
+        LoadI                                  
+        PushD        $mem-array-char-array-address 
+        LoadI                                  
+        PushD        $mem-array-char-end-array-address 
+        LoadI                                  
+        PushD        $mem-array-char-length    
+        LoadI                                  
+        PushD        $mem-array-char-size      
+        LoadI                                  
+        PushD        $mem-array-char-end-array-address 
+        LoadI                                  
+        PushD        $mem-array-char-length    
+        LoadI                                  
+        PushD        $mem-array-char-size      
+        LoadI                                  
+        Multiply                               
+        Subtract                               
+        LoadI                                  
+        Call         -mem-array-char-print     
+        PushD        $mem-array-char-size      
+        Exchange                               
+        StoreI                                 
+        PushD        $mem-array-char-length    
+        Exchange                               
+        StoreI                                 
+        PushD        $mem-array-char-end-array-address 
+        Exchange                               
+        StoreI                                 
+        PushD        $mem-array-char-array-address 
+        Exchange                               
+        StoreI                                 
+        PushD        $mem-array-char-return-address 
+        Exchange                               
+        StoreI                                 
+        PushD        $mem-array-char-length    
+        LoadI                                  
+        PushI        1                         
+        Subtract                               
+        PushD        $mem-array-char-length    
+        Exchange                               
+        StoreI                                 
+        PushD        $mem-array-char-length    
+        LoadI                                  
+        JumpFalse    $mem-array-char-array     
+        PushI        44                        
+        PushD        $print-format-char        
+        Printf                                 
+        PushI        32                        
+        PushD        $print-format-char        
+        Printf                                 
+        Jump         $mem-array-char-array     
+        Label        $mem-array-char-print-end 
+        PushI        93                        
+        PushD        $print-format-char        
+        Printf                                 
+        PushD        $mem-array-char-return-address 
+        LoadI                                  
+        Return                                 
+        Label        -mem-array-bool-print     
+        DLabel       $mem-array-bool-return-address 
+        DataZ        4                         
+        DLabel       $mem-array-bool-array-address 
+        DataZ        4                         
+        DLabel       $mem-array-bool-end-array-address 
+        DataZ        4                         
+        DLabel       $mem-array-bool-length    
+        DataZ        4                         
+        DLabel       $mem-array-bool-size      
+        DataZ        4                         
+        PushD        $mem-array-bool-return-address 
+        Exchange                               
+        StoreI                                 
+        PushD        $mem-array-bool-array-address 
+        Exchange                               
+        StoreI                                 
+        PushD        $mem-array-bool-array-address 
+        LoadI                                  
+        Call         -mem-arrya-record-valid   
+        PushD        $mem-array-bool-array-address 
+        LoadI                                  
+        PushI        4                         
+        Add                                    
+        LoadI                                  
+        PushI        91                        
+        PushD        $print-format-char        
+        Printf                                 
+        PushD        $mem-array-bool-array-address 
+        LoadI                                  
+        PushI        12                        
+        Add                                    
+        LoadI                                  
+        PushD        $mem-array-bool-length    
+        Exchange                               
+        StoreI                                 
+        PushD        $mem-array-bool-array-address 
+        LoadI                                  
+        PushI        8                         
+        Add                                    
+        LoadI                                  
+        PushD        $mem-array-bool-size      
+        Exchange                               
+        StoreI                                 
+        PushD        $mem-array-bool-array-address 
+        LoadI                                  
+        PushI        16                        
+        PushD        $mem-array-bool-length    
+        LoadI                                  
+        PushD        $mem-array-bool-size      
+        LoadI                                  
+        Multiply                               
+        Add                                    
+        Add                                    
+        PushD        $mem-array-bool-end-array-address 
+        Exchange                               
+        StoreI                                 
+        JumpPos      $mem-array-bool-array     
+        Label        $mem-array-bool-loop      
+        PushD        $mem-array-bool-length    
+        LoadI                                  
+        JumpFalse    $mem-array-bool-print-end 
+        PushD        $mem-array-bool-end-array-address 
+        LoadI                                  
+        PushD        $mem-array-bool-length    
+        LoadI                                  
+        PushD        $mem-array-bool-size      
+        LoadI                                  
+        Multiply                               
+        Subtract                               
+        LoadC                                  
+        JumpTrue     $mem-array-bool-true      
+        PushD        $boolean-false-string     
+        Jump         $mem-array-bool-end       
+        Label        $mem-array-bool-true      
+        PushD        $boolean-true-string      
+        Label        $mem-array-bool-end       
+        PushD        $print-format-string      
+        Printf                                 
+        PushD        $mem-array-bool-length    
+        LoadI                                  
+        PushI        1                         
+        Subtract                               
+        PushD        $mem-array-bool-length    
+        Exchange                               
+        StoreI                                 
+        PushD        $mem-array-bool-length    
+        LoadI                                  
+        JumpFalse    $mem-array-bool-loop      
+        PushI        44                        
+        PushD        $print-format-char        
+        Printf                                 
+        PushI        32                        
+        PushD        $print-format-char        
+        Printf                                 
+        Jump         $mem-array-bool-loop      
+        Label        $mem-array-bool-array     
+        PushD        $mem-array-bool-length    
+        LoadI                                  
+        JumpFalse    $mem-array-bool-print-end 
+        PushD        $mem-array-bool-return-address 
+        LoadI                                  
+        PushD        $mem-array-bool-array-address 
+        LoadI                                  
+        PushD        $mem-array-bool-end-array-address 
+        LoadI                                  
+        PushD        $mem-array-bool-length    
+        LoadI                                  
+        PushD        $mem-array-bool-size      
+        LoadI                                  
+        PushD        $mem-array-bool-end-array-address 
+        LoadI                                  
+        PushD        $mem-array-bool-length    
+        LoadI                                  
+        PushD        $mem-array-bool-size      
+        LoadI                                  
+        Multiply                               
+        Subtract                               
+        LoadI                                  
+        Call         -mem-array-bool-print     
+        PushD        $mem-array-bool-size      
+        Exchange                               
+        StoreI                                 
+        PushD        $mem-array-bool-length    
+        Exchange                               
+        StoreI                                 
+        PushD        $mem-array-bool-end-array-address 
+        Exchange                               
+        StoreI                                 
+        PushD        $mem-array-bool-array-address 
+        Exchange                               
+        StoreI                                 
+        PushD        $mem-array-bool-return-address 
+        Exchange                               
+        StoreI                                 
+        PushD        $mem-array-bool-length    
+        LoadI                                  
+        PushI        1                         
+        Subtract                               
+        PushD        $mem-array-bool-length    
+        Exchange                               
+        StoreI                                 
+        PushD        $mem-array-bool-length    
+        LoadI                                  
+        JumpFalse    $mem-array-bool-array     
+        PushI        44                        
+        PushD        $print-format-char        
+        Printf                                 
+        PushI        32                        
+        PushD        $print-format-char        
+        Printf                                 
+        Jump         $mem-array-bool-array     
+        Label        $mem-array-bool-print-end 
+        PushI        93                        
+        PushD        $print-format-char        
+        Printf                                 
+        PushD        $mem-array-bool-return-address 
+        LoadI                                  
+        Return                                 
+        Label        -mem-array-string-print   
+        DLabel       $mem-array-string-return-address 
+        DataZ        4                         
+        DLabel       $mem-array-string-array-address 
+        DataZ        4                         
+        DLabel       $mem-array-string-end-array-address 
+        DataZ        4                         
+        DLabel       $mem-array-string-length  
+        DataZ        4                         
+        DLabel       $mem-array-string-size    
+        DataZ        4                         
+        PushD        $mem-array-string-return-address 
+        Exchange                               
+        StoreI                                 
+        PushD        $mem-array-string-array-address 
+        Exchange                               
+        StoreI                                 
+        PushD        $mem-array-string-array-address 
+        LoadI                                  
+        Call         -mem-arrya-record-valid   
+        PushD        $mem-array-string-array-address 
+        LoadI                                  
+        PushI        4                         
+        Add                                    
+        LoadI                                  
+        PushI        91                        
+        PushD        $print-format-char        
+        Printf                                 
+        PushD        $mem-array-string-array-address 
+        LoadI                                  
+        PushI        12                        
+        Add                                    
+        LoadI                                  
+        PushD        $mem-array-string-length  
+        Exchange                               
+        StoreI                                 
+        PushD        $mem-array-string-array-address 
+        LoadI                                  
+        PushI        8                         
+        Add                                    
+        LoadI                                  
+        PushD        $mem-array-string-size    
+        Exchange                               
+        StoreI                                 
+        PushD        $mem-array-string-array-address 
+        LoadI                                  
+        PushI        16                        
+        PushD        $mem-array-string-length  
+        LoadI                                  
+        PushD        $mem-array-string-size    
+        LoadI                                  
+        Multiply                               
+        Add                                    
+        Add                                    
+        PushD        $mem-array-string-end-array-address 
+        Exchange                               
+        StoreI                                 
+        JumpPos      $mem-array-string-array   
+        Label        $mem-array-string-loop    
+        PushD        $mem-array-string-length  
+        LoadI                                  
+        JumpFalse    $mem-array-string-print-end 
+        PushD        $mem-array-string-end-array-address 
+        LoadI                                  
+        PushD        $mem-array-string-length  
+        LoadI                                  
+        PushD        $mem-array-string-size    
+        LoadI                                  
+        Multiply                               
+        Subtract                               
+        LoadI                                  
+        PushI        12                        
+        Add                                    
+        PushD        $print-format-string      
+        Printf                                 
+        PushD        $mem-array-string-length  
+        LoadI                                  
+        PushI        1                         
+        Subtract                               
+        PushD        $mem-array-string-length  
+        Exchange                               
+        StoreI                                 
+        PushD        $mem-array-string-length  
+        LoadI                                  
+        JumpFalse    $mem-array-string-loop    
+        PushI        44                        
+        PushD        $print-format-char        
+        Printf                                 
+        PushI        32                        
+        PushD        $print-format-char        
+        Printf                                 
+        Jump         $mem-array-string-loop    
+        Label        $mem-array-string-array   
+        PushD        $mem-array-string-length  
+        LoadI                                  
+        JumpFalse    $mem-array-string-print-end 
+        PushD        $mem-array-string-return-address 
+        LoadI                                  
+        PushD        $mem-array-string-array-address 
+        LoadI                                  
+        PushD        $mem-array-string-end-array-address 
+        LoadI                                  
+        PushD        $mem-array-string-length  
+        LoadI                                  
+        PushD        $mem-array-string-size    
+        LoadI                                  
+        PushD        $mem-array-string-end-array-address 
+        LoadI                                  
+        PushD        $mem-array-string-length  
+        LoadI                                  
+        PushD        $mem-array-string-size    
+        LoadI                                  
+        Multiply                               
+        Subtract                               
+        LoadI                                  
+        Call         -mem-array-string-print   
+        PushD        $mem-array-string-size    
+        Exchange                               
+        StoreI                                 
+        PushD        $mem-array-string-length  
+        Exchange                               
+        StoreI                                 
+        PushD        $mem-array-string-end-array-address 
+        Exchange                               
+        StoreI                                 
+        PushD        $mem-array-string-array-address 
+        Exchange                               
+        StoreI                                 
+        PushD        $mem-array-string-return-address 
+        Exchange                               
+        StoreI                                 
+        PushD        $mem-array-string-length  
+        LoadI                                  
+        PushI        1                         
+        Subtract                               
+        PushD        $mem-array-string-length  
+        Exchange                               
+        StoreI                                 
+        PushD        $mem-array-string-length  
+        LoadI                                  
+        JumpFalse    $mem-array-string-array   
+        PushI        44                        
+        PushD        $print-format-char        
+        Printf                                 
+        PushI        32                        
+        PushD        $print-format-char        
+        Printf                                 
+        Jump         $mem-array-string-array   
+        Label        $mem-array-string-print-end 
+        PushI        93                        
+        PushD        $print-format-char        
+        Printf                                 
+        PushD        $mem-array-string-return-address 
+        LoadI                                  
+        Return                                 
+        Label        -mem-array-rational-print 
+        DLabel       $mem-array-rational-return-address 
+        DataZ        4                         
+        DLabel       $mem-array-rational-array-address 
+        DataZ        4                         
+        DLabel       $mem-array-rational-end-array-address 
+        DataZ        4                         
+        DLabel       $mem-array-rational-length 
+        DataZ        4                         
+        DLabel       $mem-array-rational-size  
+        DataZ        4                         
+        PushD        $mem-array-rational-return-address 
+        Exchange                               
+        StoreI                                 
+        PushD        $mem-array-rational-array-address 
+        Exchange                               
+        StoreI                                 
+        PushD        $mem-array-rational-array-address 
+        LoadI                                  
+        Call         -mem-arrya-record-valid   
+        PushD        $mem-array-rational-array-address 
+        LoadI                                  
+        PushI        4                         
+        Add                                    
+        LoadI                                  
+        PushI        91                        
+        PushD        $print-format-char        
+        Printf                                 
+        PushD        $mem-array-rational-array-address 
+        LoadI                                  
+        PushI        12                        
+        Add                                    
+        LoadI                                  
+        PushD        $mem-array-rational-length 
+        Exchange                               
+        StoreI                                 
+        PushD        $mem-array-rational-array-address 
+        LoadI                                  
+        PushI        8                         
+        Add                                    
+        LoadI                                  
+        PushD        $mem-array-rational-size  
+        Exchange                               
+        StoreI                                 
+        PushD        $mem-array-rational-array-address 
+        LoadI                                  
+        PushI        16                        
+        PushD        $mem-array-rational-length 
+        LoadI                                  
+        PushD        $mem-array-rational-size  
+        LoadI                                  
+        Multiply                               
+        Add                                    
+        Add                                    
+        PushD        $mem-array-rational-end-array-address 
+        Exchange                               
+        StoreI                                 
+        JumpPos      $mem-array-rational-array 
+        Label        $mem-array-rational-loop  
+        PushD        $mem-array-rational-length 
+        LoadI                                  
+        JumpFalse    $mem-array-rational-print-end 
+        PushD        $mem-array-rational-end-array-address 
+        LoadI                                  
+        PushD        $mem-array-rational-length 
+        LoadI                                  
+        PushD        $mem-array-rational-size  
+        LoadI                                  
+        Multiply                               
+        Subtract                               
+        Duplicate                              
+        LoadI                                  
+        Exchange                               
+        PushI        4                         
+        Add                                    
+        LoadI                                  
+        Call         -mem-rat-print            
+        PushD        $mem-array-rational-length 
+        LoadI                                  
+        PushI        1                         
+        Subtract                               
+        PushD        $mem-array-rational-length 
+        Exchange                               
+        StoreI                                 
+        PushD        $mem-array-rational-length 
+        LoadI                                  
+        JumpFalse    $mem-array-rational-loop  
+        PushI        44                        
+        PushD        $print-format-char        
+        Printf                                 
+        PushI        32                        
+        PushD        $print-format-char        
+        Printf                                 
+        Jump         $mem-array-rational-loop  
+        Label        $mem-array-rational-array 
+        PushD        $mem-array-rational-length 
+        LoadI                                  
+        JumpFalse    $mem-array-rational-print-end 
+        PushD        $mem-array-rational-return-address 
+        LoadI                                  
+        PushD        $mem-array-rational-array-address 
+        LoadI                                  
+        PushD        $mem-array-rational-end-array-address 
+        LoadI                                  
+        PushD        $mem-array-rational-length 
+        LoadI                                  
+        PushD        $mem-array-rational-size  
+        LoadI                                  
+        PushD        $mem-array-rational-end-array-address 
+        LoadI                                  
+        PushD        $mem-array-rational-length 
+        LoadI                                  
+        PushD        $mem-array-rational-size  
+        LoadI                                  
+        Multiply                               
+        Subtract                               
+        LoadI                                  
+        Call         -mem-array-rational-print 
+        PushD        $mem-array-rational-size  
+        Exchange                               
+        StoreI                                 
+        PushD        $mem-array-rational-length 
+        Exchange                               
+        StoreI                                 
+        PushD        $mem-array-rational-end-array-address 
+        Exchange                               
+        StoreI                                 
+        PushD        $mem-array-rational-array-address 
+        Exchange                               
+        StoreI                                 
+        PushD        $mem-array-rational-return-address 
+        Exchange                               
+        StoreI                                 
+        PushD        $mem-array-rational-length 
+        LoadI                                  
+        PushI        1                         
+        Subtract                               
+        PushD        $mem-array-rational-length 
+        Exchange                               
+        StoreI                                 
+        PushD        $mem-array-rational-length 
+        LoadI                                  
+        JumpFalse    $mem-array-rational-array 
+        PushI        44                        
+        PushD        $print-format-char        
+        Printf                                 
+        PushI        32                        
+        PushD        $print-format-char        
+        Printf                                 
+        Jump         $mem-array-rational-array 
+        Label        $mem-array-rational-print-end 
+        PushI        93                        
+        PushD        $print-format-char        
+        Printf                                 
+        PushD        $mem-array-rational-return-address 
+        LoadI                                  
+        Return                                 
+        Label        -mem-arrya-record-valid   
+        DLabel       -mem-arrya-record-valid-return-address 
+        DataZ        4                         
+        DLabel       -mem-arrya-record-valid-array-address 
+        DataZ        4                         
+        PushD        -mem-arrya-record-valid-return-address 
+        Exchange                               
+        StoreI                                 
+        PushD        -mem-arrya-record-valid-array-address 
+        Exchange                               
+        StoreI                                 
+        PushD        -mem-arrya-record-valid-array-address 
+        LoadI                                  
+        LoadI                                  
+        PushI        7                         
+        Subtract                               
+        JumpTrue     $$a-record-error          
+        PushD        -mem-arrya-record-valid-array-address 
+        LoadI                                  
+        PushI        4                         
+        Add                                    
+        LoadI                                  
+        PushI        2                         
+        BTAnd                                  
+        JumpTrue     $$a-record-deleted-error  
+        PushD        -mem-arrya-record-valid-return-address 
         LoadI                                  
         Return                                 
         DLabel       $heap-memory              

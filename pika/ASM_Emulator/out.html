@@ -1,0 +1,2851 @@
+<table>
+<tr>
+<td style='vertical-align:text-top;'><div style = 'border:thin black solid;width:200px;padding:10px;margin:10px;'>
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$heap-memory(722)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Duplicate&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$heap-start-ptr(0)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Exchange&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;StoreI&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$heap-after-ptr(4)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Exchange&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;StoreI&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushI&nbsp;&nbsp;&nbsp;&nbsp;0<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$heap-first-free(8)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Exchange&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;StoreI&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Jump&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$$main(32)<br />
+</div>
+</td>
+<td style='vertical-align:text-top;'><div style = 'border:thin black solid;width:200px;padding:10px;margin:10px;'>
+-mem-manager-initialize,$heap-start-ptr:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataZ&nbsp;&nbsp;&nbsp;&nbsp;4<br />
+$heap-after-ptr:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataZ&nbsp;&nbsp;&nbsp;&nbsp;4<br />
+$heap-first-free:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataZ&nbsp;&nbsp;&nbsp;&nbsp;4<br />
+$mmgr-newblock-block:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataZ&nbsp;&nbsp;&nbsp;&nbsp;4<br />
+$mmgr-newblock-size:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataZ&nbsp;&nbsp;&nbsp;&nbsp;4<br />
+</div>
+</td>
+</tr>
+<tr>
+<td style='vertical-align:text-top;'><div style = 'border:thin black solid;width:200px;padding:10px;margin:10px;'>
+$$general-runtime-error:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$errors-general-message(60)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Printf&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Halt&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+</div>
+</td>
+<td style='vertical-align:text-top;'><div style = 'border:thin black solid;width:200px;padding:10px;margin:10px;'>
+$eat-location-zero:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataZ&nbsp;&nbsp;&nbsp;&nbsp;8<br />
+$print-format-integer:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataC&nbsp;&nbsp;&nbsp;&nbsp;37<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataC&nbsp;&nbsp;&nbsp;&nbsp;100<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataC&nbsp;&nbsp;&nbsp;&nbsp;0<br />
+$print-format-float:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataC&nbsp;&nbsp;&nbsp;&nbsp;37<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataC&nbsp;&nbsp;&nbsp;&nbsp;103<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataC&nbsp;&nbsp;&nbsp;&nbsp;0<br />
+$print-format-boolean:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataC&nbsp;&nbsp;&nbsp;&nbsp;37<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataC&nbsp;&nbsp;&nbsp;&nbsp;115<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataC&nbsp;&nbsp;&nbsp;&nbsp;0<br />
+$print-format-string:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataC&nbsp;&nbsp;&nbsp;&nbsp;37<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataC&nbsp;&nbsp;&nbsp;&nbsp;115<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataC&nbsp;&nbsp;&nbsp;&nbsp;0<br />
+$print-format-char:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataC&nbsp;&nbsp;&nbsp;&nbsp;37<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataC&nbsp;&nbsp;&nbsp;&nbsp;99<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataC&nbsp;&nbsp;&nbsp;&nbsp;0<br />
+$print-format-newline:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataC&nbsp;&nbsp;&nbsp;&nbsp;10<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataC&nbsp;&nbsp;&nbsp;&nbsp;0<br />
+$print-format-tab:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataC&nbsp;&nbsp;&nbsp;&nbsp;9<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataC&nbsp;&nbsp;&nbsp;&nbsp;0<br />
+$print-format-space:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataC&nbsp;&nbsp;&nbsp;&nbsp;32<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataC&nbsp;&nbsp;&nbsp;&nbsp;0<br />
+$boolean-true-string:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataC&nbsp;&nbsp;&nbsp;&nbsp;116<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataC&nbsp;&nbsp;&nbsp;&nbsp;114<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataC&nbsp;&nbsp;&nbsp;&nbsp;117<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataC&nbsp;&nbsp;&nbsp;&nbsp;101<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataC&nbsp;&nbsp;&nbsp;&nbsp;0<br />
+$boolean-false-string:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataC&nbsp;&nbsp;&nbsp;&nbsp;102<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataC&nbsp;&nbsp;&nbsp;&nbsp;97<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataC&nbsp;&nbsp;&nbsp;&nbsp;108<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataC&nbsp;&nbsp;&nbsp;&nbsp;115<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataC&nbsp;&nbsp;&nbsp;&nbsp;101<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataC&nbsp;&nbsp;&nbsp;&nbsp;0<br />
+$errors-general-message:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataC&nbsp;&nbsp;&nbsp;&nbsp;82<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataC&nbsp;&nbsp;&nbsp;&nbsp;117<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataC&nbsp;&nbsp;&nbsp;&nbsp;110<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataC&nbsp;&nbsp;&nbsp;&nbsp;116<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataC&nbsp;&nbsp;&nbsp;&nbsp;105<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataC&nbsp;&nbsp;&nbsp;&nbsp;109<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataC&nbsp;&nbsp;&nbsp;&nbsp;101<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataC&nbsp;&nbsp;&nbsp;&nbsp;32<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataC&nbsp;&nbsp;&nbsp;&nbsp;101<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataC&nbsp;&nbsp;&nbsp;&nbsp;114<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataC&nbsp;&nbsp;&nbsp;&nbsp;114<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataC&nbsp;&nbsp;&nbsp;&nbsp;111<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataC&nbsp;&nbsp;&nbsp;&nbsp;114<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataC&nbsp;&nbsp;&nbsp;&nbsp;58<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataC&nbsp;&nbsp;&nbsp;&nbsp;32<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataC&nbsp;&nbsp;&nbsp;&nbsp;37<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataC&nbsp;&nbsp;&nbsp;&nbsp;115<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataC&nbsp;&nbsp;&nbsp;&nbsp;10<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataC&nbsp;&nbsp;&nbsp;&nbsp;0<br />
+</div>
+</td>
+</tr>
+<tr>
+<td style='vertical-align:text-top;'><div style = 'border:thin black solid;width:200px;padding:10px;margin:10px;'>
+$$i-divide-by-zero:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$errors-int-divide-by-zero(79)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Jump&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$$general-runtime-error(13)<br />
+</div>
+</td>
+<td style='vertical-align:text-top;'><div style = 'border:thin black solid;width:200px;padding:10px;margin:10px;'>
+$errors-int-divide-by-zero:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataC&nbsp;&nbsp;&nbsp;&nbsp;105<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataC&nbsp;&nbsp;&nbsp;&nbsp;110<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataC&nbsp;&nbsp;&nbsp;&nbsp;116<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataC&nbsp;&nbsp;&nbsp;&nbsp;101<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataC&nbsp;&nbsp;&nbsp;&nbsp;103<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataC&nbsp;&nbsp;&nbsp;&nbsp;101<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataC&nbsp;&nbsp;&nbsp;&nbsp;114<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataC&nbsp;&nbsp;&nbsp;&nbsp;32<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataC&nbsp;&nbsp;&nbsp;&nbsp;100<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataC&nbsp;&nbsp;&nbsp;&nbsp;105<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataC&nbsp;&nbsp;&nbsp;&nbsp;118<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataC&nbsp;&nbsp;&nbsp;&nbsp;105<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataC&nbsp;&nbsp;&nbsp;&nbsp;100<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataC&nbsp;&nbsp;&nbsp;&nbsp;101<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataC&nbsp;&nbsp;&nbsp;&nbsp;32<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataC&nbsp;&nbsp;&nbsp;&nbsp;98<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataC&nbsp;&nbsp;&nbsp;&nbsp;121<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataC&nbsp;&nbsp;&nbsp;&nbsp;32<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataC&nbsp;&nbsp;&nbsp;&nbsp;122<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataC&nbsp;&nbsp;&nbsp;&nbsp;101<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataC&nbsp;&nbsp;&nbsp;&nbsp;114<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataC&nbsp;&nbsp;&nbsp;&nbsp;111<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataC&nbsp;&nbsp;&nbsp;&nbsp;0<br />
+</div>
+</td>
+</tr>
+<tr>
+<td style='vertical-align:text-top;'><div style = 'border:thin black solid;width:200px;padding:10px;margin:10px;'>
+$$f-divide-by-zero:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$errors-float-divide-by-zero(102)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Jump&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$$general-runtime-error(13)<br />
+</div>
+</td>
+<td style='vertical-align:text-top;'><div style = 'border:thin black solid;width:200px;padding:10px;margin:10px;'>
+$errors-float-divide-by-zero:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataC&nbsp;&nbsp;&nbsp;&nbsp;102<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataC&nbsp;&nbsp;&nbsp;&nbsp;108<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataC&nbsp;&nbsp;&nbsp;&nbsp;111<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataC&nbsp;&nbsp;&nbsp;&nbsp;97<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataC&nbsp;&nbsp;&nbsp;&nbsp;116<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataC&nbsp;&nbsp;&nbsp;&nbsp;32<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataC&nbsp;&nbsp;&nbsp;&nbsp;100<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataC&nbsp;&nbsp;&nbsp;&nbsp;105<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataC&nbsp;&nbsp;&nbsp;&nbsp;118<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataC&nbsp;&nbsp;&nbsp;&nbsp;105<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataC&nbsp;&nbsp;&nbsp;&nbsp;100<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataC&nbsp;&nbsp;&nbsp;&nbsp;101<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataC&nbsp;&nbsp;&nbsp;&nbsp;32<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataC&nbsp;&nbsp;&nbsp;&nbsp;98<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataC&nbsp;&nbsp;&nbsp;&nbsp;121<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataC&nbsp;&nbsp;&nbsp;&nbsp;32<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataC&nbsp;&nbsp;&nbsp;&nbsp;122<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataC&nbsp;&nbsp;&nbsp;&nbsp;101<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataC&nbsp;&nbsp;&nbsp;&nbsp;114<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataC&nbsp;&nbsp;&nbsp;&nbsp;111<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataC&nbsp;&nbsp;&nbsp;&nbsp;0<br />
+</div>
+</td>
+</tr>
+<tr>
+<td style='vertical-align:text-top;'><div style = 'border:thin black solid;width:200px;padding:10px;margin:10px;'>
+$$r-divide-by-zero:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$errors-rat-divide-by-zero(123)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Jump&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$$general-runtime-error(13)<br />
+</div>
+</td>
+<td style='vertical-align:text-top;'><div style = 'border:thin black solid;width:200px;padding:10px;margin:10px;'>
+$errors-rat-divide-by-zero:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataC&nbsp;&nbsp;&nbsp;&nbsp;114<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataC&nbsp;&nbsp;&nbsp;&nbsp;97<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataC&nbsp;&nbsp;&nbsp;&nbsp;116<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataC&nbsp;&nbsp;&nbsp;&nbsp;32<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataC&nbsp;&nbsp;&nbsp;&nbsp;100<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataC&nbsp;&nbsp;&nbsp;&nbsp;105<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataC&nbsp;&nbsp;&nbsp;&nbsp;118<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataC&nbsp;&nbsp;&nbsp;&nbsp;105<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataC&nbsp;&nbsp;&nbsp;&nbsp;100<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataC&nbsp;&nbsp;&nbsp;&nbsp;101<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataC&nbsp;&nbsp;&nbsp;&nbsp;32<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataC&nbsp;&nbsp;&nbsp;&nbsp;98<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataC&nbsp;&nbsp;&nbsp;&nbsp;121<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataC&nbsp;&nbsp;&nbsp;&nbsp;32<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataC&nbsp;&nbsp;&nbsp;&nbsp;122<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataC&nbsp;&nbsp;&nbsp;&nbsp;101<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataC&nbsp;&nbsp;&nbsp;&nbsp;114<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataC&nbsp;&nbsp;&nbsp;&nbsp;111<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataC&nbsp;&nbsp;&nbsp;&nbsp;0<br />
+</div>
+</td>
+</tr>
+<tr>
+<td style='vertical-align:text-top;'><div style = 'border:thin black solid;width:200px;padding:10px;margin:10px;'>
+$$r-denominator-zero:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$errors-denominator-zero(142)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Jump&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$$general-runtime-error(13)<br />
+</div>
+</td>
+<td style='vertical-align:text-top;'><div style = 'border:thin black solid;width:200px;padding:10px;margin:10px;'>
+$errors-denominator-zero:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataC&nbsp;&nbsp;&nbsp;&nbsp;100<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataC&nbsp;&nbsp;&nbsp;&nbsp;101<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataC&nbsp;&nbsp;&nbsp;&nbsp;110<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataC&nbsp;&nbsp;&nbsp;&nbsp;111<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataC&nbsp;&nbsp;&nbsp;&nbsp;109<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataC&nbsp;&nbsp;&nbsp;&nbsp;105<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataC&nbsp;&nbsp;&nbsp;&nbsp;110<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataC&nbsp;&nbsp;&nbsp;&nbsp;97<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataC&nbsp;&nbsp;&nbsp;&nbsp;116<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataC&nbsp;&nbsp;&nbsp;&nbsp;111<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataC&nbsp;&nbsp;&nbsp;&nbsp;114<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataC&nbsp;&nbsp;&nbsp;&nbsp;32<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataC&nbsp;&nbsp;&nbsp;&nbsp;105<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataC&nbsp;&nbsp;&nbsp;&nbsp;115<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataC&nbsp;&nbsp;&nbsp;&nbsp;32<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataC&nbsp;&nbsp;&nbsp;&nbsp;122<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataC&nbsp;&nbsp;&nbsp;&nbsp;101<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataC&nbsp;&nbsp;&nbsp;&nbsp;114<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataC&nbsp;&nbsp;&nbsp;&nbsp;111<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataC&nbsp;&nbsp;&nbsp;&nbsp;0<br />
+</div>
+</td>
+</tr>
+<tr>
+<td style='vertical-align:text-top;'><div style = 'border:thin black solid;width:200px;padding:10px;margin:10px;'>
+$$a-index-negative:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$errors-index-neg(162)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Jump&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$$general-runtime-error(13)<br />
+</div>
+</td>
+<td style='vertical-align:text-top;'><div style = 'border:thin black solid;width:200px;padding:10px;margin:10px;'>
+$errors-index-neg:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataC&nbsp;&nbsp;&nbsp;&nbsp;97<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataC&nbsp;&nbsp;&nbsp;&nbsp;114<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataC&nbsp;&nbsp;&nbsp;&nbsp;114<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataC&nbsp;&nbsp;&nbsp;&nbsp;97<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataC&nbsp;&nbsp;&nbsp;&nbsp;121<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataC&nbsp;&nbsp;&nbsp;&nbsp;32<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataC&nbsp;&nbsp;&nbsp;&nbsp;105<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataC&nbsp;&nbsp;&nbsp;&nbsp;110<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataC&nbsp;&nbsp;&nbsp;&nbsp;100<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataC&nbsp;&nbsp;&nbsp;&nbsp;101<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataC&nbsp;&nbsp;&nbsp;&nbsp;120<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataC&nbsp;&nbsp;&nbsp;&nbsp;32<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataC&nbsp;&nbsp;&nbsp;&nbsp;105<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataC&nbsp;&nbsp;&nbsp;&nbsp;115<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataC&nbsp;&nbsp;&nbsp;&nbsp;32<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataC&nbsp;&nbsp;&nbsp;&nbsp;110<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataC&nbsp;&nbsp;&nbsp;&nbsp;101<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataC&nbsp;&nbsp;&nbsp;&nbsp;103<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataC&nbsp;&nbsp;&nbsp;&nbsp;97<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataC&nbsp;&nbsp;&nbsp;&nbsp;116<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataC&nbsp;&nbsp;&nbsp;&nbsp;105<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataC&nbsp;&nbsp;&nbsp;&nbsp;118<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataC&nbsp;&nbsp;&nbsp;&nbsp;101<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataC&nbsp;&nbsp;&nbsp;&nbsp;46<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataC&nbsp;&nbsp;&nbsp;&nbsp;0<br />
+</div>
+</td>
+</tr>
+<tr>
+<td style='vertical-align:text-top;'><div style = 'border:thin black solid;width:200px;padding:10px;margin:10px;'>
+$$a-index-exceed:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$errors-index-exceed(187)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Jump&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$$general-runtime-error(13)<br />
+</div>
+</td>
+<td style='vertical-align:text-top;'><div style = 'border:thin black solid;width:200px;padding:10px;margin:10px;'>
+$errors-index-exceed:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataC&nbsp;&nbsp;&nbsp;&nbsp;97<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataC&nbsp;&nbsp;&nbsp;&nbsp;114<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataC&nbsp;&nbsp;&nbsp;&nbsp;114<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataC&nbsp;&nbsp;&nbsp;&nbsp;97<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataC&nbsp;&nbsp;&nbsp;&nbsp;121<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataC&nbsp;&nbsp;&nbsp;&nbsp;32<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataC&nbsp;&nbsp;&nbsp;&nbsp;105<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataC&nbsp;&nbsp;&nbsp;&nbsp;110<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataC&nbsp;&nbsp;&nbsp;&nbsp;100<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataC&nbsp;&nbsp;&nbsp;&nbsp;101<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataC&nbsp;&nbsp;&nbsp;&nbsp;120<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataC&nbsp;&nbsp;&nbsp;&nbsp;32<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataC&nbsp;&nbsp;&nbsp;&nbsp;101<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataC&nbsp;&nbsp;&nbsp;&nbsp;120<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataC&nbsp;&nbsp;&nbsp;&nbsp;99<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataC&nbsp;&nbsp;&nbsp;&nbsp;101<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataC&nbsp;&nbsp;&nbsp;&nbsp;101<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataC&nbsp;&nbsp;&nbsp;&nbsp;100<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataC&nbsp;&nbsp;&nbsp;&nbsp;115<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataC&nbsp;&nbsp;&nbsp;&nbsp;46<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataC&nbsp;&nbsp;&nbsp;&nbsp;0<br />
+</div>
+</td>
+</tr>
+<tr>
+<td style='vertical-align:text-top;'><div style = 'border:thin black solid;width:200px;padding:10px;margin:10px;'>
+$$a-record-error:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$errors-record-error(208)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Jump&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$$general-runtime-error(13)<br />
+$$a-record-deleted-error:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$errors-record-deleted-error(235)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Jump&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$$general-runtime-error(13)<br />
+</div>
+</td>
+<td style='vertical-align:text-top;'><div style = 'border:thin black solid;width:200px;padding:10px;margin:10px;'>
+$errors-record-error:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataC&nbsp;&nbsp;&nbsp;&nbsp;97<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataC&nbsp;&nbsp;&nbsp;&nbsp;114<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataC&nbsp;&nbsp;&nbsp;&nbsp;114<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataC&nbsp;&nbsp;&nbsp;&nbsp;97<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataC&nbsp;&nbsp;&nbsp;&nbsp;121<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataC&nbsp;&nbsp;&nbsp;&nbsp;32<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataC&nbsp;&nbsp;&nbsp;&nbsp;114<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataC&nbsp;&nbsp;&nbsp;&nbsp;101<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataC&nbsp;&nbsp;&nbsp;&nbsp;99<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataC&nbsp;&nbsp;&nbsp;&nbsp;111<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataC&nbsp;&nbsp;&nbsp;&nbsp;114<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataC&nbsp;&nbsp;&nbsp;&nbsp;100<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataC&nbsp;&nbsp;&nbsp;&nbsp;32<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataC&nbsp;&nbsp;&nbsp;&nbsp;105<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataC&nbsp;&nbsp;&nbsp;&nbsp;115<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataC&nbsp;&nbsp;&nbsp;&nbsp;32<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataC&nbsp;&nbsp;&nbsp;&nbsp;110<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataC&nbsp;&nbsp;&nbsp;&nbsp;111<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataC&nbsp;&nbsp;&nbsp;&nbsp;116<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataC&nbsp;&nbsp;&nbsp;&nbsp;32<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataC&nbsp;&nbsp;&nbsp;&nbsp;118<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataC&nbsp;&nbsp;&nbsp;&nbsp;97<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataC&nbsp;&nbsp;&nbsp;&nbsp;108<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataC&nbsp;&nbsp;&nbsp;&nbsp;105<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataC&nbsp;&nbsp;&nbsp;&nbsp;100<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataC&nbsp;&nbsp;&nbsp;&nbsp;46<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataC&nbsp;&nbsp;&nbsp;&nbsp;0<br />
+$errors-record-deleted-error:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataC&nbsp;&nbsp;&nbsp;&nbsp;97<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataC&nbsp;&nbsp;&nbsp;&nbsp;114<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataC&nbsp;&nbsp;&nbsp;&nbsp;114<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataC&nbsp;&nbsp;&nbsp;&nbsp;97<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataC&nbsp;&nbsp;&nbsp;&nbsp;121<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataC&nbsp;&nbsp;&nbsp;&nbsp;32<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataC&nbsp;&nbsp;&nbsp;&nbsp;114<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataC&nbsp;&nbsp;&nbsp;&nbsp;101<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataC&nbsp;&nbsp;&nbsp;&nbsp;99<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataC&nbsp;&nbsp;&nbsp;&nbsp;111<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataC&nbsp;&nbsp;&nbsp;&nbsp;114<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataC&nbsp;&nbsp;&nbsp;&nbsp;100<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataC&nbsp;&nbsp;&nbsp;&nbsp;32<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataC&nbsp;&nbsp;&nbsp;&nbsp;104<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataC&nbsp;&nbsp;&nbsp;&nbsp;97<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataC&nbsp;&nbsp;&nbsp;&nbsp;115<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataC&nbsp;&nbsp;&nbsp;&nbsp;32<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataC&nbsp;&nbsp;&nbsp;&nbsp;98<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataC&nbsp;&nbsp;&nbsp;&nbsp;101<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataC&nbsp;&nbsp;&nbsp;&nbsp;101<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataC&nbsp;&nbsp;&nbsp;&nbsp;110<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataC&nbsp;&nbsp;&nbsp;&nbsp;32<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataC&nbsp;&nbsp;&nbsp;&nbsp;100<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataC&nbsp;&nbsp;&nbsp;&nbsp;101<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataC&nbsp;&nbsp;&nbsp;&nbsp;108<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataC&nbsp;&nbsp;&nbsp;&nbsp;101<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataC&nbsp;&nbsp;&nbsp;&nbsp;116<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataC&nbsp;&nbsp;&nbsp;&nbsp;101<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataC&nbsp;&nbsp;&nbsp;&nbsp;100<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataC&nbsp;&nbsp;&nbsp;&nbsp;46<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataC&nbsp;&nbsp;&nbsp;&nbsp;0<br />
+</div>
+</td>
+</tr>
+<tr>
+<td style='vertical-align:text-top;'><div style = 'border:thin black solid;width:200px;padding:10px;margin:10px;'>
+$string-constant-memory,$$main:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$global-memory-block(266)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushI&nbsp;&nbsp;&nbsp;&nbsp;0<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Add&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushI&nbsp;&nbsp;&nbsp;&nbsp;1<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Duplicate&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushI&nbsp;&nbsp;&nbsp;&nbsp;1<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Multiply&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushI&nbsp;&nbsp;&nbsp;&nbsp;16<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Add&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Call&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-mem-manager-allocate(153)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Exchange&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushI&nbsp;&nbsp;&nbsp;&nbsp;1<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Exchange&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushI&nbsp;&nbsp;&nbsp;&nbsp;0<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Call&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-mem-store-array-header(443)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushI&nbsp;&nbsp;&nbsp;&nbsp;0<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Call&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-mem-store-array-one-byte(490)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;StoreI&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$global-memory-block(266)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushI&nbsp;&nbsp;&nbsp;&nbsp;0<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Add&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushI&nbsp;&nbsp;&nbsp;&nbsp;0<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushI&nbsp;&nbsp;&nbsp;&nbsp;0<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Call&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-mem-array-index(770)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushI&nbsp;&nbsp;&nbsp;&nbsp;97<br />
+&nbsp;&nbsp;&nbsp;&nbsp;StoreC&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$global-memory-block(266)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushI&nbsp;&nbsp;&nbsp;&nbsp;0<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Add&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Call&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-mem-array-char-print(1399)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$global-memory-block(266)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushI&nbsp;&nbsp;&nbsp;&nbsp;0<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Add&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Call&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-mem-array-release(623)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Halt&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+</div>
+</td>
+<td style='vertical-align:text-top;'><div style = 'border:thin black solid;width:200px;padding:10px;margin:10px;'>
+$usable-memory-start,$global-memory-block:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataZ&nbsp;&nbsp;&nbsp;&nbsp;4<br />
+</div>
+</td>
+</tr>
+<tr>
+<td style='vertical-align:text-top;'><div style = 'border:thin black solid;width:200px;padding:10px;margin:10px;'>
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mmgr-tags-return(290)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Exchange&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;StoreI&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mmgr-tags-size(270)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Exchange&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;StoreI&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mmgr-tags-start(274)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Exchange&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;StoreI&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mmgr-tags-available(278)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Exchange&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;StoreI&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mmgr-tags-nextptr(282)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Exchange&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;StoreI&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mmgr-tags-prevptr(286)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Exchange&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;StoreI&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mmgr-tags-prevptr(286)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mmgr-tags-size(270)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mmgr-tags-available(278)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mmgr-tags-start(274)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Call&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-mem-manager-one-tag(116)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mmgr-tags-nextptr(282)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mmgr-tags-size(270)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mmgr-tags-available(278)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mmgr-tags-start(274)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Duplicate&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushI&nbsp;&nbsp;&nbsp;&nbsp;4<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Add&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Add&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushI&nbsp;&nbsp;&nbsp;&nbsp;9<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Subtract&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Call&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-mem-manager-one-tag(116)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mmgr-tags-return(290)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Return&nbsp;&nbsp;&nbsp;<br />
+</div>
+</td>
+<td style='vertical-align:text-top;'><div style = 'border:thin black solid;width:200px;padding:10px;margin:10px;'>
+-mem-manager-make-tags,$mmgr-tags-size:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataZ&nbsp;&nbsp;&nbsp;&nbsp;4<br />
+$mmgr-tags-start:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataZ&nbsp;&nbsp;&nbsp;&nbsp;4<br />
+$mmgr-tags-available:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataZ&nbsp;&nbsp;&nbsp;&nbsp;4<br />
+$mmgr-tags-nextptr:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataZ&nbsp;&nbsp;&nbsp;&nbsp;4<br />
+$mmgr-tags-prevptr:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataZ&nbsp;&nbsp;&nbsp;&nbsp;4<br />
+$mmgr-tags-return:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataZ&nbsp;&nbsp;&nbsp;&nbsp;4<br />
+</div>
+</td>
+</tr>
+<tr>
+<td style='vertical-align:text-top;'><div style = 'border:thin black solid;width:200px;padding:10px;margin:10px;'>
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mmgr-onetag-return(294)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Exchange&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;StoreI&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mmgr-onetag-location(298)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Exchange&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;StoreI&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mmgr-onetag-available(302)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Exchange&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;StoreI&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mmgr-onetag-size(306)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Exchange&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;StoreI&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mmgr-onetag-location(298)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushI&nbsp;&nbsp;&nbsp;&nbsp;0<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Add&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Exchange&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;StoreI&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mmgr-onetag-size(306)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mmgr-onetag-location(298)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushI&nbsp;&nbsp;&nbsp;&nbsp;4<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Add&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Exchange&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;StoreI&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mmgr-onetag-available(302)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mmgr-onetag-location(298)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushI&nbsp;&nbsp;&nbsp;&nbsp;8<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Add&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Exchange&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;StoreC&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mmgr-onetag-return(294)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Return&nbsp;&nbsp;&nbsp;<br />
+</div>
+</td>
+<td style='vertical-align:text-top;'><div style = 'border:thin black solid;width:200px;padding:10px;margin:10px;'>
+-mem-manager-one-tag,$mmgr-onetag-return:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataZ&nbsp;&nbsp;&nbsp;&nbsp;4<br />
+$mmgr-onetag-location:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataZ&nbsp;&nbsp;&nbsp;&nbsp;4<br />
+$mmgr-onetag-available:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataZ&nbsp;&nbsp;&nbsp;&nbsp;4<br />
+$mmgr-onetag-size:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataZ&nbsp;&nbsp;&nbsp;&nbsp;4<br />
+$mmgr-onetag-pointer:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataZ&nbsp;&nbsp;&nbsp;&nbsp;4<br />
+</div>
+</td>
+</tr>
+<tr>
+<td style='vertical-align:text-top;'><div style = 'border:thin black solid;width:200px;padding:10px;margin:10px;'>
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mmgr-alloc-return(314)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Exchange&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;StoreI&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushI&nbsp;&nbsp;&nbsp;&nbsp;18<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Add&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mmgr-alloc-size(318)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Exchange&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;StoreI&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$heap-first-free(8)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mmgr-alloc-current-block(322)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Exchange&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;StoreI&nbsp;&nbsp;&nbsp;<br />
+-mmgr-alloc-process-current:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mmgr-alloc-current-block(322)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;JumpFalse&nbsp;-mmgr-alloc-no-block-works(252)<br />
+-mmgr-alloc-test-block:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mmgr-alloc-current-block(322)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushI&nbsp;&nbsp;&nbsp;&nbsp;4<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Add&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mmgr-alloc-size(318)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Subtract&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushI&nbsp;&nbsp;&nbsp;&nbsp;1<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Add&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;JumpPos&nbsp;&nbsp;-mmgr-alloc-found-block(196)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mmgr-alloc-current-block(322)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Duplicate&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushI&nbsp;&nbsp;&nbsp;&nbsp;4<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Add&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Add&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushI&nbsp;&nbsp;&nbsp;&nbsp;9<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Subtract&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushI&nbsp;&nbsp;&nbsp;&nbsp;0<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Add&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mmgr-alloc-current-block(322)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Exchange&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;StoreI&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Jump&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-mmgr-alloc-process-current(166)<br />
+-mmgr-alloc-found-block:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mmgr-alloc-current-block(322)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Call&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-mem-manager-remove-block(357)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mmgr-alloc-current-block(322)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushI&nbsp;&nbsp;&nbsp;&nbsp;4<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Add&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mmgr-alloc-size(318)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Subtract&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushI&nbsp;&nbsp;&nbsp;&nbsp;26<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Subtract&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;JumpNeg&nbsp;&nbsp;-mmgr-alloc-return-userblock(283)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mmgr-alloc-current-block(322)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mmgr-alloc-size(318)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Add&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mmgr-alloc-remainder-block(326)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Exchange&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;StoreI&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mmgr-alloc-size(318)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mmgr-alloc-current-block(322)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushI&nbsp;&nbsp;&nbsp;&nbsp;4<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Add&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Exchange&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Subtract&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mmgr-alloc-remainder-size(330)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Exchange&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;StoreI&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushI&nbsp;&nbsp;&nbsp;&nbsp;0<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushI&nbsp;&nbsp;&nbsp;&nbsp;0<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushI&nbsp;&nbsp;&nbsp;&nbsp;0<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mmgr-alloc-current-block(322)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mmgr-alloc-size(318)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Call&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-mem-manager-make-tags(70)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushI&nbsp;&nbsp;&nbsp;&nbsp;0<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushI&nbsp;&nbsp;&nbsp;&nbsp;0<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushI&nbsp;&nbsp;&nbsp;&nbsp;1<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mmgr-alloc-remainder-block(326)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mmgr-alloc-remainder-size(330)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Call&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-mem-manager-make-tags(70)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mmgr-alloc-remainder-block(326)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushI&nbsp;&nbsp;&nbsp;&nbsp;9<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Add&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Call&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-mem-manager-deallocate(290)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Jump&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-mmgr-alloc-return-userblock(283)<br />
+-mmgr-alloc-no-block-works:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mmgr-alloc-size(318)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mmgr-newblock-size(16)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Exchange&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;StoreI&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$heap-after-ptr(4)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mmgr-newblock-block(12)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Exchange&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;StoreI&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mmgr-newblock-size(16)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$heap-after-ptr(4)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Add&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$heap-after-ptr(4)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Exchange&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;StoreI&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushI&nbsp;&nbsp;&nbsp;&nbsp;0<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushI&nbsp;&nbsp;&nbsp;&nbsp;0<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushI&nbsp;&nbsp;&nbsp;&nbsp;0<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mmgr-newblock-block(12)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mmgr-newblock-size(16)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Call&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-mem-manager-make-tags(70)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mmgr-newblock-block(12)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mmgr-alloc-current-block(322)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Exchange&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;StoreI&nbsp;&nbsp;&nbsp;<br />
+-mmgr-alloc-return-userblock:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mmgr-alloc-current-block(322)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushI&nbsp;&nbsp;&nbsp;&nbsp;9<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Add&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mmgr-alloc-return(314)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Return&nbsp;&nbsp;&nbsp;<br />
+</div>
+</td>
+<td style='vertical-align:text-top;'><div style = 'border:thin black solid;width:200px;padding:10px;margin:10px;'>
+-mem-manager-allocate,$mmgr-alloc-return:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataZ&nbsp;&nbsp;&nbsp;&nbsp;4<br />
+$mmgr-alloc-size:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataZ&nbsp;&nbsp;&nbsp;&nbsp;4<br />
+$mmgr-alloc-current-block:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataZ&nbsp;&nbsp;&nbsp;&nbsp;4<br />
+$mmgr-alloc-remainder-block:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataZ&nbsp;&nbsp;&nbsp;&nbsp;4<br />
+$mmgr-alloc-remainder-size:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataZ&nbsp;&nbsp;&nbsp;&nbsp;4<br />
+</div>
+</td>
+</tr>
+<tr>
+<td style='vertical-align:text-top;'><div style = 'border:thin black solid;width:200px;padding:10px;margin:10px;'>
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mmgr-dealloc-return(334)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Exchange&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;StoreI&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushI&nbsp;&nbsp;&nbsp;&nbsp;9<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Subtract&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mmgr-dealloc-block(338)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Exchange&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;StoreI&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mmgr-dealloc-block(338)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$heap-first-free(8)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushI&nbsp;&nbsp;&nbsp;&nbsp;0<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Add&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Exchange&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;StoreI&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushI&nbsp;&nbsp;&nbsp;&nbsp;0<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mmgr-dealloc-block(338)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushI&nbsp;&nbsp;&nbsp;&nbsp;0<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Add&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Exchange&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;StoreI&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$heap-first-free(8)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mmgr-dealloc-block(338)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Duplicate&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushI&nbsp;&nbsp;&nbsp;&nbsp;4<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Add&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Add&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushI&nbsp;&nbsp;&nbsp;&nbsp;9<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Subtract&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushI&nbsp;&nbsp;&nbsp;&nbsp;0<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Add&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Exchange&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;StoreI&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushI&nbsp;&nbsp;&nbsp;&nbsp;1<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mmgr-dealloc-block(338)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushI&nbsp;&nbsp;&nbsp;&nbsp;8<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Add&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Exchange&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;StoreC&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushI&nbsp;&nbsp;&nbsp;&nbsp;1<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mmgr-dealloc-block(338)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Duplicate&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushI&nbsp;&nbsp;&nbsp;&nbsp;4<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Add&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Add&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushI&nbsp;&nbsp;&nbsp;&nbsp;9<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Subtract&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushI&nbsp;&nbsp;&nbsp;&nbsp;8<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Add&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Exchange&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;StoreC&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mmgr-dealloc-block(338)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$heap-first-free(8)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Exchange&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;StoreI&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mmgr-dealloc-return(334)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Return&nbsp;&nbsp;&nbsp;<br />
+</div>
+</td>
+<td style='vertical-align:text-top;'><div style = 'border:thin black solid;width:200px;padding:10px;margin:10px;'>
+-mem-manager-deallocate,$mmgr-dealloc-return:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataZ&nbsp;&nbsp;&nbsp;&nbsp;4<br />
+$mmgr-dealloc-block:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataZ&nbsp;&nbsp;&nbsp;&nbsp;4<br />
+</div>
+</td>
+</tr>
+<tr>
+<td style='vertical-align:text-top;'><div style = 'border:thin black solid;width:200px;padding:10px;margin:10px;'>
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mmgr-remove-return(342)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Exchange&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;StoreI&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mmgr-remove-block(346)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Exchange&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;StoreI&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mmgr-remove-block(346)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushI&nbsp;&nbsp;&nbsp;&nbsp;0<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Add&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mmgr-remove-prev(350)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Exchange&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;StoreI&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mmgr-remove-block(346)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Duplicate&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushI&nbsp;&nbsp;&nbsp;&nbsp;4<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Add&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Add&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushI&nbsp;&nbsp;&nbsp;&nbsp;9<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Subtract&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushI&nbsp;&nbsp;&nbsp;&nbsp;0<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Add&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mmgr-remove-next(354)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Exchange&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;StoreI&nbsp;&nbsp;&nbsp;<br />
+-mmgr-remove-process-prev:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mmgr-remove-prev(350)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;JumpFalse&nbsp;-mmgr-remove-no-prev(405)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mmgr-remove-next(354)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mmgr-remove-prev(350)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Duplicate&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushI&nbsp;&nbsp;&nbsp;&nbsp;4<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Add&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Add&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushI&nbsp;&nbsp;&nbsp;&nbsp;9<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Subtract&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushI&nbsp;&nbsp;&nbsp;&nbsp;0<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Add&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Exchange&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;StoreI&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Jump&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-mmgr-remove-process-next(410)<br />
+-mmgr-remove-no-prev:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mmgr-remove-next(354)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$heap-first-free(8)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Exchange&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;StoreI&nbsp;&nbsp;&nbsp;<br />
+-mmgr-remove-process-next:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mmgr-remove-next(354)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;JumpFalse&nbsp;-mmgr-remove-done(421)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mmgr-remove-prev(350)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mmgr-remove-next(354)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushI&nbsp;&nbsp;&nbsp;&nbsp;0<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Add&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Exchange&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;StoreI&nbsp;&nbsp;&nbsp;<br />
+-mmgr-remove-done:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mmgr-remove-return(342)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Return&nbsp;&nbsp;&nbsp;<br />
+</div>
+</td>
+<td style='vertical-align:text-top;'><div style = 'border:thin black solid;width:200px;padding:10px;margin:10px;'>
+-mem-manager-remove-block,$mmgr-remove-return:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataZ&nbsp;&nbsp;&nbsp;&nbsp;4<br />
+$mmgr-remove-block:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataZ&nbsp;&nbsp;&nbsp;&nbsp;4<br />
+$mmgr-remove-prev:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataZ&nbsp;&nbsp;&nbsp;&nbsp;4<br />
+$mmgr-remove-next:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataZ&nbsp;&nbsp;&nbsp;&nbsp;4<br />
+</div>
+</td>
+</tr>
+<tr>
+<td style='vertical-align:text-top;'><div style = 'border:thin black solid;width:200px;padding:10px;margin:10px;'>
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-string-return(358)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Exchange&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;StoreI&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Exchange&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Duplicate&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushI&nbsp;&nbsp;&nbsp;&nbsp;6<br />
+&nbsp;&nbsp;&nbsp;&nbsp;StoreI&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Duplicate&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushI&nbsp;&nbsp;&nbsp;&nbsp;4<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Add&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushI&nbsp;&nbsp;&nbsp;&nbsp;9<br />
+&nbsp;&nbsp;&nbsp;&nbsp;StoreI&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushI&nbsp;&nbsp;&nbsp;&nbsp;8<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Add&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Exchange&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;StoreI&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-string-return(358)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Return&nbsp;&nbsp;&nbsp;<br />
+</div>
+</td>
+<td style='vertical-align:text-top;'><div style = 'border:thin black solid;width:200px;padding:10px;margin:10px;'>
+-mem-store-string-header,$mem-string-return:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataZ&nbsp;&nbsp;&nbsp;&nbsp;4<br />
+</div>
+</td>
+</tr>
+<tr>
+<td style='vertical-align:text-top;'><div style = 'border:thin black solid;width:200px;padding:10px;margin:10px;'>
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-return(362)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Exchange&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;StoreI&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-store-array-status-header(370)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Exchange&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;StoreI&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-store-array-length-header(374)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Exchange&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;StoreI&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-store-array-size-header(378)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Exchange&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;StoreI&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-store-array-block-header(366)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Exchange&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;StoreI&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-store-array-block-header(366)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushI&nbsp;&nbsp;&nbsp;&nbsp;7<br />
+&nbsp;&nbsp;&nbsp;&nbsp;StoreI&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-store-array-block-header(366)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushI&nbsp;&nbsp;&nbsp;&nbsp;4<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Add&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-store-array-status-header(370)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;StoreI&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-store-array-block-header(366)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushI&nbsp;&nbsp;&nbsp;&nbsp;8<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Add&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-store-array-size-header(378)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;StoreI&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-store-array-block-header(366)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushI&nbsp;&nbsp;&nbsp;&nbsp;12<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Add&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-store-array-length-header(374)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;StoreI&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-store-array-block-header(366)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-store-array-length-header(374)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-return(362)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Return&nbsp;&nbsp;&nbsp;<br />
+</div>
+</td>
+<td style='vertical-align:text-top;'><div style = 'border:thin black solid;width:200px;padding:10px;margin:10px;'>
+-mem-store-array-header,$mem-array-return:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataZ&nbsp;&nbsp;&nbsp;&nbsp;4<br />
+$mem-store-array-block-header:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataZ&nbsp;&nbsp;&nbsp;&nbsp;4<br />
+$mem-store-array-status-header:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataZ&nbsp;&nbsp;&nbsp;&nbsp;4<br />
+$mem-store-array-length-header:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataZ&nbsp;&nbsp;&nbsp;&nbsp;4<br />
+$mem-store-array-size-header:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataZ&nbsp;&nbsp;&nbsp;&nbsp;4<br />
+</div>
+</td>
+</tr>
+<tr>
+<td style='vertical-align:text-top;'><div style = 'border:thin black solid;width:200px;padding:10px;margin:10px;'>
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-store-array-one-byte-return(382)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Exchange&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;StoreI&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-store-array-flag(394)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Exchange&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;StoreI&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-store-array-length(386)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Exchange&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;StoreI&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-store-array-block(390)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Exchange&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;StoreI&nbsp;&nbsp;&nbsp;<br />
+$mem-store-array-loop-one:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-store-array-length(386)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;JumpFalse&nbsp;$mem-store-array-loop-end-one(528)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-store-array-length(386)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushI&nbsp;&nbsp;&nbsp;&nbsp;1<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Subtract&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-store-array-length(386)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Exchange&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;StoreI&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-store-array-length(386)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-store-array-block(390)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushI&nbsp;&nbsp;&nbsp;&nbsp;16<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Add&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Add&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-store-array-flag(394)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;JumpFalse&nbsp;-mem-store-array-empty-one(525)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Exchange&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;StoreC&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Jump&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$mem-store-array-loop-one(502)<br />
+-mem-store-array-empty-one:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushI&nbsp;&nbsp;&nbsp;&nbsp;0<br />
+&nbsp;&nbsp;&nbsp;&nbsp;StoreC&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Jump&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$mem-store-array-loop-one(502)<br />
+$mem-store-array-loop-end-one:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-store-array-block(390)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-store-array-one-byte-return(382)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Return&nbsp;&nbsp;&nbsp;<br />
+</div>
+</td>
+<td style='vertical-align:text-top;'><div style = 'border:thin black solid;width:200px;padding:10px;margin:10px;'>
+-mem-store-array-one-byte,$mem-store-array-one-byte-return:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataZ&nbsp;&nbsp;&nbsp;&nbsp;4<br />
+$mem-store-array-length:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataZ&nbsp;&nbsp;&nbsp;&nbsp;4<br />
+$mem-store-array-block:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataZ&nbsp;&nbsp;&nbsp;&nbsp;4<br />
+$mem-store-array-flag:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataZ&nbsp;&nbsp;&nbsp;&nbsp;4<br />
+</div>
+</td>
+</tr>
+<tr>
+<td style='vertical-align:text-top;'><div style = 'border:thin black solid;width:200px;padding:10px;margin:10px;'>
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-store-array-four-byte-return(398)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Exchange&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;StoreI&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-store-array-flag(394)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Exchange&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;StoreI&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-store-array-length(386)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Exchange&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;StoreI&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-store-array-block(390)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Exchange&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;StoreI&nbsp;&nbsp;&nbsp;<br />
+$mem-store-array-loop-four:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-store-array-length(386)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;JumpFalse&nbsp;$mem-store-array-loop-end-four(573)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-store-array-length(386)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushI&nbsp;&nbsp;&nbsp;&nbsp;1<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Subtract&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-store-array-length(386)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Exchange&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;StoreI&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-store-array-length(386)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushI&nbsp;&nbsp;&nbsp;&nbsp;4<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Multiply&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-store-array-block(390)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushI&nbsp;&nbsp;&nbsp;&nbsp;16<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Add&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Add&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-store-array-flag(394)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;JumpFalse&nbsp;-mem-store-array-empty-four(570)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Exchange&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;StoreI&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Jump&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$mem-store-array-loop-four(545)<br />
+-mem-store-array-empty-four:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushI&nbsp;&nbsp;&nbsp;&nbsp;0<br />
+&nbsp;&nbsp;&nbsp;&nbsp;StoreI&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Jump&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$mem-store-array-loop-four(545)<br />
+$mem-store-array-loop-end-four:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-store-array-block(390)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-store-array-four-byte-return(398)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Return&nbsp;&nbsp;&nbsp;<br />
+</div>
+</td>
+<td style='vertical-align:text-top;'><div style = 'border:thin black solid;width:200px;padding:10px;margin:10px;'>
+-mem-store-array-four-byte,$mem-store-array-four-byte-return:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataZ&nbsp;&nbsp;&nbsp;&nbsp;4<br />
+</div>
+</td>
+</tr>
+<tr>
+<td style='vertical-align:text-top;'><div style = 'border:thin black solid;width:200px;padding:10px;margin:10px;'>
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-store-array-eight-byte-return(402)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Exchange&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;StoreI&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-store-array-flag(394)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Exchange&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;StoreI&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-store-array-length(386)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Exchange&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;StoreI&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-store-array-block(390)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Exchange&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;StoreI&nbsp;&nbsp;&nbsp;<br />
+$mem-store-array-loop-eight:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-store-array-length(386)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;JumpFalse&nbsp;$mem-store-array-loop-end-eight(618)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-store-array-length(386)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushI&nbsp;&nbsp;&nbsp;&nbsp;1<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Subtract&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-store-array-length(386)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Exchange&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;StoreI&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-store-array-length(386)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushI&nbsp;&nbsp;&nbsp;&nbsp;8<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Multiply&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-store-array-block(390)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushI&nbsp;&nbsp;&nbsp;&nbsp;16<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Add&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Add&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-store-array-flag(394)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;JumpFalse&nbsp;-mem-store-array-empty-eight(615)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Exchange&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;StoreF&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Jump&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$mem-store-array-loop-eight(590)<br />
+-mem-store-array-empty-eight:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushF&nbsp;&nbsp;&nbsp;&nbsp;0.0<br />
+&nbsp;&nbsp;&nbsp;&nbsp;StoreF&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Jump&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$mem-store-array-loop-eight(590)<br />
+$mem-store-array-loop-end-eight:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-store-array-block(390)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-store-array-eight-byte-return(402)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Return&nbsp;&nbsp;&nbsp;<br />
+</div>
+</td>
+<td style='vertical-align:text-top;'><div style = 'border:thin black solid;width:200px;padding:10px;margin:10px;'>
+-mem-store-array-eight-byte,$mem-store-array-eight-byte-return:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataZ&nbsp;&nbsp;&nbsp;&nbsp;4<br />
+</div>
+</td>
+</tr>
+<tr>
+<td style='vertical-align:text-top;'><div style = 'border:thin black solid;width:200px;padding:10px;margin:10px;'>
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-release-return-address(406)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Exchange&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;StoreI&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-release-array-address(410)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Exchange&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;StoreI&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-release-array-address(410)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Call&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-mem-arrya-record-valid(1965)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-release-array-address(410)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushI&nbsp;&nbsp;&nbsp;&nbsp;4<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Add&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushI&nbsp;&nbsp;&nbsp;&nbsp;4<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Add&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-release-array-address(410)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushI&nbsp;&nbsp;&nbsp;&nbsp;4<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Add&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Exchange&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;StoreI&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-release-array-address(410)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-release-array-address(410)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushI&nbsp;&nbsp;&nbsp;&nbsp;4<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Add&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushI&nbsp;&nbsp;&nbsp;&nbsp;4<br />
+&nbsp;&nbsp;&nbsp;&nbsp;And&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;JumpFalse&nbsp;$mem-array-release-not-ref(707)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-release-array-address(410)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushI&nbsp;&nbsp;&nbsp;&nbsp;12<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Add&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-release-array-length(414)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Exchange&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;StoreI&nbsp;&nbsp;&nbsp;<br />
+$mem-array-release-loop:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-release-array-length(414)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;JumpFalse&nbsp;$mem-array-release-end(710)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-release-array-length(414)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushI&nbsp;&nbsp;&nbsp;&nbsp;1<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Subtract&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-release-array-length(414)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Exchange&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;StoreI&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-release-array-length(414)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-release-array-address(410)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushI&nbsp;&nbsp;&nbsp;&nbsp;8<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Add&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Multiply&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushI&nbsp;&nbsp;&nbsp;&nbsp;16<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-release-array-address(410)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Add&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Add&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-release-return-address(406)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Exchange&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-release-array-address(410)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Exchange&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-release-array-length(414)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Exchange&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Call&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-mem-array-release(623)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-release-array-length(414)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Exchange&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;StoreI&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-release-array-address(410)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Exchange&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;StoreI&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-release-return-address(406)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Exchange&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;StoreI&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Jump&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-release-loop(663)<br />
+$mem-array-release-not-ref:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-release-array-address(410)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Call&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-mem-manager-deallocate(290)<br />
+$mem-array-release-end:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-release-return-address(406)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Return&nbsp;&nbsp;&nbsp;<br />
+</div>
+</td>
+<td style='vertical-align:text-top;'><div style = 'border:thin black solid;width:200px;padding:10px;margin:10px;'>
+-mem-array-release,$mem-array-release-return-address:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataZ&nbsp;&nbsp;&nbsp;&nbsp;4<br />
+$mem-array-release-array-address:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataZ&nbsp;&nbsp;&nbsp;&nbsp;4<br />
+$mem-array-release-array-length:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataZ&nbsp;&nbsp;&nbsp;&nbsp;4<br />
+</div>
+</td>
+</tr>
+<tr>
+<td style='vertical-align:text-top;'><div style = 'border:thin black solid;width:200px;padding:10px;margin:10px;'>
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-clone-return-address(418)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Exchange&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;StoreI&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-clone-array-address(422)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Exchange&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;StoreI&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-clone-array-address(422)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushI&nbsp;&nbsp;&nbsp;&nbsp;12<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Add&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-clone-array-address(422)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushI&nbsp;&nbsp;&nbsp;&nbsp;8<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Add&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Multiply&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushI&nbsp;&nbsp;&nbsp;&nbsp;16<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Add&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-clone-record-size(430)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Exchange&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;StoreI&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-clone-record-size(430)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Call&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-mem-manager-allocate(153)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-clone-result-address(426)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Exchange&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;StoreI&nbsp;&nbsp;&nbsp;<br />
+$mem-array-clone-loop:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-clone-record-size(430)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;JumpFalse&nbsp;$mem-array-clone-end(765)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-clone-record-size(430)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushI&nbsp;&nbsp;&nbsp;&nbsp;1<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Subtract&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-clone-record-size(430)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Exchange&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;StoreI&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-clone-record-size(430)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-clone-array-address(422)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Add&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadC&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-clone-record-size(430)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-clone-result-address(426)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Add&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Exchange&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;StoreC&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Jump&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-clone-loop(741)<br />
+$mem-array-clone-end:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-clone-result-address(426)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-clone-return-address(418)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Return&nbsp;&nbsp;&nbsp;<br />
+</div>
+</td>
+<td style='vertical-align:text-top;'><div style = 'border:thin black solid;width:200px;padding:10px;margin:10px;'>
+-mem-array-clone,$mem-array-clone-return-address:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataZ&nbsp;&nbsp;&nbsp;&nbsp;4<br />
+$mem-array-clone-array-address:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataZ&nbsp;&nbsp;&nbsp;&nbsp;4<br />
+$mem-array-clone-result-address:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataZ&nbsp;&nbsp;&nbsp;&nbsp;4<br />
+$mem-array-clone-record-size:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataZ&nbsp;&nbsp;&nbsp;&nbsp;4<br />
+</div>
+</td>
+</tr>
+<tr>
+<td style='vertical-align:text-top;'><div style = 'border:thin black solid;width:200px;padding:10px;margin:10px;'>
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-index-return-address(434)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Exchange&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;StoreI&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-index-flag(450)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Exchange&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;StoreI&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-index-num(442)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Exchange&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;StoreI&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-index-array-address(438)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Exchange&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;StoreI&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-index-num(442)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;JumpNeg&nbsp;&nbsp;$$a-index-negative(24)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-index-array-address(438)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushI&nbsp;&nbsp;&nbsp;&nbsp;12<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Add&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushI&nbsp;&nbsp;&nbsp;&nbsp;1<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Subtract&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-index-num(442)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Subtract&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;JumpNeg&nbsp;&nbsp;$$a-index-exceed(26)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-index-array-address(438)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushI&nbsp;&nbsp;&nbsp;&nbsp;8<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Add&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-index-size(446)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Exchange&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;StoreI&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-index-size(446)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-index-num(442)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Multiply&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushI&nbsp;&nbsp;&nbsp;&nbsp;16<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-index-array-address(438)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Add&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Add&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-index-return-address(434)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Return&nbsp;&nbsp;&nbsp;<br />
+</div>
+</td>
+<td style='vertical-align:text-top;'><div style = 'border:thin black solid;width:200px;padding:10px;margin:10px;'>
+-mem-array-index,$mem-array-index-return-address:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataZ&nbsp;&nbsp;&nbsp;&nbsp;4<br />
+$mem-array-index-array-address:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataZ&nbsp;&nbsp;&nbsp;&nbsp;4<br />
+$mem-array-index-num:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataZ&nbsp;&nbsp;&nbsp;&nbsp;4<br />
+$mem-array-index-size:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataZ&nbsp;&nbsp;&nbsp;&nbsp;4<br />
+$mem-array-index-flag:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataZ&nbsp;&nbsp;&nbsp;&nbsp;4<br />
+</div>
+</td>
+</tr>
+<tr>
+<td style='vertical-align:text-top;'><div style = 'border:thin black solid;width:200px;padding:10px;margin:10px;'>
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-rat-gcd-return-address(454)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Exchange&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;StoreI&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-rat-gcd-denominator(462)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Exchange&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;StoreI&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-rat-gcd-numerator(458)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Exchange&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;StoreI&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-rat-gcd-numerator(458)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-rat-gcd-a(466)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Exchange&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;StoreI&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-rat-gcd-denominator(462)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-rat-gcd-b(470)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Exchange&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;StoreI&nbsp;&nbsp;&nbsp;<br />
+$mem-rat-gcd-loop:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-rat-gcd-b(470)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;JumpFalse&nbsp;$mem-rat-gcd-end(853)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-rat-gcd-b(470)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-rat-gcd-a(466)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-rat-gcd-b(470)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Remainder&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-rat-gcd-b(470)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Exchange&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;StoreI&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-rat-gcd-a(466)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Exchange&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;StoreI&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Jump&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$mem-rat-gcd-loop(836)<br />
+$mem-rat-gcd-end:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-rat-gcd-numerator(458)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-rat-gcd-a(466)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Divide&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;JumpNeg&nbsp;&nbsp;$mem-rat-gcd-neg(872)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-rat-gcd-numerator(458)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-rat-gcd-a(466)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Divide&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-rat-gcd-denominator(462)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-rat-gcd-a(466)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Divide&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-rat-gcd-return-address(454)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Return&nbsp;&nbsp;&nbsp;<br />
+$mem-rat-gcd-neg:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-rat-gcd-numerator(458)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-rat-gcd-a(466)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Divide&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Negate&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-rat-gcd-denominator(462)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-rat-gcd-a(466)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Divide&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Negate&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-rat-gcd-return-address(454)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Return&nbsp;&nbsp;&nbsp;<br />
+</div>
+</td>
+<td style='vertical-align:text-top;'><div style = 'border:thin black solid;width:200px;padding:10px;margin:10px;'>
+-mem-rat-GCD,$mem-rat-gcd-return-address:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataZ&nbsp;&nbsp;&nbsp;&nbsp;4<br />
+$mem-rat-gcd-numerator:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataZ&nbsp;&nbsp;&nbsp;&nbsp;4<br />
+$mem-rat-gcd-denominator:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataZ&nbsp;&nbsp;&nbsp;&nbsp;4<br />
+$mem-rat-gcd-a:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataZ&nbsp;&nbsp;&nbsp;&nbsp;4<br />
+$mem-rat-gcd-b:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataZ&nbsp;&nbsp;&nbsp;&nbsp;4<br />
+</div>
+</td>
+</tr>
+<tr>
+<td style='vertical-align:text-top;'><div style = 'border:thin black solid;width:200px;padding:10px;margin:10px;'>
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-rat-store-return-address(474)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Exchange&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;StoreI&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-rat-store-denominator(482)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Exchange&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;StoreI&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-rat-store-numerator(478)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Exchange&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;StoreI&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-rat-store-target-address(486)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Exchange&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;StoreI&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-rat-store-target-address(486)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-rat-store-numerator(478)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;StoreI&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-rat-store-target-address(486)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushI&nbsp;&nbsp;&nbsp;&nbsp;4<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Add&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-rat-store-denominator(482)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;StoreI&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-rat-store-return-address(474)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Return&nbsp;&nbsp;&nbsp;<br />
+</div>
+</td>
+<td style='vertical-align:text-top;'><div style = 'border:thin black solid;width:200px;padding:10px;margin:10px;'>
+-mem-rat-store,$mem-rat-store-return-address:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataZ&nbsp;&nbsp;&nbsp;&nbsp;4<br />
+$mem-rat-store-numerator:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataZ&nbsp;&nbsp;&nbsp;&nbsp;4<br />
+$mem-rat-store-denominator:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataZ&nbsp;&nbsp;&nbsp;&nbsp;4<br />
+$mem-rat-store-target-address:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataZ&nbsp;&nbsp;&nbsp;&nbsp;4<br />
+</div>
+</td>
+</tr>
+<tr>
+<td style='vertical-align:text-top;'><div style = 'border:thin black solid;width:200px;padding:10px;margin:10px;'>
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-rat-aid-return-address(490)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Exchange&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;StoreI&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-rat-aid-b(498)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Exchange&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;StoreI&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-rat-aid-a(494)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Exchange&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;StoreI&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-rat-aid-a(494)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-rat-aid-b(498)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Divide&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-rat-aid-b(498)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-rat-aid-return-address(490)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Return&nbsp;&nbsp;&nbsp;<br />
+</div>
+</td>
+<td style='vertical-align:text-top;'><div style = 'border:thin black solid;width:200px;padding:10px;margin:10px;'>
+-mem-rat-aid,$mem-rat-aid-return-address:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataZ&nbsp;&nbsp;&nbsp;&nbsp;4<br />
+$mem-rat-aid-a:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataZ&nbsp;&nbsp;&nbsp;&nbsp;4<br />
+$mem-rat-aid-b:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataZ&nbsp;&nbsp;&nbsp;&nbsp;4<br />
+</div>
+</td>
+</tr>
+<tr>
+<td style='vertical-align:text-top;'><div style = 'border:thin black solid;width:200px;padding:10px;margin:10px;'>
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-rat-print-return-address(502)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Exchange&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;StoreI&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-rat-print-b(510)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Exchange&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;StoreI&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-rat-print-a(506)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Exchange&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;StoreI&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-rat-print-a(506)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-rat-print-b(510)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Divide&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;JumpFalse&nbsp;$mem-rat-print-neg(986)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-rat-print-a(506)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-rat-print-b(510)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Divide&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$print-format-integer(28)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Printf&nbsp;&nbsp;&nbsp;<br />
+$mem-rat-print-rat:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-rat-print-a(506)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-rat-print-b(510)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Remainder&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;JumpFalse&nbsp;$mem-rat-print-end(983)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushI&nbsp;&nbsp;&nbsp;&nbsp;95<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$print-format-char(40)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Printf&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-rat-print-a(506)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-rat-print-b(510)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Remainder&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$print-format-integer(28)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Printf&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushI&nbsp;&nbsp;&nbsp;&nbsp;47<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$print-format-char(40)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Printf&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-rat-print-b(510)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-rat-print-b(510)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;JumpPos&nbsp;&nbsp;$mem-rat-print-con(980)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Negate&nbsp;&nbsp;&nbsp;<br />
+$mem-rat-print-con:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$print-format-integer(28)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Printf&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Jump&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$mem-rat-print-end(983)<br />
+$mem-rat-print-end:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-rat-print-return-address(502)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Return&nbsp;&nbsp;&nbsp;<br />
+$mem-rat-print-neg:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-rat-print-b(510)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;JumpPos&nbsp;&nbsp;$mem-rat-print-rat(955)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushI&nbsp;&nbsp;&nbsp;&nbsp;45<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$print-format-char(40)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Printf&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Jump&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$mem-rat-print-rat(955)<br />
+</div>
+</td>
+<td style='vertical-align:text-top;'><div style = 'border:thin black solid;width:200px;padding:10px;margin:10px;'>
+-mem-rat-print,$mem-rat-print-return-address:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataZ&nbsp;&nbsp;&nbsp;&nbsp;4<br />
+$mem-rat-print-a:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataZ&nbsp;&nbsp;&nbsp;&nbsp;4<br />
+$mem-rat-print-b:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataZ&nbsp;&nbsp;&nbsp;&nbsp;4<br />
+</div>
+</td>
+</tr>
+<tr>
+<td style='vertical-align:text-top;'><div style = 'border:thin black solid;width:200px;padding:10px;margin:10px;'>
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-rat-add-return-address(514)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Exchange&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;StoreI&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-rat-add-b-den(530)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Exchange&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;StoreI&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-rat-add-b-num(526)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Exchange&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;StoreI&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-rat-add-a-den(522)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Exchange&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;StoreI&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-rat-add-a-num(518)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Exchange&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;StoreI&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-rat-add-a-num(518)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-rat-add-b-den(530)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Multiply&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-rat-add-b-num(526)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-rat-add-a-den(522)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Multiply&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Add&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-rat-add-a-den(522)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-rat-add-b-den(530)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Multiply&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Call&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-mem-rat-GCD(817)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-rat-add-return-address(514)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Return&nbsp;&nbsp;&nbsp;<br />
+</div>
+</td>
+<td style='vertical-align:text-top;'><div style = 'border:thin black solid;width:200px;padding:10px;margin:10px;'>
+-mem-rat-add,$mem-rat-add-return-address:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataZ&nbsp;&nbsp;&nbsp;&nbsp;4<br />
+$mem-rat-add-a-num:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataZ&nbsp;&nbsp;&nbsp;&nbsp;4<br />
+$mem-rat-add-a-den:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataZ&nbsp;&nbsp;&nbsp;&nbsp;4<br />
+$mem-rat-add-b-num:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataZ&nbsp;&nbsp;&nbsp;&nbsp;4<br />
+$mem-rat-add-b-den:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataZ&nbsp;&nbsp;&nbsp;&nbsp;4<br />
+</div>
+</td>
+</tr>
+<tr>
+<td style='vertical-align:text-top;'><div style = 'border:thin black solid;width:200px;padding:10px;margin:10px;'>
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-rat-subtract-return-address(534)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Exchange&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;StoreI&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-rat-subtract-b-den(550)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Exchange&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;StoreI&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-rat-subtract-b-num(546)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Exchange&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;StoreI&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-rat-subtract-a-den(542)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Exchange&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;StoreI&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-rat-subtract-a-num(538)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Exchange&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;StoreI&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-rat-subtract-a-num(538)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-rat-subtract-b-den(550)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Multiply&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-rat-subtract-b-num(546)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-rat-subtract-a-den(542)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Multiply&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Subtract&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-rat-subtract-a-den(542)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-rat-subtract-b-den(550)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Multiply&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Call&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-mem-rat-GCD(817)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-rat-subtract-return-address(534)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Return&nbsp;&nbsp;&nbsp;<br />
+</div>
+</td>
+<td style='vertical-align:text-top;'><div style = 'border:thin black solid;width:200px;padding:10px;margin:10px;'>
+-mem-rat-subtract,$mem-rat-subtract-return-address:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataZ&nbsp;&nbsp;&nbsp;&nbsp;4<br />
+$mem-rat-subtract-a-num:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataZ&nbsp;&nbsp;&nbsp;&nbsp;4<br />
+$mem-rat-subtract-a-den:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataZ&nbsp;&nbsp;&nbsp;&nbsp;4<br />
+$mem-rat-subtract-b-num:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataZ&nbsp;&nbsp;&nbsp;&nbsp;4<br />
+$mem-rat-subtract-b-den:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataZ&nbsp;&nbsp;&nbsp;&nbsp;4<br />
+</div>
+</td>
+</tr>
+<tr>
+<td style='vertical-align:text-top;'><div style = 'border:thin black solid;width:200px;padding:10px;margin:10px;'>
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-rat-multiply-return-address(554)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Exchange&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;StoreI&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-rat-multiply-b-den(570)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Exchange&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;StoreI&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-rat-multiply-b-num(566)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Exchange&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;StoreI&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-rat-multiply-a-den(562)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Exchange&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;StoreI&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-rat-multiply-a-num(558)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Exchange&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;StoreI&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-rat-multiply-a-num(558)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-rat-multiply-b-num(566)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Multiply&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-rat-multiply-a-den(562)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-rat-multiply-b-den(570)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Multiply&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Call&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-mem-rat-GCD(817)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-rat-multiply-return-address(554)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Return&nbsp;&nbsp;&nbsp;<br />
+</div>
+</td>
+<td style='vertical-align:text-top;'><div style = 'border:thin black solid;width:200px;padding:10px;margin:10px;'>
+-mem-rat-multiply,$mem-rat-multiply-return-address:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataZ&nbsp;&nbsp;&nbsp;&nbsp;4<br />
+$mem-rat-multiply-a-num:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataZ&nbsp;&nbsp;&nbsp;&nbsp;4<br />
+$mem-rat-multiply-a-den:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataZ&nbsp;&nbsp;&nbsp;&nbsp;4<br />
+$mem-rat-multiply-b-num:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataZ&nbsp;&nbsp;&nbsp;&nbsp;4<br />
+$mem-rat-multiply-b-den:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataZ&nbsp;&nbsp;&nbsp;&nbsp;4<br />
+</div>
+</td>
+</tr>
+<tr>
+<td style='vertical-align:text-top;'><div style = 'border:thin black solid;width:200px;padding:10px;margin:10px;'>
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-rat-divide-return-address(574)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Exchange&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;StoreI&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-rat-divide-b-den(590)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Exchange&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;StoreI&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-rat-divide-b-num(586)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Exchange&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;StoreI&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-rat-divide-a-den(582)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Exchange&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;StoreI&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-rat-divide-a-num(578)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Exchange&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;StoreI&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-rat-divide-a-num(578)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-rat-divide-b-den(590)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Multiply&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-rat-divide-a-den(582)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-rat-divide-b-num(586)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Multiply&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Call&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-mem-rat-GCD(817)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-rat-divide-return-address(574)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Return&nbsp;&nbsp;&nbsp;<br />
+</div>
+</td>
+<td style='vertical-align:text-top;'><div style = 'border:thin black solid;width:200px;padding:10px;margin:10px;'>
+-mem-rat-divide,$mem-rat-divide-return-address:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataZ&nbsp;&nbsp;&nbsp;&nbsp;4<br />
+$mem-rat-divide-a-num:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataZ&nbsp;&nbsp;&nbsp;&nbsp;4<br />
+$mem-rat-divide-a-den:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataZ&nbsp;&nbsp;&nbsp;&nbsp;4<br />
+$mem-rat-divide-b-num:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataZ&nbsp;&nbsp;&nbsp;&nbsp;4<br />
+$mem-rat-divide-b-den:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataZ&nbsp;&nbsp;&nbsp;&nbsp;4<br />
+</div>
+</td>
+</tr>
+<tr>
+<td style='vertical-align:text-top;'><div style = 'border:thin black solid;width:200px;padding:10px;margin:10px;'>
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-int-return-address(594)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Exchange&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;StoreI&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-int-array-address(598)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Exchange&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;StoreI&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-int-array-address(598)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Call&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-mem-arrya-record-valid(1965)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-int-array-address(598)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushI&nbsp;&nbsp;&nbsp;&nbsp;4<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Add&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushI&nbsp;&nbsp;&nbsp;&nbsp;91<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$print-format-char(40)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Printf&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-int-array-address(598)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushI&nbsp;&nbsp;&nbsp;&nbsp;12<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Add&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-int-length(606)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Exchange&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;StoreI&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-int-array-address(598)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushI&nbsp;&nbsp;&nbsp;&nbsp;8<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Add&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-int-size(610)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Exchange&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;StoreI&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-int-array-address(598)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushI&nbsp;&nbsp;&nbsp;&nbsp;16<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-int-length(606)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-int-size(610)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Multiply&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Add&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Add&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-int-end-array-address(602)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Exchange&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;StoreI&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;JumpPos&nbsp;&nbsp;$mem-array-int-array(1199)<br />
+$mem-array-int-loop:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-int-length(606)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;JumpFalse&nbsp;$mem-array-int-print-end(1254)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-int-end-array-address(602)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-int-length(606)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-int-size(610)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Multiply&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Subtract&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$print-format-integer(28)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Printf&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-int-length(606)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushI&nbsp;&nbsp;&nbsp;&nbsp;1<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Subtract&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-int-length(606)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Exchange&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;StoreI&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-int-length(606)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;JumpFalse&nbsp;$mem-array-int-loop(1168)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushI&nbsp;&nbsp;&nbsp;&nbsp;44<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$print-format-char(40)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Printf&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushI&nbsp;&nbsp;&nbsp;&nbsp;32<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$print-format-char(40)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Printf&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Jump&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-int-loop(1168)<br />
+$mem-array-int-array:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-int-length(606)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;JumpFalse&nbsp;$mem-array-int-print-end(1254)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-int-return-address(594)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-int-array-address(598)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-int-end-array-address(602)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-int-length(606)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-int-size(610)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-int-end-array-address(602)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-int-length(606)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-int-size(610)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Multiply&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Subtract&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Call&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-mem-array-int-print(1121)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-int-size(610)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Exchange&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;StoreI&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-int-length(606)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Exchange&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;StoreI&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-int-end-array-address(602)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Exchange&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;StoreI&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-int-array-address(598)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Exchange&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;StoreI&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-int-return-address(594)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Exchange&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;StoreI&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-int-length(606)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushI&nbsp;&nbsp;&nbsp;&nbsp;1<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Subtract&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-int-length(606)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Exchange&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;StoreI&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-int-length(606)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;JumpFalse&nbsp;$mem-array-int-array(1199)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushI&nbsp;&nbsp;&nbsp;&nbsp;44<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$print-format-char(40)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Printf&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushI&nbsp;&nbsp;&nbsp;&nbsp;32<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$print-format-char(40)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Printf&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Jump&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-int-array(1199)<br />
+$mem-array-int-print-end:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushI&nbsp;&nbsp;&nbsp;&nbsp;93<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$print-format-char(40)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Printf&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-int-return-address(594)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Return&nbsp;&nbsp;&nbsp;<br />
+</div>
+</td>
+<td style='vertical-align:text-top;'><div style = 'border:thin black solid;width:200px;padding:10px;margin:10px;'>
+-mem-array-int-print,$mem-array-int-return-address:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataZ&nbsp;&nbsp;&nbsp;&nbsp;4<br />
+$mem-array-int-array-address:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataZ&nbsp;&nbsp;&nbsp;&nbsp;4<br />
+$mem-array-int-end-array-address:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataZ&nbsp;&nbsp;&nbsp;&nbsp;4<br />
+$mem-array-int-length:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataZ&nbsp;&nbsp;&nbsp;&nbsp;4<br />
+$mem-array-int-size:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataZ&nbsp;&nbsp;&nbsp;&nbsp;4<br />
+</div>
+</td>
+</tr>
+<tr>
+<td style='vertical-align:text-top;'><div style = 'border:thin black solid;width:200px;padding:10px;margin:10px;'>
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-float-return-address(614)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Exchange&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;StoreI&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-float-array-address(618)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Exchange&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;StoreI&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-float-array-address(618)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Call&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-mem-arrya-record-valid(1965)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-float-array-address(618)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushI&nbsp;&nbsp;&nbsp;&nbsp;4<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Add&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushI&nbsp;&nbsp;&nbsp;&nbsp;91<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$print-format-char(40)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Printf&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-float-array-address(618)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushI&nbsp;&nbsp;&nbsp;&nbsp;12<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Add&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-float-length(626)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Exchange&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;StoreI&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-float-array-address(618)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushI&nbsp;&nbsp;&nbsp;&nbsp;8<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Add&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-float-size(630)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Exchange&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;StoreI&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-float-array-address(618)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushI&nbsp;&nbsp;&nbsp;&nbsp;16<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-float-length(626)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-float-size(630)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Multiply&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Add&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Add&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-float-end-array-address(622)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Exchange&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;StoreI&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;JumpPos&nbsp;&nbsp;$mem-array-float-array(1338)<br />
+$mem-array-float-loop:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-float-length(626)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;JumpFalse&nbsp;$mem-array-float-print-end(1393)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-float-end-array-address(622)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-float-length(626)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-float-size(630)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Multiply&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Subtract&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadF&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$print-format-float(31)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Printf&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-float-length(626)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushI&nbsp;&nbsp;&nbsp;&nbsp;1<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Subtract&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-float-length(626)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Exchange&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;StoreI&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-float-length(626)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;JumpFalse&nbsp;$mem-array-float-loop(1307)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushI&nbsp;&nbsp;&nbsp;&nbsp;44<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$print-format-char(40)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Printf&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushI&nbsp;&nbsp;&nbsp;&nbsp;32<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$print-format-char(40)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Printf&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Jump&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-float-loop(1307)<br />
+$mem-array-float-array:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-float-length(626)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;JumpFalse&nbsp;$mem-array-float-print-end(1393)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-float-return-address(614)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-float-array-address(618)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-float-end-array-address(622)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-float-length(626)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-float-size(630)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-float-end-array-address(622)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-float-length(626)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-float-size(630)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Multiply&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Subtract&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Call&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-mem-array-float-print(1260)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-float-size(630)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Exchange&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;StoreI&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-float-length(626)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Exchange&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;StoreI&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-float-end-array-address(622)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Exchange&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;StoreI&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-float-array-address(618)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Exchange&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;StoreI&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-float-return-address(614)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Exchange&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;StoreI&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-float-length(626)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushI&nbsp;&nbsp;&nbsp;&nbsp;1<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Subtract&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-float-length(626)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Exchange&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;StoreI&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-float-length(626)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;JumpFalse&nbsp;$mem-array-float-array(1338)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushI&nbsp;&nbsp;&nbsp;&nbsp;44<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$print-format-char(40)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Printf&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushI&nbsp;&nbsp;&nbsp;&nbsp;32<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$print-format-char(40)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Printf&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Jump&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-float-array(1338)<br />
+$mem-array-float-print-end:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushI&nbsp;&nbsp;&nbsp;&nbsp;93<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$print-format-char(40)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Printf&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-float-return-address(614)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Return&nbsp;&nbsp;&nbsp;<br />
+</div>
+</td>
+<td style='vertical-align:text-top;'><div style = 'border:thin black solid;width:200px;padding:10px;margin:10px;'>
+-mem-array-float-print,$mem-array-float-return-address:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataZ&nbsp;&nbsp;&nbsp;&nbsp;4<br />
+$mem-array-float-array-address:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataZ&nbsp;&nbsp;&nbsp;&nbsp;4<br />
+$mem-array-float-end-array-address:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataZ&nbsp;&nbsp;&nbsp;&nbsp;4<br />
+$mem-array-float-length:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataZ&nbsp;&nbsp;&nbsp;&nbsp;4<br />
+$mem-array-float-size:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataZ&nbsp;&nbsp;&nbsp;&nbsp;4<br />
+</div>
+</td>
+</tr>
+<tr>
+<td style='vertical-align:text-top;'><div style = 'border:thin black solid;width:200px;padding:10px;margin:10px;'>
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-char-return-address(634)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Exchange&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;StoreI&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-char-array-address(638)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Exchange&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;StoreI&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-char-array-address(638)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Call&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-mem-arrya-record-valid(1965)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-char-array-address(638)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushI&nbsp;&nbsp;&nbsp;&nbsp;4<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Add&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushI&nbsp;&nbsp;&nbsp;&nbsp;91<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$print-format-char(40)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Printf&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-char-array-address(638)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushI&nbsp;&nbsp;&nbsp;&nbsp;12<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Add&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-char-length(646)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Exchange&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;StoreI&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-char-array-address(638)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushI&nbsp;&nbsp;&nbsp;&nbsp;8<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Add&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-char-size(650)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Exchange&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;StoreI&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-char-array-address(638)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushI&nbsp;&nbsp;&nbsp;&nbsp;16<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-char-length(646)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-char-size(650)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Multiply&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Add&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Add&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-char-end-array-address(642)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Exchange&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;StoreI&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;JumpPos&nbsp;&nbsp;$mem-array-char-array(1477)<br />
+$mem-array-char-loop:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-char-length(646)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;JumpFalse&nbsp;$mem-array-char-print-end(1532)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-char-end-array-address(642)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-char-length(646)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-char-size(650)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Multiply&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Subtract&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadC&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$print-format-char(40)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Printf&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-char-length(646)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushI&nbsp;&nbsp;&nbsp;&nbsp;1<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Subtract&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-char-length(646)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Exchange&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;StoreI&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-char-length(646)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;JumpFalse&nbsp;$mem-array-char-loop(1446)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushI&nbsp;&nbsp;&nbsp;&nbsp;44<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$print-format-char(40)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Printf&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushI&nbsp;&nbsp;&nbsp;&nbsp;32<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$print-format-char(40)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Printf&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Jump&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-char-loop(1446)<br />
+$mem-array-char-array:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-char-length(646)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;JumpFalse&nbsp;$mem-array-char-print-end(1532)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-char-return-address(634)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-char-array-address(638)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-char-end-array-address(642)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-char-length(646)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-char-size(650)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-char-end-array-address(642)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-char-length(646)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-char-size(650)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Multiply&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Subtract&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Call&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-mem-array-char-print(1399)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-char-size(650)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Exchange&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;StoreI&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-char-length(646)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Exchange&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;StoreI&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-char-end-array-address(642)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Exchange&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;StoreI&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-char-array-address(638)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Exchange&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;StoreI&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-char-return-address(634)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Exchange&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;StoreI&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-char-length(646)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushI&nbsp;&nbsp;&nbsp;&nbsp;1<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Subtract&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-char-length(646)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Exchange&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;StoreI&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-char-length(646)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;JumpFalse&nbsp;$mem-array-char-array(1477)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushI&nbsp;&nbsp;&nbsp;&nbsp;44<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$print-format-char(40)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Printf&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushI&nbsp;&nbsp;&nbsp;&nbsp;32<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$print-format-char(40)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Printf&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Jump&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-char-array(1477)<br />
+$mem-array-char-print-end:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushI&nbsp;&nbsp;&nbsp;&nbsp;93<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$print-format-char(40)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Printf&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-char-return-address(634)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Return&nbsp;&nbsp;&nbsp;<br />
+</div>
+</td>
+<td style='vertical-align:text-top;'><div style = 'border:thin black solid;width:200px;padding:10px;margin:10px;'>
+-mem-array-char-print,$mem-array-char-return-address:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataZ&nbsp;&nbsp;&nbsp;&nbsp;4<br />
+$mem-array-char-array-address:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataZ&nbsp;&nbsp;&nbsp;&nbsp;4<br />
+$mem-array-char-end-array-address:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataZ&nbsp;&nbsp;&nbsp;&nbsp;4<br />
+$mem-array-char-length:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataZ&nbsp;&nbsp;&nbsp;&nbsp;4<br />
+$mem-array-char-size:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataZ&nbsp;&nbsp;&nbsp;&nbsp;4<br />
+</div>
+</td>
+</tr>
+<tr>
+<td style='vertical-align:text-top;'><div style = 'border:thin black solid;width:200px;padding:10px;margin:10px;'>
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-bool-return-address(654)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Exchange&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;StoreI&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-bool-array-address(658)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Exchange&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;StoreI&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-bool-array-address(658)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Call&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-mem-arrya-record-valid(1965)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-bool-array-address(658)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushI&nbsp;&nbsp;&nbsp;&nbsp;4<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Add&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushI&nbsp;&nbsp;&nbsp;&nbsp;91<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$print-format-char(40)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Printf&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-bool-array-address(658)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushI&nbsp;&nbsp;&nbsp;&nbsp;12<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Add&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-bool-length(666)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Exchange&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;StoreI&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-bool-array-address(658)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushI&nbsp;&nbsp;&nbsp;&nbsp;8<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Add&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-bool-size(670)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Exchange&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;StoreI&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-bool-array-address(658)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushI&nbsp;&nbsp;&nbsp;&nbsp;16<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-bool-length(666)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-bool-size(670)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Multiply&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Add&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Add&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-bool-end-array-address(662)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Exchange&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;StoreI&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;JumpPos&nbsp;&nbsp;$mem-array-bool-array(1620)<br />
+$mem-array-bool-loop:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-bool-length(666)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;JumpFalse&nbsp;$mem-array-bool-print-end(1675)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-bool-end-array-address(662)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-bool-length(666)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-bool-size(670)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Multiply&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Subtract&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadC&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;JumpTrue&nbsp;$mem-array-bool-true(1600)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$boolean-false-string(54)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Jump&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-bool-end(1601)<br />
+$mem-array-bool-true:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$boolean-true-string(49)<br />
+$mem-array-bool-end:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$print-format-string(37)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Printf&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-bool-length(666)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushI&nbsp;&nbsp;&nbsp;&nbsp;1<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Subtract&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-bool-length(666)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Exchange&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;StoreI&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-bool-length(666)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;JumpFalse&nbsp;$mem-array-bool-loop(1585)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushI&nbsp;&nbsp;&nbsp;&nbsp;44<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$print-format-char(40)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Printf&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushI&nbsp;&nbsp;&nbsp;&nbsp;32<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$print-format-char(40)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Printf&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Jump&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-bool-loop(1585)<br />
+$mem-array-bool-array:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-bool-length(666)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;JumpFalse&nbsp;$mem-array-bool-print-end(1675)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-bool-return-address(654)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-bool-array-address(658)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-bool-end-array-address(662)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-bool-length(666)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-bool-size(670)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-bool-end-array-address(662)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-bool-length(666)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-bool-size(670)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Multiply&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Subtract&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Call&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-mem-array-bool-print(1538)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-bool-size(670)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Exchange&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;StoreI&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-bool-length(666)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Exchange&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;StoreI&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-bool-end-array-address(662)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Exchange&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;StoreI&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-bool-array-address(658)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Exchange&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;StoreI&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-bool-return-address(654)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Exchange&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;StoreI&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-bool-length(666)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushI&nbsp;&nbsp;&nbsp;&nbsp;1<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Subtract&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-bool-length(666)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Exchange&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;StoreI&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-bool-length(666)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;JumpFalse&nbsp;$mem-array-bool-array(1620)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushI&nbsp;&nbsp;&nbsp;&nbsp;44<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$print-format-char(40)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Printf&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushI&nbsp;&nbsp;&nbsp;&nbsp;32<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$print-format-char(40)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Printf&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Jump&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-bool-array(1620)<br />
+$mem-array-bool-print-end:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushI&nbsp;&nbsp;&nbsp;&nbsp;93<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$print-format-char(40)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Printf&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-bool-return-address(654)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Return&nbsp;&nbsp;&nbsp;<br />
+</div>
+</td>
+<td style='vertical-align:text-top;'><div style = 'border:thin black solid;width:200px;padding:10px;margin:10px;'>
+-mem-array-bool-print,$mem-array-bool-return-address:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataZ&nbsp;&nbsp;&nbsp;&nbsp;4<br />
+$mem-array-bool-array-address:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataZ&nbsp;&nbsp;&nbsp;&nbsp;4<br />
+$mem-array-bool-end-array-address:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataZ&nbsp;&nbsp;&nbsp;&nbsp;4<br />
+$mem-array-bool-length:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataZ&nbsp;&nbsp;&nbsp;&nbsp;4<br />
+$mem-array-bool-size:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataZ&nbsp;&nbsp;&nbsp;&nbsp;4<br />
+</div>
+</td>
+</tr>
+<tr>
+<td style='vertical-align:text-top;'><div style = 'border:thin black solid;width:200px;padding:10px;margin:10px;'>
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-string-return-address(674)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Exchange&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;StoreI&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-string-array-address(678)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Exchange&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;StoreI&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-string-array-address(678)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Call&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-mem-arrya-record-valid(1965)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-string-array-address(678)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushI&nbsp;&nbsp;&nbsp;&nbsp;4<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Add&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushI&nbsp;&nbsp;&nbsp;&nbsp;91<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$print-format-char(40)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Printf&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-string-array-address(678)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushI&nbsp;&nbsp;&nbsp;&nbsp;12<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Add&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-string-length(686)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Exchange&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;StoreI&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-string-array-address(678)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushI&nbsp;&nbsp;&nbsp;&nbsp;8<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Add&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-string-size(690)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Exchange&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;StoreI&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-string-array-address(678)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushI&nbsp;&nbsp;&nbsp;&nbsp;16<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-string-length(686)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-string-size(690)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Multiply&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Add&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Add&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-string-end-array-address(682)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Exchange&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;StoreI&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;JumpPos&nbsp;&nbsp;$mem-array-string-array(1761)<br />
+$mem-array-string-loop:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-string-length(686)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;JumpFalse&nbsp;$mem-array-string-print-end(1816)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-string-end-array-address(682)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-string-length(686)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-string-size(690)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Multiply&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Subtract&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushI&nbsp;&nbsp;&nbsp;&nbsp;12<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Add&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$print-format-string(37)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Printf&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-string-length(686)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushI&nbsp;&nbsp;&nbsp;&nbsp;1<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Subtract&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-string-length(686)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Exchange&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;StoreI&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-string-length(686)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;JumpFalse&nbsp;$mem-array-string-loop(1728)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushI&nbsp;&nbsp;&nbsp;&nbsp;44<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$print-format-char(40)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Printf&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushI&nbsp;&nbsp;&nbsp;&nbsp;32<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$print-format-char(40)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Printf&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Jump&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-string-loop(1728)<br />
+$mem-array-string-array:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-string-length(686)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;JumpFalse&nbsp;$mem-array-string-print-end(1816)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-string-return-address(674)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-string-array-address(678)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-string-end-array-address(682)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-string-length(686)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-string-size(690)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-string-end-array-address(682)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-string-length(686)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-string-size(690)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Multiply&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Subtract&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Call&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-mem-array-string-print(1681)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-string-size(690)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Exchange&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;StoreI&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-string-length(686)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Exchange&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;StoreI&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-string-end-array-address(682)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Exchange&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;StoreI&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-string-array-address(678)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Exchange&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;StoreI&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-string-return-address(674)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Exchange&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;StoreI&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-string-length(686)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushI&nbsp;&nbsp;&nbsp;&nbsp;1<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Subtract&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-string-length(686)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Exchange&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;StoreI&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-string-length(686)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;JumpFalse&nbsp;$mem-array-string-array(1761)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushI&nbsp;&nbsp;&nbsp;&nbsp;44<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$print-format-char(40)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Printf&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushI&nbsp;&nbsp;&nbsp;&nbsp;32<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$print-format-char(40)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Printf&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Jump&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-string-array(1761)<br />
+$mem-array-string-print-end:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushI&nbsp;&nbsp;&nbsp;&nbsp;93<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$print-format-char(40)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Printf&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-string-return-address(674)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Return&nbsp;&nbsp;&nbsp;<br />
+</div>
+</td>
+<td style='vertical-align:text-top;'><div style = 'border:thin black solid;width:200px;padding:10px;margin:10px;'>
+-mem-array-string-print,$mem-array-string-return-address:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataZ&nbsp;&nbsp;&nbsp;&nbsp;4<br />
+$mem-array-string-array-address:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataZ&nbsp;&nbsp;&nbsp;&nbsp;4<br />
+$mem-array-string-end-array-address:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataZ&nbsp;&nbsp;&nbsp;&nbsp;4<br />
+$mem-array-string-length:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataZ&nbsp;&nbsp;&nbsp;&nbsp;4<br />
+$mem-array-string-size:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataZ&nbsp;&nbsp;&nbsp;&nbsp;4<br />
+</div>
+</td>
+</tr>
+<tr>
+<td style='vertical-align:text-top;'><div style = 'border:thin black solid;width:200px;padding:10px;margin:10px;'>
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-rational-return-address(694)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Exchange&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;StoreI&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-rational-array-address(698)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Exchange&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;StoreI&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-rational-array-address(698)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Call&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-mem-arrya-record-valid(1965)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-rational-array-address(698)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushI&nbsp;&nbsp;&nbsp;&nbsp;4<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Add&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushI&nbsp;&nbsp;&nbsp;&nbsp;91<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$print-format-char(40)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Printf&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-rational-array-address(698)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushI&nbsp;&nbsp;&nbsp;&nbsp;12<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Add&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-rational-length(706)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Exchange&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;StoreI&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-rational-array-address(698)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushI&nbsp;&nbsp;&nbsp;&nbsp;8<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Add&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-rational-size(710)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Exchange&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;StoreI&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-rational-array-address(698)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushI&nbsp;&nbsp;&nbsp;&nbsp;16<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-rational-length(706)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-rational-size(710)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Multiply&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Add&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Add&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-rational-end-array-address(702)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Exchange&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;StoreI&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;JumpPos&nbsp;&nbsp;$mem-array-rational-array(1904)<br />
+$mem-array-rational-loop:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-rational-length(706)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;JumpFalse&nbsp;$mem-array-rational-print-end(1959)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-rational-end-array-address(702)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-rational-length(706)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-rational-size(710)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Multiply&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Subtract&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Duplicate&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Exchange&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushI&nbsp;&nbsp;&nbsp;&nbsp;4<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Add&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Call&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-mem-rat-print(933)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-rational-length(706)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushI&nbsp;&nbsp;&nbsp;&nbsp;1<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Subtract&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-rational-length(706)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Exchange&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;StoreI&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-rational-length(706)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;JumpFalse&nbsp;$mem-array-rational-loop(1869)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushI&nbsp;&nbsp;&nbsp;&nbsp;44<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$print-format-char(40)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Printf&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushI&nbsp;&nbsp;&nbsp;&nbsp;32<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$print-format-char(40)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Printf&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Jump&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-rational-loop(1869)<br />
+$mem-array-rational-array:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-rational-length(706)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;JumpFalse&nbsp;$mem-array-rational-print-end(1959)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-rational-return-address(694)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-rational-array-address(698)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-rational-end-array-address(702)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-rational-length(706)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-rational-size(710)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-rational-end-array-address(702)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-rational-length(706)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-rational-size(710)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Multiply&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Subtract&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Call&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-mem-array-rational-print(1822)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-rational-size(710)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Exchange&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;StoreI&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-rational-length(706)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Exchange&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;StoreI&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-rational-end-array-address(702)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Exchange&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;StoreI&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-rational-array-address(698)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Exchange&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;StoreI&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-rational-return-address(694)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Exchange&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;StoreI&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-rational-length(706)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushI&nbsp;&nbsp;&nbsp;&nbsp;1<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Subtract&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-rational-length(706)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Exchange&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;StoreI&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-rational-length(706)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;JumpFalse&nbsp;$mem-array-rational-array(1904)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushI&nbsp;&nbsp;&nbsp;&nbsp;44<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$print-format-char(40)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Printf&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushI&nbsp;&nbsp;&nbsp;&nbsp;32<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$print-format-char(40)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Printf&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Jump&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-rational-array(1904)<br />
+$mem-array-rational-print-end:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushI&nbsp;&nbsp;&nbsp;&nbsp;93<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$print-format-char(40)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Printf&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;$mem-array-rational-return-address(694)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Return&nbsp;&nbsp;&nbsp;<br />
+</div>
+</td>
+<td style='vertical-align:text-top;'><div style = 'border:thin black solid;width:200px;padding:10px;margin:10px;'>
+-mem-array-rational-print,$mem-array-rational-return-address:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataZ&nbsp;&nbsp;&nbsp;&nbsp;4<br />
+$mem-array-rational-array-address:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataZ&nbsp;&nbsp;&nbsp;&nbsp;4<br />
+$mem-array-rational-end-array-address:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataZ&nbsp;&nbsp;&nbsp;&nbsp;4<br />
+$mem-array-rational-length:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataZ&nbsp;&nbsp;&nbsp;&nbsp;4<br />
+$mem-array-rational-size:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataZ&nbsp;&nbsp;&nbsp;&nbsp;4<br />
+</div>
+</td>
+</tr>
+<tr>
+<td style='vertical-align:text-top;'><div style = 'border:thin black solid;width:200px;padding:10px;margin:10px;'>
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;-mem-arrya-record-valid-return-address(714)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Exchange&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;StoreI&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;-mem-arrya-record-valid-array-address(718)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Exchange&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;StoreI&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;-mem-arrya-record-valid-array-address(718)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushI&nbsp;&nbsp;&nbsp;&nbsp;7<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Subtract&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;JumpTrue&nbsp;$$a-record-error(28)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;-mem-arrya-record-valid-array-address(718)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushI&nbsp;&nbsp;&nbsp;&nbsp;4<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Add&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushI&nbsp;&nbsp;&nbsp;&nbsp;2<br />
+&nbsp;&nbsp;&nbsp;&nbsp;And&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;JumpTrue&nbsp;$$a-record-deleted-error(30)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PushD&nbsp;&nbsp;&nbsp;&nbsp;-mem-arrya-record-valid-return-address(714)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;LoadI&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Return&nbsp;&nbsp;&nbsp;<br />
+</div>
+</td>
+<td style='vertical-align:text-top;'><div style = 'border:thin black solid;width:200px;padding:10px;margin:10px;'>
+-mem-arrya-record-valid,-mem-arrya-record-valid-return-address:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataZ&nbsp;&nbsp;&nbsp;&nbsp;4<br />
+-mem-arrya-record-valid-array-address:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;DataZ&nbsp;&nbsp;&nbsp;&nbsp;4<br />
+</div>
+</td>
+</tr>
+</table>

@@ -6,8 +6,7 @@ import parseTree.nodeTypes.NewlineNode;
 import parseTree.nodeTypes.PrintStatementNode;
 import parseTree.nodeTypes.SpaceNode;
 import parseTree.nodeTypes.TabNode;
-import semanticAnalyzer.types.PrimitiveType;
-import semanticAnalyzer.types.Type;
+import semanticAnalyzer.types.*;
 import asmCodeGenerator.ASMCodeGenerator.CodeVisitor;
 import asmCodeGenerator.codeStorage.ASMCodeFragment;
 import asmCodeGenerator.runtime.MemoryManager;
@@ -41,7 +40,34 @@ public class PrintStatementGenerator {
 				code.append(visitor.removeValueCode(child));
 				code.add(Call, MemoryManager.MEM_RAT_PRINT);
 			}
-			else if(child)
+			else if(child.getType() instanceof ArrayType) {
+				Type type = child.getType();
+				
+				while(type instanceof ArrayType) {
+					type = ((ArrayType)type).getSubType();
+				}
+				
+				code.append(visitor.removeValueCode(child));
+				
+				if(type == PrimitiveType.INTEGER) {
+					code.add(Call, MemoryManager.MEM_ARRAY_INT_PRINT);
+				}
+				else if(type == PrimitiveType.FLOAT) {
+					code.add(Call, MemoryManager.MEM_ARRAY_FLOAT_PRINT);
+				}
+				else if(type == PrimitiveType.CHAR) {
+					code.add(Call, MemoryManager.MEM_ARRAY_CHAR_PRINT);
+				}
+				else if(type == PrimitiveType.BOOLEAN) {
+					code.add(Call, MemoryManager.MEM_ARRAY_BOOL_PRINT);
+				}
+				else if(type == PrimitiveType.STRING) {
+					code.add(Call, MemoryManager.MEM_ARRAY_STRING_PRINT);
+				}
+				else if(type == PrimitiveType.RATIONAL) {
+					code.add(Call, MemoryManager.MEM_ARRAY_RATIONAL_PRINT);
+				}
+			}
 			else {
 				appendPrintCode(child);
 			}

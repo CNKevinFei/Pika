@@ -22,6 +22,9 @@ public class ArrayType implements Type{
 	}
 	public boolean equivalent(Type type) {
 		if(type instanceof ArrayType) {
+			if(subType == PrimitiveType.NO_TYPE)
+				return true;
+			
 			return subType.equivalent(((ArrayType)type).getSubType());
 		}
 		

@@ -26,7 +26,12 @@ public class RunTime {
 	public static final String RAT_DIVIDE_BY_ZERO_RUNTIME_ERROR = "$$r-divide-by-zero";
 	
 	public static final String RAT_WITH_ZERO_DENOMINATOR_RUNTIME_ERROR = "$$r-denominator-zero";
-
+	
+	public static final String ARRAY_INDEX_NEGATIVE = "$$a-index-negative";
+	public static final String ARRAY_INDEX_EXCEED = "$$a-index-exceed";
+	public static final String ARRAY_RECORD_ERROR = "$$a-record-error";
+	public static final String ARRAY_RECORD_DELETED_ERROR = "$$a-record-deleted-error";
+	
 	private ASMCodeFragment environmentASM() {
 		ASMCodeFragment result = new ASMCodeFragment(GENERATES_VOID);
 		result.append(MemoryManager.codeForInitialization());
@@ -78,6 +83,8 @@ public class RunTime {
 		generalRuntimeError(frag);
 		divideByZeroError(frag);
 		ratDenominatorZeroError(frag);
+		arrayIndexError(frag);
+		arrayRecordError(frag);
 		
 		return frag;
 	}
@@ -128,6 +135,46 @@ public class RunTime {
 		
 		frag.add(Label, RAT_WITH_ZERO_DENOMINATOR_RUNTIME_ERROR);
 		frag.add(PushD, ratDenominatorZeroError);
+		frag.add(Jump, GENERAL_RUNTIME_ERROR);
+	}
+	
+	private void arrayIndexError(ASMCodeFragment frag) {
+		String indexNeg = "$errors-index-neg";
+		String indexExceed = "$errors-index-exceed";
+				
+		frag.add(DLabel, indexNeg);
+		frag.add(DataS, "array index is negative.");
+		
+		frag.add(Label, ARRAY_INDEX_NEGATIVE);
+		frag.add(PushD, indexNeg);
+		frag.add(Jump, GENERAL_RUNTIME_ERROR);
+		
+		frag.add(DLabel, indexExceed);
+		frag.add(DataS, "array index exceeds.");
+		
+		frag.add(Label, ARRAY_INDEX_EXCEED);
+		frag.add(PushD, indexExceed);
+		frag.add(Jump, GENERAL_RUNTIME_ERROR);
+		
+		
+	}
+	
+	private void arrayRecordError(ASMCodeFragment frag) {
+		String recordError = "$errors-record-error";
+		String recordDeletedError = "$errors-record-deleted-error";
+				
+		frag.add(DLabel, recordError);
+		frag.add(DataS, "array record is not valid.");
+		
+		frag.add(DLabel, recordDeletedError);
+		frag.add(DataS, "array record has been deleted.");
+		
+		frag.add(Label, ARRAY_RECORD_ERROR);
+		frag.add(PushD, recordError);
+		frag.add(Jump, GENERAL_RUNTIME_ERROR);
+		
+		frag.add(Label, ARRAY_RECORD_DELETED_ERROR);
+		frag.add(PushD, recordDeletedError);
 		frag.add(Jump, GENERAL_RUNTIME_ERROR);
 	}
 	

@@ -116,12 +116,14 @@ public class FunctionSignatures extends ArrayList<FunctionSignature> {
 			    new FunctionSignature(1, PrimitiveType.CHAR, PrimitiveType.CHAR, PrimitiveType.BOOLEAN)
 		);
 		
+
 		new FunctionSignatures(Punctuator.EQUAL,
 				new FunctionSignature(1, PrimitiveType.INTEGER, PrimitiveType.INTEGER, PrimitiveType.BOOLEAN), 
 				new FunctionSignature(1, PrimitiveType.FLOAT, PrimitiveType.FLOAT, PrimitiveType.BOOLEAN),
 				new FunctionSignature(1, PrimitiveType.CHAR, PrimitiveType.CHAR, PrimitiveType.BOOLEAN),
 			    new FunctionSignature(1, PrimitiveType.BOOLEAN, PrimitiveType.BOOLEAN, PrimitiveType.BOOLEAN),
-			    new FunctionSignature(1, PrimitiveType.STRING, PrimitiveType.STRING, PrimitiveType.BOOLEAN)
+			    new FunctionSignature(1, PrimitiveType.STRING, PrimitiveType.STRING, PrimitiveType.BOOLEAN),
+			    new FunctionSignature(1, new ArrayType(PrimitiveType.NO_TYPE), new ArrayType(PrimitiveType.NO_TYPE), PrimitiveType.BOOLEAN)
 		);
 		
 		new FunctionSignatures(Punctuator.NOTEQUAL,
@@ -129,7 +131,8 @@ public class FunctionSignatures extends ArrayList<FunctionSignature> {
 				new FunctionSignature(1, PrimitiveType.FLOAT, PrimitiveType.FLOAT, PrimitiveType.BOOLEAN),
 				new FunctionSignature(1, PrimitiveType.CHAR, PrimitiveType.CHAR, PrimitiveType.BOOLEAN),
 			    new FunctionSignature(1, PrimitiveType.BOOLEAN, PrimitiveType.BOOLEAN, PrimitiveType.BOOLEAN),
-			    new FunctionSignature(1, PrimitiveType.STRING, PrimitiveType.STRING, PrimitiveType.BOOLEAN)
+			    new FunctionSignature(1, PrimitiveType.STRING, PrimitiveType.STRING, PrimitiveType.BOOLEAN),
+			    new FunctionSignature(1, new ArrayType(PrimitiveType.NO_TYPE), new ArrayType(PrimitiveType.NO_TYPE), PrimitiveType.BOOLEAN)
 		);
 		
 		new FunctionSignatures(Punctuator.OPEN_BRACKET,

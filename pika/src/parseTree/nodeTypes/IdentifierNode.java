@@ -87,7 +87,7 @@ public class IdentifierNode extends ParseNode {
 // satisfy the conditions for assignment
 	
 	public boolean satisfy(ParseNode value) {
-		if(conOrVar.isLextant(Keyword.VAR) && this.getType() == value.getType())
+		if(conOrVar.isLextant(Keyword.VAR) && this.getType().equivalent(value.getType()))
 			return true;
 		
 		return false;
