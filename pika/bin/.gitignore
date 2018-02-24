@@ -1,6 +1,3 @@
-/.DS_Store
-/applications/
-/asmCodeGenerator/
 /inputHandler/
 /lexicalAnalyzer/
 /logging/
@@ -11,3 +8,4 @@
 /symbolTable/
 /tests/
 /tokens/
+/asmCodeGenerator/

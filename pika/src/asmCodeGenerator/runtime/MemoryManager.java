@@ -993,11 +993,9 @@ public class MemoryManager {
 				frag.add(LoadI);
 				//[...arrayAddr]
 				loadIFrom(frag, MEM_ARRAY_RELEASE_RETURN_ADDRESS);
-				frag.add(Exchange);
 				loadIFrom(frag, MEM_ARRAY_RELEASE_ARRAY_ADDRESS);
-				frag.add(Exchange);
 				loadIFrom(frag, MEM_ARRAY_RELEASE_ARRAY_LENGTH);
-				frag.add(Exchange);
+
 				frag.add(Call, MEM_ARRAY_RELEASE);
 				storeITo(frag, MEM_ARRAY_RELEASE_ARRAY_LENGTH);
 				storeITo(frag, MEM_ARRAY_RELEASE_ARRAY_ADDRESS);

@@ -1,5 +1,10 @@
 exec {
-	const a := new [rat](2).
+	const a := new [[string]](2).
+	const b := ["a","b"].
 	
-	print a.
+	a[0] := b.
+	a[1] := b.
+	
+	release a.
+	print b.
 }

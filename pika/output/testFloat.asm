@@ -303,32 +303,153 @@
         DataC        100                       
         DataC        46                        
         DataC        0                         
+        DLabel       $errors-string-error      
+        DataC        115                       %% "string record is not valid."
+        DataC        116                       
+        DataC        114                       
+        DataC        105                       
+        DataC        110                       
+        DataC        103                       
+        DataC        32                        
+        DataC        114                       
+        DataC        101                       
+        DataC        99                        
+        DataC        111                       
+        DataC        114                       
+        DataC        100                       
+        DataC        32                        
+        DataC        105                       
+        DataC        115                       
+        DataC        32                        
+        DataC        110                       
+        DataC        111                       
+        DataC        116                       
+        DataC        32                        
+        DataC        118                       
+        DataC        97                        
+        DataC        108                       
+        DataC        105                       
+        DataC        100                       
+        DataC        46                        
+        DataC        0                         
         Label        $$a-record-error          
         PushD        $errors-record-error      
         Jump         $$general-runtime-error   
         Label        $$a-record-deleted-error  
         PushD        $errors-record-deleted-error 
         Jump         $$general-runtime-error   
+        Label        $$a-string-error          
+        PushD        $errors-record-deleted-error 
+        Jump         $$general-runtime-error   
         DLabel       $usable-memory-start      
         DLabel       $global-memory-block      
-        DataZ        0                         
+        DataZ        8                         
         DLabel       $string-constant-memory   
         Label        $$main                    
-        PushI        -592654                   
-        PushD        $print-format-integer     
-        Printf                                 
-        PushD        $print-format-newline     
-        Printf                                 
-        PushI        3999999                   
-        PushD        $print-format-integer     
-        Printf                                 
-        PushD        $print-format-newline     
-        Printf                                 
-        PushI        1234                      
-        PushD        $print-format-integer     
-        Printf                                 
-        PushD        $print-format-newline     
-        Printf                                 
+        PushD        $global-memory-block      
+        PushI        0                         
+        Add                                    %% a
+        PushI        2                         
+        Duplicate                              
+        PushI        4                         
+        Multiply                               
+        PushI        16                        
+        Add                                    
+        Call         -mem-manager-allocate     
+        Exchange                               
+        PushI        4                         
+        Exchange                               
+        PushI        4                         
+        Call         -mem-store-array-header   
+        PushI        0                         
+        Call         -mem-store-array-four-byte 
+        StoreI                                 
+        PushD        $global-memory-block      
+        PushI        4                         
+        Add                                    %% b
+        PushI        14                        
+        Call         -mem-manager-allocate     
+        Duplicate                              
+        PushI        1                         
+        Call         -mem-store-string-header  
+        Duplicate                              
+        PushI        0                         
+        PushI        12                        
+        Add                                    
+        Add                                    
+        PushI        97                        
+        StoreC                                 
+        Duplicate                              
+        PushI        1                         
+        PushI        12                        
+        Add                                    
+        Add                                    
+        PushI        0                         
+        StoreC                                 
+        PushI        14                        
+        Call         -mem-manager-allocate     
+        Duplicate                              
+        PushI        1                         
+        Call         -mem-store-string-header  
+        Duplicate                              
+        PushI        0                         
+        PushI        12                        
+        Add                                    
+        Add                                    
+        PushI        98                        
+        StoreC                                 
+        Duplicate                              
+        PushI        1                         
+        PushI        12                        
+        Add                                    
+        Add                                    
+        PushI        0                         
+        StoreC                                 
+        PushI        16                        
+        PushI        8                         
+        Add                                    
+        Call         -mem-manager-allocate     
+        PushI        4                         
+        PushI        2                         
+        PushI        0                         
+        Call         -mem-store-array-header   
+        PushI        1                         
+        Call         -mem-store-array-four-byte 
+        StoreI                                 
+        PushD        $global-memory-block      
+        PushI        0                         
+        Add                                    %% a
+        LoadI                                  
+        PushI        0                         
+        PushI        0                         
+        Call         -mem-array-index          
+        PushD        $global-memory-block      
+        PushI        4                         
+        Add                                    %% b
+        LoadI                                  
+        StoreI                                 
+        PushD        $global-memory-block      
+        PushI        0                         
+        Add                                    %% a
+        LoadI                                  
+        PushI        1                         
+        PushI        0                         
+        Call         -mem-array-index          
+        PushD        $global-memory-block      
+        PushI        4                         
+        Add                                    %% b
+        LoadI                                  
+        StoreI                                 
+        PushD        $global-memory-block      
+        PushI        0                         
+        Add                                    %% a
+        LoadI                                  
+        Call         -mem-array-release        
+        PushD        $global-memory-block      
+        PushI        4                         
+        Add                                    %% b
+        LoadI                                  
+        Call         -mem-array-string-print   
         Halt                                   
         Label        -mem-manager-make-tags    
         DLabel       $mmgr-tags-size           
@@ -1053,13 +1174,10 @@
         LoadI                                  
         PushD        $mem-array-release-return-address 
         LoadI                                  
-        Exchange                               
         PushD        $mem-array-release-array-address 
         LoadI                                  
-        Exchange                               
         PushD        $mem-array-release-array-length 
         LoadI                                  
-        Exchange                               
         Call         -mem-array-release        
         PushD        $mem-array-release-array-length 
         Exchange                               
@@ -1707,6 +1825,8 @@
         Multiply                               
         Subtract                               
         LoadI                                  
+        Duplicate                              
+        JumpFalse    $$a-record-error          
         Call         -mem-array-int-print      
         PushD        $mem-array-int-size       
         Exchange                               
@@ -1860,6 +1980,8 @@
         Multiply                               
         Subtract                               
         LoadI                                  
+        Duplicate                              
+        JumpFalse    $$a-record-error          
         Call         -mem-array-float-print    
         PushD        $mem-array-float-size     
         Exchange                               
@@ -2013,6 +2135,8 @@
         Multiply                               
         Subtract                               
         LoadI                                  
+        Duplicate                              
+        JumpFalse    $$a-record-error          
         Call         -mem-array-char-print     
         PushD        $mem-array-char-size      
         Exchange                               
@@ -2172,6 +2296,8 @@
         Multiply                               
         Subtract                               
         LoadI                                  
+        Duplicate                              
+        JumpFalse    $$a-record-error          
         Call         -mem-array-bool-print     
         PushD        $mem-array-bool-size      
         Exchange                               
@@ -2283,6 +2409,8 @@
         Multiply                               
         Subtract                               
         LoadI                                  
+        Duplicate                              
+        JumpFalse    $$a-string-error          
         PushI        12                        
         Add                                    
         PushD        $print-format-string      
@@ -2327,6 +2455,8 @@
         Multiply                               
         Subtract                               
         LoadI                                  
+        Duplicate                              
+        JumpFalse    $$a-record-error          
         Call         -mem-array-string-print   
         PushD        $mem-array-string-size    
         Exchange                               
@@ -2443,6 +2573,8 @@
         PushI        4                         
         Add                                    
         LoadI                                  
+        Duplicate                              
+        JumpFalse    $$r-denominator-zero      
         Call         -mem-rat-print            
         PushD        $mem-array-rational-length 
         LoadI                                  
@@ -2484,6 +2616,8 @@
         Multiply                               
         Subtract                               
         LoadI                                  
+        Duplicate                              
+        JumpFalse    $$a-record-error          
         Call         -mem-array-rational-print 
         PushD        $mem-array-rational-size  
         Exchange                               
