@@ -1561,6 +1561,8 @@ public class MemoryManager {
 				frag.add(Multiply);
 				frag.add(Subtract);
 				frag.add(LoadI);
+				frag.add(Duplicate);
+				frag.add(JumpFalse, RunTime.RECORD_ARRAY_ERROR);
 				
 				frag.add(Call, MEM_ARRAY_INT_PRINT);
 				
@@ -1697,6 +1699,8 @@ public class MemoryManager {
 				frag.add(Multiply);
 				frag.add(Subtract);
 				frag.add(LoadI);
+				frag.add(Duplicate);
+				frag.add(JumpFalse, RunTime.RECORD_ARRAY_ERROR);
 				
 				frag.add(Call, MEM_ARRAY_FLOAT_PRINT);
 				
@@ -1833,6 +1837,8 @@ public class MemoryManager {
 				frag.add(Multiply);
 				frag.add(Subtract);
 				frag.add(LoadI);
+				frag.add(Duplicate);
+				frag.add(JumpFalse, RunTime.RECORD_ARRAY_ERROR);
 				
 				frag.add(Call, MEM_ARRAY_CHAR_PRINT);
 				
@@ -1976,6 +1982,8 @@ public class MemoryManager {
 				frag.add(Multiply);
 				frag.add(Subtract);
 				frag.add(LoadI);
+				frag.add(Duplicate);
+				frag.add(JumpFalse, RunTime.RECORD_ARRAY_ERROR);
 				
 				frag.add(Call, MEM_ARRAY_BOOL_PRINT);
 				
@@ -2075,6 +2083,8 @@ public class MemoryManager {
 				frag.add(Multiply);
 				frag.add(Subtract);
 				frag.add(LoadI);
+				frag.add(Duplicate);
+				frag.add(JumpFalse, RunTime.RECORD_STRING_ERROR);
 				frag.add(PushI, MEM_STRING_CONTENT_OFFSET);
 				frag.add(Add);
 				frag.add(PushD, RunTime.STRING_PRINT_FORMAT);
@@ -2114,6 +2124,8 @@ public class MemoryManager {
 				frag.add(Multiply);
 				frag.add(Subtract);
 				frag.add(LoadI);
+				frag.add(Duplicate);
+				frag.add(JumpFalse, RunTime.RECORD_ARRAY_ERROR);
 				
 				frag.add(Call, MEM_ARRAY_STRING_PRINT);
 				
@@ -2218,6 +2230,8 @@ public class MemoryManager {
 				frag.add(PushI,4);
 				frag.add(Add);
 				frag.add(LoadI);
+				frag.add(Duplicate);
+				frag.add(JumpFalse, RunTime.RAT_WITH_ZERO_DENOMINATOR_RUNTIME_ERROR);
 				frag.add(Call, MEM_RAT_PRINT);
 				
 				
@@ -2255,6 +2269,8 @@ public class MemoryManager {
 				frag.add(Multiply);
 				frag.add(Subtract);
 				frag.add(LoadI);
+				frag.add(Duplicate);
+				frag.add(JumpFalse, RunTime.RECORD_ARRAY_ERROR);
 				
 				frag.add(Call, MEM_ARRAY_RATIONAL_PRINT);
 				
@@ -2308,7 +2324,7 @@ public class MemoryManager {
 			frag.add(LoadI);
 			frag.add(PushI, 7);
 			frag.add(Subtract);
-			frag.add(JumpTrue, RunTime.ARRAY_RECORD_ERROR);
+			frag.add(JumpTrue, RunTime.RECORD_ARRAY_ERROR);
 			
 			loadIFrom(frag, MEM_ARRAY_RECORD_VALID_ARRAY_ADDRESS);
 			frag.add(PushI, MEM_ARRAY_STATUS_OFFSET);
@@ -2316,7 +2332,7 @@ public class MemoryManager {
 			frag.add(LoadI);
 			frag.add(PushI, 2);
 			frag.add(BTAnd);
-			frag.add(JumpTrue, RunTime.ARRAY_RECORD_DELETED_ERROR);
+			frag.add(JumpTrue, RunTime.RECORD_ARRAY_DELETED_ERROR);
 		
 		loadIFrom(frag,MEM_ARRAY_RECORD_VALID_RETURN_ADDRESS);
 		frag.add(Return);

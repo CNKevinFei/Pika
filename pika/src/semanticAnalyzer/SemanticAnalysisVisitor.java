@@ -215,7 +215,7 @@ class SemanticAnalysisVisitor extends ParseNodeVisitor.Default {
 			
 		}
 		
-		if(PromotionType.canPromote(node.child(1).getType())) {
+		if(PromotionType.canPromote(node.child(1).getType()) && operator != Punctuator.OPEN_BRACKET) {
 			List<PrimitiveType> matchingType = new ArrayList<PrimitiveType>();
 			int number = 1;
 			PromotionType promotionType = PromotionType.getPromotionTypeObject((PrimitiveType)node.child(1).getType());

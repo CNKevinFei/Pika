@@ -137,6 +137,7 @@ public class FunctionSignatures extends ArrayList<FunctionSignature> {
 		
 		new FunctionSignatures(Punctuator.OPEN_BRACKET,
 				new FunctionSignature(0, PrimitiveType.CHAR, PrimitiveType.INTEGER, PrimitiveType.INTEGER),
+				new FunctionSignature(0, PrimitiveType.CHAR, PrimitiveType.FLOAT, PrimitiveType.FLOAT),
 				new FunctionSignature(0, PrimitiveType.INTEGER, PrimitiveType.CHAR, PrimitiveType.CHAR),
 				new FunctionSignature(0, PrimitiveType.INTEGER, PrimitiveType.FLOAT, PrimitiveType.FLOAT),
 				new FunctionSignature(0, PrimitiveType.FLOAT, PrimitiveType.INTEGER, PrimitiveType.INTEGER),

@@ -29,8 +29,9 @@ public class RunTime {
 	
 	public static final String ARRAY_INDEX_NEGATIVE = "$$a-index-negative";
 	public static final String ARRAY_INDEX_EXCEED = "$$a-index-exceed";
-	public static final String ARRAY_RECORD_ERROR = "$$a-record-error";
-	public static final String ARRAY_RECORD_DELETED_ERROR = "$$a-record-deleted-error";
+	public static final String RECORD_ARRAY_ERROR = "$$a-record-error";
+	public static final String RECORD_STRING_ERROR = "$$a-string-error";
+	public static final String RECORD_ARRAY_DELETED_ERROR = "$$a-record-deleted-error";
 	
 	private ASMCodeFragment environmentASM() {
 		ASMCodeFragment result = new ASMCodeFragment(GENERATES_VOID);
@@ -84,7 +85,7 @@ public class RunTime {
 		divideByZeroError(frag);
 		ratDenominatorZeroError(frag);
 		arrayIndexError(frag);
-		arrayRecordError(frag);
+		recordError(frag);
 		
 		return frag;
 	}
@@ -159,9 +160,10 @@ public class RunTime {
 		
 	}
 	
-	private void arrayRecordError(ASMCodeFragment frag) {
+	private void recordError(ASMCodeFragment frag) {
 		String recordError = "$errors-record-error";
 		String recordDeletedError = "$errors-record-deleted-error";
+		String stringError = "$errors-string-error";
 				
 		frag.add(DLabel, recordError);
 		frag.add(DataS, "array record is not valid.");
@@ -169,11 +171,18 @@ public class RunTime {
 		frag.add(DLabel, recordDeletedError);
 		frag.add(DataS, "array record has been deleted.");
 		
-		frag.add(Label, ARRAY_RECORD_ERROR);
+		frag.add(DLabel, stringError);
+		frag.add(DataS, "string record is not valid.");
+		
+		frag.add(Label, RECORD_ARRAY_ERROR);
 		frag.add(PushD, recordError);
 		frag.add(Jump, GENERAL_RUNTIME_ERROR);
 		
-		frag.add(Label, ARRAY_RECORD_DELETED_ERROR);
+		frag.add(Label, RECORD_ARRAY_DELETED_ERROR);
+		frag.add(PushD, recordDeletedError);
+		frag.add(Jump, GENERAL_RUNTIME_ERROR);
+		
+		frag.add(Label, RECORD_STRING_ERROR);
 		frag.add(PushD, recordDeletedError);
 		frag.add(Jump, GENERAL_RUNTIME_ERROR);
 	}

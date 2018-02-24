@@ -659,6 +659,8 @@ public class ASMCodeGenerator {
 			}
 			else if(node.child(0).getType()==PrimitiveType.INTEGER && node.getType()==PrimitiveType.FLOAT) {
 				code.add(ConvertF);
+			}else if(node.child(0).getType()==PrimitiveType.CHAR && node.getType()==PrimitiveType.FLOAT) {
+				code.add(ConvertF);
 			}
 			else if(node.child(1).getType()==PrimitiveType.BOOLEAN) {
 				code.add(PushI,1);
@@ -750,6 +752,14 @@ public class ASMCodeGenerator {
 				case SUBTRACT:		return FSubtract;
 				case MULTIPLY: 		return FMultiply;
 				case DIVIDE:		return FDivide;
+				default:
+					assert false : "unimplemented operator in opcodeForOperator";
+				}
+			}
+			else if(type == PrimitiveType.BOOLEAN) {
+				switch(punctuator) {
+				case AND:			return And;
+				case OR:			return Or;
 				default:
 					assert false : "unimplemented operator in opcodeForOperator";
 				}
