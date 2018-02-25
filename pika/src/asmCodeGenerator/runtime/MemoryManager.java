@@ -229,6 +229,7 @@ public class MemoryManager {
 	private static final String MEM_RAT_PRINT_RAT = "$mem-rat-print-rat";
 	private static final String MEM_RAT_PRINT_END = "$mem-rat-print-end";
 	private static final String MEM_RAT_PRINT_CON = "$mem-rat-print-con";
+	private static final String MEM_RAT_PRINT_ZERO = "$mem-rat-print-zero";
 	
 	// local and subroutine tags for rational add
 	public static final String MEM_RAT_ADD = "-mem-rat-add";
@@ -1263,6 +1264,8 @@ public class MemoryManager {
 			storeITo(frag, MEM_RAT_PRINT_A);
 			
 			loadIFrom(frag, MEM_RAT_PRINT_A);
+			frag.add(JumpFalse, MEM_RAT_PRINT_ZERO);
+			loadIFrom(frag, MEM_RAT_PRINT_A);
 			loadIFrom(frag, MEM_RAT_PRINT_B);
 			frag.add(Divide);
 			
@@ -1303,6 +1306,10 @@ public class MemoryManager {
 			
 			frag.add(Jump, MEM_RAT_PRINT_END);
 			
+			frag.add(Label, MEM_RAT_PRINT_ZERO);
+				frag.add(PushI, 0);
+				frag.add(PushD, RunTime.INTEGER_PRINT_FORMAT);
+				frag.add(Printf);
 			frag.add(Label, MEM_RAT_PRINT_END);
 				loadIFrom(frag, MEM_RAT_PRINT_RETURN_ADDRESS);
 				frag.add(Return);
@@ -1443,7 +1450,8 @@ public class MemoryManager {
 			storeITo(frag, MEM_RAT_DIVIDE_A_DEN);
 			storeITo(frag, MEM_RAT_DIVIDE_A_NUM);
 			
-
+			loadIFrom(frag, MEM_RAT_DIVIDE_B_NUM);
+			frag.add(JumpFalse, RunTime.RAT_DIVIDE_BY_ZERO_RUNTIME_ERROR);
 			loadIFrom(frag, MEM_RAT_DIVIDE_A_NUM);
 			loadIFrom(frag, MEM_RAT_DIVIDE_B_DEN);
 			frag.add(Multiply);

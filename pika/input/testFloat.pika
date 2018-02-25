@@ -1,10 +1,9 @@
 exec {
-	const a := new [[string]](2).
-	const b := ["a","b"].
-	
-	a[0] := b.
-	a[1] := b.
-	
-	release a.
-	print b.
+	var a := _true_.
+	if(!a){
+	print a.
+	}
+	else{
+	print _false_.
+	}
 }

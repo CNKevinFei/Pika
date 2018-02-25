@@ -91,7 +91,7 @@
         Printf                                 
         Halt                                   
         DLabel       $errors-int-divide-by-zero 
-        DataC        105                       %% "integer divide by zero"
+        DataC        105                       %% "integer divided by zero"
         DataC        110                       
         DataC        116                       
         DataC        101                       
@@ -105,6 +105,7 @@
         DataC        105                       
         DataC        100                       
         DataC        101                       
+        DataC        100                       
         DataC        32                        
         DataC        98                        
         DataC        121                       
@@ -343,113 +344,44 @@
         Jump         $$general-runtime-error   
         DLabel       $usable-memory-start      
         DLabel       $global-memory-block      
-        DataZ        8                         
+        DataZ        1                         
         DLabel       $string-constant-memory   
         Label        $$main                    
         PushD        $global-memory-block      
         PushI        0                         
         Add                                    %% a
-        PushI        2                         
-        Duplicate                              
-        PushI        4                         
-        Multiply                               
-        PushI        16                        
-        Add                                    
-        Call         -mem-manager-allocate     
-        Exchange                               
-        PushI        4                         
-        Exchange                               
-        PushI        4                         
-        Call         -mem-store-array-header   
-        PushI        0                         
-        Call         -mem-store-array-four-byte 
-        StoreI                                 
-        PushD        $global-memory-block      
-        PushI        4                         
-        Add                                    %% b
-        PushI        14                        
-        Call         -mem-manager-allocate     
-        Duplicate                              
         PushI        1                         
-        Call         -mem-store-string-header  
-        Duplicate                              
-        PushI        0                         
-        PushI        12                        
-        Add                                    
-        Add                                    
-        PushI        97                        
         StoreC                                 
-        Duplicate                              
-        PushI        1                         
-        PushI        12                        
-        Add                                    
-        Add                                    
-        PushI        0                         
-        StoreC                                 
-        PushI        14                        
-        Call         -mem-manager-allocate     
-        Duplicate                              
-        PushI        1                         
-        Call         -mem-store-string-header  
-        Duplicate                              
-        PushI        0                         
-        PushI        12                        
-        Add                                    
-        Add                                    
-        PushI        98                        
-        StoreC                                 
-        Duplicate                              
-        PushI        1                         
-        PushI        12                        
-        Add                                    
-        Add                                    
-        PushI        0                         
-        StoreC                                 
-        PushI        16                        
-        PushI        8                         
-        Add                                    
-        Call         -mem-manager-allocate     
-        PushI        4                         
-        PushI        2                         
-        PushI        0                         
-        Call         -mem-store-array-header   
-        PushI        1                         
-        Call         -mem-store-array-four-byte 
-        StoreI                                 
         PushD        $global-memory-block      
         PushI        0                         
         Add                                    %% a
-        LoadI                                  
-        PushI        0                         
-        PushI        0                         
-        Call         -mem-array-index          
-        PushD        $global-memory-block      
-        PushI        4                         
-        Add                                    %% b
-        LoadI                                  
-        StoreI                                 
+        LoadC                                  
+        BNegate                                
+        JumpFalse    $ELSE1                    
         PushD        $global-memory-block      
         PushI        0                         
         Add                                    %% a
-        LoadI                                  
-        PushI        1                         
+        LoadC                                  
+        JumpTrue     -print-boolean-1-true     
+        PushD        $boolean-false-string     
+        Jump         -print-boolean-1-join     
+        Label        -print-boolean-1-true     
+        PushD        $boolean-true-string      
+        Label        -print-boolean-1-join     
+        PushD        $print-format-boolean     
+        Printf                                 
+        Jump         $IFEND1                   
+        Label        $ELSE1                    
         PushI        0                         
-        Call         -mem-array-index          
-        PushD        $global-memory-block      
-        PushI        4                         
-        Add                                    %% b
-        LoadI                                  
-        StoreI                                 
-        PushD        $global-memory-block      
-        PushI        0                         
-        Add                                    %% a
-        LoadI                                  
-        Call         -mem-array-release        
-        PushD        $global-memory-block      
-        PushI        4                         
-        Add                                    %% b
-        LoadI                                  
-        Call         -mem-array-string-print   
+        JumpTrue     -print-boolean-2-true     
+        PushD        $boolean-false-string     
+        Jump         -print-boolean-2-join     
+        Label        -print-boolean-2-true     
+        PushD        $boolean-true-string      
+        Label        -print-boolean-2-join     
+        PushD        $print-format-boolean     
+        Printf                                 
+        Label        $IFEND1                   
         Halt                                   
         Label        -mem-manager-make-tags    
         DLabel       $mmgr-tags-size           
@@ -1487,6 +1419,9 @@
         StoreI                                 
         PushD        $mem-rat-print-a          
         LoadI                                  
+        JumpFalse    $mem-rat-print-zero       
+        PushD        $mem-rat-print-a          
+        LoadI                                  
         PushD        $mem-rat-print-b          
         LoadI                                  
         Divide                                 
@@ -1528,6 +1463,10 @@
         PushD        $print-format-integer     
         Printf                                 
         Jump         $mem-rat-print-end        
+        Label        $mem-rat-print-zero       
+        PushI        0                         
+        PushD        $print-format-integer     
+        Printf                                 
         Label        $mem-rat-print-end        
         PushD        $mem-rat-print-return-address 
         LoadI                                  
@@ -1698,6 +1637,9 @@
         PushD        $mem-rat-divide-a-num     
         Exchange                               
         StoreI                                 
+        PushD        $mem-rat-divide-b-num     
+        LoadI                                  
+        JumpFalse    $$r-divide-by-zero        
         PushD        $mem-rat-divide-a-num     
         LoadI                                  
         PushD        $mem-rat-divide-b-den     

@@ -107,7 +107,7 @@ public class RunTime {
 		String ratDivideByZeroMessage = "$errors-rat-divide-by-zero";
 		
 		frag.add(DLabel, intDivideByZeroMessage);
-		frag.add(DataS, "integer divide by zero");
+		frag.add(DataS, "integer divided by zero");
 		
 		frag.add(Label, INTEGER_DIVIDE_BY_ZERO_RUNTIME_ERROR);
 		frag.add(PushD, intDivideByZeroMessage);
