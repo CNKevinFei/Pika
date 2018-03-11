@@ -18,6 +18,7 @@ public enum Keyword implements Lextant {
 	CHAR("char"),
 	BOOL("bool"),
 	RAT("rat"),
+	VOID("void"),
 	EXEC("exec"),
 	IF("if"),
 	ELSE("else"),

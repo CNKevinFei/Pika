@@ -1,10 +1,8 @@
-func add<int a, int b>->int{
+func add<<int,int>->int a, void b>->int{
 	var c := a+b.
 }
 
 exec {
-	var a := 1 + add(1,2) * <int a, int b>->int{
-	var c := a+b.
-	}(1,2) + 5 .
+	
 
 }

@@ -894,7 +894,7 @@ public class Parser {
 	
 	// type (terminal)
 	private ParseNode parseType() {
-		if(nowReading.isLextant(Keyword.INT, Keyword.FLOAT, Keyword.STRING, Keyword.CHAR, Keyword.BOOL, Keyword.RAT)) {
+		if(nowReading.isLextant(Keyword.VOID, Keyword.INT, Keyword.FLOAT, Keyword.STRING, Keyword.CHAR, Keyword.BOOL, Keyword.RAT)) {
 			readToken();
 			return new TypeConstantNode(previouslyRead);
 		}
@@ -902,13 +902,34 @@ public class Parser {
 			
 			return parseArrayType();
 		}
+		else if(nowReading.isLextant(Punctuator.SMALLER)) {
+			ParseNode lambdaTypeList = new TypeListNode();
+			expect(Punctuator.SMALLER);
+			
+			while(startsType(nowReading)) {
+				ParseNode type = parseType();
+				
+				lambdaTypeList.appendChild(type);
+				
+				if(nowReading.isLextant(Punctuator.SEPARATOR)) {
+					expect(Punctuator.SEPARATOR);
+				}
+			}
+			
+			expect(Punctuator.GREATER);
+			expect(Punctuator.TO);
+			
+			ParseNode returnType = parseType();
+			
+			return new LambdaTypeConstantNode(lambdaTypeList, returnType);
+		}
 		else {
 			return syntaxErrorNode("type node error");
 		}
 		
 	}
 	private boolean startsType(Token token) {
-		return token.isLextant(Keyword.INT, Keyword.FLOAT, Keyword.STRING, Keyword.CHAR, Keyword.BOOL, Keyword.RAT, Punctuator.OPEN_BRACKET);
+		return token.isLextant(Keyword.VOID, Keyword.INT, Keyword.FLOAT, Keyword.STRING, Keyword.CHAR, Keyword.BOOL, Keyword.RAT, Punctuator.OPEN_BRACKET, Punctuator.SMALLER);
 	}
 	private ParseNode parseArrayType() {
 		Token token = nowReading;

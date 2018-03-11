@@ -5,27 +5,25 @@ import parseTree.ParseNode;
 import parseTree.ParseNodeVisitor;
 import tokens.LextantToken;
 
-public class LambdaNode extends ParseNode {
-	public LambdaNode(ParseNode param, ParseNode functionBody) {
-		super(LextantToken.fakeToken("lambda node", Punctuator.LAMBDA));
-		
-		this.appendChild(param);
-		this.appendChild(functionBody);
-	}
+public class TypeListNode extends ParseNode {
 
-	public LambdaNode(ParseNode node) {
+	public TypeListNode() {
+		super(LextantToken.fakeToken("lambda type node", Punctuator.TYPELIST));
+	}
+	public TypeListNode(ParseNode node) {
 		super(node);
 	}
 	
+	////////////////////////////////////////////////////////////
+	// no attributes
+
 	
 	///////////////////////////////////////////////////////////
 	// boilerplate for visitors
-			
+	
 	public void accept(ParseNodeVisitor visitor) {
 		visitor.visitEnter(this);
 		visitChildren(visitor);
 		visitor.visitLeave(this);
 	}
 }
-
-

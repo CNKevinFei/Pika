@@ -37,6 +37,8 @@ public enum Punctuator implements Lextant {
 	TO("->"),
 	LAMBDA(""),
 	LAMBDAPARAMTYPE(""),
+	LAMBDATYPE(""),
+	TYPELIST(""),
 	FUNCTIONBODY(""),
 	PARAMETERLIST(""),
 	PARAMETER(""),
