@@ -36,10 +36,15 @@ public class Parser {
 	// S -> EXEC mainBlock
 	
 	private ParseNode parseProgram() {
-		if(!startsProgram(nowReading)) {
+		if((!startsProgram(nowReading))&&(!startsFunctionDeclaration(nowReading))) {
 			return syntaxErrorNode("program");
 		}
 		ParseNode program = new ProgramNode(nowReading);
+		
+		while(startsFunctionDeclaration(nowReading)) {
+			ParseNode func = parseFunctionDeclaration();
+			program.appendChild(func);
+		}
 		
 		expect(Keyword.EXEC);
 		ParseNode mainBlock = parseMainBlock();
@@ -55,6 +60,33 @@ public class Parser {
 		return token.isLextant(Keyword.EXEC);
 	}
 	
+	///////////////////////////////////////////////////////////
+	// function declaration
+	
+	private ParseNode parseFunctionDeclaration() {
+		Token token = nowReading;
+		
+		expect(Keyword.FUNCTION);
+		
+		
+		if(!startsIdentifier(nowReading)) {
+			return syntaxErrorNode("identifier");
+		}
+		
+		ParseNode identifier = parseIdentifier();
+		
+		if(!startsLambdaExpression(nowReading)) {
+			return syntaxErrorNode("no matching lambda expression");
+		}
+		
+		ParseNode lambda = parseLambdaExpression();
+		
+		return new FunctionDeclarationNode(token, identifier, lambda);
+	}
+	
+	private boolean startsFunctionDeclaration(Token token) {
+		return token.isLextant(Keyword.FUNCTION);
+	}
 	
 	///////////////////////////////////////////////////////////
 	// mainBlock
@@ -381,6 +413,9 @@ public class Parser {
 	// expr  -> comparisonExpression
 	private ParseNode parseExpression() {		
 		if(!startsExpression(nowReading)) {
+			if(startsLambdaExpression(nowReading)) {
+				return parseLambdaExpression();
+			}
 			return syntaxErrorNode("expression"); 
 		}
 		return parseOrExpression();
@@ -388,6 +423,96 @@ public class Parser {
 	private boolean startsExpression(Token token) {
 		return startsOrExpression(token);
 	}
+	
+	// Lambda expression
+	private ParseNode parseLambdaExpression() {
+		ParseNode lambdaParamType = parseLambdaParamType();
+		
+		if(!startsFunctionBody(nowReading)) {
+			return syntaxErrorNode("function body");
+		}
+		
+		ParseNode functionBody = parseFunctionBody();
+		
+		return new LambdaNode(lambdaParamType, functionBody);
+	}
+	
+	private boolean startsLambdaExpression(Token token) {
+		return startsLambdaParamType(token);
+	}
+	
+	// Lambda Parameter Type
+	private ParseNode parseLambdaParamType() {
+		
+		expect(Punctuator.SMALLER);
+		ParseNode list = parseParameterList();
+		expect(Punctuator.GREATER);
+		
+		expect(Punctuator.TO);
+		
+		ParseNode returnType = parseType();
+		
+		return new LambdaParameterTypeNode(list, returnType);
+	}
+	
+	private boolean startsLambdaParamType(Token token) {
+		return token.isLextant(Punctuator.SMALLER);
+	}
+	
+	// Lambda function body
+	private ParseNode parseFunctionBody() {
+		if(!startsFunctionBody(nowReading)) {
+			return syntaxErrorNode("function body");
+		}
+		ParseNode functionBody = new FunctionBodyNode();
+		expect(Punctuator.OPEN_BRACE);
+		
+		while(startsStatement(nowReading)) {
+			ParseNode statement = parseStatement();
+			functionBody.appendChild(statement);
+		}
+		expect(Punctuator.CLOSE_BRACE);
+		return functionBody;
+	}
+	
+	private boolean startsFunctionBody(Token token) {
+		return token.isLextant(Punctuator.OPEN_BRACE);
+	}
+	
+	
+	// Parameter List
+	private ParseNode parseParameterList() {
+		ParseNode parameterList = new ParameterListNode();
+		
+		while(startsParameter(nowReading)) {
+			ParseNode param = parseParameter();
+			parameterList.appendChild(param);
+			
+			if(nowReading.isLextant(Punctuator.SEPARATOR)) {
+				expect(Punctuator.SEPARATOR);
+			}
+		}
+		
+		return parameterList;
+	}
+	
+	// Parameter
+	
+	private ParseNode parseParameter() {
+		if(!startsType(nowReading)) {
+			return syntaxErrorNode("parameter");
+		}
+		
+		ParseNode type = parseType();
+		ParseNode identifier = parseIdentifier();
+		return new ParameterNode(type, identifier);
+	}
+	
+	private boolean startsParameter(Token token) {
+		return startsType(token);
+	}
+	
+	
 	
 	// || expression
 	private ParseNode parseOrExpression() {
@@ -712,7 +837,9 @@ public class Parser {
 		}
 		
 	}
-	
+	private boolean startsType(Token token) {
+		return token.isLextant(Keyword.INT, Keyword.FLOAT, Keyword.STRING, Keyword.CHAR, Keyword.BOOL, Keyword.RAT, Punctuator.OPEN_BRACKET);
+	}
 	private ParseNode parseArrayType() {
 		Token token = nowReading;
 		expect(Punctuator.OPEN_BRACKET);

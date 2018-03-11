@@ -97,6 +97,9 @@ public class LexicalAnalyzer extends ScannerImp implements Scanner {
 		point = appendPoint(buffer);
 		appendSubsequentDigits(buffer);
 		
+		if(buffer.length()==1 && firstChar.isChar('-')) {
+			return PunctuatorScanner.scan(firstChar, input);
+		}
 		if(point!=null || firstChar.isChar('.')) {
 			isInt = false;
 		}

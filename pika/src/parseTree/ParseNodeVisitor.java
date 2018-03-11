@@ -9,6 +9,9 @@ public interface ParseNodeVisitor {
 	void visitEnter(BinaryOperatorNode node);
 	void visitLeave(BinaryOperatorNode node);
 	
+	void visitEnter(FunctionDeclarationNode node);
+	void visitLeave(FunctionDeclarationNode node);
+	
 	void visitEnter(MainBlockNode node);
 	void visitLeave(MainBlockNode node);
 
@@ -17,6 +20,21 @@ public interface ParseNodeVisitor {
 
 	void visitEnter(AssignmentStatementNode node);
 	void visitLeave(AssignmentStatementNode node);
+	
+	void visitEnter(LambdaNode node);
+	void visitLeave(LambdaNode node);
+	
+	void visitEnter(LambdaParameterTypeNode node);
+	void visitLeave(LambdaParameterTypeNode node);
+	
+	void visitEnter(FunctionBodyNode node);
+	void visitLeave(FunctionBodyNode node);
+	
+	void visitEnter(ParameterListNode node);
+	void visitLeave(ParameterListNode node);
+	
+	void visitEnter(ParameterNode node);
+	void visitLeave(ParameterNode node);
 	
 	void visitEnter(ParseNode node);
 	void visitLeave(ParseNode node);
@@ -88,6 +106,12 @@ public interface ParseNodeVisitor {
 		public void visitLeave(BinaryOperatorNode node) {
 			defaultVisitLeave(node);
 		}
+		public void visitEnter(FunctionDeclarationNode node) {
+			defaultVisitEnter(node);
+		}
+		public void visitLeave(FunctionDeclarationNode node) {
+			defaultVisitLeave(node);
+		}
 		public void visitEnter(DeclarationNode node) {
 			defaultVisitEnter(node);
 		}
@@ -98,6 +122,36 @@ public interface ParseNodeVisitor {
 			defaultVisitEnter(node);
 		}
 		public void visitLeave(AssignmentStatementNode node) {
+			defaultVisitLeave(node);
+		}
+		public void visitEnter(LambdaNode node) {
+			defaultVisitEnter(node);
+		}
+		public void visitLeave(LambdaNode node) {
+			defaultVisitLeave(node);
+		}
+		public void visitEnter(LambdaParameterTypeNode node) {
+			defaultVisitEnter(node);
+		}
+		public void visitLeave(LambdaParameterTypeNode node) {
+			defaultVisitLeave(node);
+		}
+		public void visitEnter(FunctionBodyNode node) {
+			defaultVisitEnter(node);
+		}
+		public void visitLeave(FunctionBodyNode node) {
+			defaultVisitLeave(node);
+		}
+		public void visitEnter(ParameterListNode node) {
+			defaultVisitEnter(node);
+		}
+		public void visitLeave(ParameterListNode node) {
+			defaultVisitLeave(node);
+		}
+		public void visitEnter(ParameterNode node) {
+			defaultVisitEnter(node);
+		}
+		public void visitLeave(ParameterNode node) {
 			defaultVisitLeave(node);
 		}
 		public void visitEnter(MainBlockNode node) {
