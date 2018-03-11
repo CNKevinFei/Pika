@@ -2,10 +2,9 @@ func add<int a, int b>->int{
 	var c := a+b.
 }
 
-func add<int a, int b>->int{
-	var c := a+b.
-}
 exec {
-	var a := 1.
-	var b := a>-1.
+	var a := 1 + add(1,2) * <int a, int b>->int{
+	var c := a+b.
+	}(1,2) + 5 .
+
 }

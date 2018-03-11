@@ -52,6 +52,9 @@ public interface ParseNodeVisitor {
 	void visitEnter(ExpressionListNode node);
 	void visitLeave(ExpressionListNode node);
 	
+	void visitEnter(ParaExpressionListNode node);
+	void visitLeave(ParaExpressionListNode node);
+	
 	
 	void visitEnter(LengthExpressionNode node);
 	void visitLeave(LengthExpressionNode node);
@@ -188,6 +191,12 @@ public interface ParseNodeVisitor {
 			defaultVisitEnter(node);
 		}
 		public void visitLeave(ExpressionListNode node) {
+			defaultVisitLeave(node);
+		}
+		public void visitEnter(ParaExpressionListNode node) {
+			defaultVisitEnter(node);
+		}
+		public void visitLeave(ParaExpressionListNode node) {
 			defaultVisitLeave(node);
 		}
 		public void visitEnter(IfStatementNode node) {

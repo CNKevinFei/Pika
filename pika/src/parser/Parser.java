@@ -146,6 +146,12 @@ public class Parser {
 		if(startsReleaseStatement(nowReading)) {
 			return parseReleaseStatement();
 		}
+		if(startsReturnStatement(nowReading)) {
+			return parseReturnStatement();
+		}
+		if(startsCallStatement(nowReading)) {
+			return parseCallStatement();
+		}
 		return syntaxErrorNode("statement");
 	}
 	private boolean startsStatement(Token token) {
@@ -157,7 +163,45 @@ public class Parser {
 			   startsWhileStatement(token)||
 			   startsReleaseStatement(token)||
 			   startsBreakStatement(token)||
-			   startsContinueStatement(token);
+			   startsContinueStatement(token)||
+			   startsReturnStatement(token)||
+			   startsCallStatement(token);
+	}
+	
+	// return statement
+	private ParseNode parseReturnStatement() {
+		Token token = nowReading;
+		expect(Keyword.RETURN);
+		
+		if(!startsExpression(nowReading)) {
+			return syntaxErrorNode("return statement");
+		}
+		
+		ParseNode expr = parseExpression();
+		
+		return new ReturnStatementNode(token, expr);
+	}
+	
+	private boolean startsReturnStatement(Token token) {
+		return token.isLextant(Keyword.RETURN);
+	}
+	
+	// call statement
+	private ParseNode parseCallStatement() {
+		Token token = nowReading;
+		expect(Keyword.CALL);
+		
+		if(!startsExpression(nowReading)) {
+			return syntaxErrorNode("call statement");
+		}
+		
+		ParseNode callFunc = parseExpression();
+		
+		return new ReturnStatementNode(token, callFunc);
+	}
+	
+	private boolean startsCallStatement(Token token) {
+		return token.isLextant(Keyword.RETURN);
 	}
 	
 	// printStmt -> PRINT printExpressionList .
@@ -413,9 +457,6 @@ public class Parser {
 	// expr  -> comparisonExpression
 	private ParseNode parseExpression() {		
 		if(!startsExpression(nowReading)) {
-			if(startsLambdaExpression(nowReading)) {
-				return parseLambdaExpression();
-			}
 			return syntaxErrorNode("expression"); 
 		}
 		return parseOrExpression();
@@ -725,7 +766,7 @@ public class Parser {
 	private boolean startsArrayIndexExpression(Token token) {
 		return startsAtomicExpression(token);
 	}
-	// atomicExpression -> literal || (expression) || [expression | type]
+	// atomicExpression -> literal || (expression) || [expression | type] || expression(exprList)
 	private ParseNode parseAtomicExpression() {
 		if(!startsAtomicExpression(nowReading)) {
 			return syntaxErrorNode("atomic expression");
@@ -740,12 +781,41 @@ public class Parser {
 		else if(startsNewExpression(nowReading)) {
 			return parseNewExpression();
 		}
+		else if(startsLambdaExpression(nowReading)) {
+			ParseNode lambda = parseLambdaExpression();
+			
+			if(startsParenthesesExpression(nowReading)) {
+				expect(Punctuator.OPEN_PARENTHESES);
+				ParseNode para = parseParaExpressionList();
+				expect(Punctuator.CLOSE_PARENTHESES);
+				
+				return new FunctionInvocationNode(lambda, para);
+			}
+			
+			return lambda;
+		}
 		else {
 			return parseLiteral();
 		}
 	}
+	
+	private ParseNode parseParaExpressionList() {
+		ParseNode paraList = new ParaExpressionListNode();
+		
+		while(startsExpression(nowReading)) {
+			ParseNode expr = parseExpression();
+			
+			paraList.appendChild(expr);
+			
+			if(nowReading.isLextant(Punctuator.SEPARATOR)) {
+				expect(Punctuator.SEPARATOR);
+			}
+		}
+		
+		return paraList;
+	}
 	private boolean startsAtomicExpression(Token token) {
-		return startsLiteral(token) || startsParenthesesExpression(token) || startsBracketExpression(token) || startsNewExpression(token);
+		return startsLiteral(token) || startsParenthesesExpression(token) || startsBracketExpression(token) || startsNewExpression(token) || startsLambdaExpression(token);
 	}
 		
 		
@@ -899,8 +969,18 @@ public class Parser {
 		if(!startsIdentifier(nowReading)) {
 			return syntaxErrorNode("identifier");
 		}
+		ParseNode identifier = new IdentifierNode(nowReading);
 		readToken();
-		return new IdentifierNode(previouslyRead);
+		
+		if(startsParenthesesExpression(nowReading)) {
+			expect(Punctuator.OPEN_PARENTHESES);
+			ParseNode para = parseParaExpressionList();
+			expect(Punctuator.CLOSE_PARENTHESES);
+			
+			return new FunctionInvocationNode(identifier, para);
+		}
+		
+		return identifier;
 	}
 	private boolean startsIdentifier(Token token) {
 		return token instanceof IdentifierToken;
