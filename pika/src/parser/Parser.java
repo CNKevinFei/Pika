@@ -105,6 +105,12 @@ public class Parser {
 		if(startsWhileStatement(nowReading)) {
 			return parseWhileStatement();
 		}
+		if(startsBreakStatement(nowReading)) {
+			return parseBreakStatement();
+		}
+		if(startsContinueStatement(nowReading)) {
+			return parseContinueStatement();
+		}
 		if(startsReleaseStatement(nowReading)) {
 			return parseReleaseStatement();
 		}
@@ -117,7 +123,9 @@ public class Parser {
 			   startsAssignmentStatement(token)||
 			   startsIfStatement(token)||
 			   startsWhileStatement(token)||
-			   startsReleaseStatement(token);
+			   startsReleaseStatement(token)||
+			   startsBreakStatement(token)||
+			   startsContinueStatement(token);
 	}
 	
 	// printStmt -> PRINT printExpressionList .
@@ -312,6 +320,36 @@ public class Parser {
 	
 	private boolean startsWhileStatement(Token token) {
 		return token.isLextant(Keyword.WHILE);
+	}
+	
+	///////////////////////////////////////////////////////////
+	// break statement
+	
+	private ParseNode parseBreakStatement() {
+		Token token = nowReading;
+		expect(Keyword.BREAK);
+		expect(Punctuator.TERMINATOR);
+		
+		return new BreakStatementNode(token);
+	}
+	
+	private boolean startsBreakStatement(Token token) {
+		return token.isLextant(Keyword.BREAK);
+	}
+	
+	///////////////////////////////////////////////////////////
+	// continue statement
+	
+	private ParseNode parseContinueStatement() {
+		Token token = nowReading;
+		expect(Keyword.CONTINUE);
+		expect(Punctuator.TERMINATOR);
+		
+		return new ContinueStatementNode(token);
+	}
+	
+	private boolean startsContinueStatement(Token token) {
+		return token.isLextant(Keyword.CONTINUE);
 	}
 	
 	///////////////////////////////////////////////////////////

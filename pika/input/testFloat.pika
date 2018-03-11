@@ -1,9 +1,8 @@
 exec {
-	var a := _true_.
-	if(!a){
-	print a.
-	}
-	else{
-	print _false_.
+	var a := 1.
+	
+	while(a<5){
+		print a.
+		a := a+1.
 	}
 }

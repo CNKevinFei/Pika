@@ -24,6 +24,8 @@ import tokens.Token;
 
 class SemanticAnalysisVisitor extends ParseNodeVisitor.Default {
 	private int stringBlockSize = 0;
+	private int whileLoopNun = 0;
+	
 	@Override
 	public void visitLeave(ParseNode node) {
 		throw new RuntimeException("Node class unimplemented in SemanticAnalysisVisitor: " + node.getClass());
@@ -405,7 +407,14 @@ class SemanticAnalysisVisitor extends ParseNodeVisitor.Default {
 	}
 	
 	@Override
+	public void visitEnter(WhileStatementNode node) {
+		this.whileLoopNun++;
+	}
+	
+	@Override
 	public void visitLeave(WhileStatementNode node) {
+		this.whileLoopNun--;
+		
 		ParseNode condition = node.child(0);
 		
 		if(!condition.getType().equals(PrimitiveType.BOOLEAN)) {
@@ -413,7 +422,20 @@ class SemanticAnalysisVisitor extends ParseNodeVisitor.Default {
 			node.setType(PrimitiveType.ERROR);
 		}
 	}
-
+	
+	public void visit(BreakStatementNode node) {
+		if(this.whileLoopNun==0) {
+			logError("break statement is not in a valid while loop at Location:"+node.getToken().getLocation());
+			node.setType(PrimitiveType.ERROR);
+		}
+	}
+	
+	public void visit(ContinueStatementNode node) {
+		if(this.whileLoopNun==0) {
+			logError("continue statement is not in a valid while loop at Location:"+node.getToken().getLocation());
+			node.setType(PrimitiveType.ERROR);
+		}
+	}
 	///////////////////////////////////////////////////////////////////////////
 	// array type
 	@Override

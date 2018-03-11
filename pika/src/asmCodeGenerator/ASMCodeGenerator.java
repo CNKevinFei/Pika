@@ -314,8 +314,21 @@ public class ASMCodeGenerator {
 				code.add(Jump, "$WhileLoop"+this.whileNum);
 				
 			code.add(Label, "$WhileEnd"+this.whileNum);
+			
+			this.whileNum++;
 		}
 		
+		public void visit(BreakStatementNode node) {
+			newVoidCode(node);
+			
+			code.add(Jump, "$WhileEnd"+this.whileNum);
+		}
+		
+		public void visit(ContinueStatementNode node) {
+			newVoidCode(node);
+			
+			code.add(Jump, "$WhileLoop"+this.whileNum);
+		}
 		
 		
 		
