@@ -1,4 +1,4 @@
-package symbolTable;
+ package symbolTable;
 
 import asmCodeGenerator.codeStorage.ASMCodeFragment;
 import asmCodeGenerator.runtime.RunTime;

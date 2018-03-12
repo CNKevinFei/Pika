@@ -36,9 +36,6 @@ public interface ParseNodeVisitor {
 	void visitEnter(FunctionBodyNode node);
 	void visitLeave(FunctionBodyNode node);
 	
-	void visitEnter(ParameterListNode node);
-	void visitLeave(ParameterListNode node);
-	
 	void visitEnter(ParameterNode node);
 	void visitLeave(ParameterNode node);
 	
@@ -164,12 +161,6 @@ public interface ParseNodeVisitor {
 			defaultVisitEnter(node);
 		}
 		public void visitLeave(FunctionBodyNode node) {
-			defaultVisitLeave(node);
-		}
-		public void visitEnter(ParameterListNode node) {
-			defaultVisitEnter(node);
-		}
-		public void visitLeave(ParameterListNode node) {
 			defaultVisitLeave(node);
 		}
 		public void visitEnter(ParameterNode node) {

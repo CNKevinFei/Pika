@@ -3,3 +3,4 @@
 /parseTree/
 /semanticAnalyzer/
 /asmCodeGenerator/
+/symbolTable/

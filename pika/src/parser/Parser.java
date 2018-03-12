@@ -484,16 +484,28 @@ public class Parser {
 	
 	// Lambda Parameter Type
 	private ParseNode parseLambdaParamType() {
+		ParseNode node = new LambdaParameterTypeNode();
 		
 		expect(Punctuator.SMALLER);
-		ParseNode list = parseParameterList();
+		
+		while(startsParameter(nowReading)) {
+			ParseNode para = parseParameter();
+			
+			node.appendChild(para);
+			
+			if(nowReading.isLextant(Punctuator.SEPARATOR)) {
+				expect(Punctuator.SEPARATOR);
+			}
+		}
+		
 		expect(Punctuator.GREATER);
 		
 		expect(Punctuator.TO);
 		
 		ParseNode returnType = parseType();
+		node.insertChild(returnType);
 		
-		return new LambdaParameterTypeNode(list, returnType);
+		return node;
 	}
 	
 	private boolean startsLambdaParamType(Token token) {
@@ -520,22 +532,6 @@ public class Parser {
 		return token.isLextant(Punctuator.OPEN_BRACE);
 	}
 	
-	
-	// Parameter List
-	private ParseNode parseParameterList() {
-		ParseNode parameterList = new ParameterListNode();
-		
-		while(startsParameter(nowReading)) {
-			ParseNode param = parseParameter();
-			parameterList.appendChild(param);
-			
-			if(nowReading.isLextant(Punctuator.SEPARATOR)) {
-				expect(Punctuator.SEPARATOR);
-			}
-		}
-		
-		return parameterList;
-	}
 	
 	// Parameter
 	

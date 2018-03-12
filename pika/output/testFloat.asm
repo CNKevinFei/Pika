@@ -344,52 +344,19 @@
         Jump         $$general-runtime-error   
         DLabel       $usable-memory-start      
         DLabel       $global-memory-block      
-        DataZ        4                         
+        DataZ        8                         
         DLabel       $string-constant-memory   
         Label        $$main                    
         PushD        $global-memory-block      
         PushI        0                         
         Add                                    %% a
-        PushI        1                         
+        PushI        8                         
         StoreI                                 
-        Label        $WhileLoop1               
-        Label        -compare-1-arg1           
         PushD        $global-memory-block      
-        PushI        0                         
+        PushI        4                         
         Add                                    %% a
-        LoadI                                  
-        Label        -compare-1-arg2           
-        PushI        5                         
-        Label        -compare-1-sub            
-        Subtract                               
-        JumpNeg      -compare-1-true           
-        Jump         -compare-1-false          
-        Label        -compare-1-true           
-        PushI        1                         
-        Jump         -compare-1-join           
-        Label        -compare-1-false          
-        PushI        0                         
-        Jump         -compare-1-join           
-        Label        -compare-1-join           
-        JumpFalse    $WhileEnd1                
-        PushD        $global-memory-block      
-        PushI        0                         
-        Add                                    %% a
-        LoadI                                  
-        PushD        $print-format-integer     
-        Printf                                 
-        PushD        $global-memory-block      
-        PushI        0                         
-        Add                                    %% a
-        PushD        $global-memory-block      
-        PushI        0                         
-        Add                                    %% a
-        LoadI                                  
-        PushI        1                         
-        Add                                    
+        PushI        8                         
         StoreI                                 
-        Jump         $WhileLoop1               
-        Label        $WhileEnd1                
         Halt                                   
         Label        -mem-manager-make-tags    
         DLabel       $mmgr-tags-size           

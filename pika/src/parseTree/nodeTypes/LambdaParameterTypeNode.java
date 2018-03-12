@@ -7,11 +7,9 @@ import parseTree.ParseNodeVisitor;
 import tokens.LextantToken;
 
 public class LambdaParameterTypeNode extends ParseNode {
-	public LambdaParameterTypeNode(ParseNode list, ParseNode returnType) {
+	public LambdaParameterTypeNode() {
 		super(LextantToken.fakeToken("lambda param type node", Punctuator.LAMBDAPARAMTYPE));
 		
-		this.appendChild(list);
-		this.appendChild(returnType);
 	}
 
 	public LambdaParameterTypeNode(ParseNode node) {

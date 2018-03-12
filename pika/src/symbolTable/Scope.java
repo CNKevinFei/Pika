@@ -1,9 +1,11 @@
       package symbolTable;
 
 import inputHandler.TextLocation;
+import lexicalAnalyzer.Keyword;
 import logging.PikaLogger;
 import parseTree.nodeTypes.IdentifierNode;
 import semanticAnalyzer.types.Type;
+import tokens.LextantToken;
 import tokens.Token;
 
 public class Scope {
@@ -18,7 +20,10 @@ public class Scope {
 		return new Scope(programScopeAllocator(), nullInstance());
 	}
 	public Scope createSubscope() {
-		return new Scope(allocator, this);
+		Scope scope = new Scope(allocator, this);
+		scope.enter();
+
+		return scope;
 	}
 	
 	private static MemoryAllocator programScopeAllocator() {
@@ -35,6 +40,11 @@ public class Scope {
 		this.symbolTable = new SymbolTable();
 		
 		this.allocator = allocator;
+		//allocator.saveState();
+	}
+///////////////////////////////////////////////////////////////////////
+//  enter scope
+	public void enter() {
 		allocator.saveState();
 	}
 	
@@ -73,9 +83,22 @@ public class Scope {
 
 		return binding;
 	}
+	
 	private Binding allocateNewBinding(Type type, TextLocation textLocation, String lexeme, Token conOrVar) {
 		MemoryLocation memoryLocation = allocator.allocate(type.getSize());
 		return new Binding(type, textLocation, memoryLocation, lexeme, conOrVar);
+	}
+	
+	public Binding createFunctionBinding(IdentifierNode identifierNode, Type type) {
+		Token token = identifierNode.getToken();
+		Token conOrVar = LextantToken.fakeToken("const function identifier", Keyword.CONST);
+		symbolTable.errorIfAlreadyDefined(token);
+
+		String lexeme = token.getLexeme();
+		Binding binding = allocateNewBinding(type, token.getLocation(), lexeme, conOrVar);	
+		symbolTable.install(lexeme, binding);
+
+		return binding;
 	}
 	
 ///////////////////////////////////////////////////////////////////////
