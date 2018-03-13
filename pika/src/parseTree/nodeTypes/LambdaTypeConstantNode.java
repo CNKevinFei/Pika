@@ -6,11 +6,8 @@ import parseTree.ParseNodeVisitor;
 import tokens.LextantToken;
 
 public class LambdaTypeConstantNode extends ParseNode {
-	public LambdaTypeConstantNode(ParseNode param, ParseNode returnType) {
+	public LambdaTypeConstantNode() {
 		super(LextantToken.fakeToken("lambda type constant node", Punctuator.LAMBDATYPE));
-		
-		this.appendChild(param);
-		this.appendChild(returnType);
 	}
 
 	public LambdaTypeConstantNode(ParseNode node) {

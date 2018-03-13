@@ -318,6 +318,10 @@ public class MemoryManager {
 		frag.add(PushI, 0);								// no blocks allocated.
 		storeITo(frag, MEM_MANAGER_FIRST_FREE_BLOCK);
 
+		frag.add(Memtop);
+		frag.add(Duplicate);
+		storeITo(frag, RunTime.FRAME_STACK_POINTER);
+		storeITo(frag, RunTime.STACK_POINTER);
 		if(DEBUGGING) {
 			insertDebugMain(frag);
 		}

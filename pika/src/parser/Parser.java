@@ -178,6 +178,7 @@ public class Parser {
 		}
 		
 		ParseNode expr = parseExpression();
+		expect(Punctuator.TERMINATOR);
 		
 		return new ReturnStatementNode(token, expr);
 	}
@@ -196,12 +197,13 @@ public class Parser {
 		}
 		
 		ParseNode callFunc = parseExpression();
+		expect(Punctuator.TERMINATOR);
 		
-		return new ReturnStatementNode(token, callFunc);
+		return new CallStatementNode(token, callFunc);
 	}
 	
 	private boolean startsCallStatement(Token token) {
-		return token.isLextant(Keyword.RETURN);
+		return token.isLextant(Keyword.CALL);
 	}
 	
 	// printStmt -> PRINT printExpressionList .
@@ -899,13 +901,13 @@ public class Parser {
 			return parseArrayType();
 		}
 		else if(nowReading.isLextant(Punctuator.SMALLER)) {
-			ParseNode lambdaTypeList = new TypeListNode();
+			ParseNode lambdaType = new LambdaTypeConstantNode();
 			expect(Punctuator.SMALLER);
 			
 			while(startsType(nowReading)) {
 				ParseNode type = parseType();
 				
-				lambdaTypeList.appendChild(type);
+				lambdaType.appendChild(type);
 				
 				if(nowReading.isLextant(Punctuator.SEPARATOR)) {
 					expect(Punctuator.SEPARATOR);
@@ -917,7 +919,8 @@ public class Parser {
 			
 			ParseNode returnType = parseType();
 			
-			return new LambdaTypeConstantNode(lambdaTypeList, returnType);
+			lambdaType.insertChild(returnType);
+			return lambdaType;
 		}
 		else {
 			return syntaxErrorNode("type node error");

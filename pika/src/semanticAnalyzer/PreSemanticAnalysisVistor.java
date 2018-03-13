@@ -14,6 +14,7 @@ import parseTree.nodeTypes.*;
 import semanticAnalyzer.signatures.FunctionSignature;
 import semanticAnalyzer.signatures.FunctionSignatures;
 import semanticAnalyzer.types.PrimitiveType;
+import semanticAnalyzer.types.LambdaType;
 import semanticAnalyzer.types.ArrayType;
 import semanticAnalyzer.types.Type;
 import semanticAnalyzer.PromotionType;
@@ -68,7 +69,7 @@ public class PreSemanticAnalysisVistor extends ParseNodeVisitor.Default{
 	
 	@Override
 	public void visitLeave(LambdaParameterTypeNode node) {
-		Type type = new LambdaType();
+		LambdaType type = new LambdaType();
 		
 		assert node.nChildren()>0;
 		
@@ -84,5 +85,48 @@ public class PreSemanticAnalysisVistor extends ParseNodeVisitor.Default{
 	@Override
 	public void visitLeave(ParameterNode node) {
 		node.setType(node.child(0).getType());
+	}
+	
+	@Override
+	public void visit(TypeConstantNode node) {
+		if(node.getToken().isLextant(Keyword.INT)) {
+			node.setType(PrimitiveType.INTEGER);
+		}
+		else if(node.getToken().isLextant(Keyword.FLOAT)) {
+			node.setType(PrimitiveType.FLOAT);
+		}
+		else if(node.getToken().isLextant(Keyword.BOOL)) {
+			node.setType(PrimitiveType.BOOLEAN);
+		}
+		else if(node.getToken().isLextant(Keyword.CHAR)) {
+			node.setType(PrimitiveType.CHAR);
+		}
+		else if(node.getToken().isLextant(Keyword.STRING)) {
+			node.setType(PrimitiveType.STRING);
+		}
+		else if(node.getToken().isLextant(Keyword.RAT)) {
+			node.setType(PrimitiveType.RATIONAL);
+		}
+	}
+	
+	@Override
+	public void visitLeave(ArrayTypeConstantNode node) {
+		Type type = node.child(0).getType();
+		
+		node.setType(new ArrayType(type));
+	}
+	
+	@Override
+	public void visitLeave(LambdaTypeConstantNode node) {
+		LambdaType type = new LambdaType();
+		
+		assert node.nChildren()>0;
+		type.setReturnType(node.child(0).getType());
+		
+		for(int i = 1; i < node.nChildren(); i++) {
+			type.addParaType(node.child(i).getType());
+		}
+		
+		node.setType(type);
 	}
 }

@@ -39,6 +39,7 @@ public class ASMCodeGenerator {
 		
 		code.append( RunTime.getEnvironment() );
 		code.append( globalVariableBlockASM() );
+		code.append( frameStackPointer());
 		code.append( stringConstantBlock());
 		code.append( programASM() );
 		code.append( MemoryManager.codeForAfterApplication() );
@@ -53,6 +54,13 @@ public class ASMCodeGenerator {
 		ASMCodeFragment code = new ASMCodeFragment(GENERATES_VOID);
 		code.add(DLabel, RunTime.GLOBAL_MEMORY_BLOCK);
 		code.add(DataZ, globalBlockSize);
+		return code;
+	}
+	private ASMCodeFragment frameStackPointer() {
+		ASMCodeFragment code = new ASMCodeFragment(GENERATES_VOID);
+		code.add(DLabel, RunTime.FRAME_STACK_POINTER);
+		code.add(DataZ, 4);
+		
 		return code;
 	}
 	private ASMCodeFragment stringConstantBlock() {

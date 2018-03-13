@@ -1,7 +1,12 @@
-exec {
-	var a := 8.	
-	{
-		var a := 8.
-	}
+func add<int a, int b, int c>->int {
+	var x := 5.
+	return 1.
+}
 
+exec {
+	var x := _true_.
+	{
+	var add := 5.
+	}
+	x := add(1,2,3).
 }

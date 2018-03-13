@@ -1,4 +1,4 @@
-        Jump         $$main                    
+        Jump         $$main                  
         DLabel       $eat-location-zero        
         DataZ        8                         
         DLabel       $print-format-integer     
@@ -123,7 +123,12 @@
         DLabel       $global-memory-block      
         DataZ        8                         
         DLabel       $string-constant-memory   
-        Label        $$main                    
+        Label        $$main
+        Memtop    
+        PushI        -4
+        Add
+        PushI        100
+        StoreI                
         PushD        $global-memory-block      
         PushI        0                         
         Add                                    %% x

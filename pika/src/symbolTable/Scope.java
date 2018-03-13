@@ -25,11 +25,35 @@ public class Scope {
 
 		return scope;
 	}
+	public static Scope createParameterScope() {
+		Scope scope = new Scope(parameterScopeAllocator(), nullInstance());
+		scope.enter();
+		
+		return scope;
+	}
+	public static Scope createFunctionScope() {
+		Scope scope = new Scope(functionScopeAllocator(), nullInstance());
+		scope.enter();
+		
+		return scope;
+	}
 	
 	private static MemoryAllocator programScopeAllocator() {
 		return new PositiveMemoryAllocator(
 				MemoryAccessMethod.DIRECT_ACCESS_BASE, 
 				MemoryLocation.GLOBAL_VARIABLE_BLOCK);
+	}
+	
+	private static MemoryAllocator parameterScopeAllocator() {
+		return new ParameterMemoryAllocator(
+				MemoryAccessMethod.INDIRECT_ACCESS_BASE, 
+				MemoryLocation.FRAME_POINTER);
+	}
+	
+	private static MemoryAllocator functionScopeAllocator() {
+		return new FunctionMemoryAllocator(
+				MemoryAccessMethod.INDIRECT_ACCESS_BASE, 
+				MemoryLocation.FRAME_POINTER);
 	}
 	
 //////////////////////////////////////////////////////////////////////
@@ -69,6 +93,13 @@ public class Scope {
 	public int getAllocatedSize() {
 		return allocator.getMaxAllocatedSize();
 	}
+	// for function parameters
+	
+	public void resetOffset() {
+		assert allocator instanceof ParameterMemoryAllocator;
+		
+		((ParameterMemoryAllocator)allocator).resetOffset();
+	}
 
 ///////////////////////////////////////////////////////////////////////
 //bindings
@@ -86,6 +117,7 @@ public class Scope {
 	
 	private Binding allocateNewBinding(Type type, TextLocation textLocation, String lexeme, Token conOrVar) {
 		MemoryLocation memoryLocation = allocator.allocate(type.getSize());
+
 		return new Binding(type, textLocation, memoryLocation, lexeme, conOrVar);
 	}
 	
@@ -100,7 +132,7 @@ public class Scope {
 
 		return binding;
 	}
-	
+
 ///////////////////////////////////////////////////////////////////////
 //toString
 	public String toString() {

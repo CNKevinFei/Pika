@@ -1,6 +1,9 @@
 package semanticAnalyzer;
 
 import java.util.Arrays;
+
+import static org.junit.Assert.assertNotNull;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,6 +17,7 @@ import parseTree.nodeTypes.*;
 import semanticAnalyzer.signatures.FunctionSignature;
 import semanticAnalyzer.signatures.FunctionSignatures;
 import semanticAnalyzer.types.PrimitiveType;
+import semanticAnalyzer.types.LambdaType;
 import semanticAnalyzer.types.ArrayType;
 import semanticAnalyzer.types.Type;
 import semanticAnalyzer.PromotionType;
@@ -26,10 +30,10 @@ class SemanticAnalysisVisitor extends ParseNodeVisitor.Default {
 	private int stringBlockSize = 0;
 	private int whileLoopNun = 0;
 	
-	@Override
+	/*@Override
 	public void visitLeave(ParseNode node) {
 		throw new RuntimeException("Node class unimplemented in SemanticAnalysisVisitor: " + node.getClass());
-	}
+	}*/
 	
 	///////////////////////////////////////////////////////////////////////////
 	// constructs larger than statements
@@ -47,7 +51,12 @@ class SemanticAnalysisVisitor extends ParseNodeVisitor.Default {
 	public void visitLeave(MainBlockNode node) {
 		leaveScope(node);
 	}
-	
+	public void visitEnter(LambdaNode node) {
+		enterParameterScope(node);
+	}
+	public void visitLeave(LambdaNode node) {
+		leaveScope(node);
+	}
 	
 	///////////////////////////////////////////////////////////////////////////
 	// helper methods for scoping.
@@ -59,7 +68,12 @@ class SemanticAnalysisVisitor extends ParseNodeVisitor.Default {
 		Scope baseScope = node.getLocalScope();
 		Scope scope = baseScope.createSubscope();
 		node.setScope(scope);
-	}		
+	}
+	private void enterParameterScope(ParseNode node) {
+		Scope scope = Scope.createParameterScope();
+
+		node.setScope(scope);
+	}
 	private void leaveScope(ParseNode node) {
 		node.getScope().leave();
 	}
@@ -143,8 +157,81 @@ class SemanticAnalysisVisitor extends ParseNodeVisitor.Default {
 			logError("Assignment of "+"\""+value.getType()+"\""+" to "+"\""+" "+variable.getType()+"\""+" failed.");
 		}
 	}
+	///////////////////////////////////////////////////////////////////////////
+	// Lambda part
+	@Override
+	public void visitLeave(LambdaParameterTypeNode node) {
+		node.getLocalScope().resetOffset();
+	}
 	
-
+	@Override
+	public void visitLeave(ParameterNode node) {
+		IdentifierNode identifier = (IdentifierNode)node.child(1);
+		Type type = node.getType();
+		
+		node.setType(type);
+		
+		identifier.setType(type);
+		identifier.setConOrVar(LextantToken.fakeToken("parameter", Keyword.CONST));
+		addBinding(identifier, type);
+	}
+	
+	///////////////////////////////////////////////////////////////////////////
+	// function body
+	@Override
+	public void visitEnter(FunctionBodyNode node) {
+		Scope scope = Scope.createFunctionScope();
+		
+		node.setScope(scope);
+	}
+	@Override
+	public void visitLeave(FunctionBodyNode node) {
+		leaveScope(node);
+	}
+	
+	///////////////////////////////////////////////////////////////////////////
+	// return
+	@Override
+	public void visitLeave(ReturnStatementNode node) {
+		Type type = null;
+		
+		for(ParseNode pathNode: node.pathToRoot()) {
+			if(pathNode instanceof LambdaNode) {
+				type = ((LambdaType)(pathNode.getType())).getReturnType();
+			}
+		}
+		
+		assert node.child(0).getType().equivalent(type); 
+	}
+	
+	///////////////////////////////////////////////////////////////////////////
+	// call
+	
+	@Override
+	public void visitLeave(CallStatementNode node) {
+		assert node.child(0) instanceof FunctionInvocationNode; 
+	}
+	
+	///////////////////////////////////////////////////////////////////////////
+	// function invocation part
+	
+	@Override
+	public void visitLeave(FunctionInvocationNode node) {
+		assert node.child(0).getType() instanceof LambdaType;
+		List<Type> paraType = ((LambdaType)(node.child(0).getType())).getParaType();
+		List<ParseNode> input = node.child(1).getChildren();
+		assert paraType.size()==input.size();
+		
+		for(int i = 0; i < paraType.size(); i++) {
+			if(!paraType.get(i).equivalent(input.get(i).getType())) {
+				logError("function invocation: type doesnt match.");
+				
+				return;
+			}
+		}
+		
+		node.setType(((LambdaType)(node.child(0).getType())).getReturnType());
+	}
 	///////////////////////////////////////////////////////////////////////////
 	// expressions
 	@Override
@@ -437,12 +524,12 @@ class SemanticAnalysisVisitor extends ParseNodeVisitor.Default {
 	}
 	///////////////////////////////////////////////////////////////////////////
 	// array type
-	@Override
+	/*@Override
 	public void visitLeave(ArrayTypeConstantNode node) {
 		Type type = node.child(0).getType();
 		
 		node.setType(new ArrayType(type));
-	}
+	}*/
 	
 	///////////////////////////////////////////////////////////////////////////
 	// simple leaf nodes
@@ -474,7 +561,8 @@ class SemanticAnalysisVisitor extends ParseNodeVisitor.Default {
 	public void visit(CharConstantNode node) {
 		node.setType(PrimitiveType.CHAR);
 	}
-	@Override
+	
+	/*@Override
 	public void visit(TypeConstantNode node) {
 		if(node.getToken().isLextant(Keyword.INT)) {
 			node.setType(PrimitiveType.INTEGER);
@@ -494,7 +582,7 @@ class SemanticAnalysisVisitor extends ParseNodeVisitor.Default {
 		else if(node.getToken().isLextant(Keyword.RAT)) {
 			node.setType(PrimitiveType.RATIONAL);
 		}
-	}
+	}*/
 	@Override
 	public void visit(NewlineNode node) {
 	}
@@ -508,7 +596,7 @@ class SemanticAnalysisVisitor extends ParseNodeVisitor.Default {
 	// IdentifierNodes, with helper methods
 	@Override
 	public void visit(IdentifierNode node) {
-		if(!isBeingDeclared(node)) {		
+		if(!isBeingDeclared(node) && !(node.getParent() instanceof ParameterNode)) {		
 			Binding binding = node.findVariableBinding();
 			
 			node.setType(binding.getType());

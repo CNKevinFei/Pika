@@ -1,16 +1,16 @@
 package parseTree.nodeTypes;
 
-import lexicalAnalyzer.Punctuator;
 import parseTree.ParseNode;
 import parseTree.ParseNodeVisitor;
-import tokens.LextantToken;
+import tokens.Token;
 
-public class TypeListNode extends ParseNode {
+public class CallStatementNode extends ParseNode {
 
-	public TypeListNode() {
-		super(LextantToken.fakeToken("lambda type node", Punctuator.TYPELIST));
+	public CallStatementNode(Token token, ParseNode node) {
+		super(token);
+		this.appendChild(node);
 	}
-	public TypeListNode(ParseNode node) {
+	public CallStatementNode(ParseNode node) {
 		super(node);
 	}
 	
