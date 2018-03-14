@@ -61,6 +61,9 @@ public class IdentifierNode extends ParseNode {
 				declarationScope = current.getScope();
 				return current.bindingOf(identifier);
 			}
+			else if(current instanceof LambdaNode) {
+				break;
+			}
 		}
 		useBeforeDefineError();
 		return Binding.nullInstance();
