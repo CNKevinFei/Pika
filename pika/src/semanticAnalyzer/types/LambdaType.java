@@ -27,7 +27,7 @@ public class LambdaType implements Type{
 	}
 	
 	public int getSize() {
-		return 0;
+		return 4;
 	}
 	
 	// information print
@@ -57,7 +57,7 @@ public class LambdaType implements Type{
 	
 	public boolean equivalent(Type type) {
 		if(type instanceof LambdaType) {
-			if(!this.getReturnType().equivalent(type)) {
+			if(!this.getReturnType().equivalent(((LambdaType) type).getReturnType())) {
 				return false;
 			}
 			

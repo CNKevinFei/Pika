@@ -26,7 +26,7 @@ public class PromotionType {
 	}
 	
 	public static boolean canPromote(Type testType) {
-		if(testType instanceof ArrayType) {
+		if(testType instanceof ArrayType || testType instanceof LambdaType) {
 			return  false;
 		}
 		PromotionType promotionType = getPromotionTypeObject((PrimitiveType)testType);

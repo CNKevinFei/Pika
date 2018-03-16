@@ -65,6 +65,12 @@ public class IdentifierNode extends ParseNode {
 				break;
 			}
 		}
+		
+		if(getRoot().containsBindingOf(identifier)) {
+			declarationScope = getRoot().getScope();
+			return getRoot().bindingOf(identifier);
+		}
+		
 		useBeforeDefineError();
 		return Binding.nullInstance();
 	}

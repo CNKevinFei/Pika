@@ -137,6 +137,15 @@ public class ParseNode {
 		return new PathToRootIterable(this);
 	}
 	
+	public ParseNode getRoot() {
+		ParseNode root = this;
+		
+		while(root.parent!=null) {
+			root = root.parent;
+		}
+		
+		return root;
+	}
 ////////////////////////////////////////////////////////////////////////////////////
 // toString() 
 

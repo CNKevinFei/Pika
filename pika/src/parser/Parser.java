@@ -173,14 +173,22 @@ public class Parser {
 		Token token = nowReading;
 		expect(Keyword.RETURN);
 		
-		if(!startsExpression(nowReading)) {
+		if(startsExpression(nowReading)) {
+			ParseNode expr = parseExpression();
+			expect(Punctuator.TERMINATOR);
+			
+			return new ReturnStatementNode(token, expr);
+		}
+		else if(nowReading.isLextant(Punctuator.TERMINATOR)) {
+			expect(Punctuator.TERMINATOR);
+			
+			return new ReturnStatementNode(token);
+		}
+		else {
 			return syntaxErrorNode("return statement");
 		}
 		
-		ParseNode expr = parseExpression();
-		expect(Punctuator.TERMINATOR);
 		
-		return new ReturnStatementNode(token, expr);
 	}
 	
 	private boolean startsReturnStatement(Token token) {
@@ -782,12 +790,12 @@ public class Parser {
 		else if(startsLambdaExpression(nowReading)) {
 			ParseNode lambda = parseLambdaExpression();
 			
-			if(startsParenthesesExpression(nowReading)) {
+			while(startsParenthesesExpression(nowReading)) {
 				expect(Punctuator.OPEN_PARENTHESES);
 				ParseNode para = parseParaExpressionList();
 				expect(Punctuator.CLOSE_PARENTHESES);
 				
-				return new FunctionInvocationNode(lambda, para);
+				lambda = new FunctionInvocationNode(lambda, para);
 			}
 			
 			return lambda;
@@ -992,12 +1000,12 @@ public class Parser {
 		ParseNode identifier = new IdentifierNode(nowReading);
 		readToken();
 		
-		if(startsParenthesesExpression(nowReading)) {
+		while(startsParenthesesExpression(nowReading)) {
 			expect(Punctuator.OPEN_PARENTHESES);
 			ParseNode para = parseParaExpressionList();
 			expect(Punctuator.CLOSE_PARENTHESES);
-			
-			return new FunctionInvocationNode(identifier, para);
+				
+			identifier = new FunctionInvocationNode(identifier, para);
 		}
 		
 		return identifier;

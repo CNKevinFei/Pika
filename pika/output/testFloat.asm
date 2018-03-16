@@ -21,6 +21,14 @@
         PushD        $heap-first-free          
         Exchange                               
         StoreI                                 
+        Memtop                                 
+        Duplicate                              
+        PushD        $frame-stack-pointer      
+        Exchange                               
+        StoreI                                 
+        PushD        $stack-pointer            
+        Exchange                               
+        StoreI                                 
         Jump         $$main                    
         DLabel       $eat-location-zero        
         DataZ        8                         
@@ -342,21 +350,83 @@
         Label        $$a-string-error          
         PushD        $errors-record-deleted-error 
         Jump         $$general-runtime-error   
+        DLabel       $no-retuirn-error         
+        DataC        119                       %% "without return statement."
+        DataC        105                       
+        DataC        116                       
+        DataC        104                       
+        DataC        111                       
+        DataC        117                       
+        DataC        116                       
+        DataC        32                        
+        DataC        114                       
+        DataC        101                       
+        DataC        116                       
+        DataC        117                       
+        DataC        114                       
+        DataC        110                       
+        DataC        32                        
+        DataC        115                       
+        DataC        116                       
+        DataC        97                        
+        DataC        116                       
+        DataC        101                       
+        DataC        109                       
+        DataC        101                       
+        DataC        110                       
+        DataC        116                       
+        DataC        46                        
+        DataC        0                         
+        Label        $$function-without-return 
+        PushD        $no-retuirn-error         
+        Jump         $$general-runtime-error   
         DLabel       $usable-memory-start      
         DLabel       $global-memory-block      
-        DataZ        8                         
+        DataZ        4                         
+        DLabel       $frame-stack-pointer      
+        DataZ        4                         
+        DLabel       $stack-pointer            
+        DataZ        4                         
         DLabel       $string-constant-memory   
         Label        $$main                    
         PushD        $global-memory-block      
         PushI        0                         
-        Add                                    %% a
-        PushI        8                         
+        Add                                    %% hello
+        PushPC                                 
+        PushI        3                         
+        Add                                    
+        Jump         -function-1-skip          
+        PushD        $stack-pointer            
+        LoadI                                  
+        PushI        -4                        
+        Add                                    
+        Exchange                               
+        StoreI                                 
+        PushD        $stack-pointer            
+        LoadI                                  
+        PushI        -8                        
+        Add                                    
+        PushD        $frame-stack-pointer      
+        LoadI                                  
+        StoreI                                 
+        PushD        $frame-stack-pointer      
+        PushD        $stack-pointer            
+        LoadI                                  
+        StoreI                                 
+        PushD        $stack-pointer            
+        PushD        $frame-stack-pointer      
+        LoadI                                  
+        PushI        -8                        
+        Add                                    
+        StoreI                                 
+        Jump         $$function-without-return 
+        Label        -function-1-skip          
         StoreI                                 
         PushD        $global-memory-block      
-        PushI        4                         
-        Add                                    %% a
-        PushI        8                         
-        StoreI                                 
+        PushI        0                         
+        Add                                    %% hello
+        LoadI                                  
+        CallV                                  
         Halt                                   
         Label        -mem-manager-make-tags    
         DLabel       $mmgr-tags-size           

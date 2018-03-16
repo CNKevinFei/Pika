@@ -76,6 +76,7 @@ public class PreSemanticAnalysisVistor extends ParseNodeVisitor.Default{
 		type.setReturnType(node.child(0).getType());
 		
 		for(int i = 1; i < node.nChildren(); i++) {
+			assert !node.child(i).getType().equivalent(PrimitiveType.VOID);
 			type.addParaType(node.child(i).getType());
 		}
 		
@@ -104,6 +105,9 @@ public class PreSemanticAnalysisVistor extends ParseNodeVisitor.Default{
 		else if(node.getToken().isLextant(Keyword.STRING)) {
 			node.setType(PrimitiveType.STRING);
 		}
+		else if(node.getToken().isLextant(Keyword.VOID)) {
+			node.setType(PrimitiveType.VOID);
+		}
 		else if(node.getToken().isLextant(Keyword.RAT)) {
 			node.setType(PrimitiveType.RATIONAL);
 		}
@@ -112,7 +116,7 @@ public class PreSemanticAnalysisVistor extends ParseNodeVisitor.Default{
 	@Override
 	public void visitLeave(ArrayTypeConstantNode node) {
 		Type type = node.child(0).getType();
-		
+		assert !type.equivalent(PrimitiveType.VOID);
 		node.setType(new ArrayType(type));
 	}
 	
@@ -124,6 +128,7 @@ public class PreSemanticAnalysisVistor extends ParseNodeVisitor.Default{
 		type.setReturnType(node.child(0).getType());
 		
 		for(int i = 1; i < node.nChildren(); i++) {
+			assert !node.child(i).getType().equivalent(PrimitiveType.VOID);
 			type.addParaType(node.child(i).getType());
 		}
 		

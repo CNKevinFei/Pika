@@ -10,6 +10,9 @@ public class ReturnStatementNode extends ParseNode {
 		super(token);
 		this.appendChild(node);
 	}
+	public ReturnStatementNode(Token token) {
+		super(token);
+	}
 	public ReturnStatementNode(ParseNode node) {
 		super(node);
 	}

@@ -193,15 +193,29 @@ class SemanticAnalysisVisitor extends ParseNodeVisitor.Default {
 	// return
 	@Override
 	public void visitLeave(ReturnStatementNode node) {
-		Type type = null;
-		
-		for(ParseNode pathNode: node.pathToRoot()) {
-			if(pathNode instanceof LambdaNode) {
-				type = ((LambdaType)(pathNode.getType())).getReturnType();
+		if(node.nChildren()==1) {
+			Type type = null;
+			
+			for(ParseNode pathNode: node.pathToRoot()) {
+				if(pathNode instanceof LambdaNode) {
+					type = ((LambdaType)(pathNode.getType())).getReturnType();
+				}
 			}
+			
+			assert node.child(0).getType().equivalent(type);
 		}
-		
-		assert node.child(0).getType().equivalent(type); 
+		else {
+			Type type = null;
+			
+			for(ParseNode pathNode: node.pathToRoot()) {
+				if(pathNode instanceof LambdaNode) {
+					type = ((LambdaType)(pathNode.getType())).getReturnType();
+				}
+			}
+			
+			assert type.equivalent(PrimitiveType.VOID);
+		}
+		 
 	}
 	
 	///////////////////////////////////////////////////////////////////////////

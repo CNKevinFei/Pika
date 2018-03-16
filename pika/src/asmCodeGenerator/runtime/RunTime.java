@@ -29,6 +29,8 @@ public class RunTime {
 	
 	public static final String RAT_WITH_ZERO_DENOMINATOR_RUNTIME_ERROR = "$$r-denominator-zero";
 	
+	public static final String FUNCTION_WITHOUT_RETURN_RUNTIME_ERROR = "$$function-without-return";
+	
 	public static final String ARRAY_INDEX_NEGATIVE = "$$a-index-negative";
 	public static final String ARRAY_INDEX_EXCEED = "$$a-index-exceed";
 	public static final String RECORD_ARRAY_ERROR = "$$a-record-error";
@@ -88,6 +90,7 @@ public class RunTime {
 		ratDenominatorZeroError(frag);
 		arrayIndexError(frag);
 		recordError(frag);
+		noReturnError(frag);
 		
 		return frag;
 	}
@@ -186,6 +189,17 @@ public class RunTime {
 		
 		frag.add(Label, RECORD_STRING_ERROR);
 		frag.add(PushD, recordDeletedError);
+		frag.add(Jump, GENERAL_RUNTIME_ERROR);
+	}
+	
+	private void noReturnError(ASMCodeFragment frag) {
+		String noreturnError = "$no-retuirn-error";
+				
+		frag.add(DLabel, noreturnError);
+		frag.add(DataS, "without return statement.");
+		
+		frag.add(Label, FUNCTION_WITHOUT_RETURN_RUNTIME_ERROR);
+		frag.add(PushD, noreturnError);
 		frag.add(Jump, GENERAL_RUNTIME_ERROR);
 	}
 	

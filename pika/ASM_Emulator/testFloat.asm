@@ -123,49 +123,11 @@
         DLabel       $global-memory-block      
         DataZ        8                         
         DLabel       $string-constant-memory   
-        Label        $$main
-        Memtop    
-        PushI        -4
-        Add
-        PushI        100
-        StoreI                
-        PushD        $global-memory-block      
-        PushI        0                         
-        Add                                    %% x
-        PushI        5                         
-        StoreI                                 
-        PushD        $global-memory-block      
-        PushI        4                         
-        Add                                    %% x
-        PushI        5                         
-        StoreI                                 
-        PushD        $global-memory-block      
-        PushI        4                         
-        Add                                    %% x
-        PushD        $global-memory-block      
-        PushI        4                         
-        Add                                    %% x
-        LoadI                                  
-        PushD        $global-memory-block      
-        PushI        4                         
-        Add                                    %% x
-        LoadI                                  
-        Add                                    
-        StoreI                                 
-        PushD        $global-memory-block      
-        PushI        4                         
-        Add                                    %% x
-        LoadI                                  
+        Label        $$main  
+        PushPC    
         PushD        $print-format-integer     
-        Printf                                 
-        PushD        $print-format-newline     
-        Printf                                 
-        PushD        $global-memory-block      
-        PushI        0                         
-        Add                                    %% x
-        LoadI                                  
+        Printf   
+        PushPC    
         PushD        $print-format-integer     
-        Printf                                 
-        PushD        $print-format-newline     
-        Printf                                 
+        Printf                                                                                 
         Halt                                   

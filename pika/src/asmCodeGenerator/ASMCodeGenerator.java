@@ -14,6 +14,7 @@ import lexicalAnalyzer.Punctuator;
 import parseTree.*;
 import parseTree.nodeTypes.*;
 import semanticAnalyzer.types.PrimitiveType;
+import semanticAnalyzer.types.LambdaType;
 import semanticAnalyzer.types.Type;
 import semanticAnalyzer.types.ArrayType;
 import symbolTable.Binding;
@@ -59,6 +60,8 @@ public class ASMCodeGenerator {
 	private ASMCodeFragment frameStackPointer() {
 		ASMCodeFragment code = new ASMCodeFragment(GENERATES_VOID);
 		code.add(DLabel, RunTime.FRAME_STACK_POINTER);
+		code.add(DataZ, 4);
+		code.add(DLabel, RunTime.STACK_POINTER);
 		code.add(DataZ, 4);
 		
 		return code;
@@ -173,6 +176,9 @@ public class ASMCodeGenerator {
 			else if(node.getType() instanceof ArrayType) {
 				code.add(LoadI);
 			}
+			else if(node.getType() instanceof LambdaType) {
+				code.add(LoadI);
+			}
 			else {
 				assert false : "node " + node;
 			}
@@ -198,6 +204,7 @@ public class ASMCodeGenerator {
 		}
 		public void visitLeave(MainBlockNode node) {
 			newVoidCode(node);
+			
 			for(ParseNode child : node.getChildren()) {
 				ASMCodeFragment childCode = removeVoidCode(child);
 				code.append(childCode);
@@ -205,7 +212,177 @@ public class ASMCodeGenerator {
 		}
 		
 		
+		////////////////////////////////////////////////////////////////////////////
+		// function definitions
+		public void visitLeave(FunctionDeclarationNode node) {
+			newVoidCode(node);
+			
+			ASMCodeFragment identifier = removeAddressCode(node.child(0));
+			ASMCodeFragment function = removeValueCode(node.child(1));
+			
+			code.append(identifier);
+			code.append(function);
+			code.add(StoreI);
+		}
+		
+		public void visitLeave(LambdaNode node) {
+			newValueCode(node);
+			
+			code.append(removeValueCode(node.child(1)));
+		}
+		
+		public void visitLeave(FunctionBodyNode node) {
+			newValueCode(node);
+			Labeller labeller = new Labeller("function");
+			String skip = labeller.newLabel("skip");
+			
+			code.add(PushPC);
+			code.add(PushI, 3);
+			code.add(Add);
+			code.add(Jump, skip);
+			
+			// addr->MEM[sp]
+			code.add(PushD, RunTime.STACK_POINTER);
+			code.add(LoadI);
+			code.add(PushI, -4);
+			code.add(Add);
+			code.add(Exchange);
+			code.add(StoreI);
+			
+			// fp->MEM[sp-4]
+			code.add(PushD, RunTime.STACK_POINTER);
+			code.add(LoadI);
+			code.add(PushI, -8);
+			code.add(Add);
+			code.add(PushD, RunTime.FRAME_STACK_POINTER);
+			code.add(LoadI);
+			code.add(StoreI);
+			
+			// sp->fp
+			code.add(PushD, RunTime.FRAME_STACK_POINTER);
+			code.add(PushD, RunTime.STACK_POINTER);
+			code.add(LoadI);
+			code.add(StoreI);
+			
+			// fp-scopeSize -> sp
+			code.add(PushD, RunTime.STACK_POINTER);
+			code.add(PushD, RunTime.FRAME_STACK_POINTER);
+			code.add(LoadI);
+			code.add(PushI, node.getScope().getAllocatedSize()*(-1));
+			code.add(Add);
+			code.add(StoreI);
+			
+			for(ParseNode child : node.getChildren()) {
+				ASMCodeFragment childCode = removeVoidCode(child);
+				code.append(childCode);
+			}
+		
+			code.add(Jump, RunTime.FUNCTION_WITHOUT_RETURN_RUNTIME_ERROR);
+			code.add(Label, skip);
+		}
+		
+		public void visitLeave(LambdaParameterTypeNode node) {
+			
+		}
+		
+		public void visitLeave(ParameterNode node) {
+			
+		}
+		///////////////////////////////////////////////////////////////////////////
+		// return statement
+		public void visitLeave(ReturnStatementNode node) {
+			newVoidCode(node);
+			if(node.nChildren()==1) {
+				ASMCodeFragment expr = removeValueCode(node.child(0));
+				
+				code.append(expr);
+			}
 
+			
+			// fp->sp
+			code.add(PushD, RunTime.STACK_POINTER);
+			code.add(PushD, RunTime.FRAME_STACK_POINTER);
+			code.add(LoadI);
+			code.add(StoreI);
+			
+			// mem[sp-8]->fp
+			code.add(PushD, RunTime.FRAME_STACK_POINTER);
+			code.add(PushD, RunTime.STACK_POINTER);
+			code.add(LoadI);
+			code.add(PushI, -8);
+			code.add(Add);
+			code.add(LoadI);
+			code.add(StoreI);
+			
+			// mem[sp]->stack
+			code.add(PushD, RunTime.STACK_POINTER);
+			code.add(LoadI);
+			code.add(PushI, -4);
+			code.add(Add);
+			code.add(LoadI);
+			
+			// [...addr]
+			code.add(Return);
+		}
+		
+		///////////////////////////////////////////////////////////////////////////
+		// call
+		public void visitLeave(CallStatementNode node) {
+			newVoidCode(node);
+			ASMCodeFragment func = removeValueCode(node.child(0));
+			
+			code.append(func);
+			if(!node.child(0).getType().equivalent(PrimitiveType.VOID)) {
+				code.add(Pop);
+			}
+		}
+		///////////////////////////////////////////////////////////////////////////
+		// function invocation
+		public void visitLeave(FunctionInvocationNode node) {
+			newValueCode(node);
+			
+			ASMCodeFragment functionAddr = removeValueCode(node.child(0));
+			ASMCodeFragment parameter = removeValueCode(node.child(1));
+			
+			code.append(parameter);
+			code.append(functionAddr);
+			code.add(CallV);
+		}
+		
+		public void visitLeave(ParaExpressionListNode node) {
+			newValueCode(node);
+			
+			for(ParseNode para : node.getChildren()) {
+				// sp-size->sp
+				code.add(PushD, RunTime.STACK_POINTER);
+				code.add(PushD, RunTime.STACK_POINTER);
+				code.add(LoadI);
+				code.add(PushI, para.getType().getSize()*(-1));
+				code.add(Add);
+				code.add(StoreI);
+				
+				// para -> MEM[sp]
+				code.add(PushD, RunTime.STACK_POINTER);
+				code.add(LoadI);
+				code.append(removeValueCode(para));
+				if(para.getType().getSize()==1) {
+					code.add(StoreC);
+				}
+				else if(para.getType().getSize()==4) {
+					code.add(StoreI);
+				}
+				else if(para.getType().getSize()==8) {
+					code.add(StoreF);
+				}
+				else {
+					assert 1==0;
+				}
+				
+				
+			}
+		}
+		
+		
 		///////////////////////////////////////////////////////////////////////////
 		// statements and declarations
 
@@ -283,6 +460,9 @@ public class ASMCodeGenerator {
 				return StoreI;
 			}
 			if(type instanceof ArrayType) {
+				return StoreI;
+			}
+			if(type instanceof LambdaType) {
 				return StoreI;
 			}
 			assert false: "Type " + type + " unimplemented in opcodeForStore()";

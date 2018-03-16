@@ -34,6 +34,7 @@ public class Scope {
 	public static Scope createFunctionScope() {
 		Scope scope = new Scope(functionScopeAllocator(), nullInstance());
 		scope.enter();
+		scope.allocator.allocate(8);
 		
 		return scope;
 	}

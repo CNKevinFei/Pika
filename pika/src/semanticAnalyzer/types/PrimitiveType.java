@@ -6,6 +6,7 @@ public enum PrimitiveType implements Type {
 	INTEGER(4),
 	FLOAT(8),
 	STRING(4),
+	VOID(0),
 	CHAR(1),
 	RATIONAL(8),
 	ERROR(0),			// use as a value when a syntax error has occurred
