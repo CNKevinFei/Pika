@@ -33,6 +33,7 @@ public class RunTime {
 	
 	public static final String ARRAY_INDEX_NEGATIVE = "$$a-index-negative";
 	public static final String ARRAY_INDEX_EXCEED = "$$a-index-exceed";
+	public static final String NEW_NEG_ERROR= "$$new-neg-error";
 	public static final String RECORD_ARRAY_ERROR = "$$a-record-error";
 	public static final String RECORD_STRING_ERROR = "$$a-string-error";
 	public static final String RECORD_ARRAY_DELETED_ERROR = "$$a-record-deleted-error";
@@ -91,7 +92,7 @@ public class RunTime {
 		arrayIndexError(frag);
 		recordError(frag);
 		noReturnError(frag);
-		
+		newNegError(frag);
 		return frag;
 	}
 	private ASMCodeFragment generalRuntimeError(ASMCodeFragment frag) {
@@ -200,6 +201,17 @@ public class RunTime {
 		
 		frag.add(Label, FUNCTION_WITHOUT_RETURN_RUNTIME_ERROR);
 		frag.add(PushD, noreturnError);
+		frag.add(Jump, GENERAL_RUNTIME_ERROR);
+	}
+	
+	private void newNegError(ASMCodeFragment frag) {
+		String newNegError = "$new-neg-error";
+				
+		frag.add(DLabel, newNegError);
+		frag.add(DataS, "negative length given for array.");
+		
+		frag.add(Label, NEW_NEG_ERROR);
+		frag.add(PushD, newNegError);
 		frag.add(Jump, GENERAL_RUNTIME_ERROR);
 	}
 	

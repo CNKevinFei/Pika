@@ -267,7 +267,7 @@ public class LexicalAnalyzer extends ScannerImp implements Scanner {
 			currentLine = c.getLocation().getLineNumber();
 		}
 		
-		if(!c.isCommentEnd())
+		if(startLine != currentLine)
 			input.pushback(c);
 		
 		return findNextToken();

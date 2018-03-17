@@ -380,9 +380,46 @@
         Label        $$function-without-return 
         PushD        $no-retuirn-error         
         Jump         $$general-runtime-error   
+        DLabel       $new-neg-error            
+        DataC        110                       %% "negative length given for array."
+        DataC        101                       
+        DataC        103                       
+        DataC        97                        
+        DataC        116                       
+        DataC        105                       
+        DataC        118                       
+        DataC        101                       
+        DataC        32                        
+        DataC        108                       
+        DataC        101                       
+        DataC        110                       
+        DataC        103                       
+        DataC        116                       
+        DataC        104                       
+        DataC        32                        
+        DataC        103                       
+        DataC        105                       
+        DataC        118                       
+        DataC        101                       
+        DataC        110                       
+        DataC        32                        
+        DataC        102                       
+        DataC        111                       
+        DataC        114                       
+        DataC        32                        
+        DataC        97                        
+        DataC        114                       
+        DataC        114                       
+        DataC        97                        
+        DataC        121                       
+        DataC        46                        
+        DataC        0                         
+        Label        $$new-neg-error           
+        PushD        $new-neg-error            
+        Jump         $$general-runtime-error   
         DLabel       $usable-memory-start      
         DLabel       $global-memory-block      
-        DataZ        4                         
+        DataZ        12                        
         DLabel       $frame-stack-pointer      
         DataZ        4                         
         DLabel       $stack-pointer            
@@ -391,11 +428,11 @@
         Label        $$main                    
         PushD        $global-memory-block      
         PushI        0                         
-        Add                                    %% hello
+        Add                                    %% mul
         PushPC                                 
         PushI        3                         
         Add                                    
-        Jump         -function-1-skip          
+        Jump         -function-2-skip          
         PushD        $stack-pointer            
         LoadI                                  
         PushI        -4                        
@@ -419,14 +456,282 @@
         PushI        -8                        
         Add                                    
         StoreI                                 
-        Jump         $$function-without-return 
-        Label        -function-1-skip          
+        Label        -compare-1-arg1           
+        PushD        $frame-stack-pointer      
+        LoadI                                  
+        PushI        0                         
+        Add                                    %% b
+        LoadI                                  
+        Label        -compare-1-arg2           
+        PushI        1                         
+        Label        -compare-1-sub            
+        Subtract                               
+        JumpFalse    -compare-1-true           
+        Jump         -compare-1-false          
+        Label        -compare-1-true           
+        PushI        1                         
+        Jump         -compare-1-join           
+        Label        -compare-1-false          
+        PushI        0                         
+        Jump         -compare-1-join           
+        Label        -compare-1-join           
+        JumpFalse    $ELSE1                    
+        PushD        $frame-stack-pointer      
+        LoadI                                  
+        PushI        4                         
+        Add                                    %% a
+        LoadI                                  
+        PushD        $stack-pointer            
+        PushD        $frame-stack-pointer      
+        LoadI                                  
+        StoreI                                 
+        PushD        $frame-stack-pointer      
+        PushD        $stack-pointer            
+        LoadI                                  
+        PushI        -8                        
+        Add                                    
+        LoadI                                  
+        StoreI                                 
+        PushD        $stack-pointer            
+        LoadI                                  
+        PushI        -4                        
+        Add                                    
+        LoadI                                  
+        Return                                 
+        Jump         $IFEND1                   
+        Label        $ELSE1                    
+        Label        $IFEND1                   
+        PushD        $stack-pointer            
+        PushD        $stack-pointer            
+        LoadI                                  
+        PushI        -4                        
+        Add                                    
+        StoreI                                 
+        PushD        $stack-pointer            
+        LoadI                                  
+        PushD        $stack-pointer            
+        PushD        $stack-pointer            
+        LoadI                                  
+        PushI        -4                        
+        Add                                    
+        StoreI                                 
+        PushD        $stack-pointer            
+        LoadI                                  
+        PushD        $frame-stack-pointer      
+        LoadI                                  
+        PushI        4                         
+        Add                                    %% a
+        LoadI                                  
+        StoreI                                 
+        PushD        $stack-pointer            
+        PushD        $stack-pointer            
+        LoadI                                  
+        PushI        -4                        
+        Add                                    
+        StoreI                                 
+        PushD        $stack-pointer            
+        LoadI                                  
+        PushD        $frame-stack-pointer      
+        LoadI                                  
+        PushI        0                         
+        Add                                    %% b
+        LoadI                                  
+        PushI        1                         
+        Subtract                               
         StoreI                                 
         PushD        $global-memory-block      
         PushI        0                         
-        Add                                    %% hello
+        Add                                    %% mul
         LoadI                                  
         CallV                                  
+        PushD        $stack-pointer            
+        PushD        $stack-pointer            
+        LoadI                                  
+        PushI        8                         
+        Add                                    
+        StoreI                                 
+        StoreI                                 
+        PushD        $stack-pointer            
+        PushD        $stack-pointer            
+        LoadI                                  
+        PushI        -4                        
+        Add                                    
+        StoreI                                 
+        PushD        $stack-pointer            
+        LoadI                                  
+        PushD        $frame-stack-pointer      
+        LoadI                                  
+        PushI        4                         
+        Add                                    %% a
+        LoadI                                  
+        StoreI                                 
+        PushD        $global-memory-block      
+        PushI        4                         
+        Add                                    %% add
+        LoadI                                  
+        CallV                                  
+        PushD        $stack-pointer            
+        PushD        $stack-pointer            
+        LoadI                                  
+        PushI        8                         
+        Add                                    
+        StoreI                                 
+        PushD        $stack-pointer            
+        PushD        $frame-stack-pointer      
+        LoadI                                  
+        StoreI                                 
+        PushD        $frame-stack-pointer      
+        PushD        $stack-pointer            
+        LoadI                                  
+        PushI        -8                        
+        Add                                    
+        LoadI                                  
+        StoreI                                 
+        PushD        $stack-pointer            
+        LoadI                                  
+        PushI        -4                        
+        Add                                    
+        LoadI                                  
+        Return                                 
+        Jump         $$function-without-return 
+        Label        -function-2-skip          
+        StoreI                                 
+        PushD        $global-memory-block      
+        PushI        4                         
+        Add                                    %% add
+        PushPC                                 
+        PushI        3                         
+        Add                                    
+        Jump         -function-3-skip          
+        PushD        $stack-pointer            
+        LoadI                                  
+        PushI        -4                        
+        Add                                    
+        Exchange                               
+        StoreI                                 
+        PushD        $stack-pointer            
+        LoadI                                  
+        PushI        -8                        
+        Add                                    
+        PushD        $frame-stack-pointer      
+        LoadI                                  
+        StoreI                                 
+        PushD        $frame-stack-pointer      
+        PushD        $stack-pointer            
+        LoadI                                  
+        StoreI                                 
+        PushD        $stack-pointer            
+        PushD        $frame-stack-pointer      
+        LoadI                                  
+        PushI        -8                        
+        Add                                    
+        StoreI                                 
+        PushD        $frame-stack-pointer      
+        LoadI                                  
+        PushI        4                         
+        Add                                    %% a
+        LoadI                                  
+        PushD        $frame-stack-pointer      
+        LoadI                                  
+        PushI        0                         
+        Add                                    %% b
+        LoadI                                  
+        Add                                    
+        PushD        $stack-pointer            
+        PushD        $frame-stack-pointer      
+        LoadI                                  
+        StoreI                                 
+        PushD        $frame-stack-pointer      
+        PushD        $stack-pointer            
+        LoadI                                  
+        PushI        -8                        
+        Add                                    
+        LoadI                                  
+        StoreI                                 
+        PushD        $stack-pointer            
+        LoadI                                  
+        PushI        -4                        
+        Add                                    
+        LoadI                                  
+        Return                                 
+        Jump         $$function-without-return 
+        Label        -function-3-skip          
+        StoreI                                 
+        PushD        $global-memory-block      
+        PushI        8                         
+        Add                                    %% i
+        PushI        100                       
+        StoreI                                 
+        Label        $WhileLoop1               
+        Label        -compare-4-arg1           
+        PushD        $global-memory-block      
+        PushI        8                         
+        Add                                    %% i
+        LoadI                                  
+        Label        -compare-4-arg2           
+        PushI        0                         
+        Label        -compare-4-sub            
+        Subtract                               
+        JumpFalse    -compare-4-false          
+        Jump         -compare-4-true           
+        Label        -compare-4-true           
+        PushI        1                         
+        Jump         -compare-4-join           
+        Label        -compare-4-false          
+        PushI        0                         
+        Jump         -compare-4-join           
+        Label        -compare-4-join           
+        JumpFalse    $WhileEnd1                
+        PushD        $global-memory-block      
+        PushI        8                         
+        Add                                    %% i
+        PushD        $global-memory-block      
+        PushI        8                         
+        Add                                    %% i
+        LoadI                                  
+        PushI        1                         
+        Subtract                               
+        StoreI                                 
+        PushD        $stack-pointer            
+        PushD        $stack-pointer            
+        LoadI                                  
+        PushI        -4                        
+        Add                                    
+        StoreI                                 
+        PushD        $stack-pointer            
+        LoadI                                  
+        PushD        $global-memory-block      
+        PushI        8                         
+        Add                                    %% i
+        LoadI                                  
+        StoreI                                 
+        PushD        $stack-pointer            
+        PushD        $stack-pointer            
+        LoadI                                  
+        PushI        -4                        
+        Add                                    
+        StoreI                                 
+        PushD        $stack-pointer            
+        LoadI                                  
+        PushI        5                         
+        StoreI                                 
+        PushD        $global-memory-block      
+        PushI        0                         
+        Add                                    %% mul
+        LoadI                                  
+        CallV                                  
+        PushD        $stack-pointer            
+        PushD        $stack-pointer            
+        LoadI                                  
+        PushI        8                         
+        Add                                    
+        StoreI                                 
+        PushD        $print-format-integer     
+        Printf                                 
+        PushD        $print-format-space       
+        Printf                                 
+        Jump         $WhileLoop1               
+        Label        $WhileEnd1                
         Halt                                   
         Label        -mem-manager-make-tags    
         DLabel       $mmgr-tags-size           
@@ -1427,21 +1732,29 @@
         DataZ        4                         
         DLabel       $mem-rat-aid-b            
         DataZ        4                         
+        DLabel       $mem-rat-aid-c            
+        DataZ        4                         
         PushD        $mem-rat-aid-return-address 
         Exchange                               
         StoreI                                 
+        PushD        $mem-rat-aid-c            
+        Exchange                               
+        StoreI                                 
         PushD        $mem-rat-aid-b            
         Exchange                               
         StoreI                                 
         PushD        $mem-rat-aid-a            
         Exchange                               
         StoreI                                 
+        PushD        $mem-rat-aid-c            
+        LoadI                                  
         PushD        $mem-rat-aid-a            
         LoadI                                  
+        Multiply                               
         PushD        $mem-rat-aid-b            
         LoadI                                  
         Divide                                 
-        PushD        $mem-rat-aid-b            
+        PushD        $mem-rat-aid-c            
         LoadI                                  
         PushD        $mem-rat-aid-return-address 
         LoadI                                  

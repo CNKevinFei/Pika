@@ -347,6 +347,20 @@ public class ASMCodeGenerator {
 			code.append(parameter);
 			code.append(functionAddr);
 			code.add(CallV);
+			
+			int paraSize = 0;
+			LambdaType type = (LambdaType)node.child(0).getType();
+			
+			for(Type paraType:type.getParaType()) {
+				paraSize += paraType.getSize();
+			}
+			
+			code.add(PushD, RunTime.STACK_POINTER);
+			code.add(PushD, RunTime.STACK_POINTER);
+			code.add(LoadI);
+			code.add(PushI, paraSize);
+			code.add(Add);
+			code.add(StoreI);
 		}
 		
 		public void visitLeave(ParaExpressionListNode node) {
@@ -641,6 +655,10 @@ public class ASMCodeGenerator {
 					code.append(arg1);
 					code.add(Exchange);
 					code.append(arg2);
+					
+					code.add(Duplicate);
+					code.add(JumpFalse, RunTime.RAT_DIVIDE_BY_ZERO_RUNTIME_ERROR);	
+					
 					code.add(Multiply);
 					code.add(Exchange);
 					code.add(Divide);
@@ -648,6 +666,8 @@ public class ASMCodeGenerator {
 				if(node.child(0).getType() == PrimitiveType.FLOAT) {
 					code.append(arg1);
 					code.append(arg2);
+					code.add(Duplicate);
+					code.add(JumpFalse, RunTime.RAT_DIVIDE_BY_ZERO_RUNTIME_ERROR);
 					code.add(ConvertF);
 					code.add(FMultiply);
 					code.add(ConvertI);
@@ -661,10 +681,9 @@ public class ASMCodeGenerator {
 				
 				if(node.child(0).getType() == PrimitiveType.RATIONAL) {
 					code.append(arg1);
-					code.add(Exchange);
 					code.append(arg2);
-					code.add(Multiply);
-					code.add(Exchange);
+					code.add(Duplicate);
+					code.add(JumpFalse, RunTime.RAT_DIVIDE_BY_ZERO_RUNTIME_ERROR);
 					
 					code.add(Call, MemoryManager.MEM_RAT_AID);
 					code.add(Call, MemoryManager.MEM_RAT_GCD);
@@ -672,6 +691,8 @@ public class ASMCodeGenerator {
 				if(node.child(0).getType() == PrimitiveType.FLOAT) {
 					code.append(arg2);
 					code.add(Duplicate);
+					code.add(Duplicate);
+					code.add(JumpFalse, RunTime.RAT_DIVIDE_BY_ZERO_RUNTIME_ERROR);
 					code.append(arg1);
 					code.add(Exchange);
 					code.add(ConvertF);
@@ -721,6 +742,8 @@ public class ASMCodeGenerator {
 			ASMCodeFragment value = removeValueCode(node.child(1));
 			
 			code.append(value);
+			code.add(Duplicate);
+			code.add(JumpNeg, RunTime.NEW_NEG_ERROR);
 			code.add(Duplicate);
 			code.add(PushI, size);
 			code.add(Multiply);
@@ -775,6 +798,10 @@ public class ASMCodeGenerator {
 			code.add(Label, subLabel);
 			if(node.child(0).getType() == PrimitiveType.FLOAT) {
 				code.add(FSubtract);
+			}
+			else if(node.child(0).getType() == PrimitiveType.RATIONAL) {
+				code.add(Call, MemoryManager.MEM_RAT_SUBTRACT);
+				code.add(Multiply);
 			}
 			else {
 				code.add(Subtract);
@@ -884,8 +911,10 @@ public class ASMCodeGenerator {
 				code.add(PushI, 1);
 			}
 			else if(node.child(0).getType()==PrimitiveType.FLOAT && node.getType()==PrimitiveType.RATIONAL) {
-				code.add(PushF, 223092870);
+				code.add(PushI, 223092870);
+				code.add(ConvertF);
 				code.add(FMultiply);
+				code.add(ConvertI);
 				code.add(PushI, 223092870);
 				
 				code.add(Call, MemoryManager.MEM_RAT_GCD);
@@ -909,7 +938,6 @@ public class ASMCodeGenerator {
 					code.add(Call, MemoryManager.MEM_RAT_ADD);
 				}
 				else if(node.getOperator() == Punctuator.SUBTRACT) {
-					System.out.println("hello");
 					code.add(Call, MemoryManager.MEM_RAT_SUBTRACT);
 				}
 				else if(node.getOperator() == Punctuator.DIVIDE) {

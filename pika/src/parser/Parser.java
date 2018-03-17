@@ -702,8 +702,8 @@ public class Parser {
 		
 		expect(Keyword.CLONE);
 		
-		if(nowReading.isLextant(Keyword.CLONE)) {
-			expr = parseCloneExpression();
+		if(startsUnaryOperatorExpression(nowReading)) {
+			expr = parseUnaryOperatorExpression();
 		}
 		else {
 			expr = parseArrayIndexExpression();
@@ -723,8 +723,8 @@ public class Parser {
 		
 		expect(Punctuator.NOT);
 		
-		if(nowReading.isLextant(Punctuator.NOT)) {
-			expr = parseNotExpression();
+		if(startsUnaryOperatorExpression(nowReading)) {
+			expr = parseUnaryOperatorExpression();
 		}
 		else {
 			expr = parseArrayIndexExpression();
@@ -742,7 +742,14 @@ public class Parser {
 	private ParseNode parseLengthExpression() {
 		Token token = nowReading;
 		expect(Keyword.LENGTH);
-		ParseNode expr = parseArrayIndexExpression();
+		ParseNode expr;
+				
+		if(startsUnaryOperatorExpression(nowReading)) {
+			expr = parseUnaryOperatorExpression();
+		}
+		else {
+			expr = parseArrayIndexExpression();
+		}
 			
 		return new LengthExpressionNode(token, expr);
 	}

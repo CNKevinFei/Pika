@@ -1,4 +1,19 @@
+func mul<int a,int b>->int{
+	if(b==1){
+		return a.
+	}
+	return add(mul(a,b-1),a).
+}
+func add<int a, int b>->int{
+	return a+b.
+}
 
-exec {
-	var a := new [void](1).
+exec{
+	var i:= 100.
+
+	
+	while(i!=0){
+		i := i-1.
+		print mul(i,5);.
+	}
 }

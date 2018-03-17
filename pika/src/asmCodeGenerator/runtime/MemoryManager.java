@@ -219,6 +219,7 @@ public class MemoryManager {
 	private static final String MEM_RAT_AID_RETURN_ADDRESS = "$mem-rat-aid-return-address";
 	private static final String MEM_RAT_AID_A = "$mem-rat-aid-a";
 	private static final String MEM_RAT_AID_B = "$mem-rat-aid-b";
+	private static final String MEM_RAT_AID_C = "$mem-rat-aid-c";
 	
 	// local and subroutine tags for rational print
 	public static final String MEM_RAT_PRINT = "-mem-rat-print";
@@ -1238,15 +1239,19 @@ public class MemoryManager {
 			declareI(frag, MEM_RAT_AID_RETURN_ADDRESS);
 			declareI(frag, MEM_RAT_AID_A);
 			declareI(frag, MEM_RAT_AID_B);
+			declareI(frag, MEM_RAT_AID_C);
 			
 			storeITo(frag, MEM_RAT_AID_RETURN_ADDRESS);
+			storeITo(frag, MEM_RAT_AID_C);
 			storeITo(frag, MEM_RAT_AID_B);
 			storeITo(frag, MEM_RAT_AID_A);
 			
+			loadIFrom(frag, MEM_RAT_AID_C);
 			loadIFrom(frag, MEM_RAT_AID_A);
+			frag.add(Multiply);
 			loadIFrom(frag, MEM_RAT_AID_B);
 			frag.add(Divide);
-			loadIFrom(frag, MEM_RAT_AID_B);
+			loadIFrom(frag, MEM_RAT_AID_C);
 			
 			loadIFrom(frag, MEM_RAT_AID_RETURN_ADDRESS);
 			
