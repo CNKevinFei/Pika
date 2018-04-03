@@ -13,6 +13,7 @@ public class IdentifierNode extends ParseNode {
 	private Binding binding;
 	private Token conOrVar;
 	private Scope declarationScope;
+	private boolean staticFlag;
 
 	public IdentifierNode(Token token) {
 		super(token);
@@ -49,27 +50,36 @@ public class IdentifierNode extends ParseNode {
 	public Token getConOrVar() {
 		return conOrVar;
 	}
+	public void setStatic(boolean flag) {
+		staticFlag = flag;
+	}
+	public boolean getStatic() {
+		return staticFlag;
+	}
 	
 ////////////////////////////////////////////////////////////
 // Speciality functions
 
 	public Binding findVariableBinding() {
 		String identifier = token.getLexeme();
+		Binding bind;
+		boolean flag = true;
 
 		for(ParseNode current : pathToRoot()) {
 			if(current.containsBindingOf(identifier)) {
 				declarationScope = current.getScope();
-				return current.bindingOf(identifier);
+				bind = current.bindingOf(identifier);
+				
+				if(flag||bind.getStatic())
+					return bind;
+				else
+					continue;
 			}
 			else if(current instanceof LambdaNode) {
-				break;
+				flag = false;
 			}
 		}
 		
-		if(getRoot().containsBindingOf(identifier)) {
-			declarationScope = getRoot().getScope();
-			return getRoot().bindingOf(identifier);
-		}
 		
 		useBeforeDefineError();
 		return Binding.nullInstance();

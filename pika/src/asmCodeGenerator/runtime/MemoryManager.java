@@ -101,7 +101,57 @@ public class MemoryManager {
 	private static final String MEM_STORE_ARRAY_EMPTY_ONE = "-mem-store-array-empty-one";
 	private static final String MEM_STORE_ARRAY_EMPTY_FOUR = "-mem-store-array-empty-four";
 	private static final String MEM_STORE_ARRAY_EMPTY_EIGHT = "-mem-store-array-empty-eight";
-		
+	
+	public static final String MEM_STRING_INDEX = "-mem-string-index";
+	private static final String MEM_STRING_INDEX_RETURN_ADDRESS = "$mem-string-index-return-address";
+	private static final String MEM_STRING_INDEX_ADDRESS = "$mem-string-index-address";
+	private static final String MEM_STRING_INDEX_INDEX = "$mem-string-index-index";
+	private static final String MEM_STRING_INDEX_END1 = "$mem-string-index-end1";
+	private static final String MEM_STRING_INDEX_END2 = "$mem-string-index-end2";
+	
+	public static final String MEM_STRING_RANGE = "-mem-string-range";
+	private static final String MEM_STRING_RANGE_RETURN_ADDRESS = "$mem-string-range-return-address";
+	private static final String MEM_STRING_RANGE_ADDRESS = "$mem-string-range-address";
+	private static final String MEM_STRING_RANGE_INDEX1 = "$mem-string-range-index1";
+	private static final String MEM_STRING_RANGE_INDEX2 = "$mem-string-range-index2";
+	private static final String MEM_STRING_RANGE_LENGTH = "$mem-string-range-length";
+	private static final String MEM_STRING_RANGE_LOOP = "$mem-string-range-loop";
+	private static final String MEM_STRING_RANGE_END = "$mem-string-range-end";
+	private static final String MEM_STRING_RANGE_RTE = "$mem-string-range-rte";
+	
+	public static final String MEM_STRING_CONCATENATION = "-mem-string-concatenation";
+	private static final String MEM_STRING_CONCATENATION_RETURN_ADDRESS = "$mem-string-concatenation-return-address";
+	private static final String MEM_STRING_CONCATENATION_ADDRESS1 = "$mem-string-concatenation-address1";
+	private static final String MEM_STRING_CONCATENATION_ADDRESS2 = "$mem-string-concatenation-address2";
+	private static final String MEM_STRING_CONCATENATION_LENGTH1 = "$mem-string-concatenation-length1";
+	private static final String MEM_STRING_CONCATENATION_LENGTH2 = "$mem-string-concatenation-length2";
+	private static final String MEM_STRING_CONCATENATION_LOOP1 = "$mem-string-concatenation-loop1";
+	private static final String MEM_STRING_CONCATENATION_LOOP2 = "$mem-string-concatenation-loop2";
+	private static final String MEM_STRING_CONCATENATION_END = "$mem-string-concacenation-end";
+	
+	public static final String MEM_STRING_CHAR = "-mem-string-char";
+	private static final String MEM_STRING_CHAR_RETURN_ADDRESS = "$mem-string-char-return-address";
+	private static final String MEM_STRING_CHAR_ADDRESS = "$mem-string-char-address";
+	private static final String MEM_STRING_CHAR_CHAR = "$mem-string-char-char";
+	private static final String MEM_STRING_CHAR_LENGTH = "$mem-string-char-length";
+	private static final String MEM_STRING_CHAR_LOOP = "$mem-string-char-loop";
+	private static final String MEM_STRING_CHAR_END = "$mem-string-char-end";
+	
+	public static final String MEM_CHAR_STRING = "-mem-char-string";
+	private static final String MEM_CHAR_STRING_RETURN_ADDRESS = "$mem-char-string-return-address";
+	private static final String MEM_CHAR_STRING_ADDRESS = "$mem-char-string-address";
+	private static final String MEM_CHAR_STRING_CHAR = "$mem-char-string-char";
+	private static final String MEM_CHAR_STRING_LENGTH = "$mem-char-string-length";
+	private static final String MEM_CHAR_STRING_LOOP = "$mem-char-string-loop";
+	private static final String MEM_CHAR_STRING_END = "$mem-char-string-end";
+	
+	public static final String MEM_STRING_REVERSE = "-mem-string-reverse";
+	private static final String MEM_STRING_REVERSE_RETURN_ADDRESS = "$mem-string-reverse-return-address";
+	private static final String MEM_STRING_REVERSE_ADDRESS = "$mem-string-reverse-address";
+	private static final String MEM_STRING_REVERSE_LENGTH = "$mem-string-reverse-length";
+	private static final String MEM_STRING_REVERSE_LOOP = "$mem-string-reverse-loop";
+	private static final String MEM_STRING_REVERSE_END = "$mem-string-reverse-end";
+
 	// locals and subroutine tag for array record release
 	public static final String MEM_ARRAY_RELEASE = "-mem-array-release";
 	private static final String MEM_ARRAY_RELEASE_RETURN_ADDRESS = "$mem-array-release-return-address";
@@ -284,7 +334,7 @@ public class MemoryManager {
 	// extra information for string record
 	public static final int MEM_STRING_RECORD_EXTRA = 13;
 	private static final int MEM_STRING_STATUS_OFFSET = 4;
-	private static final int MEM_STRING_LENGTH_OFFSET = 8;
+	public static final int MEM_STRING_LENGTH_OFFSET = 8;
 	public static final int MEM_STRING_CONTENT_OFFSET = 12;
 	
 	// extra information for array record
@@ -345,6 +395,12 @@ public class MemoryManager {
 		frag.append(subroutineStoreArrayOneByte());
 		frag.append(subroutineStoreArrayFourByte());
 		frag.append(subroutineStoreArrayEightByte());
+		frag.append(subroutineStringIndex());
+		frag.append(subroutineStringRange());
+		frag.append(subroutineStringConcatenation());
+		frag.append(subroutineStringCharConcatenation());
+		frag.append(subroutineCharStringConcatenation());
+		frag.append(subroutineStringReverse());
 		frag.append(subroutineArrayRelease());
 		frag.append(subroutineArrayClone());
 		frag.append(subroutineArrayIndex());
@@ -919,6 +975,539 @@ public class MemoryManager {
 			frag.add(Return);
 			
 			return frag;
+	}
+	
+	// [...stringAddr, index]
+	private static ASMCodeFragment subroutineStringIndex() {
+		ASMCodeFragment frag = new ASMCodeFragment(GENERATES_VOID);
+		
+		frag.add(Label, MEM_STRING_INDEX);
+			declareI(frag, MEM_STRING_INDEX_RETURN_ADDRESS);
+			declareI(frag, MEM_STRING_INDEX_ADDRESS);
+			declareI(frag, MEM_STRING_INDEX_INDEX);
+			
+			storeITo(frag, MEM_STRING_INDEX_RETURN_ADDRESS);
+			storeITo(frag, MEM_STRING_INDEX_INDEX);
+			storeITo(frag, MEM_STRING_INDEX_ADDRESS);
+			
+			loadIFrom(frag,MEM_STRING_INDEX_ADDRESS);
+			frag.add(PushI, MEM_STRING_LENGTH_OFFSET);
+			frag.add(Add);
+			frag.add(LoadI);
+			loadIFrom(frag,MEM_STRING_INDEX_INDEX);
+			frag.add(Subtract);
+			frag.add(JumpPos, MEM_STRING_INDEX_END1);
+			frag.add(Call, RunTime.ARRAY_INDEX_EXCEED);
+			
+		frag.add(Label, MEM_STRING_INDEX_END1);
+			loadIFrom(frag, MEM_STRING_INDEX_INDEX);
+			frag.add(PushI,1);
+			frag.add(Add);
+			frag.add(JumpPos, MEM_STRING_INDEX_END2);
+			frag.add(Call, RunTime.ARRAY_INDEX_EXCEED);
+			
+		frag.add(Label, MEM_STRING_INDEX_END2);
+			loadIFrom(frag, MEM_STRING_INDEX_ADDRESS);
+			frag.add(PushI, MEM_STRING_CONTENT_OFFSET);
+			loadIFrom(frag, MEM_STRING_INDEX_INDEX);
+			frag.add(Add);
+			frag.add(Add);
+			
+			loadIFrom(frag, MEM_STRING_INDEX_RETURN_ADDRESS);
+			frag.add(Return);
+			
+		return frag;
+	}
+	//[...char, stringAddr]
+	private static ASMCodeFragment subroutineStringCharConcatenation() {
+		ASMCodeFragment frag = new ASMCodeFragment(GENERATES_VOID);
+	
+		frag.add(Label, MEM_STRING_CHAR);
+			declareI(frag, MEM_STRING_CHAR_RETURN_ADDRESS);
+			declareI(frag, MEM_STRING_CHAR_ADDRESS);
+			declareC(frag, MEM_STRING_CHAR_CHAR);
+			declareI(frag, MEM_STRING_CHAR_LENGTH);
+			
+			storeITo(frag, MEM_STRING_CHAR_RETURN_ADDRESS);
+			storeITo(frag, MEM_STRING_CHAR_ADDRESS);
+			storeCTo(frag, MEM_STRING_CHAR_CHAR);
+			
+			loadIFrom(frag, MEM_STRING_CHAR_ADDRESS);
+			frag.add(PushI, MEM_STRING_LENGTH_OFFSET);
+			frag.add(Add);
+			frag.add(LoadI);
+			storeITo(frag, MEM_STRING_CHAR_LENGTH);
+			
+			loadIFrom(frag,MEM_STRING_CHAR_LENGTH);
+			frag.add(PushI, MEM_STRING_RECORD_EXTRA);
+			frag.add(PushI,1);
+			frag.add(Add);
+			frag.add(Add);
+			frag.add(Call, MEM_MANAGER_ALLOCATE);
+			frag.add(Duplicate);
+			
+			loadIFrom(frag, MEM_STRING_CHAR_LENGTH);
+			frag.add(PushI,1);
+			frag.add(Add);
+			frag.add(Call, MemoryManager.MEM_STORE_STRING_HEADER);
+			
+			loadIFrom(frag, MEM_STRING_CHAR_LENGTH);
+			frag.add(PushI,1);
+			frag.add(Subtract);
+			storeITo(frag, MEM_STRING_CHAR_LENGTH);
+			
+		frag.add(Label, MEM_STRING_CHAR_LOOP);
+			loadIFrom(frag, MEM_STRING_CHAR_LENGTH);
+			frag.add(JumpNeg, MEM_STRING_CHAR_END);
+			frag.add(Duplicate);
+			frag.add(PushI, MEM_STRING_CONTENT_OFFSET);
+			loadIFrom(frag, MEM_STRING_CHAR_LENGTH);
+			frag.add(Add);
+			frag.add(Add);
+			
+			loadIFrom(frag, MEM_STRING_CHAR_ADDRESS);
+			loadIFrom(frag, MEM_STRING_CHAR_LENGTH);
+			frag.add(PushI, MEM_STRING_CONTENT_OFFSET);
+			frag.add(Add);
+			frag.add(Add);
+			frag.add(LoadC);
+			
+			frag.add(StoreC);
+			
+			loadIFrom(frag, MEM_STRING_CHAR_LENGTH);
+			frag.add(PushI, 1);
+			frag.add(Subtract);
+			storeITo(frag, MEM_STRING_CHAR_LENGTH);
+			
+			frag.add(Jump, MEM_STRING_CHAR_LOOP);
+			
+		frag.add(Label, MEM_STRING_CHAR_END);
+			frag.add(Duplicate);
+			loadIFrom(frag, MEM_STRING_CHAR_ADDRESS);
+			frag.add(PushI, MEM_STRING_LENGTH_OFFSET);
+			frag.add(Add);
+			frag.add(LoadI);
+			frag.add(PushI,MEM_STRING_CONTENT_OFFSET);
+			frag.add(Add);
+			frag.add(Add);
+			loadCFrom(frag, MEM_STRING_CHAR_CHAR);
+			frag.add(StoreC);
+			
+			frag.add(Duplicate);
+			loadIFrom(frag, MEM_STRING_CHAR_ADDRESS);
+			frag.add(PushI, MEM_STRING_LENGTH_OFFSET);
+			frag.add(Add);
+			frag.add(LoadI);
+			frag.add(PushI,MEM_STRING_CONTENT_OFFSET);
+			frag.add(PushI,1);
+			frag.add(Add);
+			frag.add(Add);
+			frag.add(Add);
+			frag.add(PushI,0);
+			frag.add(StoreC);
+			
+			loadIFrom(frag, MEM_STRING_CHAR_RETURN_ADDRESS);
+			frag.add(Return);
+			
+		return frag;
+	}
+	
+	private static ASMCodeFragment subroutineStringReverse() {
+		ASMCodeFragment frag = new ASMCodeFragment(GENERATES_VOID);
+
+		frag.add(Label, MEM_STRING_REVERSE);
+			declareI(frag, MEM_STRING_REVERSE_RETURN_ADDRESS);
+			declareI(frag, MEM_STRING_REVERSE_ADDRESS);
+			declareI(frag, MEM_STRING_REVERSE_LENGTH);
+			
+			storeITo(frag, MEM_STRING_REVERSE_RETURN_ADDRESS);
+			storeITo(frag, MEM_STRING_REVERSE_ADDRESS);
+			
+			loadIFrom(frag, MEM_STRING_REVERSE_ADDRESS);
+			frag.add(PushI, MEM_STRING_LENGTH_OFFSET);
+			frag.add(Add);
+			frag.add(LoadI);
+			storeITo(frag, MEM_STRING_REVERSE_LENGTH);
+			
+			loadIFrom(frag,MEM_STRING_REVERSE_LENGTH);
+			frag.add(PushI, MEM_STRING_RECORD_EXTRA);
+			frag.add(Add);
+			frag.add(Call, MEM_MANAGER_ALLOCATE);
+			frag.add(Duplicate);
+			
+			loadIFrom(frag, MEM_STRING_REVERSE_LENGTH);
+			frag.add(Call, MemoryManager.MEM_STORE_STRING_HEADER);
+			
+			loadIFrom(frag, MEM_STRING_REVERSE_LENGTH);
+			frag.add(PushI, 1);
+			frag.add(Subtract);
+			storeITo(frag, MEM_STRING_REVERSE_LENGTH);
+			
+		frag.add(Label, MEM_STRING_REVERSE_LOOP);
+			loadIFrom(frag, MEM_STRING_REVERSE_LENGTH);
+			frag.add(JumpNeg, MEM_STRING_REVERSE_END);
+			frag.add(Duplicate);
+			frag.add(PushI, MEM_STRING_CONTENT_OFFSET);
+			loadIFrom(frag, MEM_STRING_REVERSE_ADDRESS);
+			frag.add(PushI, MEM_STRING_LENGTH_OFFSET);
+			frag.add(Add);
+			frag.add(LoadI);
+			loadIFrom(frag, MEM_STRING_REVERSE_LENGTH);
+			frag.add(Subtract);
+			frag.add(PushI,1);
+			frag.add(Subtract);
+			frag.add(Add);
+			frag.add(Add);
+			
+			loadIFrom(frag, MEM_STRING_REVERSE_ADDRESS);
+			loadIFrom(frag, MEM_STRING_REVERSE_LENGTH);
+			frag.add(PushI, MEM_STRING_CONTENT_OFFSET);
+			frag.add(Add);
+			frag.add(Add);
+			frag.add(LoadC);
+			
+			frag.add(StoreC);
+			
+			loadIFrom(frag, MEM_STRING_REVERSE_LENGTH);
+			frag.add(PushI, 1);
+			frag.add(Subtract);
+			storeITo(frag, MEM_STRING_REVERSE_LENGTH);
+			
+			frag.add(Jump, MEM_STRING_REVERSE_LOOP);
+			
+			
+		frag.add(Label, MEM_STRING_REVERSE_END);
+			frag.add(Duplicate);
+			loadIFrom(frag, MEM_STRING_REVERSE_ADDRESS);
+			frag.add(PushI, MEM_STRING_LENGTH_OFFSET);
+			frag.add(Add);
+			frag.add(LoadI);
+			frag.add(PushI,MEM_STRING_CONTENT_OFFSET);
+			frag.add(Add);
+			frag.add(Add);
+			frag.add(PushI,0);
+			frag.add(StoreC);
+			
+			loadIFrom(frag, MEM_STRING_REVERSE_RETURN_ADDRESS);
+			frag.add(Return);
+			
+		return frag;
+	}
+	private static ASMCodeFragment subroutineCharStringConcatenation() {
+		ASMCodeFragment frag = new ASMCodeFragment(GENERATES_VOID);
+	
+		frag.add(Label, MEM_CHAR_STRING);
+			declareI(frag, MEM_CHAR_STRING_RETURN_ADDRESS);
+			declareI(frag, MEM_CHAR_STRING_ADDRESS);
+			declareC(frag, MEM_CHAR_STRING_CHAR);
+			declareI(frag, MEM_CHAR_STRING_LENGTH);
+			
+			storeITo(frag, MEM_CHAR_STRING_RETURN_ADDRESS);
+			storeITo(frag, MEM_CHAR_STRING_ADDRESS);
+			storeCTo(frag, MEM_CHAR_STRING_CHAR);
+			
+			loadIFrom(frag, MEM_CHAR_STRING_ADDRESS);
+			frag.add(PushI, MEM_STRING_LENGTH_OFFSET);
+			frag.add(Add);
+			frag.add(LoadI);
+			storeITo(frag, MEM_CHAR_STRING_LENGTH);
+			
+			loadIFrom(frag,MEM_CHAR_STRING_LENGTH);
+			frag.add(PushI, MEM_STRING_RECORD_EXTRA);
+			frag.add(PushI,1);
+			frag.add(Add);
+			frag.add(Add);
+			frag.add(Call, MEM_MANAGER_ALLOCATE);
+			frag.add(Duplicate);
+			
+			loadIFrom(frag, MEM_CHAR_STRING_LENGTH);
+			frag.add(PushI,1);
+			frag.add(Add);
+			frag.add(Call, MemoryManager.MEM_STORE_STRING_HEADER);
+			
+			frag.add(Duplicate);
+			frag.add(PushI,MEM_STRING_CONTENT_OFFSET);
+			frag.add(Add);
+			loadCFrom(frag, MEM_CHAR_STRING_CHAR);
+			frag.add(StoreC);
+			
+			
+		frag.add(Label, MEM_CHAR_STRING_LOOP);
+			loadIFrom(frag, MEM_CHAR_STRING_LENGTH);
+			frag.add(JumpFalse, MEM_CHAR_STRING_END);
+			frag.add(Duplicate);
+			frag.add(PushI, MEM_STRING_CONTENT_OFFSET);
+			loadIFrom(frag, MEM_CHAR_STRING_LENGTH);
+			frag.add(Add);
+			frag.add(Add);
+			
+			loadIFrom(frag, MEM_CHAR_STRING_ADDRESS);
+			loadIFrom(frag, MEM_CHAR_STRING_LENGTH);
+			frag.add(PushI, MEM_STRING_CONTENT_OFFSET);
+			frag.add(Add);
+			frag.add(Add);
+			frag.add(PushI,1);
+			frag.add(Subtract);
+			frag.add(LoadC);
+			
+			frag.add(StoreC);
+			
+			loadIFrom(frag, MEM_CHAR_STRING_LENGTH);
+			frag.add(PushI, 1);
+			frag.add(Subtract);
+			storeITo(frag, MEM_CHAR_STRING_LENGTH);
+			
+			frag.add(Jump, MEM_CHAR_STRING_LOOP);
+			
+		frag.add(Label, MEM_CHAR_STRING_END);
+			
+			frag.add(Duplicate);
+			loadIFrom(frag, MEM_CHAR_STRING_ADDRESS);
+			frag.add(PushI, MEM_STRING_LENGTH_OFFSET);
+			frag.add(Add);
+			frag.add(LoadI);
+			frag.add(PushI,MEM_STRING_CONTENT_OFFSET);
+			frag.add(PushI,1);
+			frag.add(Add);
+			frag.add(Add);
+			frag.add(Add);
+			frag.add(PushI,0);
+			frag.add(StoreC);
+			
+			loadIFrom(frag, MEM_CHAR_STRING_RETURN_ADDRESS);
+			frag.add(Return);
+			
+		return frag;
+	}
+	
+	//[...stringAddr, stringAddr]
+	private static ASMCodeFragment subroutineStringConcatenation() {
+		ASMCodeFragment frag = new ASMCodeFragment(GENERATES_VOID);
+		
+		frag.add(Label, MEM_STRING_CONCATENATION);
+			declareI(frag, MEM_STRING_CONCATENATION_RETURN_ADDRESS);
+			declareI(frag, MEM_STRING_CONCATENATION_ADDRESS1);
+			declareI(frag, MEM_STRING_CONCATENATION_ADDRESS2);
+			declareI(frag, MEM_STRING_CONCATENATION_LENGTH1);
+			declareI(frag, MEM_STRING_CONCATENATION_LENGTH2);
+			
+			storeITo(frag, MEM_STRING_CONCATENATION_RETURN_ADDRESS);
+			storeITo(frag, MEM_STRING_CONCATENATION_ADDRESS2);
+			storeITo(frag, MEM_STRING_CONCATENATION_ADDRESS1);
+			
+			loadIFrom(frag, MEM_STRING_CONCATENATION_ADDRESS1);
+			frag.add(PushI, MEM_STRING_LENGTH_OFFSET);
+			frag.add(Add);
+			frag.add(LoadI);
+			storeITo(frag, MEM_STRING_CONCATENATION_LENGTH1);
+			
+			loadIFrom(frag, MEM_STRING_CONCATENATION_ADDRESS2);
+			frag.add(PushI, MEM_STRING_LENGTH_OFFSET);
+			frag.add(Add);
+			frag.add(LoadI);
+			storeITo(frag, MEM_STRING_CONCATENATION_LENGTH2);
+			
+			loadIFrom(frag, MEM_STRING_CONCATENATION_LENGTH1);
+			loadIFrom(frag, MEM_STRING_CONCATENATION_LENGTH2);
+			frag.add(Add);
+			frag.add(PushI, MEM_STRING_RECORD_EXTRA);
+			frag.add(Add);
+			
+			frag.add(Call, MEM_MANAGER_ALLOCATE);
+			frag.add(Duplicate);
+			
+			loadIFrom(frag, MEM_STRING_CONCATENATION_LENGTH1);
+			loadIFrom(frag, MEM_STRING_CONCATENATION_LENGTH2);
+			frag.add(Add);
+			frag.add(Call, MemoryManager.MEM_STORE_STRING_HEADER);
+			
+			
+			loadIFrom(frag, MEM_STRING_CONCATENATION_LENGTH1);
+			frag.add(PushI, 1);
+			frag.add(Subtract);
+			storeITo(frag, MEM_STRING_CONCATENATION_LENGTH1);
+			
+		frag.add(Label, MEM_STRING_CONCATENATION_LOOP1);
+			loadIFrom(frag, MEM_STRING_CONCATENATION_LENGTH1);
+			frag.add(JumpNeg, MEM_STRING_CONCATENATION_LOOP2);
+			frag.add(Duplicate);
+			frag.add(PushI, MEM_STRING_CONTENT_OFFSET);
+			loadIFrom(frag, MEM_STRING_CONCATENATION_LENGTH1);
+			frag.add(Add);
+			frag.add(Add);
+			
+			loadIFrom(frag, MEM_STRING_CONCATENATION_ADDRESS1);
+			loadIFrom(frag, MEM_STRING_CONCATENATION_LENGTH1);
+			frag.add(PushI, MEM_STRING_CONTENT_OFFSET);
+			frag.add(Add);
+			frag.add(Add);
+			frag.add(LoadC);
+			
+			frag.add(StoreC);
+			
+			loadIFrom(frag, MEM_STRING_CONCATENATION_LENGTH1);
+			frag.add(PushI, 1);
+			frag.add(Subtract);
+			storeITo(frag, MEM_STRING_CONCATENATION_LENGTH1);
+			
+			frag.add(Jump, MEM_STRING_CONCATENATION_LOOP1);
+			
+			loadIFrom(frag, MEM_STRING_CONCATENATION_LENGTH2);
+			frag.add(PushI, 1);
+			frag.add(Subtract);
+			storeITo(frag, MEM_STRING_CONCATENATION_LENGTH2);
+			
+		frag.add(Label, MEM_STRING_CONCATENATION_LOOP2);
+			loadIFrom(frag, MEM_STRING_CONCATENATION_LENGTH2);
+			frag.add(JumpNeg, MEM_STRING_CONCATENATION_END);
+			frag.add(Duplicate);
+			frag.add(PushI, MEM_STRING_CONTENT_OFFSET);
+			loadIFrom(frag, MEM_STRING_CONCATENATION_LENGTH2);
+			loadIFrom(frag, MEM_STRING_CONCATENATION_ADDRESS1);
+			frag.add(PushI, MEM_STRING_LENGTH_OFFSET);
+			frag.add(Add);
+			frag.add(LoadI);
+			frag.add(Add);
+			frag.add(Add);
+			frag.add(Add);
+			
+			loadIFrom(frag, MEM_STRING_CONCATENATION_ADDRESS2);
+			loadIFrom(frag, MEM_STRING_CONCATENATION_LENGTH2);
+			frag.add(PushI, MEM_STRING_CONTENT_OFFSET);
+			frag.add(Add);
+			frag.add(Add);
+			frag.add(LoadC);
+			
+			frag.add(StoreC);
+			
+			loadIFrom(frag, MEM_STRING_CONCATENATION_LENGTH2);
+			frag.add(PushI, 1);
+			frag.add(Subtract);
+			storeITo(frag, MEM_STRING_CONCATENATION_LENGTH2);
+			
+			frag.add(Jump, MEM_STRING_CONCATENATION_LOOP1);
+			
+		frag.add(Label, MEM_STRING_CONCATENATION_END);
+			frag.add(Duplicate);
+			loadIFrom(frag, MEM_STRING_CONCATENATION_ADDRESS1);
+			frag.add(PushI, MEM_STRING_LENGTH_OFFSET);
+			frag.add(Add);
+			frag.add(LoadI);
+			loadIFrom(frag, MEM_STRING_CONCATENATION_ADDRESS2);
+			frag.add(PushI, MEM_STRING_LENGTH_OFFSET);
+			frag.add(Add);
+			frag.add(LoadI);
+			frag.add(Add);
+			
+			frag.add(PushI,MEM_STRING_CONTENT_OFFSET);
+			frag.add(Add);
+			frag.add(Add);
+			frag.add(PushI,0);
+			frag.add(StoreC);
+			
+			loadIFrom(frag, MEM_STRING_CONCATENATION_RETURN_ADDRESS);
+			frag.add(Return);
+			
+		return frag;
+	}
+	
+	// [...stringAddr, index1, index2]
+	private static ASMCodeFragment subroutineStringRange() {
+		ASMCodeFragment frag = new ASMCodeFragment(GENERATES_VOID);
+
+		frag.add(Label, MEM_STRING_RANGE);
+			declareI(frag, MEM_STRING_RANGE_RETURN_ADDRESS);
+			declareI(frag, MEM_STRING_RANGE_ADDRESS);
+			declareI(frag, MEM_STRING_RANGE_INDEX1);
+			declareI(frag, MEM_STRING_RANGE_INDEX2);
+			declareI(frag, MEM_STRING_RANGE_LENGTH);
+			
+			storeITo(frag, MEM_STRING_RANGE_RETURN_ADDRESS);
+			storeITo(frag, MEM_STRING_RANGE_INDEX2);
+			storeITo(frag, MEM_STRING_RANGE_INDEX1);
+			storeITo(frag, MEM_STRING_RANGE_ADDRESS);
+			
+			loadIFrom(frag, MEM_STRING_RANGE_INDEX2);
+			loadIFrom(frag, MEM_STRING_RANGE_INDEX1);
+			frag.add(Subtract);
+			storeITo(frag, MEM_STRING_RANGE_LENGTH);
+			loadIFrom(frag, MEM_STRING_RANGE_LENGTH);
+			frag.add(PushI, 1);
+			frag.add(Subtract);
+			frag.add(JumpNeg, MEM_STRING_RANGE_RTE);
+			
+			loadIFrom(frag, MEM_STRING_RANGE_INDEX1);
+			frag.add(JumpNeg, MEM_STRING_RANGE_RTE);
+			
+			loadIFrom(frag, MEM_STRING_RANGE_ADDRESS);
+			frag.add(PushI, MEM_STRING_LENGTH_OFFSET);
+			frag.add(Add);
+			frag.add(LoadI);
+			loadIFrom(frag, MEM_STRING_RANGE_INDEX2);
+			frag.add(Subtract);
+			frag.add(JumpNeg, MEM_STRING_RANGE_RTE);
+			
+			loadIFrom(frag,MEM_STRING_RANGE_LENGTH);
+			frag.add(PushI, MEM_STRING_RECORD_EXTRA);
+			frag.add(Add);
+			frag.add(Call, MEM_MANAGER_ALLOCATE);
+			frag.add(Duplicate);
+			
+			loadIFrom(frag, MEM_STRING_RANGE_LENGTH);
+			frag.add(Call, MemoryManager.MEM_STORE_STRING_HEADER);
+			
+			loadIFrom(frag, MEM_STRING_RANGE_LENGTH);
+			frag.add(PushI, 1);
+			frag.add(Subtract);
+			storeITo(frag, MEM_STRING_RANGE_LENGTH);
+			
+		frag.add(Label, MEM_STRING_RANGE_LOOP);
+			loadIFrom(frag, MEM_STRING_RANGE_LENGTH);
+			frag.add(JumpNeg, MEM_STRING_RANGE_END);
+			frag.add(Duplicate);
+			frag.add(PushI, MEM_STRING_CONTENT_OFFSET);
+			loadIFrom(frag, MEM_STRING_RANGE_LENGTH);
+			frag.add(Add);
+			frag.add(Add);
+			
+			loadIFrom(frag, MEM_STRING_RANGE_ADDRESS);
+			loadIFrom(frag, MEM_STRING_RANGE_INDEX1);
+			loadIFrom(frag, MEM_STRING_RANGE_LENGTH);
+			frag.add(PushI, MEM_STRING_CONTENT_OFFSET);
+			frag.add(Add);
+			frag.add(Add);
+			frag.add(Add);
+			frag.add(LoadC);
+			
+			frag.add(StoreC);
+			
+			loadIFrom(frag, MEM_STRING_RANGE_LENGTH);
+			frag.add(PushI, 1);
+			frag.add(Subtract);
+			storeITo(frag, MEM_STRING_RANGE_LENGTH);
+			
+			frag.add(Jump, MEM_STRING_RANGE_LOOP);
+			
+			
+		frag.add(Label, MEM_STRING_RANGE_END);
+			frag.add(Duplicate);
+			loadIFrom(frag, MEM_STRING_RANGE_INDEX2);
+			loadIFrom(frag, MEM_STRING_RANGE_INDEX1);
+			frag.add(Subtract);
+			frag.add(PushI,MEM_STRING_CONTENT_OFFSET);
+			frag.add(Add);
+			frag.add(Add);
+			frag.add(PushI,0);
+			frag.add(StoreC);
+			
+			loadIFrom(frag, MEM_STRING_RANGE_RETURN_ADDRESS);
+			frag.add(Return);
+			
+		frag.add(Label, MEM_STRING_RANGE_RTE);
+			frag.add(Call,RunTime.ARRAY_INDEX_EXCEED);
+			
+			
+		return frag;
 	}
 	
 	// [...arrayAddr(ret)]

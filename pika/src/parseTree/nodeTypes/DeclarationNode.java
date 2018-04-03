@@ -9,6 +9,8 @@ import tokens.Token;
 
 public class DeclarationNode extends ParseNode {
 
+	private boolean staticFlag;
+	
 	public DeclarationNode(Token token) {
 		super(token);
 		assert(token.isLextant(Keyword.CONST) || token.isLextant(Keyword.VAR));
@@ -33,14 +35,21 @@ public class DeclarationNode extends ParseNode {
 	////////////////////////////////////////////////////////////
 	// convenience factory
 	
-	public static DeclarationNode withChildren(Token token, ParseNode declaredName, ParseNode initializer) {
+	public static DeclarationNode withChildren(Token token, ParseNode declaredName, ParseNode initializer, boolean flag) {
 		DeclarationNode node = new DeclarationNode(token);
 		node.appendChild(declaredName);
 		node.appendChild(initializer);
+		node.staticFlag = flag;
+		
 		return node;
 	}
 	
+	///////////////////////////////////////////////////////////
+	// attribute get
 	
+	public boolean getStatic() {
+		return this.staticFlag;
+	}
 	///////////////////////////////////////////////////////////
 	// boilerplate for visitors
 			

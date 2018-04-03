@@ -11,15 +11,17 @@ public class Binding {
 	private TextLocation textLocation;
 	private MemoryLocation memoryLocation;
 	private Token conOrVar;
+	private boolean staticFlag;
 	private String lexeme;
 	
-	public Binding(Type type, TextLocation location, MemoryLocation memoryLocation, String lexeme, Token token) {
+	public Binding(Type type, TextLocation location, MemoryLocation memoryLocation, String lexeme, Token token, boolean flag) {
 		super();
 		this.type = type;
 		this.textLocation = location;
 		this.memoryLocation = memoryLocation;
 		this.lexeme = lexeme;
 		this.conOrVar = token;
+		this.staticFlag = flag;
 	}
 	
 
@@ -44,6 +46,9 @@ public class Binding {
 	public Token getConOrVar() {
 		return conOrVar;
 	}
+	public boolean getStatic() {
+		return staticFlag;
+	}
 	public void generateAddress(ASMCodeFragment code) {
 		memoryLocation.generateAddress(code, "%% " + lexeme);
 	}
@@ -62,7 +67,7 @@ public class Binding {
 					TextLocation.nullInstance(),
 					MemoryLocation.nullInstance(),
 					"the-null-binding",
-					null);
+					null, false);
 		}
 		public static NullBinding getInstance() {
 			if(instance==null)

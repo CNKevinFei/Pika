@@ -1,6 +1,13 @@
-/lexicalAnalyzer/
-/parser/
-/parseTree/
-/semanticAnalyzer/
+/.DS_Store
+/applications/
 /asmCodeGenerator/
+/inputHandler/
+/lexicalAnalyzer/
+/logging/
+/optimizer/
+/parseTree/
+/parser/
+/semanticAnalyzer/
 /symbolTable/
+/tests/
+/tokens/

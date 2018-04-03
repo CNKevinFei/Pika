@@ -17,6 +17,9 @@ public interface ParseNodeVisitor {
 
 	void visitEnter(DeclarationNode node);
 	void visitLeave(DeclarationNode node);
+	
+	void visitEnter(GlobalDeclarationNode node);
+	void visitLeave(GlobalDeclarationNode node);
 
 	void visitEnter(AssignmentStatementNode node);
 	void visitLeave(AssignmentStatementNode node);
@@ -48,6 +51,9 @@ public interface ParseNodeVisitor {
 	
 	void visitEnter(CloneExpressionNode node);
 	void visitLeave(CloneExpressionNode node);
+	
+	void visitEnter(ReverseExpressionNode node);
+	void visitLeave(ReverseExpressionNode node);
 	
 	void visitEnter(ExpressionListNode node);
 	void visitLeave(ExpressionListNode node);
@@ -130,6 +136,12 @@ public interface ParseNodeVisitor {
 		public void visitLeave(DeclarationNode node) {
 			defaultVisitLeave(node);
 		}
+		public void visitEnter(GlobalDeclarationNode node) {
+			defaultVisitEnter(node);
+		}
+		public void visitLeave(GlobalDeclarationNode node) {
+			defaultVisitLeave(node);
+		}
 		public void visitEnter(AssignmentStatementNode node) {
 			defaultVisitEnter(node);
 		}
@@ -194,6 +206,12 @@ public interface ParseNodeVisitor {
 			defaultVisitEnter(node);
 		}
 		public void visitLeave(CloneExpressionNode node) {
+			defaultVisitLeave(node);
+		}
+		public void visitEnter(ReverseExpressionNode node) {
+			defaultVisitEnter(node);
+		}
+		public void visitLeave(ReverseExpressionNode node) {
 			defaultVisitLeave(node);
 		}
 		public void visitEnter(ExpressionListNode node) {

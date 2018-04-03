@@ -32,6 +32,19 @@ public class Macros {
 		frag.add(DLabel, variableName);
 		frag.add(DataZ, 4);
 	}
+	public static void loadCFrom(ASMCodeFragment frag, String location) {
+		frag.add(PushD, location);
+		frag.add(LoadC);
+	}
+	public static void storeCTo(ASMCodeFragment frag, String location) {
+		frag.add(PushD, location);
+		frag.add(Exchange);
+		frag.add(StoreC);
+	}
+	public static void declareC(ASMCodeFragment frag, String variableName) {
+		frag.add(DLabel, variableName);
+		frag.add(DataZ, 1);
+	}
 	
 	/** [... baseLocation] -> [... intValue]
 	 * @param frag ASMCodeFragment to add code to

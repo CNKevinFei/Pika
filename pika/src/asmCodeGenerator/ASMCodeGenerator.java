@@ -440,6 +440,25 @@ public class ASMCodeGenerator {
 			
 			
 		}
+		public void visitLeave(GlobalDeclarationNode node) {
+			newVoidCode(node);
+			ASMCodeFragment lvalue = removeAddressCode(node.child(0));	
+			ASMCodeFragment rvalue = removeValueCode(node.child(1));
+			
+			code.append(lvalue);
+			code.append(rvalue);
+			
+			Type type = node.getType();
+			
+			if(type == PrimitiveType.RATIONAL) {
+				code.add(Call, MemoryManager.MEM_RAT_STORE);
+			}
+			else {
+				code.add(opcodeForStore(type));
+			}
+			
+			
+		}
 		public void visitLeave(AssignmentStatementNode node) {
 			newVoidCode(node);
 			ASMCodeFragment lvalue = removeAddressCode(node.child(0));	
@@ -556,6 +575,14 @@ public class ASMCodeGenerator {
 			//[...recordAddr]
 			code.add(Call,MemoryManager.MEM_ARRAY_CLONE);
 			//[...cloneAddr]
+		}
+		
+		public void visitLeave(ReverseExpressionNode node) {
+			newValueCode(node);
+			ASMCodeFragment str = removeValueCode(node.child(0));
+			
+			code.append(str);
+			code.add(Call, MemoryManager.MEM_STRING_REVERSE);
 		}
 		///////////////////////////////////////////////////////////////////////////
 		// expression list
@@ -703,13 +730,25 @@ public class ASMCodeGenerator {
 					code.add(Call, MemoryManager.MEM_RAT_GCD);
 				}
 			}
-			else if(operator == Punctuator.ARRAY_INDEX) {
+			else if(operator == Punctuator.ARRAY_INDEX) {				
 				newAddressCode(node);
 				ASMCodeFragment arg1 = removeValueCode(node.child(0));
 				ASMCodeFragment arg2 = removeValueCode(node.child(1));
 				
 				code.append(arg1);
 				code.append(arg2);
+				
+				if(node.child(0).getType().equivalent(PrimitiveType.STRING)) {
+					if(node.nChildren()==2) {
+						code.add(Call, MemoryManager.MEM_STRING_INDEX);	
+						return;
+					}
+					else {
+						assert 0==1;
+					}
+					
+				}
+				
 				if(((ArrayType)(node.child(0).getType())).getSubType()==PrimitiveType.RATIONAL) {
 					code.add(PushI, 1);
 				}
@@ -719,6 +758,13 @@ public class ASMCodeGenerator {
 				//[...arrayAddr, index, flag]
 				code.add(Call, MemoryManager.MEM_ARRAY_INDEX);
 				//[...value]
+			}
+			else if(operator == Punctuator.STRING_RANGE) {
+				newValueCode(node);
+				code.append(removeValueCode(node.child(0)));
+				code.append(removeValueCode(node.child(1)));
+				code.append(removeValueCode(node.child(2)));
+				code.add(Call, MemoryManager.MEM_STRING_RANGE);
 			}
 			else {
 				visitNormalBinaryOperatorNode(node);
@@ -933,6 +979,21 @@ public class ASMCodeGenerator {
 			code.append(arg1);
 			code.append(arg2);
 			
+			if(node.getOperator() == Punctuator.ADD && node.getType()==PrimitiveType.STRING) {
+				if(node.child(0).getType()==node.child(1).getType()) {
+					code.add(Call, MemoryManager.MEM_STRING_CONCATENATION);
+					return;
+				}
+				else if(node.child(0).getType() == PrimitiveType.STRING && node.child(1).getType() == PrimitiveType.CHAR) {
+					code.add(Exchange);
+					code.add(Call, MemoryManager.MEM_STRING_CHAR);
+					return;
+				}
+				else if(node.child(1).getType() == PrimitiveType.STRING && node.child(0).getType() == PrimitiveType.CHAR) {
+					code.add(Call, MemoryManager.MEM_CHAR_STRING);
+					return;
+				}
+			}
 			if(node.getType() == PrimitiveType.RATIONAL) {
 				if(node.getOperator() == Punctuator.ADD) {
 					code.add(Call, MemoryManager.MEM_RAT_ADD);
@@ -1013,10 +1074,18 @@ public class ASMCodeGenerator {
 			newValueCode(node);
 			ASMCodeFragment arg = removeValueCode(node.child(0));
 			
-			code.append(arg);
-			code.add(PushI, MemoryManager.MEM_ARRAY_LENGTH_OFFSET);
-			code.add(Add);
-			code.add(LoadI);
+			if(node.child(0).getType().equivalent(PrimitiveType.STRING)) {
+				code.append(arg);
+				code.add(PushI, MemoryManager.MEM_STRING_LENGTH_OFFSET);
+				code.add(Add);
+				code.add(LoadI);
+			}
+			else {
+				code.append(arg);
+				code.add(PushI, MemoryManager.MEM_ARRAY_LENGTH_OFFSET);
+				code.add(Add);
+				code.add(LoadI);
+			}
 		}
 		///////////////////////////////////////////////////////////////////////////
 		// leaf nodes (ErrorNode not necessary)

@@ -110,16 +110,16 @@ public class Scope {
 		symbolTable.errorIfAlreadyDefined(token);
 
 		String lexeme = token.getLexeme();
-		Binding binding = allocateNewBinding(type, token.getLocation(), lexeme, conOrVar);	
+		Binding binding = allocateNewBinding(type, token.getLocation(), lexeme, conOrVar, identifierNode.getStatic());	
 		symbolTable.install(lexeme, binding);
 
 		return binding;
 	}
 	
-	private Binding allocateNewBinding(Type type, TextLocation textLocation, String lexeme, Token conOrVar) {
+	private Binding allocateNewBinding(Type type, TextLocation textLocation, String lexeme, Token conOrVar, boolean flag) {
 		MemoryLocation memoryLocation = allocator.allocate(type.getSize());
 
-		return new Binding(type, textLocation, memoryLocation, lexeme, conOrVar);
+		return new Binding(type, textLocation, memoryLocation, lexeme, conOrVar,flag);
 	}
 	
 	public Binding createFunctionBinding(IdentifierNode identifierNode, Type type) {
@@ -128,7 +128,7 @@ public class Scope {
 		symbolTable.errorIfAlreadyDefined(token);
 
 		String lexeme = token.getLexeme();
-		Binding binding = allocateNewBinding(type, token.getLocation(), lexeme, conOrVar);	
+		Binding binding = allocateNewBinding(type, token.getLocation(), lexeme, conOrVar, true);	
 		symbolTable.install(lexeme, binding);
 
 		return binding;

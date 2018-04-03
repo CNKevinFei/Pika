@@ -1,19 +1,6 @@
-func mul<int a,int b>->int{
-	if(b==1){
-		return a.
-	}
-	return add(mul(a,b-1),a).
-}
-func add<int a, int b>->int{
-	return a+b.
-}
-
 exec{
-	var i:= 100.
+	var str := "hello".
+	var a := ^!^+str.
 
-	
-	while(i!=0){
-		i := i-1.
-		print mul(i,5);.
-	}
+	print reverse str.
 }

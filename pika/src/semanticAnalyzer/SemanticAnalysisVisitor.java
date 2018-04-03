@@ -98,6 +98,8 @@ class SemanticAnalysisVisitor extends ParseNodeVisitor.Default {
 		
 		identifier.setType(declarationType);
 		identifier.setConOrVar(node.lextantToken());
+		identifier.setStatic(node.getStatic());
+		
 		addBinding(identifier, declarationType);
 	}
 	@Override
@@ -250,12 +252,19 @@ class SemanticAnalysisVisitor extends ParseNodeVisitor.Default {
 	// expressions
 	@Override
 	public void visitLeave(BinaryOperatorNode node) {
-		assert node.nChildren() == 2;
 		ParseNode left  = node.child(0);
 		ParseNode right = node.child(1);
 		List<Type> childTypes = Arrays.asList(left.getType(), right.getType());
-		
 		Lextant operator = operatorFor(node);
+		
+		if(operator == Punctuator.STRING_RANGE) {
+			assert left.getType()==PrimitiveType.STRING;
+			assert right.getType() == PrimitiveType.INTEGER;
+			assert node.child(2).getType() == PrimitiveType.INTEGER;
+			node.setType(PrimitiveType.STRING);
+			return;
+		}
+		
 		FunctionSignatures signatures = FunctionSignatures.signaturesOf(operator);
 		FunctionSignature signature = signatures.acceptingSignature(childTypes);
 		
@@ -459,6 +468,13 @@ class SemanticAnalysisVisitor extends ParseNodeVisitor.Default {
 	}
 	
 	@Override
+	public void visitLeave(ReverseExpressionNode node) {
+		assert node.child(0).getType() == PrimitiveType.STRING;
+		
+		node.setType(PrimitiveType.STRING);
+	}
+	
+	@Override
 	public void visitLeave(NotExpressionNode node) {
 		Type type = node.child(0).getType();
 		
@@ -475,7 +491,7 @@ class SemanticAnalysisVisitor extends ParseNodeVisitor.Default {
 	public void visitLeave(LengthExpressionNode node) {
 		Type type = node.child(0).getType();
 		
-		if(!(type instanceof ArrayType)) {
+		if(!(type instanceof ArrayType)&&!(type.equivalent(PrimitiveType.STRING))) {
 			logError("length expression target is not array type at "+node.child(0).getToken().getLocation());
 			node.setType(PrimitiveType.ERROR);
 		}
@@ -619,11 +635,32 @@ class SemanticAnalysisVisitor extends ParseNodeVisitor.Default {
 		}
 		// else parent DeclarationNode does the processing.
 	}
+	
+	@Override
+	public void visitLeave(GlobalDeclarationNode node) {
+		IdentifierNode identifier = (IdentifierNode) node.child(0);
+		ParseNode initializer = node.child(1);
+		
+		Type declarationType = initializer.getType();
+		if(declarationType == PrimitiveType.NO_TYPE) {
+			SemanticAnalysisVisitor.logError("Variable cannot be declared with an empty expression list.");
+			node.setType(PrimitiveType.ERROR);
+			return;
+		}
+		node.setType(declarationType);
+		
+		identifier.setType(declarationType);
+		identifier.setConOrVar(node.lextantToken());
+		identifier.setStatic(true);
+		
+		SemanticAnalysisVisitor.addBinding(identifier, declarationType);
+	}
+	
 	private boolean isBeingDeclared(IdentifierNode node) {
 		ParseNode parent = node.getParent();
-		return (parent instanceof DeclarationNode || parent instanceof FunctionDeclarationNode) && (node == parent.child(0));
+		return (parent instanceof DeclarationNode || parent instanceof FunctionDeclarationNode || parent instanceof GlobalDeclarationNode) && (node == parent.child(0));
 	}
-	private void addBinding(IdentifierNode identifierNode, Type type) {
+	static public void addBinding(IdentifierNode identifierNode, Type type) {
 		Scope scope = identifierNode.getLocalScope();
 		Binding binding = scope.createBinding(identifierNode, type);
 		identifierNode.setBinding(binding);
@@ -639,7 +676,7 @@ class SemanticAnalysisVisitor extends ParseNodeVisitor.Default {
 		logError("operator " + token.getLexeme() + " not defined for types " 
 				 + operandTypes  + " at " + token.getLocation());	
 	}
-	private void logError(String message) {
+	static public void logError(String message) {
 		PikaLogger log = PikaLogger.getLogger("compiler.semanticAnalyzer");
 		log.severe(message);
 	}

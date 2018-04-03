@@ -419,7 +419,7 @@
         Jump         $$general-runtime-error   
         DLabel       $usable-memory-start      
         DLabel       $global-memory-block      
-        DataZ        12                        
+        DataZ        8                         
         DLabel       $frame-stack-pointer      
         DataZ        4                         
         DLabel       $stack-pointer            
@@ -428,310 +428,74 @@
         Label        $$main                    
         PushD        $global-memory-block      
         PushI        0                         
-        Add                                    %% mul
-        PushPC                                 
-        PushI        3                         
-        Add                                    
-        Jump         -function-2-skip          
-        PushD        $stack-pointer            
-        LoadI                                  
-        PushI        -4                        
-        Add                                    
-        Exchange                               
-        StoreI                                 
-        PushD        $stack-pointer            
-        LoadI                                  
-        PushI        -8                        
-        Add                                    
-        PushD        $frame-stack-pointer      
-        LoadI                                  
-        StoreI                                 
-        PushD        $frame-stack-pointer      
-        PushD        $stack-pointer            
-        LoadI                                  
-        StoreI                                 
-        PushD        $stack-pointer            
-        PushD        $frame-stack-pointer      
-        LoadI                                  
-        PushI        -8                        
-        Add                                    
-        StoreI                                 
-        Label        -compare-1-arg1           
-        PushD        $frame-stack-pointer      
-        LoadI                                  
-        PushI        0                         
-        Add                                    %% b
-        LoadI                                  
-        Label        -compare-1-arg2           
-        PushI        1                         
-        Label        -compare-1-sub            
-        Subtract                               
-        JumpFalse    -compare-1-true           
-        Jump         -compare-1-false          
-        Label        -compare-1-true           
-        PushI        1                         
-        Jump         -compare-1-join           
-        Label        -compare-1-false          
-        PushI        0                         
-        Jump         -compare-1-join           
-        Label        -compare-1-join           
-        JumpFalse    $ELSE1                    
-        PushD        $frame-stack-pointer      
-        LoadI                                  
-        PushI        4                         
-        Add                                    %% a
-        LoadI                                  
-        PushD        $stack-pointer            
-        PushD        $frame-stack-pointer      
-        LoadI                                  
-        StoreI                                 
-        PushD        $frame-stack-pointer      
-        PushD        $stack-pointer            
-        LoadI                                  
-        PushI        -8                        
-        Add                                    
-        LoadI                                  
-        StoreI                                 
-        PushD        $stack-pointer            
-        LoadI                                  
-        PushI        -4                        
-        Add                                    
-        LoadI                                  
-        Return                                 
-        Jump         $IFEND1                   
-        Label        $ELSE1                    
-        Label        $IFEND1                   
-        PushD        $stack-pointer            
-        PushD        $stack-pointer            
-        LoadI                                  
-        PushI        -4                        
-        Add                                    
-        StoreI                                 
-        PushD        $stack-pointer            
-        LoadI                                  
-        PushD        $stack-pointer            
-        PushD        $stack-pointer            
-        LoadI                                  
-        PushI        -4                        
-        Add                                    
-        StoreI                                 
-        PushD        $stack-pointer            
-        LoadI                                  
-        PushD        $frame-stack-pointer      
-        LoadI                                  
-        PushI        4                         
-        Add                                    %% a
-        LoadI                                  
-        StoreI                                 
-        PushD        $stack-pointer            
-        PushD        $stack-pointer            
-        LoadI                                  
-        PushI        -4                        
-        Add                                    
-        StoreI                                 
-        PushD        $stack-pointer            
-        LoadI                                  
-        PushD        $frame-stack-pointer      
-        LoadI                                  
-        PushI        0                         
-        Add                                    %% b
-        LoadI                                  
-        PushI        1                         
-        Subtract                               
-        StoreI                                 
-        PushD        $global-memory-block      
-        PushI        0                         
-        Add                                    %% mul
-        LoadI                                  
-        CallV                                  
-        PushD        $stack-pointer            
-        PushD        $stack-pointer            
-        LoadI                                  
-        PushI        8                         
-        Add                                    
-        StoreI                                 
-        StoreI                                 
-        PushD        $stack-pointer            
-        PushD        $stack-pointer            
-        LoadI                                  
-        PushI        -4                        
-        Add                                    
-        StoreI                                 
-        PushD        $stack-pointer            
-        LoadI                                  
-        PushD        $frame-stack-pointer      
-        LoadI                                  
-        PushI        4                         
-        Add                                    %% a
-        LoadI                                  
-        StoreI                                 
-        PushD        $global-memory-block      
-        PushI        4                         
-        Add                                    %% add
-        LoadI                                  
-        CallV                                  
-        PushD        $stack-pointer            
-        PushD        $stack-pointer            
-        LoadI                                  
-        PushI        8                         
-        Add                                    
-        StoreI                                 
-        PushD        $stack-pointer            
-        PushD        $frame-stack-pointer      
-        LoadI                                  
-        StoreI                                 
-        PushD        $frame-stack-pointer      
-        PushD        $stack-pointer            
-        LoadI                                  
-        PushI        -8                        
-        Add                                    
-        LoadI                                  
-        StoreI                                 
-        PushD        $stack-pointer            
-        LoadI                                  
-        PushI        -4                        
-        Add                                    
-        LoadI                                  
-        Return                                 
-        Jump         $$function-without-return 
-        Label        -function-2-skip          
-        StoreI                                 
-        PushD        $global-memory-block      
-        PushI        4                         
-        Add                                    %% add
-        PushPC                                 
-        PushI        3                         
-        Add                                    
-        Jump         -function-3-skip          
-        PushD        $stack-pointer            
-        LoadI                                  
-        PushI        -4                        
-        Add                                    
-        Exchange                               
-        StoreI                                 
-        PushD        $stack-pointer            
-        LoadI                                  
-        PushI        -8                        
-        Add                                    
-        PushD        $frame-stack-pointer      
-        LoadI                                  
-        StoreI                                 
-        PushD        $frame-stack-pointer      
-        PushD        $stack-pointer            
-        LoadI                                  
-        StoreI                                 
-        PushD        $stack-pointer            
-        PushD        $frame-stack-pointer      
-        LoadI                                  
-        PushI        -8                        
-        Add                                    
-        StoreI                                 
-        PushD        $frame-stack-pointer      
-        LoadI                                  
-        PushI        4                         
-        Add                                    %% a
-        LoadI                                  
-        PushD        $frame-stack-pointer      
-        LoadI                                  
-        PushI        0                         
-        Add                                    %% b
-        LoadI                                  
-        Add                                    
-        PushD        $stack-pointer            
-        PushD        $frame-stack-pointer      
-        LoadI                                  
-        StoreI                                 
-        PushD        $frame-stack-pointer      
-        PushD        $stack-pointer            
-        LoadI                                  
-        PushI        -8                        
-        Add                                    
-        LoadI                                  
-        StoreI                                 
-        PushD        $stack-pointer            
-        LoadI                                  
-        PushI        -4                        
-        Add                                    
-        LoadI                                  
-        Return                                 
-        Jump         $$function-without-return 
-        Label        -function-3-skip          
-        StoreI                                 
-        PushD        $global-memory-block      
-        PushI        8                         
-        Add                                    %% i
-        PushI        100                       
-        StoreI                                 
-        Label        $WhileLoop1               
-        Label        -compare-4-arg1           
-        PushD        $global-memory-block      
-        PushI        8                         
-        Add                                    %% i
-        LoadI                                  
-        Label        -compare-4-arg2           
-        PushI        0                         
-        Label        -compare-4-sub            
-        Subtract                               
-        JumpFalse    -compare-4-false          
-        Jump         -compare-4-true           
-        Label        -compare-4-true           
-        PushI        1                         
-        Jump         -compare-4-join           
-        Label        -compare-4-false          
-        PushI        0                         
-        Jump         -compare-4-join           
-        Label        -compare-4-join           
-        JumpFalse    $WhileEnd1                
-        PushD        $global-memory-block      
-        PushI        8                         
-        Add                                    %% i
-        PushD        $global-memory-block      
-        PushI        8                         
-        Add                                    %% i
-        LoadI                                  
-        PushI        1                         
-        Subtract                               
-        StoreI                                 
-        PushD        $stack-pointer            
-        PushD        $stack-pointer            
-        LoadI                                  
-        PushI        -4                        
-        Add                                    
-        StoreI                                 
-        PushD        $stack-pointer            
-        LoadI                                  
-        PushD        $global-memory-block      
-        PushI        8                         
-        Add                                    %% i
-        LoadI                                  
-        StoreI                                 
-        PushD        $stack-pointer            
-        PushD        $stack-pointer            
-        LoadI                                  
-        PushI        -4                        
-        Add                                    
-        StoreI                                 
-        PushD        $stack-pointer            
-        LoadI                                  
+        Add                                    %% str
+        PushI        18                        
+        Call         -mem-manager-allocate     
+        Duplicate                              
         PushI        5                         
+        Call         -mem-store-string-header  
+        Duplicate                              
+        PushI        0                         
+        PushI        12                        
+        Add                                    
+        Add                                    
+        PushI        104                       
+        StoreC                                 
+        Duplicate                              
+        PushI        1                         
+        PushI        12                        
+        Add                                    
+        Add                                    
+        PushI        101                       
+        StoreC                                 
+        Duplicate                              
+        PushI        2                         
+        PushI        12                        
+        Add                                    
+        Add                                    
+        PushI        108                       
+        StoreC                                 
+        Duplicate                              
+        PushI        3                         
+        PushI        12                        
+        Add                                    
+        Add                                    
+        PushI        108                       
+        StoreC                                 
+        Duplicate                              
+        PushI        4                         
+        PushI        12                        
+        Add                                    
+        Add                                    
+        PushI        111                       
+        StoreC                                 
+        Duplicate                              
+        PushI        5                         
+        PushI        12                        
+        Add                                    
+        Add                                    
+        PushI        0                         
+        StoreC                                 
+        StoreI                                 
+        PushD        $global-memory-block      
+        PushI        4                         
+        Add                                    %% a
+        PushI        33                        
+        PushD        $global-memory-block      
+        PushI        0                         
+        Add                                    %% str
+        LoadI                                  
+        Call         -mem-char-string          
         StoreI                                 
         PushD        $global-memory-block      
         PushI        0                         
-        Add                                    %% mul
+        Add                                    %% str
         LoadI                                  
-        CallV                                  
-        PushD        $stack-pointer            
-        PushD        $stack-pointer            
-        LoadI                                  
-        PushI        8                         
+        Call         -mem-string-reverse       
+        PushI        12                        
         Add                                    
-        StoreI                                 
-        PushD        $print-format-integer     
+        PushD        $print-format-string      
         Printf                                 
-        PushD        $print-format-space       
-        Printf                                 
-        Jump         $WhileLoop1               
-        Label        $WhileEnd1                
         Halt                                   
         Label        -mem-manager-make-tags    
         DLabel       $mmgr-tags-size           
@@ -1380,6 +1144,587 @@
         PushD        $mem-store-array-block    
         LoadI                                  
         PushD        $mem-store-array-eight-byte-return 
+        LoadI                                  
+        Return                                 
+        Label        -mem-string-index         
+        DLabel       $mem-string-index-return-address 
+        DataZ        4                         
+        DLabel       $mem-string-index-address 
+        DataZ        4                         
+        DLabel       $mem-string-index-index   
+        DataZ        4                         
+        PushD        $mem-string-index-return-address 
+        Exchange                               
+        StoreI                                 
+        PushD        $mem-string-index-index   
+        Exchange                               
+        StoreI                                 
+        PushD        $mem-string-index-address 
+        Exchange                               
+        StoreI                                 
+        PushD        $mem-string-index-address 
+        LoadI                                  
+        PushI        8                         
+        Add                                    
+        LoadI                                  
+        PushD        $mem-string-index-index   
+        LoadI                                  
+        Subtract                               
+        JumpPos      $mem-string-index-end1    
+        Call         $$a-index-exceed          
+        Label        $mem-string-index-end1    
+        PushD        $mem-string-index-index   
+        LoadI                                  
+        PushI        1                         
+        Add                                    
+        JumpPos      $mem-string-index-end2    
+        Call         $$a-index-exceed          
+        Label        $mem-string-index-end2    
+        PushD        $mem-string-index-address 
+        LoadI                                  
+        PushI        12                        
+        PushD        $mem-string-index-index   
+        LoadI                                  
+        Add                                    
+        Add                                    
+        PushD        $mem-string-index-return-address 
+        LoadI                                  
+        Return                                 
+        Label        -mem-string-range         
+        DLabel       $mem-string-range-return-address 
+        DataZ        4                         
+        DLabel       $mem-string-range-address 
+        DataZ        4                         
+        DLabel       $mem-string-range-index1  
+        DataZ        4                         
+        DLabel       $mem-string-range-index2  
+        DataZ        4                         
+        DLabel       $mem-string-range-length  
+        DataZ        4                         
+        PushD        $mem-string-range-return-address 
+        Exchange                               
+        StoreI                                 
+        PushD        $mem-string-range-index2  
+        Exchange                               
+        StoreI                                 
+        PushD        $mem-string-range-index1  
+        Exchange                               
+        StoreI                                 
+        PushD        $mem-string-range-address 
+        Exchange                               
+        StoreI                                 
+        PushD        $mem-string-range-index2  
+        LoadI                                  
+        PushD        $mem-string-range-index1  
+        LoadI                                  
+        Subtract                               
+        PushD        $mem-string-range-length  
+        Exchange                               
+        StoreI                                 
+        PushD        $mem-string-range-length  
+        LoadI                                  
+        PushI        1                         
+        Subtract                               
+        JumpNeg      $mem-string-range-rte     
+        PushD        $mem-string-range-index1  
+        LoadI                                  
+        JumpNeg      $mem-string-range-rte     
+        PushD        $mem-string-range-address 
+        LoadI                                  
+        PushI        8                         
+        Add                                    
+        LoadI                                  
+        PushD        $mem-string-range-index2  
+        LoadI                                  
+        Subtract                               
+        JumpNeg      $mem-string-range-rte     
+        PushD        $mem-string-range-length  
+        LoadI                                  
+        PushI        13                        
+        Add                                    
+        Call         -mem-manager-allocate     
+        Duplicate                              
+        PushD        $mem-string-range-length  
+        LoadI                                  
+        Call         -mem-store-string-header  
+        PushD        $mem-string-range-length  
+        LoadI                                  
+        PushI        1                         
+        Subtract                               
+        PushD        $mem-string-range-length  
+        Exchange                               
+        StoreI                                 
+        Label        $mem-string-range-loop    
+        PushD        $mem-string-range-length  
+        LoadI                                  
+        JumpNeg      $mem-string-range-end     
+        Duplicate                              
+        PushI        12                        
+        PushD        $mem-string-range-length  
+        LoadI                                  
+        Add                                    
+        Add                                    
+        PushD        $mem-string-range-address 
+        LoadI                                  
+        PushD        $mem-string-range-index1  
+        LoadI                                  
+        PushD        $mem-string-range-length  
+        LoadI                                  
+        PushI        12                        
+        Add                                    
+        Add                                    
+        Add                                    
+        LoadC                                  
+        StoreC                                 
+        PushD        $mem-string-range-length  
+        LoadI                                  
+        PushI        1                         
+        Subtract                               
+        PushD        $mem-string-range-length  
+        Exchange                               
+        StoreI                                 
+        Jump         $mem-string-range-loop    
+        Label        $mem-string-range-end     
+        Duplicate                              
+        PushD        $mem-string-range-index2  
+        LoadI                                  
+        PushD        $mem-string-range-index1  
+        LoadI                                  
+        Subtract                               
+        PushI        12                        
+        Add                                    
+        Add                                    
+        PushI        0                         
+        StoreC                                 
+        PushD        $mem-string-range-return-address 
+        LoadI                                  
+        Return                                 
+        Label        $mem-string-range-rte     
+        Call         $$a-index-exceed          
+        Label        -mem-string-concatenation 
+        DLabel       $mem-string-concatenation-return-address 
+        DataZ        4                         
+        DLabel       $mem-string-concatenation-address1 
+        DataZ        4                         
+        DLabel       $mem-string-concatenation-address2 
+        DataZ        4                         
+        DLabel       $mem-string-concatenation-length1 
+        DataZ        4                         
+        DLabel       $mem-string-concatenation-length2 
+        DataZ        4                         
+        PushD        $mem-string-concatenation-return-address 
+        Exchange                               
+        StoreI                                 
+        PushD        $mem-string-concatenation-address2 
+        Exchange                               
+        StoreI                                 
+        PushD        $mem-string-concatenation-address1 
+        Exchange                               
+        StoreI                                 
+        PushD        $mem-string-concatenation-address1 
+        LoadI                                  
+        PushI        8                         
+        Add                                    
+        LoadI                                  
+        PushD        $mem-string-concatenation-length1 
+        Exchange                               
+        StoreI                                 
+        PushD        $mem-string-concatenation-address2 
+        LoadI                                  
+        PushI        8                         
+        Add                                    
+        LoadI                                  
+        PushD        $mem-string-concatenation-length2 
+        Exchange                               
+        StoreI                                 
+        PushD        $mem-string-concatenation-length1 
+        LoadI                                  
+        PushD        $mem-string-concatenation-length2 
+        LoadI                                  
+        Add                                    
+        PushI        13                        
+        Add                                    
+        Call         -mem-manager-allocate     
+        Duplicate                              
+        PushD        $mem-string-concatenation-length1 
+        LoadI                                  
+        PushD        $mem-string-concatenation-length2 
+        LoadI                                  
+        Add                                    
+        Call         -mem-store-string-header  
+        PushD        $mem-string-concatenation-length1 
+        LoadI                                  
+        PushI        1                         
+        Subtract                               
+        PushD        $mem-string-concatenation-length1 
+        Exchange                               
+        StoreI                                 
+        Label        $mem-string-concatenation-loop1 
+        PushD        $mem-string-concatenation-length1 
+        LoadI                                  
+        JumpNeg      $mem-string-concatenation-loop2 
+        Duplicate                              
+        PushI        12                        
+        PushD        $mem-string-concatenation-length1 
+        LoadI                                  
+        Add                                    
+        Add                                    
+        PushD        $mem-string-concatenation-address1 
+        LoadI                                  
+        PushD        $mem-string-concatenation-length1 
+        LoadI                                  
+        PushI        12                        
+        Add                                    
+        Add                                    
+        LoadC                                  
+        StoreC                                 
+        PushD        $mem-string-concatenation-length1 
+        LoadI                                  
+        PushI        1                         
+        Subtract                               
+        PushD        $mem-string-concatenation-length1 
+        Exchange                               
+        StoreI                                 
+        Jump         $mem-string-concatenation-loop1 
+        PushD        $mem-string-concatenation-length2 
+        LoadI                                  
+        PushI        1                         
+        Subtract                               
+        PushD        $mem-string-concatenation-length2 
+        Exchange                               
+        StoreI                                 
+        Label        $mem-string-concatenation-loop2 
+        PushD        $mem-string-concatenation-length2 
+        LoadI                                  
+        JumpNeg      $mem-string-concacenation-end 
+        Duplicate                              
+        PushI        12                        
+        PushD        $mem-string-concatenation-length2 
+        LoadI                                  
+        PushD        $mem-string-concatenation-address1 
+        LoadI                                  
+        PushI        8                         
+        Add                                    
+        LoadI                                  
+        Add                                    
+        Add                                    
+        Add                                    
+        PushD        $mem-string-concatenation-address2 
+        LoadI                                  
+        PushD        $mem-string-concatenation-length2 
+        LoadI                                  
+        PushI        12                        
+        Add                                    
+        Add                                    
+        LoadC                                  
+        StoreC                                 
+        PushD        $mem-string-concatenation-length2 
+        LoadI                                  
+        PushI        1                         
+        Subtract                               
+        PushD        $mem-string-concatenation-length2 
+        Exchange                               
+        StoreI                                 
+        Jump         $mem-string-concatenation-loop1 
+        Label        $mem-string-concacenation-end 
+        Duplicate                              
+        PushD        $mem-string-concatenation-address1 
+        LoadI                                  
+        PushI        8                         
+        Add                                    
+        LoadI                                  
+        PushD        $mem-string-concatenation-address2 
+        LoadI                                  
+        PushI        8                         
+        Add                                    
+        LoadI                                  
+        Add                                    
+        PushI        12                        
+        Add                                    
+        Add                                    
+        PushI        0                         
+        StoreC                                 
+        PushD        $mem-string-concatenation-return-address 
+        LoadI                                  
+        Return                                 
+        Label        -mem-string-char          
+        DLabel       $mem-string-char-return-address 
+        DataZ        4                         
+        DLabel       $mem-string-char-address  
+        DataZ        4                         
+        DLabel       $mem-string-char-char     
+        DataZ        1                         
+        DLabel       $mem-string-char-length   
+        DataZ        4                         
+        PushD        $mem-string-char-return-address 
+        Exchange                               
+        StoreI                                 
+        PushD        $mem-string-char-address  
+        Exchange                               
+        StoreI                                 
+        PushD        $mem-string-char-char     
+        Exchange                               
+        StoreC                                 
+        PushD        $mem-string-char-address  
+        LoadI                                  
+        PushI        8                         
+        Add                                    
+        LoadI                                  
+        PushD        $mem-string-char-length   
+        Exchange                               
+        StoreI                                 
+        PushD        $mem-string-char-length   
+        LoadI                                  
+        PushI        13                        
+        PushI        1                         
+        Add                                    
+        Add                                    
+        Call         -mem-manager-allocate     
+        Duplicate                              
+        PushD        $mem-string-char-length   
+        LoadI                                  
+        PushI        1                         
+        Add                                    
+        Call         -mem-store-string-header  
+        PushD        $mem-string-char-length   
+        LoadI                                  
+        PushI        1                         
+        Subtract                               
+        PushD        $mem-string-char-length   
+        Exchange                               
+        StoreI                                 
+        Label        $mem-string-char-loop     
+        PushD        $mem-string-char-length   
+        LoadI                                  
+        JumpNeg      $mem-string-char-end      
+        Duplicate                              
+        PushI        12                        
+        PushD        $mem-string-char-length   
+        LoadI                                  
+        Add                                    
+        Add                                    
+        PushD        $mem-string-char-address  
+        LoadI                                  
+        PushD        $mem-string-char-length   
+        LoadI                                  
+        PushI        12                        
+        Add                                    
+        Add                                    
+        LoadC                                  
+        StoreC                                 
+        PushD        $mem-string-char-length   
+        LoadI                                  
+        PushI        1                         
+        Subtract                               
+        PushD        $mem-string-char-length   
+        Exchange                               
+        StoreI                                 
+        Jump         $mem-string-char-loop     
+        Label        $mem-string-char-end      
+        Duplicate                              
+        PushD        $mem-string-char-address  
+        LoadI                                  
+        PushI        8                         
+        Add                                    
+        LoadI                                  
+        PushI        12                        
+        Add                                    
+        Add                                    
+        PushD        $mem-string-char-char     
+        LoadC                                  
+        StoreC                                 
+        Duplicate                              
+        PushD        $mem-string-char-address  
+        LoadI                                  
+        PushI        8                         
+        Add                                    
+        LoadI                                  
+        PushI        12                        
+        PushI        1                         
+        Add                                    
+        Add                                    
+        Add                                    
+        PushI        0                         
+        StoreC                                 
+        PushD        $mem-string-char-return-address 
+        LoadI                                  
+        Return                                 
+        Label        -mem-char-string          
+        DLabel       $mem-char-string-return-address 
+        DataZ        4                         
+        DLabel       $mem-char-string-address  
+        DataZ        4                         
+        DLabel       $mem-char-string-char     
+        DataZ        1                         
+        DLabel       $mem-char-string-length   
+        DataZ        4                         
+        PushD        $mem-char-string-return-address 
+        Exchange                               
+        StoreI                                 
+        PushD        $mem-char-string-address  
+        Exchange                               
+        StoreI                                 
+        PushD        $mem-char-string-char     
+        Exchange                               
+        StoreC                                 
+        PushD        $mem-char-string-address  
+        LoadI                                  
+        PushI        8                         
+        Add                                    
+        LoadI                                  
+        PushD        $mem-char-string-length   
+        Exchange                               
+        StoreI                                 
+        PushD        $mem-char-string-length   
+        LoadI                                  
+        PushI        13                        
+        PushI        1                         
+        Add                                    
+        Add                                    
+        Call         -mem-manager-allocate     
+        Duplicate                              
+        PushD        $mem-char-string-length   
+        LoadI                                  
+        PushI        1                         
+        Add                                    
+        Call         -mem-store-string-header  
+        Duplicate                              
+        PushI        12                        
+        Add                                    
+        PushD        $mem-char-string-char     
+        LoadC                                  
+        StoreC                                 
+        Label        $mem-char-string-loop     
+        PushD        $mem-char-string-length   
+        LoadI                                  
+        JumpFalse    $mem-char-string-end      
+        Duplicate                              
+        PushI        12                        
+        PushD        $mem-char-string-length   
+        LoadI                                  
+        Add                                    
+        Add                                    
+        PushD        $mem-char-string-address  
+        LoadI                                  
+        PushD        $mem-char-string-length   
+        LoadI                                  
+        PushI        12                        
+        Add                                    
+        Add                                    
+        PushI        1                         
+        Subtract                               
+        LoadC                                  
+        StoreC                                 
+        PushD        $mem-char-string-length   
+        LoadI                                  
+        PushI        1                         
+        Subtract                               
+        PushD        $mem-char-string-length   
+        Exchange                               
+        StoreI                                 
+        Jump         $mem-char-string-loop     
+        Label        $mem-char-string-end      
+        Duplicate                              
+        PushD        $mem-char-string-address  
+        LoadI                                  
+        PushI        8                         
+        Add                                    
+        LoadI                                  
+        PushI        12                        
+        PushI        1                         
+        Add                                    
+        Add                                    
+        Add                                    
+        PushI        0                         
+        StoreC                                 
+        PushD        $mem-char-string-return-address 
+        LoadI                                  
+        Return                                 
+        Label        -mem-string-reverse       
+        DLabel       $mem-string-reverse-return-address 
+        DataZ        4                         
+        DLabel       $mem-string-reverse-address 
+        DataZ        4                         
+        DLabel       $mem-string-reverse-length 
+        DataZ        4                         
+        PushD        $mem-string-reverse-return-address 
+        Exchange                               
+        StoreI                                 
+        PushD        $mem-string-reverse-address 
+        Exchange                               
+        StoreI                                 
+        PushD        $mem-string-reverse-address 
+        LoadI                                  
+        PushI        8                         
+        Add                                    
+        LoadI                                  
+        PushD        $mem-string-reverse-length 
+        Exchange                               
+        StoreI                                 
+        PushD        $mem-string-reverse-length 
+        LoadI                                  
+        PushI        13                        
+        Add                                    
+        Call         -mem-manager-allocate     
+        Duplicate                              
+        PushD        $mem-string-reverse-length 
+        LoadI                                  
+        Call         -mem-store-string-header  
+        PushD        $mem-string-reverse-length 
+        LoadI                                  
+        PushI        1                         
+        Subtract                               
+        PushD        $mem-string-reverse-length 
+        Exchange                               
+        StoreI                                 
+        Label        $mem-string-reverse-loop  
+        PushD        $mem-string-reverse-length 
+        LoadI                                  
+        JumpNeg      $mem-string-reverse-end   
+        Duplicate                              
+        PushI        12                        
+        PushD        $mem-string-reverse-address 
+        LoadI                                  
+        PushI        8                         
+        Add                                    
+        LoadI                                  
+        PushD        $mem-string-reverse-length 
+        LoadI                                  
+        Subtract                               
+        PushI        1                         
+        Subtract                               
+        Add                                    
+        Add                                    
+        PushD        $mem-string-reverse-address 
+        LoadI                                  
+        PushD        $mem-string-reverse-length 
+        LoadI                                  
+        PushI        12                        
+        Add                                    
+        Add                                    
+        LoadC                                  
+        StoreC                                 
+        PushD        $mem-string-reverse-length 
+        LoadI                                  
+        PushI        1                         
+        Subtract                               
+        PushD        $mem-string-reverse-length 
+        Exchange                               
+        StoreI                                 
+        Jump         $mem-string-reverse-loop  
+        Label        $mem-string-reverse-end   
+        Duplicate                              
+        PushD        $mem-string-reverse-address 
+        LoadI                                  
+        PushI        8                         
+        Add                                    
+        LoadI                                  
+        PushI        12                        
+        Add                                    
+        Add                                    
+        PushI        0                         
+        StoreC                                 
+        PushD        $mem-string-reverse-return-address 
         LoadI                                  
         Return                                 
         Label        -mem-array-release        

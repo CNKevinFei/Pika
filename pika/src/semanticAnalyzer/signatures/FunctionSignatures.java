@@ -70,6 +70,9 @@ public class FunctionSignatures extends ArrayList<FunctionSignature> {
 
 		new FunctionSignatures(Punctuator.ADD,
 		    new FunctionSignature(ASMOpcode.Add, PrimitiveType.INTEGER, PrimitiveType.INTEGER, PrimitiveType.INTEGER),
+		    new FunctionSignature(ASMOpcode.Add, PrimitiveType.STRING, PrimitiveType.STRING, PrimitiveType.STRING),
+		    new FunctionSignature(ASMOpcode.Add, PrimitiveType.STRING, PrimitiveType.CHAR, PrimitiveType.STRING),
+		    new FunctionSignature(ASMOpcode.Add, PrimitiveType.CHAR, PrimitiveType.STRING, PrimitiveType.STRING),
 		    new FunctionSignature(ASMOpcode.FAdd, PrimitiveType.FLOAT, PrimitiveType.FLOAT, PrimitiveType.FLOAT),
 		    new FunctionSignature(0, PrimitiveType.RATIONAL, PrimitiveType.RATIONAL, PrimitiveType.RATIONAL)
 		);
@@ -190,6 +193,7 @@ public class FunctionSignatures extends ArrayList<FunctionSignature> {
 		List<TypeVariable> setS = Arrays.asList(s);
 		
 		new FunctionSignatures(Punctuator.ARRAY_INDEX,
+				new FunctionSignature(0, PrimitiveType.STRING, PrimitiveType.INTEGER, PrimitiveType.CHAR),
 				new FunctionSignature(0, setS, new ArrayType(s), PrimitiveType.INTEGER, s));
 		
 		
