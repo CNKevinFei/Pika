@@ -376,17 +376,40 @@ public class ASMCodeGenerator {
 				code.add(StoreI);
 				
 				// para -> MEM[sp]
-				code.add(PushD, RunTime.STACK_POINTER);
-				code.add(LoadI);
-				code.append(removeValueCode(para));
+				
 				if(para.getType().getSize()==1) {
+					code.add(PushD, RunTime.STACK_POINTER);
+					code.add(LoadI);
+					code.append(removeValueCode(para));
 					code.add(StoreC);
 				}
 				else if(para.getType().getSize()==4) {
+					code.add(PushD, RunTime.STACK_POINTER);
+					code.add(LoadI);
+					code.append(removeValueCode(para));
 					code.add(StoreI);
 				}
 				else if(para.getType().getSize()==8) {
-					code.add(StoreF);
+					if(para.getType() == PrimitiveType.RATIONAL) {
+						code.append(removeValueCode(para));
+						code.add(PushD, RunTime.STACK_POINTER);
+						code.add(LoadI);
+						code.add(PushI,4);
+						code.add(Add);
+						code.add(Exchange);
+						code.add(StoreI);
+						code.add(PushD, RunTime.STACK_POINTER);
+						code.add(LoadI);
+						code.add(Exchange);
+						code.add(StoreI);
+					}
+					else {
+						code.add(PushD, RunTime.STACK_POINTER);
+						code.add(LoadI);
+						code.append(removeValueCode(para));
+						code.add(StoreF);
+					}
+					
 				}
 				else {
 					assert 1==0;
@@ -539,6 +562,160 @@ public class ASMCodeGenerator {
 			this.whileNum++;
 		}
 		
+		public void visitLeave(ForIndexStatementNode node) {
+			newVoidCode(node);
+			ASMCodeFragment iden = removeAddressCode(node.child(0));
+			ASMCodeFragment expr = removeValueCode(node.child(1));
+			ASMCodeFragment content = removeVoidCode(node.child(2));
+			
+			code.append(iden);
+			code.add(Duplicate);
+			code.add(PushI,0);
+			code.add(StoreI);
+			
+			
+			code.add(Label, "$WhileLoop"+this.whileNum);
+				code.add(Duplicate);
+				code.add(LoadI);
+				
+				code.append(expr);
+				if(node.child(1).getType()==PrimitiveType.STRING) {
+					code.add(PushI, MemoryManager.MEM_STRING_LENGTH_OFFSET);
+				}
+				else {
+					code.add(PushI, MemoryManager.MEM_ARRAY_LENGTH_OFFSET);
+				}
+				code.add(Add);
+				code.add(LoadI);
+				code.add(Subtract);
+				
+				code.add(JumpFalse, "$WhileEnd"+this.whileNum);
+				code.append(content);
+				code.add(Duplicate);
+				code.add(Duplicate);
+				code.add(LoadI);
+				code.add(PushI,1);
+				code.add(Add);
+				code.add(StoreI);
+				code.add(Jump, "$WhileLoop"+this.whileNum);
+			
+		code.add(Label, "$WhileEnd"+this.whileNum);
+			code.add(Pop);
+		
+		this.whileNum++;
+		}
+		
+		public void visitLeave(ForElemStatementNode node) {
+			newVoidCode(node);
+			ASMCodeFragment iden = removeAddressCode(node.child(1));
+			ASMCodeFragment expr = removeValueCode(node.child(0));
+			ASMCodeFragment content = removeVoidCode(node.child(2));
+			
+			
+			code.add(DLabel, "-for-elem"+this.whileNum);
+			code.add(DataZ, 4);
+			code.add(PushD, "-for-elem"+this.whileNum);
+			code.add(PushI, 0);
+			code.add(StoreI);
+			
+			
+			code.add(Label, "$WhileLoop"+this.whileNum);
+				code.append(expr);
+				code.add(Duplicate);
+				code.add(PushD, "-for-elem"+this.whileNum);
+				code.add(LoadI);
+				code.add(Exchange);
+				
+				if(node.child(0).getType()==PrimitiveType.STRING) {
+					code.add(PushI, MemoryManager.MEM_STRING_LENGTH_OFFSET);
+				}
+				else {
+					code.add(PushI, MemoryManager.MEM_ARRAY_LENGTH_OFFSET);
+				}
+				code.add(Add);
+				code.add(LoadI);
+				code.add(Subtract);
+				
+				code.add(JumpFalse, "$WhileEnd"+this.whileNum);
+				
+				//[...recordAddr, index]
+				
+				if(node.child(0).getType()==PrimitiveType.STRING) {
+					code.add(PushD, "-for-elem"+this.whileNum);
+					code.add(LoadI);
+					code.add(Call, MemoryManager.MEM_STRING_INDEX);
+					code.add(LoadC);
+					code.append(iden);
+					code.add(Exchange);
+					code.add(StoreC);
+				}
+				else {
+					code.append(iden);
+					code.add(Exchange);
+					code.add(PushD, "-for-elem"+this.whileNum);
+					code.add(LoadI);
+					if(node.child(1).getType() == PrimitiveType.RATIONAL) {
+						code.add(PushI,1);
+					}
+					else {
+						code.add(PushI, 0);
+					}
+					code.add(Call, MemoryManager.MEM_ARRAY_INDEX);
+					if(node.child(1).getType() == PrimitiveType.RATIONAL) {
+						code.add(Duplicate);
+						code.add(LoadI);
+						code.add(Exchange);
+						code.add(PushI,4);
+						code.add(Add);
+						code.add(LoadI);
+						code.add(Call,MemoryManager.MEM_RAT_STORE);
+					}
+					else {
+						Type type = node.child(1).getType();
+						if(type == PrimitiveType.INTEGER) {
+							code.add(LoadI);
+						}	
+						else if(type == PrimitiveType.FLOAT) {
+							code.add(LoadF);
+						}
+						else if(type== PrimitiveType.BOOLEAN) {
+							code.add(LoadC);
+						}	
+						else if(type== PrimitiveType.CHAR) {
+							code.add(LoadC);
+						}	
+						else if(type== PrimitiveType.STRING) {
+							code.add(LoadI);
+						}
+						else if(type instanceof ArrayType) {
+							code.add(LoadI);
+						}
+						else if(type instanceof LambdaType) {
+							code.add(LoadI);
+						}
+						else {
+							assert false : "node " + node;
+						}
+						
+						code.add(opcodeForStore(node.child(1).getType()));
+					}
+				}
+				//[...]
+				
+				code.append(content);
+				code.add(PushD, "-for-elem"+this.whileNum);
+				code.add(PushD, "-for-elem"+this.whileNum);
+				code.add(LoadI);
+				code.add(PushI,1);
+				code.add(Add);
+				code.add(StoreI);
+				code.add(Jump, "$WhileLoop"+this.whileNum);
+			
+		code.add(Label, "$WhileEnd"+this.whileNum);
+			code.add(Pop);
+		
+		this.whileNum++;
+		}
 		public void visit(BreakStatementNode node) {
 			newVoidCode(node);
 			
@@ -582,7 +759,18 @@ public class ASMCodeGenerator {
 			ASMCodeFragment str = removeValueCode(node.child(0));
 			
 			code.append(str);
-			code.add(Call, MemoryManager.MEM_STRING_REVERSE);
+			if(node.getType()==PrimitiveType.STRING) {
+				code.add(Call, MemoryManager.MEM_STRING_REVERSE);
+			}
+			else if (((ArrayType)node.getType()).getSubType() == PrimitiveType.RATIONAL){
+				code.add(PushI,1);
+				code.add(Call, MemoryManager.MEM_ARRAY_REVERSE);
+			}
+			else {
+				code.add(PushI,0);
+				code.add(Call, MemoryManager.MEM_ARRAY_REVERSE);
+			}
+			
 		}
 		///////////////////////////////////////////////////////////////////////////
 		// expression list
@@ -766,6 +954,81 @@ public class ASMCodeGenerator {
 				code.append(removeValueCode(node.child(2)));
 				code.add(Call, MemoryManager.MEM_STRING_RANGE);
 			}
+			else if(operator == Keyword.MAP) {
+				newValueCode(node);
+				ASMCodeFragment lamb = removeValueCode(node.child(1));
+				ASMCodeFragment array = removeValueCode(node.child(0));
+				
+				code.append(array);
+				
+				code.add(Duplicate);
+				code.add(Duplicate);
+				code.add(PushI, MemoryManager.MEM_ARRAY_LENGTH_OFFSET);
+				code.add(Add);
+				code.add(LoadI);
+				code.add(PushI, ((LambdaType)node.child(1).getType()).getReturnType().getSize());
+				code.add(Multiply);
+				code.add(PushI, MemoryManager.MEM_ARRAY_HEADER);
+				code.add(Add);
+				code.add(Call, MemoryManager.MEM_MANAGER_ALLOCATE);
+				//[...arrayAddr, arrayAddr, newAddr]
+				
+				code.add(Exchange);
+				code.add(PushI, MemoryManager.MEM_ARRAY_LENGTH_OFFSET);
+				code.add(Add);
+				code.add(LoadI);
+				code.add(PushI, ((LambdaType)node.child(1).getType()).getReturnType().getSize());
+				code.add(Exchange);
+				
+				if(((LambdaType)node.child(1).getType()).getReturnType() instanceof ArrayType) {
+					code.add(PushI, 4);
+				}
+				else {
+					code.add(PushI, 0);
+				}
+				
+				code.add(Call, MemoryManager.MEM_STORE_ARRAY_HEADER);
+				code.add(Pop);
+				code.append(lamb);
+				if(((LambdaType)node.child(1).getType()).getParaType().get(0) == PrimitiveType.RATIONAL) {
+					code.add(PushI, 1);
+				}
+				else {
+					code.add(PushI, 0);
+				}
+				
+				if(((LambdaType)node.child(1).getType()).getReturnType() == PrimitiveType.RATIONAL) {
+					code.add(PushI, 1);
+				}
+				else {
+					code.add(PushI, 0);
+				}
+				//[...arrayAddr, newAddr, lamb, flag1, flag2]
+				
+				code.add(Call, MemoryManager.MEM_ARRAY_MAP);
+				//[...newAddr]
+				
+				
+			}
+			else if(operator == Keyword.REDUCE) {
+				newValueCode(node);
+				ASMCodeFragment lamb = removeValueCode(node.child(1));
+				ASMCodeFragment array = removeValueCode(node.child(0));
+				
+				code.append(array);
+				code.add(Call, MemoryManager.MEM_ARRAY_CLONE);
+				code.append(lamb);
+				if(((LambdaType)node.child(1).getType()).getParaType().get(0) == PrimitiveType.RATIONAL) {
+					code.add(PushI, 1);
+				}
+				else {
+					code.add(PushI, 0);
+				}
+				
+				//[...newAddr, lamb, flag]
+				code.add(Call, MemoryManager.MEM_ARRAY_REDUCE);
+				//[...newAddr]
+			}
 			else {
 				visitNormalBinaryOperatorNode(node);
 			}
@@ -781,6 +1044,49 @@ public class ASMCodeGenerator {
 				
 		}
 		
+		public void visitLeave(FoldExpressionNode node) {
+			newValueCode(node);
+			
+			if(node.nChildren() == 2) {
+				code.append(removeValueCode(node.child(0)));
+				code.append(removeValueCode(node.child(1)));
+				if(((ArrayType)node.child(0).getType()).getSubType() == PrimitiveType.RATIONAL) {
+					code.add(PushI, 1);
+				}
+				else {
+					code.add(PushI, 0);
+				}
+				
+				//[...arrayAddr, lamb, flag]
+				code.add(Call, MemoryManager.MEM_ARRAY_FOLD_TWO);
+			}
+			
+			//[...arrayAddr, lamb, base, ]
+			else if(node.nChildren() == 3) {
+				code.append(removeValueCode(node.child(2)));
+				code.append(removeValueCode(node.child(0)));
+				code.append(removeValueCode(node.child(1)));
+				
+				
+				code.add(PushI, node.child(2).getType().getSize());
+				if(node.child(2).getType() == PrimitiveType.RATIONAL) {
+					code.add(PushI, 1);
+				}
+				else {
+					code.add(PushI, 0);
+				}
+				
+				if(((ArrayType)node.child(0).getType()).getSubType() == PrimitiveType.RATIONAL) {
+					code.add(PushI, 1);
+				}
+				else {
+					code.add(PushI, 0);
+				}
+				
+				//[...base, arrayAddr, lamb, size, flagU, flagT]
+				code.add(Call, MemoryManager.MEM_ARRAY_FOLD_THREE);
+			}
+		}
 		private void visitNewNode(BinaryOperatorNode node) {
 			newValueCode(node);
 			Type type = ((ArrayType)(node.getType())).getSubType();

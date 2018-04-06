@@ -319,8 +319,126 @@ public class MemoryManager {
 	private static final String MEM_ARRAY_RECORD_VALID_RETURN_ADDRESS = "-mem-arrya-record-valid-return-address";
 	private static final String MEM_ARRAY_RECORD_VALID_ARRAY_ADDRESS = "-mem-arrya-record-valid-array-address";
 	
+	public static final String MEM_ARRAY_REVERSE = "-mem-array-reverse";
+	private static final String MEM_ARRAY_REVERSE_RETURN_ADDRESS = "$mem-array-reverse-return-address";
+	private static final String MEM_ARRAY_REVERSE_ADDRESS = "$mem-array-reverse-address";
+	private static final String MEM_ARRAY_REVERSE_NEW_ADDRESS = "$mem-array-reverse-new-address";
+	private static final String MEM_ARRAY_REVERSE_FLAG = "$mem-array-reverse-flag";
+	private static final String MEM_ARRAY_REVERSE_ITE = "$mem-array-reverse-ite";
+	private static final String MEM_ARRAY_REVERSE_LENGTH = "$mem-array-reverse-length";
+	private static final String MEM_ARRAY_REVERSE_SUBSIZE = "$mem-array-reverse-subsize";
+	private static final String MEM_ARRAY_REVERSE_ONE_BYTE = "$mem-array-reverse-one-byte";
+	private static final String MEM_ARRAY_REVERSE_FOUR_BYTE = "$mem-array-reverse-four-byte";
+	private static final String MEM_ARRAY_REVERSE_EIGHT_BYTE = "$mem-array-reverse-eight-byte";
+	private static final String MEM_ARRAY_REVERSE_RATIONAL = "$mem-array-reverse-rational";
+	private static final String MEM_ARRAY_REVERSE_ONE_LOOP = "$mem-array-reverse-one-loop";
+	private static final String MEM_ARRAY_REVERSE_FOUR_LOOP = "$mem-array-reverse-four-loop";
+	private static final String MEM_ARRAY_REVERSE_EIGHT_LOOP = "$mem-array-reverse-eight-loop";
+	private static final String MEM_ARRAY_REVERSE_RATIONAL_LOOP = "$mem-array-reverse-rational-loop";
+	private static final String MEM_ARRAY_REVERSE_ONE_END = "$mem-array-reverse-one-end";
+	private static final String MEM_ARRAY_REVERSE_FOUR_END = "$mem-array-reverse-four-end";
+	private static final String MEM_ARRAY_REVERSE_EIGHT_END = "$mem-array-reverse-eight-end";
+	private static final String MEM_ARRAY_REVERSE_RATIONAL_END= "$mem-array-reverse-rational-end";
 	
+	public static final String MEM_ARRAY_ALL = "-mem-array-all";
+	private static final String MEM_ARRAY_ALL_RETURN_ADDRESS = "$mem-array-all-return-address";
+	private static final String MEM_ARRAY_ALL_ADDRESS = "$mem-array-all-address";
+	private static final String MEM_ARRAY_ALL_ITE = "$mem-array-all-ite";
+	private static final String MEM_ARRAY_ALL_FLAG = "$mem-array-all-flag";
+	private static final String MEM_ARRAY_ALL_LENGTH = "$mem-array-all-length";
+	private static final String MEM_ARRAY_ALL_RAT = "$mem-array-all-rat";
+	private static final String MEM_ARRAY_ALL_ONE_BYTE = "$mem-array-all-one-byte";
+	private static final String MEM_ARRAY_ALL_FOUR_BYTE = "$mem-array-all-four-byte";
+	private static final String MEM_ARRAY_ALL_EIGHT_BYTE = "$mem-array-all-eight-byte";
+	private static final String MEM_ARRAY_ALL_END = "$mem-array-all-end";
 	
+	public static final String MEM_ARRAY_MAP = "-mem-array-map";
+	private static final String MEM_ARRAY_MAP_RETURN_ADDRESS = "$mem-array-map-return-address";
+	private static final String MEM_ARRAY_MAP_ARRAY_ADDRESS = "$mem-array-map-array-address";
+	private static final String MEM_ARRAY_MAP_NEW_ADDRESS = "$mem-array-map-new-address";
+	private static final String MEM_ARRAY_MAP_ITE = "$mem-array-map-ite";
+	private static final String MEM_ARRAY_MAP_LENGTH = "$mem-array-map-length";
+	private static final String MEM_ARRAY_MAP_SIZE = "$mem-array-map-size";
+	private static final String MEM_ARRAY_MAP_NEW_SIZE = "$mem-array-map-new-size";
+	private static final String MEM_ARRAY_MAP_FLAG1 = "$mem-array-map-flag1";
+	private static final String MEM_ARRAY_MAP_FLAG2 = "$mem-array-map-flag2";
+	private static final String MEM_ARRAY_MAP_ONE_BYTE1 = "$mem-array-map-one-byte1";
+	private static final String MEM_ARRAY_MAP_FOUR_BYTE1 = "$mem-array-map-four-byte1";
+	private static final String MEM_ARRAY_MAP_EIGHT_BYTE1 = "$mem-array-map-eight-byte1";
+	private static final String MEM_ARRAY_MAP_RAT1 = "$mem-array-map-rat1";
+	private static final String MEM_ARRAY_MAP_ONE_BYTE2 = "$mem-array-map-one-byte2";
+	private static final String MEM_ARRAY_MAP_FOUR_BYTE2 = "$mem-array-map-four-byte2";
+	private static final String MEM_ARRAY_MAP_EIGHT_BYTE2 = "$mem-array-map-eight-byte2";
+	private static final String MEM_ARRAY_MAP_RAT2 = "$mem-array-map-rat2";
+	private static final String MEM_ARRAY_MAP_LAMB = "$mem-array-map-lamb";
+	private static final String MEM_ARRAY_MAP_END = "$mem-array-map-end";
+	private static final String MEM_ARRAY_MAP_A = "$mem-array-map-a";
+	private static final String MEM_ARRAY_MAP_NORMAL_RAT = "$mem-array-map-normal-rat";
+	private static final String MEM_ARRAY_MAP_NORMAL_ONE = "$mem-array-map-normal-one";
+	private static final String MEM_ARRAY_MAP_NORMAL_FOUR = "$mem-array-map-normal-four";
+	private static final String MEM_ARRAY_MAP_NORMAL_EIGHT = "$mem-array-map-normal-eight";
+	
+	public static final String MEM_ARRAY_REDUCE = "-mem-array-reduce";
+	private static final String MEM_ARRAY_REDUCE_RETURN_ADDRESS = "$mem-array-reduce-return-address";
+	private static final String MEM_ARRAY_REDUCE_ADDRESS = "$mem-array-reduce-address";
+	private static final String MEM_ARRAY_REDUCE_LAMB = "$mem-array-reduce-lamb";
+	private static final String MEM_ARRAY_REDUCE_FLAG = "$mem-array-reduce-enflag";
+	private static final String MEM_ARRAY_REDUCE_ITE = "$mem-array-reduce-ite";
+	private static final String MEM_ARRAY_REDUCE_LENGTH = "$mem-array-reduce-length";
+	private static final String MEM_ARRAY_REDUCE_SIZE = "$mem-array-reduce-size";
+	private static final String MEM_ARRAY_REDUCE_TRUE = "$mem-array-reduce-true";
+	private static final String MEM_ARRAY_REDUCE_RAT = "$mem-array-reduce-rat";
+	private static final String MEM_ARRAY_REDUCE_ONE_BYTE = "$mem-array-reduce-one-byte";
+	private static final String MEM_ARRAY_REDUCE_FOUR_BYTE = "$mem-array-reduce-four-byte";
+	private static final String MEM_ARRAY_REDUCE_EIGHT_BYTE = "$mem-array-reduce-eight-byte";
+	private static final String MEM_ARRAY_REDUCE_RAT_DELETE = "$mem-array-reduce-rat-delete";
+	private static final String MEM_ARRAY_REDUCE_ONE_BYTE_DELETE = "$mem-array-reduce-one-byte-delete";
+	private static final String MEM_ARRAY_REDUCE_FOUR_BYTE_DELETE = "$mem-array-reduce-four-byte-delete";
+	private static final String MEM_ARRAY_REDUCE_EIGHT_BYTE_DELETE = "$mem-array-reduce-eight-byte-delete";
+	private static final String MEM_ARRAY_REDUCE_END = "$mem-array-reduce-end";
+	
+	public static final String MEM_ARRAY_FOLD_TWO = "-mem-array-fold-two";
+	private static final String MEM_ARRAY_FOLD_TWO_RETURN_ADDRESS = "$mem-array-fold-two-return-address";
+	private static final String MEM_ARRAY_FOLD_TWO_ADDRESS = "$mem-array-fold-two-address";
+	private static final String MEM_ARRAY_FOLD_TWO_LAMB = "$mem-array-fold-two-lamb";
+	private static final String MEM_ARRAY_FOLD_TWO_FLAG = "$mem-array-fold-two-flag";
+	private static final String MEM_ARRAY_FOLD_TWO_LENGTH = "$mem-array-fold-two-length";
+	private static final String MEM_ARRAY_FOLD_TWO_SIZE = "$mem-array-fold-two-size";
+	private static final String MEM_ARRAY_FOLD_TWO_ITE = "$mem-array-fold-two-ite";
+	private static final String MEM_ARRAY_FOLD_TWO_TEM = "$mem-array-fold-two-tem";
+	private static final String MEM_ARRAY_FOLD_TWO_LOOP = "$mem-array-fold-two-loop";
+	private static final String MEM_ARRAY_FOLD_TWO_END = "$mem-array-fold-two-end";
+	private static final String MEM_ARRAY_FOLD_TWO_NORMAL = "$mem-array-fold-two-normal";
+	
+	public static final String MEM_ARRAY_FOLD_THREE = "-mem-array-fold-three";
+	private static final String MEM_ARRAY_FOLD_THREE_RETURN_ADDRESS = "$mem-array-fold-three-return-address";
+	private static final String MEM_ARRAY_FOLD_THREE_ADDRESS = "$mem-array-fold-three-address";
+	private static final String MEM_ARRAY_FOLD_THREE_LAMB = "$mem-array-fold-three-lamb";
+	private static final String MEM_ARRAY_FOLD_THREE_FLAG1 = "$mem-array-fold-three-flag1";
+	private static final String MEM_ARRAY_FOLD_THREE_FLAG2 = "$mem-array-fold-three-flag2";
+	private static final String MEM_ARRAY_FOLD_THREE_LENGTH = "$mem-array-fold-three-length";
+	private static final String MEM_ARRAY_FOLD_THREE_SIZE = "$mem-array-fold-three-size";
+	private static final String MEM_ARRAY_FOLD_THREE_BASE_SIZE = "$mem-array-fold-three-base-size";
+	private static final String MEM_ARRAY_FOLD_THREE_ITE = "$mem-array-fold-three-ite";
+	private static final String MEM_ARRAY_FOLD_THREE_TEM = "$mem-array-fold-three-tem";
+	private static final String MEM_ARRAY_FOLD_THREE_LOOP = "$mem-array-fold-three-loop";
+	private static final String MEM_ARRAY_FOLD_THREE_END = "$mem-array-fold-three-end";
+	private static final String MEM_ARRAY_FOLD_THREE_NORMAL = "$mem-array-fold-three-normal";
+	
+	private static final String MEM_LOAD_DATA = "-mem-load-data";
+	private static final String MEM_LOAD_RETURN_ADDRESS = "$mem-load-aid-return-address";
+	private static final String MEM_LOAD_RAT = "$mem-load-aid-rat";
+	private static final String MEM_LOAD_INT = "$mem-load-aid-int";
+	private static final String MEM_LOAD_CHAR = "$mem-load-aid-char";
+	private static final String MEM_LOAD_FLOAT = "$mem-load-aid-float";
+	
+	private static final String MEM_STORE_DATA = "-mem-store-data";
+	private static final String MEM_STORE_RETURN_ADDRESS = "$mem-store-aid-return-address";
+	private static final String MEM_STORE_RAT = "$mem-store-aid-rat";
+	private static final String MEM_STORE_TEM = "$mem-store-aid-tem";
+	private static final String MEM_STORE_INT = "$mem-store-aid-int";
+	private static final String MEM_STORE_CHAR = "$mem-store-aid-char";
+	private static final String MEM_STORE_FLOAT = "$mem-store-aid-float";
 	// a tag is:
 	//		prev/next ptr:	4 bytes
 	//		size:			4 bytes
@@ -404,6 +522,11 @@ public class MemoryManager {
 		frag.append(subroutineArrayRelease());
 		frag.append(subroutineArrayClone());
 		frag.append(subroutineArrayIndex());
+		frag.append(subroutineArrayReverse());
+		frag.append(subroutineArrayMap());
+		frag.append(subroutineArrayReduce());
+		frag.append(subroutineArrayFoldTwo());
+		frag.append(subroutineArrayFoldThree());
 		frag.append(subroutineRatGCD());
 		frag.append(subroutineRatStore());
 		frag.append(subroutineRatAid());
@@ -419,6 +542,8 @@ public class MemoryManager {
 		frag.append(subroutineArrayStringPrint());
 		frag.append(subroutineArrayRationalPrint());
 		frag.append(subroutineArrayRecordTest());
+		frag.append(subroutineArrayAll());
+		frag.append(subroutineTypeAid());
 		if(DEBUGGING) {
 			frag.append(subroutineDebugPrintBlock());
 			frag.append(subroutineDebugPrintFreeList());
@@ -1129,6 +1254,7 @@ public class MemoryManager {
 			frag.add(LoadI);
 			storeITo(frag, MEM_STRING_REVERSE_LENGTH);
 			
+			
 			loadIFrom(frag,MEM_STRING_REVERSE_LENGTH);
 			frag.add(PushI, MEM_STRING_RECORD_EXTRA);
 			frag.add(Add);
@@ -1679,6 +1805,148 @@ public class MemoryManager {
 			
 	}
 	
+	//[...addr, flag]->[...[data], addr]
+	private static ASMCodeFragment subroutineArrayAll() {
+		ASMCodeFragment frag = new ASMCodeFragment(GENERATES_VOID);
+		
+		frag.add(Label, MEM_ARRAY_ALL);
+			declareI(frag, MEM_ARRAY_ALL_ADDRESS);
+			declareI(frag, MEM_ARRAY_ALL_FLAG);
+			declareI(frag, MEM_ARRAY_ALL_RETURN_ADDRESS);
+			declareI(frag, MEM_ARRAY_ALL_ITE);
+			declareI(frag, MEM_ARRAY_ALL_LENGTH);
+			
+			storeITo(frag, MEM_ARRAY_ALL_RETURN_ADDRESS);
+			storeITo(frag, MEM_ARRAY_ALL_FLAG);
+			storeITo(frag, MEM_ARRAY_ALL_ADDRESS);
+			frag.add(PushI, 0);
+			storeITo(frag, MEM_ARRAY_ALL_ITE);
+			
+			loadIFrom(frag, MEM_ARRAY_ALL_ADDRESS);
+			frag.add(PushI, MEM_ARRAY_LENGTH_OFFSET);
+			frag.add(Add);
+			frag.add(LoadI);
+			storeITo(frag, MEM_ARRAY_ALL_LENGTH);
+			
+			loadIFrom(frag, MEM_ARRAY_ALL_FLAG);
+			frag.add(JumpTrue, MEM_ARRAY_ALL_RAT);
+			
+			loadIFrom(frag, MEM_ARRAY_ALL_ADDRESS);
+			frag.add(PushI, MEM_ARRAY_SIZE_OFFSET);
+			frag.add(LoadI);
+			frag.add(PushI, 1);
+			frag.add(Subtract);
+			frag.add(JumpFalse, MEM_ARRAY_ALL_ONE_BYTE);
+			
+			loadIFrom(frag, MEM_ARRAY_ALL_ADDRESS);
+			frag.add(PushI, MEM_ARRAY_SIZE_OFFSET);
+			frag.add(LoadI);
+			frag.add(PushI, 4);
+			frag.add(Subtract);
+			frag.add(JumpFalse, MEM_ARRAY_ALL_FOUR_BYTE);
+			
+			loadIFrom(frag, MEM_ARRAY_ALL_ADDRESS);
+			frag.add(PushI, MEM_ARRAY_SIZE_OFFSET);
+			frag.add(LoadI);
+			frag.add(PushI, 8);
+			frag.add(Subtract);
+			frag.add(JumpFalse, MEM_ARRAY_ALL_EIGHT_BYTE);
+			
+		frag.add(Label, MEM_ARRAY_ALL_ONE_BYTE);
+			loadIFrom(frag, MEM_ARRAY_ALL_ITE);
+			loadIFrom(frag, MEM_ARRAY_ALL_LENGTH);
+			frag.add(Subtract);
+			frag.add(JumpFalse, MEM_ARRAY_ALL_END);
+			
+			loadIFrom(frag, MEM_ARRAY_ALL_ADDRESS);
+			loadIFrom(frag, MEM_ARRAY_ALL_ITE);
+			frag.add(PushI, MEM_ARRAY_CONTENT_OFFSET);
+			frag.add(Add);
+			frag.add(Add);
+			frag.add(LoadC);
+			
+			loadIFrom(frag, MEM_ARRAY_ALL_ITE);
+			frag.add(PushI, 1);
+			frag.add(Add);
+			storeITo(frag, MEM_ARRAY_ALL_ITE);
+			frag.add(Jump, MEM_ARRAY_ALL_ONE_BYTE);
+			
+		frag.add(Label, MEM_ARRAY_ALL_FOUR_BYTE);
+			loadIFrom(frag, MEM_ARRAY_ALL_ITE);
+			loadIFrom(frag, MEM_ARRAY_ALL_LENGTH);
+			frag.add(Subtract);
+			frag.add(JumpFalse, MEM_ARRAY_ALL_END);
+			
+			loadIFrom(frag, MEM_ARRAY_ALL_ADDRESS);
+			loadIFrom(frag, MEM_ARRAY_ALL_ITE);
+			frag.add(PushI, 4);
+			frag.add(Multiply);
+			frag.add(PushI, MEM_ARRAY_CONTENT_OFFSET);
+			frag.add(Add);
+			frag.add(Add);
+			frag.add(LoadI);
+			
+			loadIFrom(frag, MEM_ARRAY_ALL_ITE);
+			frag.add(PushI, 1);
+			frag.add(Add);
+			storeITo(frag, MEM_ARRAY_ALL_ITE);
+			frag.add(Jump, MEM_ARRAY_ALL_FOUR_BYTE);
+			
+		frag.add(Label, MEM_ARRAY_ALL_EIGHT_BYTE);
+			loadIFrom(frag, MEM_ARRAY_ALL_ITE);
+			loadIFrom(frag, MEM_ARRAY_ALL_LENGTH);
+			frag.add(Subtract);
+			frag.add(JumpFalse, MEM_ARRAY_ALL_END);
+			
+			loadIFrom(frag, MEM_ARRAY_ALL_ADDRESS);
+			loadIFrom(frag, MEM_ARRAY_ALL_ITE);
+			frag.add(PushI, 8);
+			frag.add(Multiply);
+			frag.add(PushI, MEM_ARRAY_CONTENT_OFFSET);
+			frag.add(Add);
+			frag.add(Add);
+			frag.add(LoadF);
+			
+			loadIFrom(frag, MEM_ARRAY_ALL_ITE);
+			frag.add(PushI, 1);
+			frag.add(Add);
+			storeITo(frag, MEM_ARRAY_ALL_ITE);
+			frag.add(Jump, MEM_ARRAY_ALL_EIGHT_BYTE);
+			
+		frag.add(Label, MEM_ARRAY_ALL_RAT);
+			loadIFrom(frag, MEM_ARRAY_ALL_ITE);
+			loadIFrom(frag, MEM_ARRAY_ALL_LENGTH);
+			frag.add(Subtract);
+			frag.add(JumpFalse, MEM_ARRAY_ALL_END);
+			
+			loadIFrom(frag, MEM_ARRAY_ALL_ADDRESS);
+			loadIFrom(frag, MEM_ARRAY_ALL_ITE);
+			frag.add(PushI, 8);
+			frag.add(Multiply);
+			frag.add(PushI, MEM_ARRAY_CONTENT_OFFSET);
+			frag.add(Add);
+			frag.add(Add);
+			frag.add(Duplicate);
+			frag.add(LoadI);
+			frag.add(Exchange);
+			frag.add(PushI, 4);
+			frag.add(Add);
+			frag.add(LoadI);
+			
+			loadIFrom(frag, MEM_ARRAY_ALL_ITE);
+			frag.add(PushI, 1);
+			frag.add(Add);
+			storeITo(frag, MEM_ARRAY_ALL_ITE);
+			frag.add(Jump, MEM_ARRAY_ALL_EIGHT_BYTE);	
+			
+		frag.add(Label, MEM_ARRAY_ALL_END);
+			loadIFrom(frag, MEM_ARRAY_ALL_ADDRESS);
+			loadIFrom(frag, MEM_ARRAY_ALL_RETURN_ADDRESS);
+			frag.add(Return);
+			
+		return frag;
+	}
+	
 	//[...arrayAddr, index, flag]
 	private static ASMCodeFragment subroutineArrayIndex() {
 		ASMCodeFragment frag = new ASMCodeFragment(GENERATES_VOID);
@@ -1727,6 +1995,1658 @@ public class MemoryManager {
 			frag.add(Return);
 				
 			return frag;
+	}
+	
+	private static ASMCodeFragment subroutineArrayReverse() {
+		ASMCodeFragment frag = new ASMCodeFragment(GENERATES_VOID);
+		
+		frag.add(Label, MEM_ARRAY_REVERSE);
+			declareI(frag, MEM_ARRAY_REVERSE_RETURN_ADDRESS);
+			declareI(frag, MEM_ARRAY_REVERSE_ADDRESS);
+			declareI(frag, MEM_ARRAY_REVERSE_NEW_ADDRESS);
+			declareI(frag, MEM_ARRAY_REVERSE_LENGTH);
+			declareI(frag, MEM_ARRAY_REVERSE_SUBSIZE);
+			declareI(frag, MEM_ARRAY_REVERSE_FLAG);
+			declareI(frag, MEM_ARRAY_REVERSE_ITE);
+			
+			storeITo(frag, MEM_ARRAY_REVERSE_RETURN_ADDRESS);
+			storeITo(frag, MEM_ARRAY_REVERSE_FLAG);
+			storeITo(frag, MEM_ARRAY_REVERSE_ADDRESS);
+			
+			loadIFrom(frag, MEM_ARRAY_REVERSE_ADDRESS);
+			frag.add(PushI, MEM_ARRAY_LENGTH_OFFSET);
+			frag.add(Add);
+			frag.add(LoadI);
+			storeITo(frag, MEM_ARRAY_REVERSE_LENGTH);
+			
+			loadIFrom(frag, MEM_ARRAY_REVERSE_ADDRESS);
+			frag.add(PushI, MEM_ARRAY_SIZE_OFFSET);
+			frag.add(Add);
+			frag.add(LoadI);
+			storeITo(frag, MEM_ARRAY_REVERSE_SUBSIZE);
+			
+			loadIFrom(frag, MEM_ARRAY_REVERSE_SUBSIZE);
+			loadIFrom(frag, MEM_ARRAY_REVERSE_LENGTH);
+			frag.add(Multiply);
+			frag.add(PushI, MEM_ARRAY_HEADER);
+			frag.add(Add);
+			frag.add(Call, MEM_MANAGER_ALLOCATE);
+			
+			loadIFrom(frag, MEM_ARRAY_REVERSE_SUBSIZE);
+			loadIFrom(frag, MEM_ARRAY_REVERSE_LENGTH);
+			loadIFrom(frag, MEM_ARRAY_REVERSE_ADDRESS);
+			frag.add(PushI, MEM_ARRAY_STATUS_OFFSET);
+			frag.add(Add);
+			frag.add(LoadI);
+			
+			frag.add(Call, MEM_STORE_ARRAY_HEADER);
+			frag.add(Pop);
+			storeITo(frag, MEM_ARRAY_REVERSE_NEW_ADDRESS);
+			
+			loadIFrom(frag, MEM_ARRAY_REVERSE_SUBSIZE);
+			frag.add(PushI, 1);
+			frag.add(Subtract);
+			frag.add(JumpFalse, MEM_ARRAY_REVERSE_ONE_BYTE);
+			loadIFrom(frag, MEM_ARRAY_REVERSE_SUBSIZE);
+			frag.add(PushI, 4);
+			frag.add(Subtract);
+			frag.add(JumpFalse, MEM_ARRAY_REVERSE_FOUR_BYTE);
+			loadIFrom(frag, MEM_ARRAY_REVERSE_SUBSIZE);
+			loadIFrom(frag, MEM_ARRAY_REVERSE_FLAG);
+			frag.add(Add);
+			frag.add(PushI, 8);
+			frag.add(Subtract);
+			frag.add(JumpFalse, MEM_ARRAY_REVERSE_EIGHT_BYTE);
+			loadIFrom(frag, MEM_ARRAY_REVERSE_SUBSIZE);
+			loadIFrom(frag, MEM_ARRAY_REVERSE_FLAG);
+			frag.add(Add);
+			frag.add(PushI, 9);
+			frag.add(Subtract);
+			frag.add(JumpFalse, MEM_ARRAY_REVERSE_RATIONAL);
+			
+		frag.add(Label, MEM_ARRAY_REVERSE_ONE_BYTE);
+			loadIFrom(frag, MEM_ARRAY_REVERSE_LENGTH);
+			frag.add(PushI, 1);
+			frag.add(Subtract);
+			storeITo(frag, MEM_ARRAY_REVERSE_ITE);
+			
+		frag.add(Label, MEM_ARRAY_REVERSE_ONE_LOOP);
+			loadIFrom(frag, MEM_ARRAY_REVERSE_ITE);
+			frag.add(JumpNeg, MEM_ARRAY_REVERSE_ONE_END);
+			loadIFrom(frag, MEM_ARRAY_REVERSE_ADDRESS);
+			loadIFrom(frag, MEM_ARRAY_REVERSE_ITE);
+			frag.add(PushI, MEM_ARRAY_CONTENT_OFFSET);
+			frag.add(Add);
+			frag.add(Add);
+			frag.add(LoadC);
+			loadIFrom(frag, MEM_ARRAY_REVERSE_ITE);
+			frag.add(PushI, 1);
+			frag.add(Subtract);
+			storeITo(frag, MEM_ARRAY_REVERSE_ITE);
+			frag.add(Jump, MEM_ARRAY_REVERSE_ONE_LOOP);
+			
+		frag.add(Label, MEM_ARRAY_REVERSE_ONE_END);
+			loadIFrom(frag, MEM_ARRAY_REVERSE_NEW_ADDRESS);
+			loadIFrom(frag, MEM_ARRAY_REVERSE_LENGTH);
+			frag.add(PushI, 1);
+			frag.add(Call, MEM_STORE_ARRAY_ONE_BYTE);
+			
+			loadIFrom(frag, MEM_ARRAY_REVERSE_RETURN_ADDRESS);
+			frag.add(Return);
+			
+			//
+		frag.add(Label, MEM_ARRAY_REVERSE_FOUR_BYTE);
+			loadIFrom(frag, MEM_ARRAY_REVERSE_LENGTH);
+			frag.add(PushI, 1);
+			frag.add(Subtract);
+			storeITo(frag, MEM_ARRAY_REVERSE_ITE);
+			
+		frag.add(Label, MEM_ARRAY_REVERSE_FOUR_LOOP);
+			loadIFrom(frag, MEM_ARRAY_REVERSE_ITE);
+			frag.add(JumpNeg, MEM_ARRAY_REVERSE_FOUR_END);
+			loadIFrom(frag, MEM_ARRAY_REVERSE_ADDRESS);
+			loadIFrom(frag, MEM_ARRAY_REVERSE_ITE);
+			frag.add(PushI, 4);
+			frag.add(Multiply);
+			frag.add(PushI, MEM_ARRAY_CONTENT_OFFSET);
+			frag.add(Add);
+			frag.add(Add);
+			frag.add(LoadI);
+			loadIFrom(frag, MEM_ARRAY_REVERSE_ITE);
+			frag.add(PushI, 1);
+			frag.add(Subtract);
+			storeITo(frag, MEM_ARRAY_REVERSE_ITE);
+			frag.add(Jump, MEM_ARRAY_REVERSE_FOUR_LOOP);
+			
+		frag.add(Label, MEM_ARRAY_REVERSE_FOUR_END);
+			loadIFrom(frag, MEM_ARRAY_REVERSE_NEW_ADDRESS);
+			loadIFrom(frag, MEM_ARRAY_REVERSE_LENGTH);
+			frag.add(PushI, 1);
+			frag.add(Call, MEM_STORE_ARRAY_FOUR_BYTE);
+			
+			loadIFrom(frag, MEM_ARRAY_REVERSE_RETURN_ADDRESS);
+			frag.add(Return);
+			
+		frag.add(Label, MEM_ARRAY_REVERSE_EIGHT_BYTE);
+			loadIFrom(frag, MEM_ARRAY_REVERSE_LENGTH);
+			frag.add(PushI, 1);
+			frag.add(Subtract);
+			storeITo(frag, MEM_ARRAY_REVERSE_ITE);
+			
+		frag.add(Label, MEM_ARRAY_REVERSE_EIGHT_LOOP);
+			loadIFrom(frag, MEM_ARRAY_REVERSE_ITE);
+			frag.add(JumpNeg, MEM_ARRAY_REVERSE_EIGHT_END);
+			loadIFrom(frag, MEM_ARRAY_REVERSE_ADDRESS);
+			loadIFrom(frag, MEM_ARRAY_REVERSE_ITE);
+			frag.add(PushI,8);
+			frag.add(Multiply);
+			frag.add(PushI, MEM_ARRAY_CONTENT_OFFSET);
+			frag.add(Add);
+			frag.add(Add);
+			frag.add(LoadF);
+			loadIFrom(frag, MEM_ARRAY_REVERSE_ITE);
+			frag.add(PushI, 1);
+			frag.add(Subtract);
+			storeITo(frag, MEM_ARRAY_REVERSE_ITE);
+			frag.add(Jump, MEM_ARRAY_REVERSE_EIGHT_LOOP);
+			
+		frag.add(Label, MEM_ARRAY_REVERSE_EIGHT_END);
+			loadIFrom(frag, MEM_ARRAY_REVERSE_NEW_ADDRESS);
+			loadIFrom(frag, MEM_ARRAY_REVERSE_LENGTH);
+			frag.add(PushI, 1);
+			frag.add(Call, MEM_STORE_ARRAY_EIGHT_BYTE);
+			
+			loadIFrom(frag, MEM_ARRAY_REVERSE_RETURN_ADDRESS);
+			frag.add(Return);
+			
+		frag.add(Label, MEM_ARRAY_REVERSE_RATIONAL);
+			loadIFrom(frag, MEM_ARRAY_REVERSE_LENGTH);
+			frag.add(PushI, 1);
+			frag.add(Subtract);
+			storeITo(frag, MEM_ARRAY_REVERSE_ITE);
+			
+		frag.add(Label, MEM_ARRAY_REVERSE_RATIONAL_LOOP);
+			loadIFrom(frag, MEM_ARRAY_REVERSE_ITE);
+			frag.add(JumpNeg, MEM_ARRAY_REVERSE_RATIONAL_END);
+			loadIFrom(frag, MEM_ARRAY_REVERSE_ADDRESS);
+			loadIFrom(frag, MEM_ARRAY_REVERSE_ITE);
+			frag.add(PushI, 8);
+			frag.add(Multiply);
+			frag.add(PushI, MEM_ARRAY_CONTENT_OFFSET);
+			frag.add(Add);
+			frag.add(Add);
+			frag.add(Duplicate);
+			frag.add(LoadI);
+			frag.add(Exchange);
+			frag.add(PushI,4);
+			frag.add(Add);
+			frag.add(LoadI);
+			loadIFrom(frag, MEM_ARRAY_REVERSE_ITE);
+			frag.add(PushI, 1);
+			frag.add(Subtract);
+			storeITo(frag, MEM_ARRAY_REVERSE_ITE);
+			frag.add(Jump, MEM_ARRAY_REVERSE_RATIONAL_LOOP);
+			
+		frag.add(Label, MEM_ARRAY_REVERSE_RATIONAL_END);
+			loadIFrom(frag, MEM_ARRAY_REVERSE_NEW_ADDRESS);
+			loadIFrom(frag, MEM_ARRAY_REVERSE_LENGTH);
+			frag.add(PushI,2);
+			frag.add(Multiply);
+			frag.add(PushI, 1);
+			frag.add(Call, MEM_STORE_ARRAY_FOUR_BYTE);
+			
+			loadIFrom(frag, MEM_ARRAY_REVERSE_RETURN_ADDRESS);
+			frag.add(Return);
+			
+		return frag;
+	}
+	
+	//[...arrayAddr, newAddr, lambda, flag1, flag2]->[...arrayAddr]
+	private static ASMCodeFragment subroutineArrayMap() {
+		ASMCodeFragment frag = new ASMCodeFragment(GENERATES_VOID);
+		
+		frag.add(Label, MEM_ARRAY_MAP);
+			declareI(frag, MEM_ARRAY_MAP_RETURN_ADDRESS);
+			declareI(frag, MEM_ARRAY_MAP_ARRAY_ADDRESS);
+			declareI(frag, MEM_ARRAY_MAP_NEW_ADDRESS);
+			declareI(frag, MEM_ARRAY_MAP_LAMB);
+			declareI(frag, MEM_ARRAY_MAP_FLAG1);
+			declareI(frag, MEM_ARRAY_MAP_FLAG2);
+			declareI(frag, MEM_ARRAY_MAP_ITE);
+			declareI(frag, MEM_ARRAY_MAP_LENGTH);
+			declareI(frag, MEM_ARRAY_MAP_SIZE);
+			declareI(frag, MEM_ARRAY_MAP_NEW_SIZE);
+			declareI(frag, MEM_ARRAY_MAP_A);
+			
+		
+			storeITo(frag, MEM_ARRAY_MAP_RETURN_ADDRESS);
+			storeITo(frag, MEM_ARRAY_MAP_FLAG2);
+			storeITo(frag, MEM_ARRAY_MAP_FLAG1);
+			storeITo(frag, MEM_ARRAY_MAP_LAMB);
+			storeITo(frag, MEM_ARRAY_MAP_NEW_ADDRESS);
+			storeITo(frag, MEM_ARRAY_MAP_ARRAY_ADDRESS);
+			frag.add(PushI, 0);
+			storeITo(frag, MEM_ARRAY_MAP_ITE);
+			
+			loadIFrom(frag, MEM_ARRAY_MAP_ARRAY_ADDRESS);
+			frag.add(PushI, MEM_ARRAY_SIZE_OFFSET);
+			frag.add(Add);
+			frag.add(LoadI);
+			storeITo(frag, MEM_ARRAY_MAP_SIZE);
+			
+			loadIFrom(frag, MEM_ARRAY_MAP_NEW_ADDRESS);
+			frag.add(PushI, MEM_ARRAY_SIZE_OFFSET);
+			frag.add(Add);
+			frag.add(LoadI);
+			storeITo(frag, MEM_ARRAY_MAP_NEW_SIZE);
+			
+			loadIFrom(frag, MEM_ARRAY_MAP_ARRAY_ADDRESS);
+			frag.add(PushI, MEM_ARRAY_LENGTH_OFFSET);
+			frag.add(Add);
+			frag.add(LoadI);
+			storeITo(frag, MEM_ARRAY_MAP_LENGTH);
+			
+			loadIFrom(frag, MEM_ARRAY_MAP_FLAG1);
+			frag.add(PushI, 1);
+			frag.add(Subtract);
+			frag.add(JumpFalse, MEM_ARRAY_MAP_RAT1);
+			
+			loadIFrom(frag, MEM_ARRAY_MAP_SIZE);
+			frag.add(PushI, 1);
+			frag.add(Subtract);
+			frag.add(JumpFalse, MEM_ARRAY_MAP_ONE_BYTE1);
+			
+			loadIFrom(frag, MEM_ARRAY_MAP_SIZE);
+			frag.add(PushI, 4);
+			frag.add(Subtract);
+			frag.add(JumpFalse, MEM_ARRAY_MAP_FOUR_BYTE1);
+			
+			loadIFrom(frag, MEM_ARRAY_MAP_SIZE);
+			frag.add(PushI, 8);
+			frag.add(Subtract);
+			frag.add(JumpFalse, MEM_ARRAY_MAP_EIGHT_BYTE1);
+			
+		frag.add(Label, MEM_ARRAY_MAP_RAT1);
+			frag.add(PushPC);
+			frag.add(PushI, 1);
+			frag.add(Subtract);
+			loadIFrom(frag, MEM_ARRAY_MAP_ITE);
+			loadIFrom(frag, MEM_ARRAY_MAP_LENGTH);
+			frag.add(Subtract);
+			frag.add(JumpFalse, MEM_ARRAY_MAP_END);
+			
+			loadIFrom(frag, MEM_ARRAY_MAP_ARRAY_ADDRESS);
+			loadIFrom(frag, MEM_ARRAY_MAP_ITE);
+			frag.add(PushI, 8);
+			frag.add(Multiply);
+			frag.add(PushI, MEM_ARRAY_CONTENT_OFFSET);
+			frag.add(Add);
+			frag.add(Add);
+			frag.add(Duplicate);
+			frag.add(LoadI);
+			frag.add(Exchange);
+			frag.add(PushI,4);
+			frag.add(Add);
+			frag.add(LoadI);
+			
+			frag.add(PushD, RunTime.STACK_POINTER);
+			frag.add(PushD, RunTime.STACK_POINTER);
+			frag.add(LoadI);
+			frag.add(PushI, 8*(-1));
+			frag.add(Add);
+			frag.add(StoreI);
+			
+			frag.add(PushD, RunTime.STACK_POINTER);
+			frag.add(LoadI);
+			frag.add(PushI,4);
+			frag.add(Add);
+			frag.add(Exchange);
+			frag.add(StoreI);
+			frag.add(PushD, RunTime.STACK_POINTER);
+			frag.add(LoadI);
+			frag.add(Exchange);
+			frag.add(StoreI);
+			
+			loadIFrom(frag, MEM_ARRAY_MAP_RETURN_ADDRESS);
+			loadIFrom(frag, MEM_ARRAY_MAP_ARRAY_ADDRESS);
+			loadIFrom(frag, MEM_ARRAY_MAP_NEW_ADDRESS);
+			loadIFrom(frag, MEM_ARRAY_MAP_LAMB);
+			loadIFrom(frag, MEM_ARRAY_MAP_FLAG1);
+			loadIFrom(frag, MEM_ARRAY_MAP_FLAG2);
+			loadIFrom(frag, MEM_ARRAY_MAP_ITE);
+			loadIFrom(frag, MEM_ARRAY_MAP_LENGTH);
+			loadIFrom(frag, MEM_ARRAY_MAP_SIZE);
+			loadIFrom(frag, MEM_ARRAY_MAP_NEW_SIZE);
+			frag.add(PushI, -1);
+			
+			loadIFrom(frag, MEM_ARRAY_MAP_LAMB);
+			frag.add(CallV);
+			
+			frag.add(Exchange);
+			frag.add(Duplicate);
+			frag.add(JumpNeg, MEM_ARRAY_MAP_NORMAL_RAT);
+			frag.add(Exchange);
+			storeITo(frag, MEM_ARRAY_MAP_A);
+			frag.add(Exchange);
+			
+			frag.add(Label, MEM_ARRAY_MAP_NORMAL_RAT);
+			frag.add(Pop);
+			frag.add(Exchange);
+			storeITo(frag, MEM_ARRAY_MAP_NEW_SIZE);
+			frag.add(Exchange);
+			storeITo(frag, MEM_ARRAY_MAP_SIZE);
+			frag.add(Exchange);
+			storeITo(frag, MEM_ARRAY_MAP_LENGTH);
+			frag.add(Exchange);
+			storeITo(frag, MEM_ARRAY_MAP_ITE);
+			frag.add(Exchange);
+			storeITo(frag, MEM_ARRAY_MAP_FLAG2);
+			frag.add(Exchange);
+			storeITo(frag, MEM_ARRAY_MAP_FLAG1);
+			frag.add(Exchange);
+			storeITo(frag, MEM_ARRAY_MAP_LAMB);
+			frag.add(Exchange);
+			storeITo(frag, MEM_ARRAY_MAP_NEW_ADDRESS);
+			frag.add(Exchange);
+			storeITo(frag, MEM_ARRAY_MAP_ARRAY_ADDRESS);
+			frag.add(Exchange);
+			storeITo(frag, MEM_ARRAY_MAP_RETURN_ADDRESS);			
+			
+			frag.add(PushD, RunTime.STACK_POINTER);
+			frag.add(PushD, RunTime.STACK_POINTER);
+			frag.add(LoadI);
+			frag.add(PushI, 8);
+			frag.add(Add);
+			frag.add(StoreI);
+			//[...res]
+			
+			loadIFrom(frag, MEM_ARRAY_MAP_FLAG2);
+			frag.add(JumpTrue, MEM_ARRAY_MAP_RAT2);
+			loadIFrom(frag, MEM_ARRAY_MAP_NEW_SIZE);
+			frag.add(PushI, 1);
+			frag.add(Subtract);
+			frag.add(JumpFalse, MEM_ARRAY_MAP_ONE_BYTE2);
+			loadIFrom(frag, MEM_ARRAY_MAP_NEW_SIZE);
+			frag.add(PushI, 4);
+			frag.add(Subtract);
+			frag.add(JumpFalse, MEM_ARRAY_MAP_FOUR_BYTE2);
+			loadIFrom(frag, MEM_ARRAY_MAP_NEW_SIZE);
+			frag.add(PushI, 8);
+			frag.add(Subtract);
+			frag.add(JumpFalse, MEM_ARRAY_MAP_EIGHT_BYTE2);
+			
+		frag.add(Label, MEM_ARRAY_MAP_ONE_BYTE1);
+			frag.add(PushPC);
+			frag.add(PushI, 1);
+			frag.add(Subtract);
+			loadIFrom(frag, MEM_ARRAY_MAP_ITE);
+			loadIFrom(frag, MEM_ARRAY_MAP_LENGTH);
+			frag.add(Subtract);
+			frag.add(JumpFalse, MEM_ARRAY_MAP_END);
+			
+			loadIFrom(frag, MEM_ARRAY_MAP_ARRAY_ADDRESS);
+			loadIFrom(frag, MEM_ARRAY_MAP_ITE);
+			frag.add(PushI, 1);
+			frag.add(Multiply);
+			frag.add(PushI, MEM_ARRAY_CONTENT_OFFSET);
+			frag.add(Add);
+			frag.add(Add);
+			frag.add(LoadC);
+			
+			frag.add(PushD, RunTime.STACK_POINTER);
+			frag.add(PushD, RunTime.STACK_POINTER);
+			frag.add(LoadI);
+			frag.add(PushI, 1*(-1));
+			frag.add(Add);
+			frag.add(StoreI);
+			
+			frag.add(PushD, RunTime.STACK_POINTER);
+			frag.add(LoadI);
+			frag.add(Exchange);
+			frag.add(StoreC);
+			
+			loadIFrom(frag, MEM_ARRAY_MAP_RETURN_ADDRESS);
+			loadIFrom(frag, MEM_ARRAY_MAP_ARRAY_ADDRESS);
+			loadIFrom(frag, MEM_ARRAY_MAP_NEW_ADDRESS);
+			loadIFrom(frag, MEM_ARRAY_MAP_LAMB);
+			loadIFrom(frag, MEM_ARRAY_MAP_FLAG1);
+			loadIFrom(frag, MEM_ARRAY_MAP_FLAG2);
+			loadIFrom(frag, MEM_ARRAY_MAP_ITE);
+			loadIFrom(frag, MEM_ARRAY_MAP_LENGTH);
+			loadIFrom(frag, MEM_ARRAY_MAP_SIZE);
+			loadIFrom(frag, MEM_ARRAY_MAP_NEW_SIZE);
+			frag.add(PushI, -1);
+			
+			loadIFrom(frag, MEM_ARRAY_MAP_LAMB);
+			frag.add(CallV);
+			
+			frag.add(Exchange);
+			frag.add(Duplicate);
+			frag.add(JumpNeg, MEM_ARRAY_MAP_NORMAL_ONE);
+			frag.add(Exchange);
+			storeITo(frag, MEM_ARRAY_MAP_A);
+			frag.add(Exchange);
+			
+			frag.add(Label, MEM_ARRAY_MAP_NORMAL_ONE);
+			frag.add(Pop);
+			frag.add(Exchange);
+			storeITo(frag, MEM_ARRAY_MAP_NEW_SIZE);
+			frag.add(Exchange);
+			storeITo(frag, MEM_ARRAY_MAP_SIZE);
+			frag.add(Exchange);
+			storeITo(frag, MEM_ARRAY_MAP_LENGTH);
+			frag.add(Exchange);
+			storeITo(frag, MEM_ARRAY_MAP_ITE);
+			frag.add(Exchange);
+			storeITo(frag, MEM_ARRAY_MAP_FLAG2);
+			frag.add(Exchange);
+			storeITo(frag, MEM_ARRAY_MAP_FLAG1);
+			frag.add(Exchange);
+			storeITo(frag, MEM_ARRAY_MAP_LAMB);
+			frag.add(Exchange);
+			storeITo(frag, MEM_ARRAY_MAP_NEW_ADDRESS);
+			frag.add(Exchange);
+			storeITo(frag, MEM_ARRAY_MAP_ARRAY_ADDRESS);
+			frag.add(Exchange);
+			storeITo(frag, MEM_ARRAY_MAP_RETURN_ADDRESS);	
+			
+			frag.add(PushD, RunTime.STACK_POINTER);
+			frag.add(PushD, RunTime.STACK_POINTER);
+			frag.add(LoadI);
+			frag.add(PushI, 1);
+			frag.add(Add);
+			frag.add(StoreI);
+			//[...res]
+			
+			loadIFrom(frag, MEM_ARRAY_MAP_FLAG2);
+			frag.add(JumpTrue, MEM_ARRAY_MAP_RAT2);
+			loadIFrom(frag, MEM_ARRAY_MAP_NEW_SIZE);
+			frag.add(PushI, 1);
+			frag.add(Subtract);
+			frag.add(JumpFalse, MEM_ARRAY_MAP_ONE_BYTE2);
+			loadIFrom(frag, MEM_ARRAY_MAP_NEW_SIZE);
+			frag.add(PushI, 4);
+			frag.add(Subtract);
+			frag.add(JumpFalse, MEM_ARRAY_MAP_FOUR_BYTE2);
+			loadIFrom(frag, MEM_ARRAY_MAP_NEW_SIZE);
+			frag.add(PushI, 8);
+			frag.add(Subtract);
+			frag.add(JumpFalse, MEM_ARRAY_MAP_EIGHT_BYTE2);
+			
+			
+		frag.add(Label, MEM_ARRAY_MAP_FOUR_BYTE1);
+			frag.add(PushPC);
+			frag.add(PushI, 1);
+			frag.add(Subtract);
+			loadIFrom(frag, MEM_ARRAY_MAP_ITE);
+			loadIFrom(frag, MEM_ARRAY_MAP_LENGTH);
+			frag.add(Subtract);
+			frag.add(JumpFalse, MEM_ARRAY_MAP_END);
+			
+			loadIFrom(frag, MEM_ARRAY_MAP_ARRAY_ADDRESS);
+			loadIFrom(frag, MEM_ARRAY_MAP_ITE);
+			frag.add(PushI, 4);
+			frag.add(Multiply);
+			frag.add(PushI, MEM_ARRAY_CONTENT_OFFSET);
+			frag.add(Add);
+			frag.add(Add);
+			frag.add(LoadI);
+			
+			frag.add(PushD, RunTime.STACK_POINTER);
+			frag.add(PushD, RunTime.STACK_POINTER);
+			frag.add(LoadI);
+			frag.add(PushI, 4*(-1));
+			frag.add(Add);
+			frag.add(StoreI);
+			
+			frag.add(PushD, RunTime.STACK_POINTER);
+			frag.add(LoadI);
+			frag.add(Exchange);
+			frag.add(StoreI);
+			
+			loadIFrom(frag, MEM_ARRAY_MAP_RETURN_ADDRESS);
+			loadIFrom(frag, MEM_ARRAY_MAP_ARRAY_ADDRESS);
+			loadIFrom(frag, MEM_ARRAY_MAP_NEW_ADDRESS);
+			loadIFrom(frag, MEM_ARRAY_MAP_LAMB);
+			loadIFrom(frag, MEM_ARRAY_MAP_FLAG1);
+			loadIFrom(frag, MEM_ARRAY_MAP_FLAG2);
+			loadIFrom(frag, MEM_ARRAY_MAP_ITE);
+			loadIFrom(frag, MEM_ARRAY_MAP_LENGTH);
+			loadIFrom(frag, MEM_ARRAY_MAP_SIZE);
+			loadIFrom(frag, MEM_ARRAY_MAP_NEW_SIZE);
+			frag.add(PushI, -1);
+			
+			loadIFrom(frag, MEM_ARRAY_MAP_LAMB);
+			frag.add(CallV);
+			
+			frag.add(Exchange);
+			frag.add(Duplicate);
+			frag.add(JumpNeg, MEM_ARRAY_MAP_NORMAL_FOUR);
+			frag.add(Exchange);
+			storeITo(frag, MEM_ARRAY_MAP_A);
+			frag.add(Exchange);
+			
+			frag.add(Label, MEM_ARRAY_MAP_NORMAL_FOUR);
+			frag.add(Pop);
+			frag.add(Exchange);
+			storeITo(frag, MEM_ARRAY_MAP_NEW_SIZE);
+			frag.add(Exchange);
+			storeITo(frag, MEM_ARRAY_MAP_SIZE);
+			frag.add(Exchange);
+			storeITo(frag, MEM_ARRAY_MAP_LENGTH);
+			frag.add(Exchange);
+			storeITo(frag, MEM_ARRAY_MAP_ITE);
+			frag.add(Exchange);
+			storeITo(frag, MEM_ARRAY_MAP_FLAG2);
+			frag.add(Exchange);
+			storeITo(frag, MEM_ARRAY_MAP_FLAG1);
+			frag.add(Exchange);
+			storeITo(frag, MEM_ARRAY_MAP_LAMB);
+			frag.add(Exchange);
+			storeITo(frag, MEM_ARRAY_MAP_NEW_ADDRESS);
+			frag.add(Exchange);
+			storeITo(frag, MEM_ARRAY_MAP_ARRAY_ADDRESS);
+			frag.add(Exchange);
+			storeITo(frag, MEM_ARRAY_MAP_RETURN_ADDRESS);	
+			
+			frag.add(PushD, RunTime.STACK_POINTER);
+			frag.add(PushD, RunTime.STACK_POINTER);
+			frag.add(LoadI);
+			frag.add(PushI, 4);
+			frag.add(Add);
+			frag.add(StoreI);
+			//[...res]
+			
+			loadIFrom(frag, MEM_ARRAY_MAP_FLAG2);
+			frag.add(JumpTrue, MEM_ARRAY_MAP_RAT2);
+			loadIFrom(frag, MEM_ARRAY_MAP_NEW_SIZE);
+			frag.add(PushI, 1);
+			frag.add(Subtract);
+			frag.add(JumpFalse, MEM_ARRAY_MAP_ONE_BYTE2);
+			loadIFrom(frag, MEM_ARRAY_MAP_NEW_SIZE);
+			frag.add(PushI, 4);
+			frag.add(Subtract);
+			frag.add(JumpFalse, MEM_ARRAY_MAP_FOUR_BYTE2);
+			loadIFrom(frag, MEM_ARRAY_MAP_NEW_SIZE);
+			frag.add(PushI, 8);
+			frag.add(Subtract);
+			frag.add(JumpFalse, MEM_ARRAY_MAP_EIGHT_BYTE2);
+			
+		
+		frag.add(Label, MEM_ARRAY_MAP_EIGHT_BYTE1);
+			frag.add(PushPC);
+			frag.add(PushI, 1);
+			frag.add(Subtract);
+			loadIFrom(frag, MEM_ARRAY_MAP_ITE);
+			loadIFrom(frag, MEM_ARRAY_MAP_LENGTH);
+			frag.add(Subtract);
+			frag.add(JumpFalse, MEM_ARRAY_MAP_END);
+			
+			loadIFrom(frag, MEM_ARRAY_MAP_ARRAY_ADDRESS);
+			loadIFrom(frag, MEM_ARRAY_MAP_ITE);
+			frag.add(PushI, 8);
+			frag.add(Multiply);
+			frag.add(PushI, MEM_ARRAY_CONTENT_OFFSET);
+			frag.add(Add);
+			frag.add(Add);
+			frag.add(LoadF);
+			
+			frag.add(PushD, RunTime.STACK_POINTER);
+			frag.add(PushD, RunTime.STACK_POINTER);
+			frag.add(LoadI);
+			frag.add(PushI, 8*(-1));
+			frag.add(Add);
+			frag.add(StoreI);
+			
+			frag.add(PushD, RunTime.STACK_POINTER);
+			frag.add(LoadI);
+			frag.add(Exchange);
+			frag.add(StoreF);
+			
+			loadIFrom(frag, MEM_ARRAY_MAP_RETURN_ADDRESS);
+			loadIFrom(frag, MEM_ARRAY_MAP_ARRAY_ADDRESS);
+			loadIFrom(frag, MEM_ARRAY_MAP_NEW_ADDRESS);
+			loadIFrom(frag, MEM_ARRAY_MAP_LAMB);
+			loadIFrom(frag, MEM_ARRAY_MAP_FLAG1);
+			loadIFrom(frag, MEM_ARRAY_MAP_FLAG2);
+			loadIFrom(frag, MEM_ARRAY_MAP_ITE);
+			loadIFrom(frag, MEM_ARRAY_MAP_LENGTH);
+			loadIFrom(frag, MEM_ARRAY_MAP_SIZE);
+			loadIFrom(frag, MEM_ARRAY_MAP_NEW_SIZE);
+			frag.add(PushI, -1);
+			
+			loadIFrom(frag, MEM_ARRAY_MAP_LAMB);
+			frag.add(CallV);
+			
+			frag.add(Exchange);
+			frag.add(Duplicate);
+			frag.add(JumpNeg, MEM_ARRAY_MAP_NORMAL_EIGHT);
+			frag.add(Exchange);
+			storeITo(frag, MEM_ARRAY_MAP_A);
+			frag.add(Exchange);
+			
+			frag.add(Label, MEM_ARRAY_MAP_NORMAL_EIGHT);
+			frag.add(Pop);
+			frag.add(Exchange);
+			storeITo(frag, MEM_ARRAY_MAP_NEW_SIZE);
+			frag.add(Exchange);
+			storeITo(frag, MEM_ARRAY_MAP_SIZE);
+			frag.add(Exchange);
+			storeITo(frag, MEM_ARRAY_MAP_LENGTH);
+			frag.add(Exchange);
+			storeITo(frag, MEM_ARRAY_MAP_ITE);
+			frag.add(Exchange);
+			storeITo(frag, MEM_ARRAY_MAP_FLAG2);
+			frag.add(Exchange);
+			storeITo(frag, MEM_ARRAY_MAP_FLAG1);
+			frag.add(Exchange);
+			storeITo(frag, MEM_ARRAY_MAP_LAMB);
+			frag.add(Exchange);
+			storeITo(frag, MEM_ARRAY_MAP_NEW_ADDRESS);
+			frag.add(Exchange);
+			storeITo(frag, MEM_ARRAY_MAP_ARRAY_ADDRESS);
+			frag.add(Exchange);
+			storeITo(frag, MEM_ARRAY_MAP_RETURN_ADDRESS);	
+			
+			frag.add(PushD, RunTime.STACK_POINTER);
+			frag.add(PushD, RunTime.STACK_POINTER);
+			frag.add(LoadI);
+			frag.add(PushI, 8);
+			frag.add(Add);
+			frag.add(StoreI);
+			//[...res]
+			
+			loadIFrom(frag, MEM_ARRAY_MAP_FLAG2);
+			frag.add(JumpTrue, MEM_ARRAY_MAP_RAT2);
+			loadIFrom(frag, MEM_ARRAY_MAP_NEW_SIZE);
+			frag.add(PushI, 1);
+			frag.add(Subtract);
+			frag.add(JumpFalse, MEM_ARRAY_MAP_ONE_BYTE2);
+			loadIFrom(frag, MEM_ARRAY_MAP_NEW_SIZE);
+			frag.add(PushI, 4);
+			frag.add(Subtract);
+			frag.add(JumpFalse, MEM_ARRAY_MAP_FOUR_BYTE2);
+			loadIFrom(frag, MEM_ARRAY_MAP_NEW_SIZE);
+			frag.add(PushI, 8);
+			frag.add(Subtract);
+			frag.add(JumpFalse, MEM_ARRAY_MAP_EIGHT_BYTE2);
+			
+		frag.add(Label, MEM_ARRAY_MAP_RAT2);
+			loadIFrom(frag, MEM_ARRAY_MAP_NEW_ADDRESS);
+			loadIFrom(frag, MEM_ARRAY_MAP_ITE);
+			frag.add(PushI, 8);
+			frag.add(Multiply);
+			frag.add(PushI, MEM_ARRAY_CONTENT_OFFSET);
+			frag.add(Add);
+			frag.add(Add);
+			frag.add(PushI,4);
+			frag.add(Add);
+			loadIFrom(frag, MEM_ARRAY_MAP_A);
+			frag.add(StoreI);
+	
+			loadIFrom(frag, MEM_ARRAY_MAP_NEW_ADDRESS);
+			loadIFrom(frag, MEM_ARRAY_MAP_ITE);
+			frag.add(PushI, 8);
+			frag.add(Multiply);
+			frag.add(PushI, MEM_ARRAY_CONTENT_OFFSET);
+			frag.add(Add);
+			frag.add(Add);
+			frag.add(Exchange);
+			frag.add(StoreI);
+			
+			loadIFrom(frag, MEM_ARRAY_MAP_ITE);
+			frag.add(PushI, 1);
+			frag.add(Add);
+			storeITo(frag, MEM_ARRAY_MAP_ITE);
+			frag.add(PopPC);
+			
+		frag.add(Label, MEM_ARRAY_MAP_ONE_BYTE2);
+			loadIFrom(frag, MEM_ARRAY_MAP_NEW_ADDRESS);
+			loadIFrom(frag, MEM_ARRAY_MAP_ITE);
+			frag.add(PushI, MEM_ARRAY_CONTENT_OFFSET);
+			frag.add(Add);
+			frag.add(Add);
+			frag.add(Exchange);
+			frag.add(StoreC);
+			
+			loadIFrom(frag, MEM_ARRAY_MAP_ITE);
+			frag.add(PushI, 1);
+			frag.add(Add);
+			storeITo(frag, MEM_ARRAY_MAP_ITE);
+			frag.add(PopPC);
+			
+		frag.add(Label, MEM_ARRAY_MAP_FOUR_BYTE2);
+			loadIFrom(frag, MEM_ARRAY_MAP_NEW_ADDRESS);
+			loadIFrom(frag, MEM_ARRAY_MAP_ITE);
+			frag.add(PushI, 4);
+			frag.add(Multiply);
+			frag.add(PushI, MEM_ARRAY_CONTENT_OFFSET);
+			frag.add(Add);
+			frag.add(Add);
+			frag.add(Exchange);
+			frag.add(StoreI);
+			
+			loadIFrom(frag, MEM_ARRAY_MAP_ITE);
+			frag.add(PushI, 1);
+			frag.add(Add);
+			storeITo(frag, MEM_ARRAY_MAP_ITE);
+			frag.add(PopPC);
+			
+		frag.add(Label, MEM_ARRAY_MAP_EIGHT_BYTE2);
+			loadIFrom(frag, MEM_ARRAY_MAP_NEW_ADDRESS);
+			loadIFrom(frag, MEM_ARRAY_MAP_ITE);
+			frag.add(PushI, 8);
+			frag.add(Multiply);
+			frag.add(PushI, MEM_ARRAY_CONTENT_OFFSET);
+			frag.add(Add);
+			frag.add(Add);
+			frag.add(Exchange);
+			frag.add(StoreF);
+			
+			loadIFrom(frag, MEM_ARRAY_MAP_ITE);
+			frag.add(PushI, 1);
+			frag.add(Add);
+			storeITo(frag, MEM_ARRAY_MAP_ITE);
+			frag.add(PopPC);
+			
+		frag.add(Label, MEM_ARRAY_MAP_END);
+			frag.add(Pop);
+			loadIFrom(frag, MEM_ARRAY_MAP_NEW_ADDRESS);
+			loadIFrom(frag, MEM_ARRAY_MAP_RETURN_ADDRESS);
+			
+			frag.add(Return);
+			
+		return frag;
+	}
+	
+	//[...newAddr, lamb, flag]
+	private static ASMCodeFragment subroutineArrayReduce() {
+		ASMCodeFragment frag = new ASMCodeFragment(GENERATES_VOID);
+		
+		frag.add(Label, MEM_ARRAY_REDUCE);
+			declareI(frag, MEM_ARRAY_REDUCE_RETURN_ADDRESS);
+			declareI(frag, MEM_ARRAY_REDUCE_ADDRESS);
+			declareI(frag, MEM_ARRAY_REDUCE_LAMB);
+			declareI(frag, MEM_ARRAY_REDUCE_FLAG);
+			declareI(frag, MEM_ARRAY_REDUCE_ITE);
+			declareI(frag, MEM_ARRAY_REDUCE_LENGTH);
+			declareI(frag, MEM_ARRAY_REDUCE_SIZE);
+			declareI(frag, MEM_ARRAY_REDUCE_TRUE);
+			
+			storeITo(frag, MEM_ARRAY_REDUCE_RETURN_ADDRESS);
+			storeITo(frag, MEM_ARRAY_REDUCE_FLAG);
+			storeITo(frag, MEM_ARRAY_REDUCE_LAMB);
+			storeITo(frag, MEM_ARRAY_REDUCE_ADDRESS);
+			frag.add(PushI, 0);
+			storeITo(frag, MEM_ARRAY_REDUCE_ITE);
+			frag.add(PushI, 0);
+			storeITo(frag, MEM_ARRAY_REDUCE_TRUE);
+			
+			loadIFrom(frag, MEM_ARRAY_REDUCE_ADDRESS);
+			frag.add(PushI, MEM_ARRAY_SIZE_OFFSET);
+			frag.add(Add);
+			frag.add(LoadI);
+			storeITo(frag, MEM_ARRAY_REDUCE_SIZE);
+			
+			loadIFrom(frag, MEM_ARRAY_REDUCE_ADDRESS);
+			frag.add(PushI, MEM_ARRAY_LENGTH_OFFSET);
+			frag.add(Add);
+			frag.add(LoadI);
+			storeITo(frag, MEM_ARRAY_REDUCE_LENGTH);
+			
+			loadIFrom(frag, MEM_ARRAY_REDUCE_FLAG);
+			frag.add(JumpTrue, MEM_ARRAY_REDUCE_RAT);
+			loadIFrom(frag, MEM_ARRAY_REDUCE_SIZE);
+			frag.add(PushI, 1);
+			frag.add(Subtract);
+			frag.add(JumpFalse, MEM_ARRAY_REDUCE_ONE_BYTE);
+			loadIFrom(frag, MEM_ARRAY_REDUCE_SIZE);
+			frag.add(PushI, 4);
+			frag.add(Subtract);
+			frag.add(JumpFalse, MEM_ARRAY_REDUCE_FOUR_BYTE);
+			loadIFrom(frag, MEM_ARRAY_REDUCE_SIZE);
+			frag.add(PushI, 8);
+			frag.add(Subtract);
+			frag.add(JumpFalse, MEM_ARRAY_REDUCE_EIGHT_BYTE);
+			
+		frag.add(Label, MEM_ARRAY_REDUCE_RAT);
+			loadIFrom(frag, MEM_ARRAY_REDUCE_ITE);
+			loadIFrom(frag, MEM_ARRAY_REDUCE_LENGTH);
+			frag.add(Subtract);
+			frag.add(JumpFalse, MEM_ARRAY_REDUCE_END);
+			
+			loadIFrom(frag, MEM_ARRAY_REDUCE_ADDRESS);
+			loadIFrom(frag, MEM_ARRAY_REDUCE_ITE);
+			frag.add(PushI, 8);
+			frag.add(Multiply);
+			frag.add(PushI, MEM_ARRAY_CONTENT_OFFSET);
+			frag.add(Add);
+			frag.add(Add);
+			frag.add(Duplicate);
+			frag.add(LoadI);
+			frag.add(Exchange);
+			frag.add(PushI,4);
+			frag.add(Add);
+			frag.add(LoadI);
+			
+			frag.add(PushD, RunTime.STACK_POINTER);
+			frag.add(PushD, RunTime.STACK_POINTER);
+			frag.add(LoadI);
+			frag.add(PushI, 8*(-1));
+			frag.add(Add);
+			frag.add(StoreI);
+			
+			frag.add(PushD, RunTime.STACK_POINTER);
+			frag.add(LoadI);
+			frag.add(PushI,4);
+			frag.add(Add);
+			frag.add(Exchange);
+			frag.add(StoreI);
+			frag.add(PushD, RunTime.STACK_POINTER);
+			frag.add(LoadI);
+			frag.add(Exchange);
+			frag.add(StoreI);
+			
+			loadIFrom(frag, MEM_ARRAY_REDUCE_RETURN_ADDRESS);
+			loadIFrom(frag, MEM_ARRAY_REDUCE_ADDRESS);
+			loadIFrom(frag, MEM_ARRAY_REDUCE_LAMB);
+			loadIFrom(frag, MEM_ARRAY_REDUCE_FLAG);
+			loadIFrom(frag, MEM_ARRAY_REDUCE_ITE);
+			loadIFrom(frag, MEM_ARRAY_REDUCE_LENGTH);
+			loadIFrom(frag, MEM_ARRAY_REDUCE_SIZE);
+			loadIFrom(frag, MEM_ARRAY_REDUCE_TRUE);
+			
+			loadIFrom(frag, MEM_ARRAY_REDUCE_LAMB);
+			frag.add(CallV);
+			
+			frag.add(Exchange);
+			storeITo(frag, MEM_ARRAY_REDUCE_TRUE);
+			frag.add(Exchange);
+			storeITo(frag, MEM_ARRAY_REDUCE_SIZE);
+			frag.add(Exchange);
+			storeITo(frag, MEM_ARRAY_REDUCE_LENGTH);
+			frag.add(Exchange);
+			storeITo(frag, MEM_ARRAY_REDUCE_ITE);
+			frag.add(Exchange);
+			storeITo(frag, MEM_ARRAY_REDUCE_FLAG);
+			frag.add(Exchange);
+			storeITo(frag, MEM_ARRAY_REDUCE_LAMB);
+			frag.add(Exchange);
+			storeITo(frag, MEM_ARRAY_REDUCE_ADDRESS);
+			frag.add(Exchange);
+			storeITo(frag, MEM_ARRAY_REDUCE_RETURN_ADDRESS);
+			
+			frag.add(PushD, RunTime.STACK_POINTER);
+			frag.add(PushD, RunTime.STACK_POINTER);
+			frag.add(LoadI);
+			frag.add(PushI, 8);
+			frag.add(Add);
+			frag.add(StoreI);
+			//[...res]
+			frag.add(JumpFalse, MEM_ARRAY_REDUCE_RAT_DELETE);
+			loadIFrom(frag, MEM_ARRAY_REDUCE_ADDRESS);
+			loadIFrom(frag, MEM_ARRAY_REDUCE_ITE);
+			frag.add(PushI, 8);
+			frag.add(Multiply);
+			frag.add(PushI, MEM_ARRAY_CONTENT_OFFSET);
+			frag.add(Add);
+			frag.add(Add);
+			frag.add(Duplicate);
+			frag.add(LoadI);
+			frag.add(Exchange);
+			frag.add(PushI,4);
+			frag.add(Add);
+			frag.add(LoadI);
+			
+			loadIFrom(frag, MEM_ARRAY_REDUCE_ADDRESS);
+			loadIFrom(frag, MEM_ARRAY_REDUCE_TRUE);
+			frag.add(PushI, 8);
+			frag.add(Multiply);
+			frag.add(PushI, MEM_ARRAY_CONTENT_OFFSET);
+			frag.add(Add);
+			frag.add(Add);
+			frag.add(PushI, 4);
+			frag.add(Add);
+			frag.add(Exchange);
+			frag.add(StoreI);
+			
+			loadIFrom(frag, MEM_ARRAY_REDUCE_ADDRESS);
+			loadIFrom(frag, MEM_ARRAY_REDUCE_TRUE);
+			frag.add(PushI, 8);
+			frag.add(Multiply);
+			frag.add(PushI, MEM_ARRAY_CONTENT_OFFSET);
+			frag.add(Add);
+			frag.add(Add);
+			frag.add(Exchange);
+			frag.add(StoreI);
+			
+			loadIFrom(frag, MEM_ARRAY_REDUCE_TRUE);
+			frag.add(PushI, 1);
+			frag.add(Add);
+			storeITo(frag, MEM_ARRAY_REDUCE_TRUE);
+			
+		
+		frag.add(Label, MEM_ARRAY_REDUCE_RAT_DELETE);
+			loadIFrom(frag, MEM_ARRAY_REDUCE_ITE);
+			frag.add(PushI,1);
+			frag.add(Add);
+			storeITo(frag, MEM_ARRAY_REDUCE_ITE);
+			frag.add(Jump, MEM_ARRAY_REDUCE_RAT);
+		
+		frag.add(Label, MEM_ARRAY_REDUCE_ONE_BYTE);
+			loadIFrom(frag, MEM_ARRAY_REDUCE_ITE);
+			loadIFrom(frag, MEM_ARRAY_REDUCE_LENGTH);
+			frag.add(Subtract);
+			frag.add(JumpFalse, MEM_ARRAY_REDUCE_END);
+			
+			loadIFrom(frag, MEM_ARRAY_REDUCE_ADDRESS);
+			loadIFrom(frag, MEM_ARRAY_REDUCE_ITE);
+			frag.add(PushI, 1);
+			frag.add(Multiply);
+			frag.add(PushI, MEM_ARRAY_CONTENT_OFFSET);
+			frag.add(Add);
+			frag.add(Add);
+			frag.add(LoadC);
+			
+			frag.add(PushD, RunTime.STACK_POINTER);
+			frag.add(PushD, RunTime.STACK_POINTER);
+			frag.add(LoadI);
+			frag.add(PushI, 1*(-1));
+			frag.add(Add);
+			frag.add(StoreI);
+			
+			frag.add(PushD, RunTime.STACK_POINTER);
+			frag.add(LoadI);
+			frag.add(Exchange);
+			frag.add(StoreC);
+			
+			loadIFrom(frag, MEM_ARRAY_REDUCE_RETURN_ADDRESS);
+			loadIFrom(frag, MEM_ARRAY_REDUCE_ADDRESS);
+			loadIFrom(frag, MEM_ARRAY_REDUCE_LAMB);
+			loadIFrom(frag, MEM_ARRAY_REDUCE_FLAG);
+			loadIFrom(frag, MEM_ARRAY_REDUCE_ITE);
+			loadIFrom(frag, MEM_ARRAY_REDUCE_LENGTH);
+			loadIFrom(frag, MEM_ARRAY_REDUCE_SIZE);
+			loadIFrom(frag, MEM_ARRAY_REDUCE_TRUE);
+			
+			loadIFrom(frag, MEM_ARRAY_REDUCE_LAMB);
+			frag.add(CallV);
+			
+			frag.add(Exchange);
+			storeITo(frag, MEM_ARRAY_REDUCE_TRUE);
+			frag.add(Exchange);
+			storeITo(frag, MEM_ARRAY_REDUCE_SIZE);
+			frag.add(Exchange);
+			storeITo(frag, MEM_ARRAY_REDUCE_LENGTH);
+			frag.add(Exchange);
+			storeITo(frag, MEM_ARRAY_REDUCE_ITE);
+			frag.add(Exchange);
+			storeITo(frag, MEM_ARRAY_REDUCE_FLAG);
+			frag.add(Exchange);
+			storeITo(frag, MEM_ARRAY_REDUCE_LAMB);
+			frag.add(Exchange);
+			storeITo(frag, MEM_ARRAY_REDUCE_ADDRESS);
+			frag.add(Exchange);
+			storeITo(frag, MEM_ARRAY_REDUCE_RETURN_ADDRESS);
+			
+			frag.add(PushD, RunTime.STACK_POINTER);
+			frag.add(PushD, RunTime.STACK_POINTER);
+			frag.add(LoadI);
+			frag.add(PushI, 1);
+			frag.add(Add);
+			frag.add(StoreI);
+			//[...res]
+			frag.add(JumpFalse, MEM_ARRAY_REDUCE_ONE_BYTE_DELETE);
+			loadIFrom(frag, MEM_ARRAY_REDUCE_ADDRESS);
+			loadIFrom(frag, MEM_ARRAY_REDUCE_ITE);
+			frag.add(PushI, 1);
+			frag.add(Multiply);
+			frag.add(PushI, MEM_ARRAY_CONTENT_OFFSET);
+			frag.add(Add);
+			frag.add(Add);
+			frag.add(LoadC);
+			
+			loadIFrom(frag, MEM_ARRAY_REDUCE_ADDRESS);
+			loadIFrom(frag, MEM_ARRAY_REDUCE_TRUE);
+			frag.add(PushI, 1);
+			frag.add(Multiply);
+			frag.add(PushI, MEM_ARRAY_CONTENT_OFFSET);
+			frag.add(Add);
+			frag.add(Add);
+			frag.add(Exchange);
+			frag.add(StoreC);
+			
+			loadIFrom(frag, MEM_ARRAY_REDUCE_TRUE);
+			frag.add(PushI, 1);
+			frag.add(Add);
+			storeITo(frag, MEM_ARRAY_REDUCE_TRUE);
+			
+		
+		frag.add(Label, MEM_ARRAY_REDUCE_ONE_BYTE_DELETE);
+			loadIFrom(frag, MEM_ARRAY_REDUCE_ITE);
+			frag.add(PushI,1);
+			frag.add(Add);
+			storeITo(frag, MEM_ARRAY_REDUCE_ITE);
+			frag.add(Jump, MEM_ARRAY_REDUCE_ONE_BYTE);
+			
+		frag.add(Label, MEM_ARRAY_REDUCE_FOUR_BYTE);
+			loadIFrom(frag, MEM_ARRAY_REDUCE_ITE);
+			loadIFrom(frag, MEM_ARRAY_REDUCE_LENGTH);
+			frag.add(Subtract);
+			frag.add(JumpFalse, MEM_ARRAY_REDUCE_END);
+			
+			loadIFrom(frag, MEM_ARRAY_REDUCE_ADDRESS);
+			loadIFrom(frag, MEM_ARRAY_REDUCE_ITE);
+			frag.add(PushI, 4);
+			frag.add(Multiply);
+			frag.add(PushI, MEM_ARRAY_CONTENT_OFFSET);
+			frag.add(Add);
+			frag.add(Add);
+			frag.add(LoadI);
+			
+			frag.add(PushD, RunTime.STACK_POINTER);
+			frag.add(PushD, RunTime.STACK_POINTER);
+			frag.add(LoadI);
+			frag.add(PushI, 4*(-1));
+			frag.add(Add);
+			frag.add(StoreI);
+			
+			frag.add(PushD, RunTime.STACK_POINTER);
+			frag.add(LoadI);
+			frag.add(Exchange);
+			frag.add(StoreI);
+			
+			loadIFrom(frag, MEM_ARRAY_REDUCE_RETURN_ADDRESS);
+			loadIFrom(frag, MEM_ARRAY_REDUCE_ADDRESS);
+			loadIFrom(frag, MEM_ARRAY_REDUCE_LAMB);
+			loadIFrom(frag, MEM_ARRAY_REDUCE_FLAG);
+			loadIFrom(frag, MEM_ARRAY_REDUCE_ITE);
+			loadIFrom(frag, MEM_ARRAY_REDUCE_LENGTH);
+			loadIFrom(frag, MEM_ARRAY_REDUCE_SIZE);
+			loadIFrom(frag, MEM_ARRAY_REDUCE_TRUE);
+			
+			loadIFrom(frag, MEM_ARRAY_REDUCE_LAMB);
+			frag.add(CallV);
+			
+			frag.add(Exchange);
+			storeITo(frag, MEM_ARRAY_REDUCE_TRUE);
+			frag.add(Exchange);
+			storeITo(frag, MEM_ARRAY_REDUCE_SIZE);
+			frag.add(Exchange);
+			storeITo(frag, MEM_ARRAY_REDUCE_LENGTH);
+			frag.add(Exchange);
+			storeITo(frag, MEM_ARRAY_REDUCE_ITE);
+			frag.add(Exchange);
+			storeITo(frag, MEM_ARRAY_REDUCE_FLAG);
+			frag.add(Exchange);
+			storeITo(frag, MEM_ARRAY_REDUCE_LAMB);
+			frag.add(Exchange);
+			storeITo(frag, MEM_ARRAY_REDUCE_ADDRESS);
+			frag.add(Exchange);
+			storeITo(frag, MEM_ARRAY_REDUCE_RETURN_ADDRESS);
+			
+			frag.add(PushD, RunTime.STACK_POINTER);
+			frag.add(PushD, RunTime.STACK_POINTER);
+			frag.add(LoadI);
+			frag.add(PushI, 4);
+			frag.add(Add);
+			frag.add(StoreI);
+			//[...res]
+			frag.add(JumpFalse, MEM_ARRAY_REDUCE_FOUR_BYTE_DELETE);
+			loadIFrom(frag, MEM_ARRAY_REDUCE_ADDRESS);
+			loadIFrom(frag, MEM_ARRAY_REDUCE_ITE);
+			frag.add(PushI, 4);
+			frag.add(Multiply);
+			frag.add(PushI, MEM_ARRAY_CONTENT_OFFSET);
+			frag.add(Add);
+			frag.add(Add);
+			frag.add(LoadI);
+			
+			loadIFrom(frag, MEM_ARRAY_REDUCE_ADDRESS);
+			loadIFrom(frag, MEM_ARRAY_REDUCE_TRUE);
+			frag.add(PushI, 4);
+			frag.add(Multiply);
+			frag.add(PushI, MEM_ARRAY_CONTENT_OFFSET);
+			frag.add(Add);
+			frag.add(Add);
+			frag.add(Exchange);
+			frag.add(StoreI);
+			
+			loadIFrom(frag, MEM_ARRAY_REDUCE_TRUE);
+			frag.add(PushI, 1);
+			frag.add(Add);
+			storeITo(frag, MEM_ARRAY_REDUCE_TRUE);
+			
+		
+		frag.add(Label, MEM_ARRAY_REDUCE_FOUR_BYTE_DELETE);
+			loadIFrom(frag, MEM_ARRAY_REDUCE_ITE);
+			frag.add(PushI,1);
+			frag.add(Add);
+			storeITo(frag, MEM_ARRAY_REDUCE_ITE);
+			frag.add(Jump, MEM_ARRAY_REDUCE_FOUR_BYTE);
+		
+		frag.add(Label, MEM_ARRAY_REDUCE_EIGHT_BYTE);
+			loadIFrom(frag, MEM_ARRAY_REDUCE_ITE);
+			loadIFrom(frag, MEM_ARRAY_REDUCE_LENGTH);
+			frag.add(Subtract);
+			frag.add(JumpFalse, MEM_ARRAY_REDUCE_END);
+			
+			loadIFrom(frag, MEM_ARRAY_REDUCE_ADDRESS);
+			loadIFrom(frag, MEM_ARRAY_REDUCE_ITE);
+			frag.add(PushI, 8);
+			frag.add(Multiply);
+			frag.add(PushI, MEM_ARRAY_CONTENT_OFFSET);
+			frag.add(Add);
+			frag.add(Add);
+			frag.add(LoadF);
+			
+			frag.add(PushD, RunTime.STACK_POINTER);
+			frag.add(PushD, RunTime.STACK_POINTER);
+			frag.add(LoadI);
+			frag.add(PushI, 8*(-1));
+			frag.add(Add);
+			frag.add(StoreI);
+			
+			frag.add(PushD, RunTime.STACK_POINTER);
+			frag.add(LoadI);
+			frag.add(Exchange);
+			frag.add(StoreF);
+			
+			loadIFrom(frag, MEM_ARRAY_REDUCE_RETURN_ADDRESS);
+			loadIFrom(frag, MEM_ARRAY_REDUCE_ADDRESS);
+			loadIFrom(frag, MEM_ARRAY_REDUCE_LAMB);
+			loadIFrom(frag, MEM_ARRAY_REDUCE_FLAG);
+			loadIFrom(frag, MEM_ARRAY_REDUCE_ITE);
+			loadIFrom(frag, MEM_ARRAY_REDUCE_LENGTH);
+			loadIFrom(frag, MEM_ARRAY_REDUCE_SIZE);
+			loadIFrom(frag, MEM_ARRAY_REDUCE_TRUE);
+			
+			loadIFrom(frag, MEM_ARRAY_REDUCE_LAMB);
+			frag.add(CallV);
+			
+			frag.add(Exchange);
+			storeITo(frag, MEM_ARRAY_REDUCE_TRUE);
+			frag.add(Exchange);
+			storeITo(frag, MEM_ARRAY_REDUCE_SIZE);
+			frag.add(Exchange);
+			storeITo(frag, MEM_ARRAY_REDUCE_LENGTH);
+			frag.add(Exchange);
+			storeITo(frag, MEM_ARRAY_REDUCE_ITE);
+			frag.add(Exchange);
+			storeITo(frag, MEM_ARRAY_REDUCE_FLAG);
+			frag.add(Exchange);
+			storeITo(frag, MEM_ARRAY_REDUCE_LAMB);
+			frag.add(Exchange);
+			storeITo(frag, MEM_ARRAY_REDUCE_ADDRESS);
+			frag.add(Exchange);
+			storeITo(frag, MEM_ARRAY_REDUCE_RETURN_ADDRESS);
+			
+			frag.add(PushD, RunTime.STACK_POINTER);
+			frag.add(PushD, RunTime.STACK_POINTER);
+			frag.add(LoadI);
+			frag.add(PushI, 8);
+			frag.add(Add);
+			frag.add(StoreI);
+			//[...res]
+			frag.add(JumpFalse, MEM_ARRAY_REDUCE_EIGHT_BYTE_DELETE);
+			loadIFrom(frag, MEM_ARRAY_REDUCE_ADDRESS);
+			loadIFrom(frag, MEM_ARRAY_REDUCE_ITE);
+			frag.add(PushI, 8);
+			frag.add(Multiply);
+			frag.add(PushI, MEM_ARRAY_CONTENT_OFFSET);
+			frag.add(Add);
+			frag.add(Add);
+			frag.add(LoadF);
+			
+			loadIFrom(frag, MEM_ARRAY_REDUCE_ADDRESS);
+			loadIFrom(frag, MEM_ARRAY_REDUCE_TRUE);
+			frag.add(PushI, 8);
+			frag.add(Multiply);
+			frag.add(PushI, MEM_ARRAY_CONTENT_OFFSET);
+			frag.add(Add);
+			frag.add(Add);
+			frag.add(Exchange);
+			frag.add(StoreF);
+			
+			loadIFrom(frag, MEM_ARRAY_REDUCE_TRUE);
+			frag.add(PushI, 1);
+			frag.add(Add);
+			storeITo(frag, MEM_ARRAY_REDUCE_TRUE);
+			
+		
+		frag.add(Label, MEM_ARRAY_REDUCE_EIGHT_BYTE_DELETE);
+			loadIFrom(frag, MEM_ARRAY_REDUCE_ITE);
+			frag.add(PushI,1);
+			frag.add(Add);
+			storeITo(frag, MEM_ARRAY_REDUCE_ITE);
+			frag.add(Jump, MEM_ARRAY_REDUCE_EIGHT_BYTE);
+			
+		frag.add(Label, MEM_ARRAY_REDUCE_END);
+			loadIFrom(frag, MEM_ARRAY_REDUCE_ADDRESS);
+			frag.add(PushI, MEM_ARRAY_LENGTH_OFFSET);
+			frag.add(Add);
+			loadIFrom(frag, MEM_ARRAY_REDUCE_TRUE);
+			frag.add(StoreI);
+			
+			loadIFrom(frag, MEM_ARRAY_REDUCE_ADDRESS);
+			loadIFrom(frag, MEM_ARRAY_REDUCE_RETURN_ADDRESS);
+			frag.add(Return);
+		
+		
+	
+			return frag;
+			
+		
+		
+	}
+	
+	private static ASMCodeFragment subroutineArrayFoldTwo() {
+		ASMCodeFragment frag = new ASMCodeFragment(GENERATES_VOID);
+		
+		frag.add(Label, MEM_ARRAY_FOLD_TWO);
+			declareI(frag, MEM_ARRAY_FOLD_TWO_RETURN_ADDRESS);
+			declareI(frag, MEM_ARRAY_FOLD_TWO_ADDRESS);
+			declareI(frag, MEM_ARRAY_FOLD_TWO_LAMB);
+			declareI(frag, MEM_ARRAY_FOLD_TWO_FLAG);
+			declareI(frag, MEM_ARRAY_FOLD_TWO_SIZE);
+			declareI(frag, MEM_ARRAY_FOLD_TWO_LENGTH);
+			declareI(frag, MEM_ARRAY_FOLD_TWO_ITE);
+			declareI(frag, MEM_ARRAY_FOLD_TWO_TEM);
+			
+			storeITo(frag, MEM_ARRAY_FOLD_TWO_RETURN_ADDRESS);
+			storeITo(frag, MEM_ARRAY_FOLD_TWO_FLAG);
+			storeITo(frag, MEM_ARRAY_FOLD_TWO_LAMB);
+			storeITo(frag, MEM_ARRAY_FOLD_TWO_ADDRESS);
+			frag.add(PushI, 1);
+			storeITo(frag, MEM_ARRAY_FOLD_TWO_ITE);
+			
+			loadIFrom(frag, MEM_ARRAY_FOLD_TWO_ADDRESS);
+			frag.add(PushI, MEM_ARRAY_SIZE_OFFSET);
+			frag.add(Add);
+			frag.add(LoadI);
+			storeITo(frag, MEM_ARRAY_FOLD_TWO_SIZE);
+			
+			loadIFrom(frag, MEM_ARRAY_FOLD_TWO_ADDRESS);
+			frag.add(PushI, MEM_ARRAY_LENGTH_OFFSET);
+			frag.add(Add);
+			frag.add(LoadI);
+			storeITo(frag, MEM_ARRAY_FOLD_TWO_LENGTH);
+			
+			loadIFrom(frag, MEM_ARRAY_FOLD_TWO_LENGTH);
+			frag.add(JumpFalse, RunTime.ARRAY_INDEX_EXCEED);
+			
+			loadIFrom(frag, MEM_ARRAY_FOLD_TWO_ADDRESS);
+			frag.add(PushI, MEM_ARRAY_CONTENT_OFFSET);
+			frag.add(Add);
+			loadIFrom(frag, MEM_ARRAY_FOLD_TWO_SIZE);
+			loadIFrom(frag, MEM_ARRAY_FOLD_TWO_FLAG);
+			frag.add(Call, MEM_LOAD_DATA);
+			
+		frag.add(Label, MEM_ARRAY_FOLD_TWO_LOOP);
+			loadIFrom(frag, MEM_ARRAY_FOLD_TWO_ITE);
+			loadIFrom(frag, MEM_ARRAY_FOLD_TWO_LENGTH);
+			frag.add(Subtract);
+			frag.add(JumpFalse, MEM_ARRAY_FOLD_TWO_END);
+			
+			loadIFrom(frag, MEM_ARRAY_FOLD_TWO_ADDRESS);
+			frag.add(PushI, MEM_ARRAY_CONTENT_OFFSET);
+			loadIFrom(frag, MEM_ARRAY_FOLD_TWO_ITE);
+			loadIFrom(frag, MEM_ARRAY_FOLD_TWO_SIZE);
+			frag.add(Multiply);
+			frag.add(Add);
+			frag.add(Add);
+			loadIFrom(frag, MEM_ARRAY_FOLD_TWO_SIZE);
+			loadIFrom(frag, MEM_ARRAY_FOLD_TWO_FLAG);
+			frag.add(Call, MEM_LOAD_DATA);
+			//[...data1, data2]
+			
+			
+			frag.add(PushD, RunTime.STACK_POINTER);
+			frag.add(PushD, RunTime.STACK_POINTER);
+			frag.add(LoadI);
+			frag.add(PushI, -2);
+			loadIFrom(frag,  MEM_ARRAY_FOLD_TWO_SIZE);
+			frag.add(Multiply);
+			frag.add(Add);
+			frag.add(StoreI);
+			
+			//[...data1, data2, addr]
+			frag.add(PushD, RunTime.STACK_POINTER);
+			frag.add(LoadI);
+			loadIFrom(frag, MEM_ARRAY_FOLD_TWO_SIZE);
+			loadIFrom(frag, MEM_ARRAY_FOLD_TWO_FLAG);
+			frag.add(Call, MEM_STORE_DATA);
+			
+			frag.add(PushD, RunTime.STACK_POINTER);
+			frag.add(LoadI);
+			loadIFrom(frag,  MEM_ARRAY_FOLD_TWO_SIZE);
+			frag.add(Add);
+			loadIFrom(frag, MEM_ARRAY_FOLD_TWO_SIZE);
+			loadIFrom(frag, MEM_ARRAY_FOLD_TWO_FLAG);
+			frag.add(Call, MEM_STORE_DATA);
+			
+			loadIFrom(frag, MEM_ARRAY_FOLD_TWO_RETURN_ADDRESS);
+			loadIFrom(frag, MEM_ARRAY_FOLD_TWO_ADDRESS);
+			loadIFrom(frag, MEM_ARRAY_FOLD_TWO_LAMB);
+			loadIFrom(frag, MEM_ARRAY_FOLD_TWO_FLAG);
+			loadIFrom(frag, MEM_ARRAY_FOLD_TWO_SIZE);
+			loadIFrom(frag, MEM_ARRAY_FOLD_TWO_LENGTH);
+			loadIFrom(frag, MEM_ARRAY_FOLD_TWO_ITE);
+			frag.add(PushI, -1);
+			
+			loadIFrom(frag, MEM_ARRAY_FOLD_TWO_LAMB);
+			frag.add(CallV);
+			
+			frag.add(Exchange);
+			frag.add(Duplicate);
+			frag.add(JumpNeg, MEM_ARRAY_FOLD_TWO_NORMAL);
+			frag.add(Exchange);
+			storeITo(frag, MEM_ARRAY_FOLD_TWO_TEM);
+			frag.add(Exchange);
+			
+		frag.add(Label, MEM_ARRAY_FOLD_TWO_NORMAL);
+			frag.add(Pop);
+			
+			frag.add(Exchange);
+			storeITo(frag, MEM_ARRAY_FOLD_TWO_ITE);
+			frag.add(Exchange);
+			storeITo(frag, MEM_ARRAY_FOLD_TWO_LENGTH);
+			frag.add(Exchange);
+			storeITo(frag, MEM_ARRAY_FOLD_TWO_SIZE);
+			frag.add(Exchange);
+			storeITo(frag, MEM_ARRAY_FOLD_TWO_FLAG);
+			frag.add(Exchange);
+			storeITo(frag, MEM_ARRAY_FOLD_TWO_LAMB);
+			frag.add(Exchange);
+			storeITo(frag, MEM_ARRAY_FOLD_TWO_ADDRESS);
+			frag.add(Exchange);
+			storeITo(frag, MEM_ARRAY_FOLD_TWO_RETURN_ADDRESS);
+			
+			frag.add(PushD, RunTime.STACK_POINTER);
+			frag.add(PushD, RunTime.STACK_POINTER);
+			frag.add(LoadI);
+			loadIFrom(frag, MEM_ARRAY_FOLD_TWO_SIZE);
+			frag.add(PushI, 2);
+			frag.add(Multiply);
+			frag.add(Add);
+			frag.add(StoreI);
+			
+			loadIFrom(frag, MEM_ARRAY_FOLD_TWO_ITE);
+			frag.add(PushI, 1);
+			frag.add(Add);
+			storeITo(frag, MEM_ARRAY_FOLD_TWO_ITE);
+			loadIFrom(frag,MEM_ARRAY_FOLD_TWO_FLAG);
+			frag.add(JumpFalse, MEM_ARRAY_FOLD_TWO_LOOP);
+			loadIFrom(frag, MEM_ARRAY_FOLD_TWO_TEM);
+			frag.add(Jump, MEM_ARRAY_FOLD_TWO_LOOP);
+			
+		frag.add(Label, MEM_ARRAY_FOLD_TWO_END);
+			loadIFrom(frag, MEM_ARRAY_FOLD_TWO_RETURN_ADDRESS);
+			frag.add(Return);
+			
+		return frag;
+	}
+	
+	//[...base, arrayAddr, lamb, size, flagU, flagT]
+	public static ASMCodeFragment subroutineArrayFoldThree() {
+		ASMCodeFragment frag = new ASMCodeFragment(GENERATES_VOID);
+		
+		frag.add(Label, MEM_ARRAY_FOLD_THREE);
+			declareI(frag, MEM_ARRAY_FOLD_THREE_RETURN_ADDRESS);
+			declareI(frag, MEM_ARRAY_FOLD_THREE_ADDRESS);
+			declareI(frag, MEM_ARRAY_FOLD_THREE_LAMB);
+			declareI(frag, MEM_ARRAY_FOLD_THREE_BASE_SIZE);
+			declareI(frag, MEM_ARRAY_FOLD_THREE_FLAG1);
+			declareI(frag, MEM_ARRAY_FOLD_THREE_FLAG2);
+			declareI(frag, MEM_ARRAY_FOLD_THREE_SIZE);
+			declareI(frag, MEM_ARRAY_FOLD_THREE_LENGTH);
+			declareI(frag, MEM_ARRAY_FOLD_THREE_ITE);
+			declareI(frag, MEM_ARRAY_FOLD_THREE_TEM);
+			
+			storeITo(frag, MEM_ARRAY_FOLD_THREE_RETURN_ADDRESS);
+			storeITo(frag, MEM_ARRAY_FOLD_THREE_FLAG2);
+			storeITo(frag, MEM_ARRAY_FOLD_THREE_FLAG1);
+			storeITo(frag, MEM_ARRAY_FOLD_THREE_BASE_SIZE);
+			storeITo(frag, MEM_ARRAY_FOLD_THREE_LAMB);
+			storeITo(frag, MEM_ARRAY_FOLD_THREE_ADDRESS);
+			frag.add(PushI, 0);
+			storeITo(frag, MEM_ARRAY_FOLD_THREE_ITE);
+			
+			loadIFrom(frag, MEM_ARRAY_FOLD_THREE_ADDRESS);
+			frag.add(PushI, MEM_ARRAY_SIZE_OFFSET);
+			frag.add(Add);
+			frag.add(LoadI);
+			storeITo(frag, MEM_ARRAY_FOLD_THREE_SIZE);
+			
+			loadIFrom(frag, MEM_ARRAY_FOLD_THREE_ADDRESS);
+			frag.add(PushI, MEM_ARRAY_LENGTH_OFFSET);
+			frag.add(Add);
+			frag.add(LoadI);
+			storeITo(frag, MEM_ARRAY_FOLD_THREE_LENGTH);
+			
+		frag.add(Label, MEM_ARRAY_FOLD_THREE_LOOP);
+			loadIFrom(frag, MEM_ARRAY_FOLD_THREE_ITE);
+			loadIFrom(frag, MEM_ARRAY_FOLD_THREE_LENGTH);
+			frag.add(Subtract);
+			frag.add(JumpFalse, MEM_ARRAY_FOLD_THREE_END);
+			
+			loadIFrom(frag, MEM_ARRAY_FOLD_THREE_ADDRESS);
+			frag.add(PushI, MEM_ARRAY_CONTENT_OFFSET);
+			loadIFrom(frag, MEM_ARRAY_FOLD_THREE_ITE);
+			loadIFrom(frag, MEM_ARRAY_FOLD_THREE_SIZE);
+			frag.add(Multiply);
+			frag.add(Add);
+			frag.add(Add);
+			loadIFrom(frag, MEM_ARRAY_FOLD_THREE_SIZE);
+			loadIFrom(frag, MEM_ARRAY_FOLD_THREE_FLAG2);
+			frag.add(Call, MEM_LOAD_DATA);
+			
+			frag.add(PushD, RunTime.STACK_POINTER);
+			frag.add(PushD, RunTime.STACK_POINTER);
+			frag.add(LoadI);
+			loadIFrom(frag,  MEM_ARRAY_FOLD_THREE_SIZE);
+			frag.add(PushI, -1);
+			frag.add(Multiply);
+			loadIFrom(frag,  MEM_ARRAY_FOLD_THREE_BASE_SIZE);
+			frag.add(PushI, -1);
+			frag.add(Multiply);
+			frag.add(Add);
+			frag.add(Add);
+			frag.add(StoreI);
+			
+			//[...data1, data2, addr]
+			frag.add(PushD, RunTime.STACK_POINTER);
+			frag.add(LoadI);
+			loadIFrom(frag, MEM_ARRAY_FOLD_THREE_SIZE);
+			loadIFrom(frag, MEM_ARRAY_FOLD_THREE_FLAG2);
+			frag.add(Call, MEM_STORE_DATA);
+			
+			frag.add(PushD, RunTime.STACK_POINTER);
+			frag.add(LoadI);
+			loadIFrom(frag,  MEM_ARRAY_FOLD_THREE_SIZE);
+			frag.add(Add);
+			loadIFrom(frag, MEM_ARRAY_FOLD_THREE_BASE_SIZE);
+			loadIFrom(frag, MEM_ARRAY_FOLD_THREE_FLAG1);
+			frag.add(Call, MEM_STORE_DATA);
+			
+			loadIFrom(frag, MEM_ARRAY_FOLD_THREE_RETURN_ADDRESS);
+			loadIFrom(frag, MEM_ARRAY_FOLD_THREE_ADDRESS);
+			loadIFrom(frag, MEM_ARRAY_FOLD_THREE_LAMB);
+			loadIFrom(frag, MEM_ARRAY_FOLD_THREE_BASE_SIZE);
+			loadIFrom(frag, MEM_ARRAY_FOLD_THREE_FLAG1);
+			loadIFrom(frag, MEM_ARRAY_FOLD_THREE_FLAG2);
+			loadIFrom(frag, MEM_ARRAY_FOLD_THREE_SIZE);
+			loadIFrom(frag, MEM_ARRAY_FOLD_THREE_LENGTH);
+			loadIFrom(frag, MEM_ARRAY_FOLD_THREE_ITE);
+			
+			frag.add(PushI, -1);
+			
+			loadIFrom(frag, MEM_ARRAY_FOLD_THREE_LAMB);
+			frag.add(CallV);
+			
+			frag.add(Exchange);
+			frag.add(Duplicate);
+			frag.add(JumpNeg, MEM_ARRAY_FOLD_THREE_NORMAL);
+			frag.add(Exchange);
+			storeITo(frag, MEM_ARRAY_FOLD_THREE_TEM);
+			frag.add(Exchange);
+			
+		frag.add(Label, MEM_ARRAY_FOLD_THREE_NORMAL);
+			frag.add(Pop);
+			
+			frag.add(Exchange);
+			storeITo(frag, MEM_ARRAY_FOLD_THREE_ITE);
+			frag.add(Exchange);
+			storeITo(frag, MEM_ARRAY_FOLD_THREE_LENGTH);
+			frag.add(Exchange);
+			storeITo(frag, MEM_ARRAY_FOLD_THREE_SIZE);
+			frag.add(Exchange);
+			storeITo(frag, MEM_ARRAY_FOLD_THREE_FLAG2);
+			frag.add(Exchange);
+			storeITo(frag, MEM_ARRAY_FOLD_THREE_FLAG1);
+			frag.add(Exchange);
+			storeITo(frag, MEM_ARRAY_FOLD_THREE_BASE_SIZE);
+			frag.add(Exchange);
+			storeITo(frag, MEM_ARRAY_FOLD_THREE_LAMB);
+			frag.add(Exchange);
+			storeITo(frag, MEM_ARRAY_FOLD_THREE_ADDRESS);
+			frag.add(Exchange);
+			storeITo(frag, MEM_ARRAY_FOLD_THREE_RETURN_ADDRESS);
+			
+			frag.add(PushD, RunTime.STACK_POINTER);
+			frag.add(PushD, RunTime.STACK_POINTER);
+			frag.add(LoadI);
+			loadIFrom(frag, MEM_ARRAY_FOLD_THREE_SIZE);
+			loadIFrom(frag, MEM_ARRAY_FOLD_THREE_BASE_SIZE);
+			frag.add(Add);
+			frag.add(Add);
+			frag.add(StoreI);
+			
+			loadIFrom(frag, MEM_ARRAY_FOLD_THREE_ITE);
+			frag.add(PushI, 1);
+			frag.add(Add);
+			storeITo(frag, MEM_ARRAY_FOLD_THREE_ITE);
+			loadIFrom(frag,MEM_ARRAY_FOLD_THREE_FLAG1);
+			frag.add(JumpFalse, MEM_ARRAY_FOLD_THREE_LOOP);
+			loadIFrom(frag, MEM_ARRAY_FOLD_THREE_TEM);
+			frag.add(Jump, MEM_ARRAY_FOLD_THREE_LOOP);
+			
+		frag.add(Label, MEM_ARRAY_FOLD_THREE_END);
+			loadIFrom(frag, MEM_ARRAY_FOLD_THREE_RETURN_ADDRESS);
+			frag.add(Return);
+			
+		return frag;
+	}
+	
+	private static ASMCodeFragment subroutineTypeAid() {
+		ASMCodeFragment frag = new ASMCodeFragment(GENERATES_VOID);
+		
+		frag.add(Label, MEM_LOAD_DATA);
+			declareI(frag, MEM_LOAD_RETURN_ADDRESS);
+			
+			storeITo(frag, MEM_LOAD_RETURN_ADDRESS);
+			frag.add(JumpTrue, MEM_LOAD_RAT);
+			frag.add(Duplicate);
+			frag.add(PushI, 1);
+			frag.add(Subtract);
+			frag.add(JumpFalse, MEM_LOAD_CHAR);
+			frag.add(Duplicate);
+			frag.add(PushI, 4);
+			frag.add(Subtract);
+			frag.add(JumpFalse, MEM_LOAD_INT);
+			frag.add(Duplicate);
+			frag.add(PushI, 8);
+			frag.add(Subtract);
+			frag.add(JumpFalse, MEM_LOAD_FLOAT);
+			
+		frag.add(Label, MEM_LOAD_RAT);
+			frag.add(Pop);
+			frag.add(Duplicate);
+			frag.add(LoadI);
+			frag.add(Exchange);
+			frag.add(PushI, 4);
+			frag.add(Add);
+			frag.add(LoadI);
+			loadIFrom(frag, MEM_LOAD_RETURN_ADDRESS);
+			frag.add(Return);
+			
+		frag.add(Label, MEM_LOAD_CHAR);
+			frag.add(Pop);
+			frag.add(LoadC);
+			loadIFrom(frag, MEM_LOAD_RETURN_ADDRESS);
+			frag.add(Return);
+			
+		frag.add(Label, MEM_LOAD_INT);
+			frag.add(Pop);
+			frag.add(LoadI);
+			loadIFrom(frag, MEM_LOAD_RETURN_ADDRESS);
+			frag.add(Return);
+			
+		frag.add(Label, MEM_LOAD_FLOAT);
+			frag.add(Pop);
+			frag.add(LoadF);
+			loadIFrom(frag, MEM_LOAD_RETURN_ADDRESS);
+			frag.add(Return);
+			
+		frag.add(Label, MEM_STORE_DATA);
+			declareI(frag, MEM_STORE_RETURN_ADDRESS);
+			declareI(frag, MEM_STORE_TEM);
+			
+			
+			storeITo(frag, MEM_STORE_RETURN_ADDRESS);
+			frag.add(JumpTrue, MEM_STORE_RAT);
+			frag.add(Duplicate);
+			frag.add(PushI, 1);
+			frag.add(Subtract);
+			frag.add(JumpFalse, MEM_STORE_CHAR);
+			frag.add(Duplicate);
+			frag.add(PushI, 4);
+			frag.add(Subtract);
+			frag.add(JumpFalse, MEM_STORE_INT);
+			frag.add(Duplicate);
+			frag.add(PushI, 8);
+			frag.add(Subtract);
+			frag.add(JumpFalse, MEM_STORE_FLOAT);
+			
+		frag.add(Label, MEM_STORE_RAT);
+			frag.add(Pop);
+			storeITo(frag, MEM_STORE_TEM);
+			
+			loadIFrom(frag, MEM_STORE_TEM);
+			frag.add(PushI, 4);
+			frag.add(Add);
+			frag.add(Exchange);
+			frag.add(StoreI);
+			loadIFrom(frag, MEM_STORE_TEM);
+			frag.add(Exchange);
+			frag.add(StoreI);
+			loadIFrom(frag, MEM_STORE_RETURN_ADDRESS);
+			frag.add(Return);
+			
+		frag.add(Label, MEM_STORE_CHAR);
+			frag.add(Pop);
+			frag.add(Exchange);
+			frag.add(StoreC);
+			loadIFrom(frag, MEM_STORE_RETURN_ADDRESS);
+			frag.add(Return);
+			
+		frag.add(Label, MEM_STORE_INT);
+			frag.add(Pop);
+			frag.add(Exchange);
+			frag.add(StoreI);
+			loadIFrom(frag, MEM_STORE_RETURN_ADDRESS);
+			frag.add(Return);
+			
+		frag.add(Label, MEM_STORE_FLOAT);
+			frag.add(Pop);
+			frag.add(Exchange);
+			frag.add(StoreF);
+			loadIFrom(frag, MEM_STORE_RETURN_ADDRESS);
+			frag.add(Return);
+			
+		return frag;
+		
+			
 	}
 	
 	// [int,int]

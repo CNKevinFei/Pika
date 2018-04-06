@@ -1,6 +1,14 @@
-exec{
-	var str := "hello".
-	var a := ^!^+str.
+func test<string a, char b>->string{
+	
+	return a+b.
+	
+	
+	
+}
 
-	print reverse str.
+exec{
+	var str := zip ["a","b"], [^a^, ^b^], test.
+	
+	print str.
+	
 }

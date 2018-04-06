@@ -156,6 +156,9 @@ public class Parser {
 		if(startsWhileStatement(nowReading)) {
 			return parseWhileStatement();
 		}
+		if(startsForStatement(nowReading)) {
+			return parseForStatement();
+		}
 		if(startsBreakStatement(nowReading)) {
 			return parseBreakStatement();
 		}
@@ -180,6 +183,7 @@ public class Parser {
 			   startsAssignmentStatement(token)||
 			   startsIfStatement(token)||
 			   startsWhileStatement(token)||
+			   startsForStatement(token)||
 			   startsReleaseStatement(token)||
 			   startsBreakStatement(token)||
 			   startsContinueStatement(token)||
@@ -462,6 +466,45 @@ public class Parser {
 	}
 	
 	///////////////////////////////////////////////////////////
+	// for statement
+	
+	private ParseNode parseForStatement() {
+		expect(Keyword.FOR);
+		
+		if(nowReading.isLextant(Keyword.INDEX)) {
+			Token token = nowReading;
+			expect(Keyword.INDEX);
+			
+			ParseNode identifier = parseIdentifier();
+			expect(Keyword.OF);
+			ParseNode expr = parseExpression();
+			ParseNode block = parseMainBlock();
+			
+			return new ForIndexStatementNode(token, identifier, expr, block);
+		}
+		else if(nowReading.isLextant(Keyword.ELEM)) {
+			Token token = nowReading;
+			expect(Keyword.ELEM);
+			
+			ParseNode identifier = parseIdentifier();
+			expect(Keyword.OF);
+			ParseNode expr = parseExpression();
+			ParseNode block = parseMainBlock();
+			
+			return new ForElemStatementNode(token, expr, identifier, block);
+		}
+		else {
+			assert 0==1;
+		}
+		
+		return null;
+		
+	}
+	
+	private boolean startsForStatement(Token token) {
+		return token.isLextant(Keyword.FOR);
+	}
+	///////////////////////////////////////////////////////////
 	// break statement
 	
 	private ParseNode parseBreakStatement() {
@@ -710,17 +753,71 @@ public class Parser {
 			return syntaxErrorNode("multiplicativeOrDivisionExpression");
 		}
 		
-		ParseNode left = parseUnaryOperatorExpression();
+		ParseNode left = parseFoldExpression();
 		while(nowReading.isLextant(Punctuator.MULTIPLY, Punctuator.DIVIDE, Punctuator.OVER, Punctuator.EXPRESSOVER, Punctuator.RATIONALIZE)) {
 			Token multiplicativeToken = nowReading;
 			readToken();
-			ParseNode right = parseUnaryOperatorExpression();
+			ParseNode right = parseFoldExpression();
 			
 			left = BinaryOperatorNode.withChildren(multiplicativeToken, left, right);
 		}
 		return left;
 	}
 	private boolean startsMultiplicativeOrDivisionOrRationalExpression(Token token) {
+		return startsFoldExpression(token);
+	}
+	// fold 
+	private ParseNode parseFoldExpression() {
+		ParseNode array = parseMapOrReduceExpression();
+		Token token;
+		ParseNode base = null;
+		ParseNode lamb = null;
+		
+		while(nowReading.isLextant(Keyword.FOLD)) {
+		
+			token = nowReading;
+			readToken();
+			if(nowReading.isLextant(Punctuator.OPEN_BRACKET)) {
+				expect(Punctuator.OPEN_BRACKET);
+				base = parseOrExpression();
+				expect(Punctuator.CLOSE_BRACKET);
+				
+				lamb = parseMapOrReduceExpression();
+						
+				array = new FoldExpressionNode(token, array, lamb, base);
+			}
+			else {
+				lamb = parseMapOrReduceExpression();
+				
+				array = new FoldExpressionNode(token, array, lamb);
+			}
+		}
+		
+		return array;
+	}
+	
+	private boolean startsFoldExpression(Token token) {
+		return startsMapOrReduceExpression(token);
+	}
+	// map or reduce
+	private ParseNode parseMapOrReduceExpression() {
+		if(!startsMapOrReduceExpression(nowReading)) {
+			return syntaxErrorNode("map or reduce");
+		}
+		
+		ParseNode left = parseUnaryOperatorExpression();
+		while(nowReading.isLextant(Keyword.MAP) || nowReading.isLextant(Keyword.REDUCE)) {
+			Token token = nowReading;
+			readToken();
+			ParseNode right = parseUnaryOperatorExpression();
+			
+			left = BinaryOperatorNode.withChildren(token, left, right);
+		}
+		
+		return left;
+	}
+	
+	private boolean startsMapOrReduceExpression(Token token) {
 		return startsUnaryOperatorExpression(token);
 	}
 	
@@ -736,6 +833,9 @@ public class Parser {
 		else if(startsReverseExpression(nowReading)){
 			return parseReverseExpression();
 		}
+		else if(startsZipExpression(nowReading)) {
+			return parseZipExpression();
+		}
 		else if(startsNotExpression(nowReading)) {
 			return parseNotExpression();
 		}
@@ -748,7 +848,27 @@ public class Parser {
 	}
 	
 	private boolean startsUnaryOperatorExpression(Token token) {
-		return startsArrayIndexExpression(token)||startsCloneExpression(token)||startsNotExpression(token)||startsLengthExpression(token)||startsReverseExpression(nowReading);
+		return startsArrayIndexExpression(token)||startsCloneExpression(token)||startsNotExpression(token)||startsLengthExpression(token)||startsReverseExpression(token)||startsZipExpression(token);
+	}
+	
+	//zip expression
+	private ParseNode parseZipExpression() {
+		Token token = nowReading;
+		ParseNode expr1, expr2, expr3;
+		
+		expect(Keyword.ZIP);
+		
+		expr1 = parseExpression();
+		expect(Punctuator.SEPARATOR);
+		expr2 = parseExpression();
+		expect(Punctuator.SEPARATOR);
+		expr3 = parseExpression();
+
+		return new ZipExpressionNode(token,expr1,expr2,expr3);
+	}
+	
+	private boolean startsZipExpression(Token token) {
+		return token.isLextant(Keyword.ZIP);
 	}
 	
 	// clone expression

@@ -55,6 +55,12 @@ public interface ParseNodeVisitor {
 	void visitEnter(ReverseExpressionNode node);
 	void visitLeave(ReverseExpressionNode node);
 	
+	void visitEnter(FoldExpressionNode node);
+	void visitLeave(FoldExpressionNode node);
+	
+	void visitEnter(ZipExpressionNode node);
+	void visitLeave(ZipExpressionNode node);
+	
 	void visitEnter(ExpressionListNode node);
 	void visitLeave(ExpressionListNode node);
 	
@@ -76,6 +82,12 @@ public interface ParseNodeVisitor {
 	
 	void visitEnter(WhileStatementNode node);
 	void visitLeave(WhileStatementNode node);
+	
+	void visitEnter(ForIndexStatementNode node);
+	void visitLeave(ForIndexStatementNode node);
+	
+	void visitEnter(ForElemStatementNode node);
+	void visitLeave(ForElemStatementNode node);
 	
 	void visitEnter(ArrayTypeConstantNode node);
 	void visitLeave(ArrayTypeConstantNode node);
@@ -214,6 +226,18 @@ public interface ParseNodeVisitor {
 		public void visitLeave(ReverseExpressionNode node) {
 			defaultVisitLeave(node);
 		}
+		public void visitEnter(FoldExpressionNode node) {
+			defaultVisitEnter(node);
+		}
+		public void visitLeave(FoldExpressionNode node) {
+			defaultVisitLeave(node);
+		}
+		public void visitEnter(ZipExpressionNode node) {
+			defaultVisitEnter(node);
+		}
+		public void visitLeave(ZipExpressionNode node) {
+			defaultVisitLeave(node);
+		}
 		public void visitEnter(ExpressionListNode node) {
 			defaultVisitEnter(node);
 		}
@@ -254,6 +278,18 @@ public interface ParseNodeVisitor {
 			defaultVisitEnter(node);
 		}
 		public void visitLeave(WhileStatementNode node) {
+			defaultVisitLeave(node);
+		}
+		public void visitEnter(ForIndexStatementNode node) {
+			defaultVisitEnter(node);
+		}
+		public void visitLeave(ForIndexStatementNode node) {
+			defaultVisitLeave(node);
+		}
+		public void visitEnter(ForElemStatementNode node) {
+			defaultVisitEnter(node);
+		}
+		public void visitLeave(ForElemStatementNode node) {
 			defaultVisitLeave(node);
 		}
 		public void visitEnter(ArrayTypeConstantNode node) {

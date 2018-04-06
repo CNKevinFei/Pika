@@ -248,6 +248,43 @@ class SemanticAnalysisVisitor extends ParseNodeVisitor.Default {
 		
 		node.setType(((LambdaType)(node.child(0).getType())).getReturnType());
 	}
+	
+	public void visitLeave(FoldExpressionNode node) {
+		assert node.child(0).getType() instanceof ArrayType;
+		assert node.child(1).getType() instanceof LambdaType;
+		
+		if(node.nChildren()==2) {
+			assert ((LambdaType)node.child(1).getType()).getParaType().size()==2;
+			assert ((LambdaType)node.child(1).getType()).getParaType().get(0).equivalent(((ArrayType)node.child(0).getType()).getSubType());
+			assert ((LambdaType)node.child(1).getType()).getReturnType().equivalent(((ArrayType)node.child(0).getType()).getSubType());
+			
+			
+			node.setType(((LambdaType)node.child(1).getType()).getReturnType());
+		}
+		else if(node.nChildren() == 3) {
+			assert ((LambdaType)node.child(1).getType()).getParaType().size()==2;
+			assert ((LambdaType)node.child(1).getType()).getParaType().get(1).equivalent(((ArrayType)node.child(0).getType()).getSubType());
+			assert ((LambdaType)node.child(1).getType()).getParaType().get(0).equivalent(node.child(2).getType());
+			assert ((LambdaType)node.child(1).getType()).getReturnType().equivalent(node.child(2).getType());
+			
+			node.setType(node.child(2).getType());
+		}
+		else {
+			assert 2==1;
+		}
+	}
+	
+	public void visitLeave(ZipExpressionNode node) {
+		assert node.child(2).getType() instanceof LambdaType;
+		assert node.child(0).getType() instanceof ArrayType;
+		assert node.child(1).getType() instanceof ArrayType;
+		
+		assert ((LambdaType)node.child(2).getType()).getParaType().size()==2;
+		assert ((LambdaType)node.child(2).getType()).getParaType().get(0).equivalent(((ArrayType)node.child(0).getType()).getSubType());
+		assert ((LambdaType)node.child(2).getType()).getParaType().get(1).equivalent(((ArrayType)node.child(1).getType()).getSubType());
+		
+		node.setType(new ArrayType(((LambdaType)node.child(2).getType()).getReturnType()));
+	}
 	///////////////////////////////////////////////////////////////////////////
 	// expressions
 	@Override
@@ -262,6 +299,33 @@ class SemanticAnalysisVisitor extends ParseNodeVisitor.Default {
 			assert right.getType() == PrimitiveType.INTEGER;
 			assert node.child(2).getType() == PrimitiveType.INTEGER;
 			node.setType(PrimitiveType.STRING);
+			return;
+		}
+		else if (operator == Keyword.MAP) {
+			assert node.nChildren()==2;
+			assert node.child(1).getType() instanceof LambdaType;
+			assert ((LambdaType)node.child(1).getType()).getParaType().size()==1;
+			
+			Type type = ((ArrayType)node.child(0).getType()).getSubType();
+			
+			assert type.equivalent(((LambdaType)node.child(1).getType()).getParaType().get(0));
+			
+			node.setType(new ArrayType(((LambdaType)node.child(1).getType()).getReturnType()));
+			
+			return;
+		}
+		else if(operator == Keyword.REDUCE) {
+			assert node.nChildren()==2;
+			assert node.child(1).getType() instanceof LambdaType;
+			assert ((LambdaType)node.child(1).getType()).getParaType().size()==1;
+			assert ((LambdaType)node.child(1).getType()).getReturnType() == PrimitiveType.BOOLEAN;
+			
+			Type type = ((ArrayType)node.child(0).getType()).getSubType();
+			
+			assert type.equivalent(((LambdaType)node.child(1).getType()).getParaType().get(0));
+			
+			node.setType(node.child(0).getType());
+			
 			return;
 		}
 		
@@ -469,9 +533,9 @@ class SemanticAnalysisVisitor extends ParseNodeVisitor.Default {
 	
 	@Override
 	public void visitLeave(ReverseExpressionNode node) {
-		assert node.child(0).getType() == PrimitiveType.STRING;
+		assert node.child(0).getType() == PrimitiveType.STRING || node.child(0).getType() instanceof ArrayType;
 		
-		node.setType(PrimitiveType.STRING);
+		node.setType(node.child(0).getType());
 	}
 	
 	@Override
@@ -537,6 +601,39 @@ class SemanticAnalysisVisitor extends ParseNodeVisitor.Default {
 			logError("While statement needs a boolean type expression as condition at Location:"+node.getToken().getLocation());
 			node.setType(PrimitiveType.ERROR);
 		}
+	}
+	@Override
+	public void visitEnter(ForIndexStatementNode node) {
+		enterSubscope(node);
+		this.whileLoopNun++;
+		
+		IdentifierNode identifier = (IdentifierNode) node.child(0);
+		
+		identifier.setType(PrimitiveType.INTEGER);
+		identifier.setConOrVar(LextantToken.fakeToken("const", Keyword.CONST));
+		identifier.setStatic(false);
+		
+		SemanticAnalysisVisitor.addBinding(identifier, PrimitiveType.INTEGER);
+	}
+	@Override
+	public void visitLeave(ForIndexStatementNode node) {
+		assert node.child(1).getType() instanceof ArrayType || node.child(1).getType()==PrimitiveType.STRING;
+		this.whileLoopNun--;
+		
+		leaveScope(node); 
+	}
+	
+	@Override
+	public void visitEnter(ForElemStatementNode node) {
+		enterSubscope(node);
+		this.whileLoopNun++;
+	}
+	@Override
+	public void visitLeave(ForElemStatementNode node) {
+		assert node.child(0).getType() instanceof ArrayType || node.child(0).getType()==PrimitiveType.STRING;
+		this.whileLoopNun--;
+		
+		leaveScope(node); 
 	}
 	
 	public void visit(BreakStatementNode node) {
@@ -626,12 +723,30 @@ class SemanticAnalysisVisitor extends ParseNodeVisitor.Default {
 	// IdentifierNodes, with helper methods
 	@Override
 	public void visit(IdentifierNode node) {
-		if(!isBeingDeclared(node) && !(node.getParent() instanceof ParameterNode)) {		
+		if(!isBeingDeclared(node) && !(node.getParent() instanceof ParameterNode)) {	
+			if(node.getParent() instanceof ForElemStatementNode && node == node.getParent().child(1)) {
+				if(node.getParent().child(0).getType() == PrimitiveType.STRING) {
+					node.setType(PrimitiveType.CHAR);
+					node.setConOrVar(LextantToken.fakeToken("const", Keyword.CONST));
+					node.setStatic(false);
+					
+					SemanticAnalysisVisitor.addBinding(node, PrimitiveType.CHAR);
+				}
+				else {
+					node.setType(((ArrayType)node.getParent().child(0).getType()).getSubType());
+					node.setConOrVar(LextantToken.fakeToken("const", Keyword.CONST));
+					node.setStatic(false);
+					
+					SemanticAnalysisVisitor.addBinding(node, ((ArrayType)node.getParent().child(0).getType()).getSubType());
+				}
+			}
+			else {
 			Binding binding = node.findVariableBinding();
 			
 			node.setType(binding.getType());
 			node.setConOrVar(binding.getConOrVar());
 			node.setBinding(binding);
+			}
 		}
 		// else parent DeclarationNode does the processing.
 	}

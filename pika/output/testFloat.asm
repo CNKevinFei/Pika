@@ -428,11 +428,73 @@
         Label        $$main                    
         PushD        $global-memory-block      
         PushI        0                         
+        Add                                    %% test
+        PushPC                                 
+        PushI        3                         
+        Add                                    
+        Jump         -function-1-skip          
+        PushD        $stack-pointer            
+        LoadI                                  
+        PushI        -4                        
+        Add                                    
+        Exchange                               
+        StoreI                                 
+        PushD        $stack-pointer            
+        LoadI                                  
+        PushI        -8                        
+        Add                                    
+        PushD        $frame-stack-pointer      
+        LoadI                                  
+        StoreI                                 
+        PushD        $frame-stack-pointer      
+        PushD        $stack-pointer            
+        LoadI                                  
+        StoreI                                 
+        PushD        $stack-pointer            
+        PushD        $frame-stack-pointer      
+        LoadI                                  
+        PushI        -8                        
+        Add                                    
+        StoreI                                 
+        PushD        $frame-stack-pointer      
+        LoadI                                  
+        PushI        1                         
+        Add                                    %% a
+        LoadI                                  
+        PushD        $frame-stack-pointer      
+        LoadI                                  
+        PushI        0                         
+        Add                                    %% b
+        LoadC                                  
+        Exchange                               
+        Call         -mem-string-char          
+        PushD        $stack-pointer            
+        PushD        $frame-stack-pointer      
+        LoadI                                  
+        StoreI                                 
+        PushD        $frame-stack-pointer      
+        PushD        $stack-pointer            
+        LoadI                                  
+        PushI        -8                        
+        Add                                    
+        LoadI                                  
+        StoreI                                 
+        PushD        $stack-pointer            
+        LoadI                                  
+        PushI        -4                        
+        Add                                    
+        LoadI                                  
+        Return                                 
+        Jump         $$function-without-return 
+        Label        -function-1-skip          
+        StoreI                                 
+        PushD        $global-memory-block      
+        PushI        4                         
         Add                                    %% str
-        PushI        18                        
+        PushI        14                        
         Call         -mem-manager-allocate     
         Duplicate                              
-        PushI        5                         
+        PushI        1                         
         Call         -mem-store-string-header  
         Duplicate                              
         PushI        0                         
@@ -446,52 +508,35 @@
         PushI        12                        
         Add                                    
         Add                                    
+        PushI        0                         
+        StoreC                                 
         PushI        101                       
-        StoreC                                 
-        Duplicate                              
-        PushI        2                         
-        PushI        12                        
-        Add                                    
-        Add                                    
         PushI        108                       
-        StoreC                                 
-        Duplicate                              
-        PushI        3                         
-        PushI        12                        
-        Add                                    
-        Add                                    
         PushI        108                       
-        StoreC                                 
-        Duplicate                              
-        PushI        4                         
-        PushI        12                        
-        Add                                    
-        Add                                    
         PushI        111                       
-        StoreC                                 
-        Duplicate                              
-        PushI        5                         
-        PushI        12                        
+        PushI        16                        
+        PushI        4                         
         Add                                    
-        Add                                    
+        Call         -mem-manager-allocate     
+        PushI        1                         
+        PushI        4                         
         PushI        0                         
-        StoreC                                 
+        Call         -mem-store-array-header   
+        PushI        1                         
+        Call         -mem-store-array-one-byte 
+        PushD        $global-memory-block      
+        PushI        0                         
+        Add                                    %% test
+        LoadI                                  
+        PushI        4                         
+        PushI        0                         
+        PushI        0                         
+        Call         -mem-array-fold-three     
         StoreI                                 
         PushD        $global-memory-block      
         PushI        4                         
-        Add                                    %% a
-        PushI        33                        
-        PushD        $global-memory-block      
-        PushI        0                         
         Add                                    %% str
         LoadI                                  
-        Call         -mem-char-string          
-        StoreI                                 
-        PushD        $global-memory-block      
-        PushI        0                         
-        Add                                    %% str
-        LoadI                                  
-        Call         -mem-string-reverse       
         PushI        12                        
         Add                                    
         PushD        $print-format-string      
@@ -1950,6 +1995,1969 @@
         PushD        $mem-array-index-return-address 
         LoadI                                  
         Return                                 
+        Label        -mem-array-reverse        
+        DLabel       $mem-array-reverse-return-address 
+        DataZ        4                         
+        DLabel       $mem-array-reverse-address 
+        DataZ        4                         
+        DLabel       $mem-array-reverse-new-address 
+        DataZ        4                         
+        DLabel       $mem-array-reverse-length 
+        DataZ        4                         
+        DLabel       $mem-array-reverse-subsize 
+        DataZ        4                         
+        DLabel       $mem-array-reverse-flag   
+        DataZ        4                         
+        DLabel       $mem-array-reverse-ite    
+        DataZ        4                         
+        PushD        $mem-array-reverse-return-address 
+        Exchange                               
+        StoreI                                 
+        PushD        $mem-array-reverse-flag   
+        Exchange                               
+        StoreI                                 
+        PushD        $mem-array-reverse-address 
+        Exchange                               
+        StoreI                                 
+        PushD        $mem-array-reverse-address 
+        LoadI                                  
+        PushI        12                        
+        Add                                    
+        LoadI                                  
+        PushD        $mem-array-reverse-length 
+        Exchange                               
+        StoreI                                 
+        PushD        $mem-array-reverse-address 
+        LoadI                                  
+        PushI        8                         
+        Add                                    
+        LoadI                                  
+        PushD        $mem-array-reverse-subsize 
+        Exchange                               
+        StoreI                                 
+        PushD        $mem-array-reverse-subsize 
+        LoadI                                  
+        PushD        $mem-array-reverse-length 
+        LoadI                                  
+        Multiply                               
+        PushI        16                        
+        Add                                    
+        Call         -mem-manager-allocate     
+        PushD        $mem-array-reverse-subsize 
+        LoadI                                  
+        PushD        $mem-array-reverse-length 
+        LoadI                                  
+        PushD        $mem-array-reverse-address 
+        LoadI                                  
+        PushI        4                         
+        Add                                    
+        LoadI                                  
+        Call         -mem-store-array-header   
+        Pop                                    
+        PushD        $mem-array-reverse-new-address 
+        Exchange                               
+        StoreI                                 
+        PushD        $mem-array-reverse-subsize 
+        LoadI                                  
+        PushI        1                         
+        Subtract                               
+        JumpFalse    $mem-array-reverse-one-byte 
+        PushD        $mem-array-reverse-subsize 
+        LoadI                                  
+        PushI        4                         
+        Subtract                               
+        JumpFalse    $mem-array-reverse-four-byte 
+        PushD        $mem-array-reverse-subsize 
+        LoadI                                  
+        PushD        $mem-array-reverse-flag   
+        LoadI                                  
+        Add                                    
+        PushI        8                         
+        Subtract                               
+        JumpFalse    $mem-array-reverse-eight-byte 
+        PushD        $mem-array-reverse-subsize 
+        LoadI                                  
+        PushD        $mem-array-reverse-flag   
+        LoadI                                  
+        Add                                    
+        PushI        9                         
+        Subtract                               
+        JumpFalse    $mem-array-reverse-rational 
+        Label        $mem-array-reverse-one-byte 
+        PushD        $mem-array-reverse-length 
+        LoadI                                  
+        PushI        1                         
+        Subtract                               
+        PushD        $mem-array-reverse-ite    
+        Exchange                               
+        StoreI                                 
+        Label        $mem-array-reverse-one-loop 
+        PushD        $mem-array-reverse-ite    
+        LoadI                                  
+        JumpNeg      $mem-array-reverse-one-end 
+        PushD        $mem-array-reverse-address 
+        LoadI                                  
+        PushD        $mem-array-reverse-ite    
+        LoadI                                  
+        PushI        16                        
+        Add                                    
+        Add                                    
+        LoadC                                  
+        PushD        $mem-array-reverse-ite    
+        LoadI                                  
+        PushI        1                         
+        Subtract                               
+        PushD        $mem-array-reverse-ite    
+        Exchange                               
+        StoreI                                 
+        Jump         $mem-array-reverse-one-loop 
+        Label        $mem-array-reverse-one-end 
+        PushD        $mem-array-reverse-new-address 
+        LoadI                                  
+        PushD        $mem-array-reverse-length 
+        LoadI                                  
+        PushI        1                         
+        Call         -mem-store-array-one-byte 
+        PushD        $mem-array-reverse-return-address 
+        LoadI                                  
+        Return                                 
+        Label        $mem-array-reverse-four-byte 
+        PushD        $mem-array-reverse-length 
+        LoadI                                  
+        PushI        1                         
+        Subtract                               
+        PushD        $mem-array-reverse-ite    
+        Exchange                               
+        StoreI                                 
+        Label        $mem-array-reverse-four-loop 
+        PushD        $mem-array-reverse-ite    
+        LoadI                                  
+        JumpNeg      $mem-array-reverse-four-end 
+        PushD        $mem-array-reverse-address 
+        LoadI                                  
+        PushD        $mem-array-reverse-ite    
+        LoadI                                  
+        PushI        4                         
+        Multiply                               
+        PushI        16                        
+        Add                                    
+        Add                                    
+        LoadI                                  
+        PushD        $mem-array-reverse-ite    
+        LoadI                                  
+        PushI        1                         
+        Subtract                               
+        PushD        $mem-array-reverse-ite    
+        Exchange                               
+        StoreI                                 
+        Jump         $mem-array-reverse-four-loop 
+        Label        $mem-array-reverse-four-end 
+        PushD        $mem-array-reverse-new-address 
+        LoadI                                  
+        PushD        $mem-array-reverse-length 
+        LoadI                                  
+        PushI        1                         
+        Call         -mem-store-array-four-byte 
+        PushD        $mem-array-reverse-return-address 
+        LoadI                                  
+        Return                                 
+        Label        $mem-array-reverse-eight-byte 
+        PushD        $mem-array-reverse-length 
+        LoadI                                  
+        PushI        1                         
+        Subtract                               
+        PushD        $mem-array-reverse-ite    
+        Exchange                               
+        StoreI                                 
+        Label        $mem-array-reverse-eight-loop 
+        PushD        $mem-array-reverse-ite    
+        LoadI                                  
+        JumpNeg      $mem-array-reverse-eight-end 
+        PushD        $mem-array-reverse-address 
+        LoadI                                  
+        PushD        $mem-array-reverse-ite    
+        LoadI                                  
+        PushI        8                         
+        Multiply                               
+        PushI        16                        
+        Add                                    
+        Add                                    
+        LoadF                                  
+        PushD        $mem-array-reverse-ite    
+        LoadI                                  
+        PushI        1                         
+        Subtract                               
+        PushD        $mem-array-reverse-ite    
+        Exchange                               
+        StoreI                                 
+        Jump         $mem-array-reverse-eight-loop 
+        Label        $mem-array-reverse-eight-end 
+        PushD        $mem-array-reverse-new-address 
+        LoadI                                  
+        PushD        $mem-array-reverse-length 
+        LoadI                                  
+        PushI        1                         
+        Call         -mem-store-array-eight-byte 
+        PushD        $mem-array-reverse-return-address 
+        LoadI                                  
+        Return                                 
+        Label        $mem-array-reverse-rational 
+        PushD        $mem-array-reverse-length 
+        LoadI                                  
+        PushI        1                         
+        Subtract                               
+        PushD        $mem-array-reverse-ite    
+        Exchange                               
+        StoreI                                 
+        Label        $mem-array-reverse-rational-loop 
+        PushD        $mem-array-reverse-ite    
+        LoadI                                  
+        JumpNeg      $mem-array-reverse-rational-end 
+        PushD        $mem-array-reverse-address 
+        LoadI                                  
+        PushD        $mem-array-reverse-ite    
+        LoadI                                  
+        PushI        8                         
+        Multiply                               
+        PushI        16                        
+        Add                                    
+        Add                                    
+        Duplicate                              
+        LoadI                                  
+        Exchange                               
+        PushI        4                         
+        Add                                    
+        LoadI                                  
+        PushD        $mem-array-reverse-ite    
+        LoadI                                  
+        PushI        1                         
+        Subtract                               
+        PushD        $mem-array-reverse-ite    
+        Exchange                               
+        StoreI                                 
+        Jump         $mem-array-reverse-rational-loop 
+        Label        $mem-array-reverse-rational-end 
+        PushD        $mem-array-reverse-new-address 
+        LoadI                                  
+        PushD        $mem-array-reverse-length 
+        LoadI                                  
+        PushI        2                         
+        Multiply                               
+        PushI        1                         
+        Call         -mem-store-array-four-byte 
+        PushD        $mem-array-reverse-return-address 
+        LoadI                                  
+        Return                                 
+        Label        -mem-array-map            
+        DLabel       $mem-array-map-return-address 
+        DataZ        4                         
+        DLabel       $mem-array-map-array-address 
+        DataZ        4                         
+        DLabel       $mem-array-map-new-address 
+        DataZ        4                         
+        DLabel       $mem-array-map-lamb       
+        DataZ        4                         
+        DLabel       $mem-array-map-flag1      
+        DataZ        4                         
+        DLabel       $mem-array-map-flag2      
+        DataZ        4                         
+        DLabel       $mem-array-map-ite        
+        DataZ        4                         
+        DLabel       $mem-array-map-length     
+        DataZ        4                         
+        DLabel       $mem-array-map-size       
+        DataZ        4                         
+        DLabel       $mem-array-map-new-size   
+        DataZ        4                         
+        DLabel       $mem-array-map-a          
+        DataZ        4                         
+        PushD        $mem-array-map-return-address 
+        Exchange                               
+        StoreI                                 
+        PushD        $mem-array-map-flag2      
+        Exchange                               
+        StoreI                                 
+        PushD        $mem-array-map-flag1      
+        Exchange                               
+        StoreI                                 
+        PushD        $mem-array-map-lamb       
+        Exchange                               
+        StoreI                                 
+        PushD        $mem-array-map-new-address 
+        Exchange                               
+        StoreI                                 
+        PushD        $mem-array-map-array-address 
+        Exchange                               
+        StoreI                                 
+        PushI        0                         
+        PushD        $mem-array-map-ite        
+        Exchange                               
+        StoreI                                 
+        PushD        $mem-array-map-array-address 
+        LoadI                                  
+        PushI        8                         
+        Add                                    
+        LoadI                                  
+        PushD        $mem-array-map-size       
+        Exchange                               
+        StoreI                                 
+        PushD        $mem-array-map-new-address 
+        LoadI                                  
+        PushI        8                         
+        Add                                    
+        LoadI                                  
+        PushD        $mem-array-map-new-size   
+        Exchange                               
+        StoreI                                 
+        PushD        $mem-array-map-array-address 
+        LoadI                                  
+        PushI        12                        
+        Add                                    
+        LoadI                                  
+        PushD        $mem-array-map-length     
+        Exchange                               
+        StoreI                                 
+        PushD        $mem-array-map-flag1      
+        LoadI                                  
+        PushI        1                         
+        Subtract                               
+        JumpFalse    $mem-array-map-rat1       
+        PushD        $mem-array-map-size       
+        LoadI                                  
+        PushI        1                         
+        Subtract                               
+        JumpFalse    $mem-array-map-one-byte1  
+        PushD        $mem-array-map-size       
+        LoadI                                  
+        PushI        4                         
+        Subtract                               
+        JumpFalse    $mem-array-map-four-byte1 
+        PushD        $mem-array-map-size       
+        LoadI                                  
+        PushI        8                         
+        Subtract                               
+        JumpFalse    $mem-array-map-eight-byte1 
+        Label        $mem-array-map-rat1       
+        PushPC                                 
+        PushI        1                         
+        Subtract                               
+        PushD        $mem-array-map-ite        
+        LoadI                                  
+        PushD        $mem-array-map-length     
+        LoadI                                  
+        Subtract                               
+        JumpFalse    $mem-array-map-end        
+        PushD        $mem-array-map-array-address 
+        LoadI                                  
+        PushD        $mem-array-map-ite        
+        LoadI                                  
+        PushI        8                         
+        Multiply                               
+        PushI        16                        
+        Add                                    
+        Add                                    
+        Duplicate                              
+        LoadI                                  
+        Exchange                               
+        PushI        4                         
+        Add                                    
+        LoadI                                  
+        PushD        $stack-pointer            
+        PushD        $stack-pointer            
+        LoadI                                  
+        PushI        -8                        
+        Add                                    
+        StoreI                                 
+        PushD        $stack-pointer            
+        LoadI                                  
+        PushI        4                         
+        Add                                    
+        Exchange                               
+        StoreI                                 
+        PushD        $stack-pointer            
+        LoadI                                  
+        Exchange                               
+        StoreI                                 
+        PushD        $mem-array-map-return-address 
+        LoadI                                  
+        PushD        $mem-array-map-array-address 
+        LoadI                                  
+        PushD        $mem-array-map-new-address 
+        LoadI                                  
+        PushD        $mem-array-map-lamb       
+        LoadI                                  
+        PushD        $mem-array-map-flag1      
+        LoadI                                  
+        PushD        $mem-array-map-flag2      
+        LoadI                                  
+        PushD        $mem-array-map-ite        
+        LoadI                                  
+        PushD        $mem-array-map-length     
+        LoadI                                  
+        PushD        $mem-array-map-size       
+        LoadI                                  
+        PushD        $mem-array-map-new-size   
+        LoadI                                  
+        PushI        -1                        
+        PushD        $mem-array-map-lamb       
+        LoadI                                  
+        CallV                                  
+        Exchange                               
+        Duplicate                              
+        JumpNeg      $mem-array-map-normal-rat 
+        Exchange                               
+        PushD        $mem-array-map-a          
+        Exchange                               
+        StoreI                                 
+        Exchange                               
+        Label        $mem-array-map-normal-rat 
+        Pop                                    
+        Exchange                               
+        PushD        $mem-array-map-new-size   
+        Exchange                               
+        StoreI                                 
+        Exchange                               
+        PushD        $mem-array-map-size       
+        Exchange                               
+        StoreI                                 
+        Exchange                               
+        PushD        $mem-array-map-length     
+        Exchange                               
+        StoreI                                 
+        Exchange                               
+        PushD        $mem-array-map-ite        
+        Exchange                               
+        StoreI                                 
+        Exchange                               
+        PushD        $mem-array-map-flag2      
+        Exchange                               
+        StoreI                                 
+        Exchange                               
+        PushD        $mem-array-map-flag1      
+        Exchange                               
+        StoreI                                 
+        Exchange                               
+        PushD        $mem-array-map-lamb       
+        Exchange                               
+        StoreI                                 
+        Exchange                               
+        PushD        $mem-array-map-new-address 
+        Exchange                               
+        StoreI                                 
+        Exchange                               
+        PushD        $mem-array-map-array-address 
+        Exchange                               
+        StoreI                                 
+        Exchange                               
+        PushD        $mem-array-map-return-address 
+        Exchange                               
+        StoreI                                 
+        PushD        $stack-pointer            
+        PushD        $stack-pointer            
+        LoadI                                  
+        PushI        8                         
+        Add                                    
+        StoreI                                 
+        PushD        $mem-array-map-flag2      
+        LoadI                                  
+        JumpTrue     $mem-array-map-rat2       
+        PushD        $mem-array-map-new-size   
+        LoadI                                  
+        PushI        1                         
+        Subtract                               
+        JumpFalse    $mem-array-map-one-byte2  
+        PushD        $mem-array-map-new-size   
+        LoadI                                  
+        PushI        4                         
+        Subtract                               
+        JumpFalse    $mem-array-map-four-byte2 
+        PushD        $mem-array-map-new-size   
+        LoadI                                  
+        PushI        8                         
+        Subtract                               
+        JumpFalse    $mem-array-map-eight-byte2 
+        Label        $mem-array-map-one-byte1  
+        PushPC                                 
+        PushI        1                         
+        Subtract                               
+        PushD        $mem-array-map-ite        
+        LoadI                                  
+        PushD        $mem-array-map-length     
+        LoadI                                  
+        Subtract                               
+        JumpFalse    $mem-array-map-end        
+        PushD        $mem-array-map-array-address 
+        LoadI                                  
+        PushD        $mem-array-map-ite        
+        LoadI                                  
+        PushI        1                         
+        Multiply                               
+        PushI        16                        
+        Add                                    
+        Add                                    
+        LoadC                                  
+        PushD        $stack-pointer            
+        PushD        $stack-pointer            
+        LoadI                                  
+        PushI        -1                        
+        Add                                    
+        StoreI                                 
+        PushD        $stack-pointer            
+        LoadI                                  
+        Exchange                               
+        StoreC                                 
+        PushD        $mem-array-map-return-address 
+        LoadI                                  
+        PushD        $mem-array-map-array-address 
+        LoadI                                  
+        PushD        $mem-array-map-new-address 
+        LoadI                                  
+        PushD        $mem-array-map-lamb       
+        LoadI                                  
+        PushD        $mem-array-map-flag1      
+        LoadI                                  
+        PushD        $mem-array-map-flag2      
+        LoadI                                  
+        PushD        $mem-array-map-ite        
+        LoadI                                  
+        PushD        $mem-array-map-length     
+        LoadI                                  
+        PushD        $mem-array-map-size       
+        LoadI                                  
+        PushD        $mem-array-map-new-size   
+        LoadI                                  
+        PushI        -1                        
+        PushD        $mem-array-map-lamb       
+        LoadI                                  
+        CallV                                  
+        Exchange                               
+        Duplicate                              
+        JumpNeg      $mem-array-map-normal-one 
+        Exchange                               
+        PushD        $mem-array-map-a          
+        Exchange                               
+        StoreI                                 
+        Exchange                               
+        Label        $mem-array-map-normal-one 
+        Pop                                    
+        Exchange                               
+        PushD        $mem-array-map-new-size   
+        Exchange                               
+        StoreI                                 
+        Exchange                               
+        PushD        $mem-array-map-size       
+        Exchange                               
+        StoreI                                 
+        Exchange                               
+        PushD        $mem-array-map-length     
+        Exchange                               
+        StoreI                                 
+        Exchange                               
+        PushD        $mem-array-map-ite        
+        Exchange                               
+        StoreI                                 
+        Exchange                               
+        PushD        $mem-array-map-flag2      
+        Exchange                               
+        StoreI                                 
+        Exchange                               
+        PushD        $mem-array-map-flag1      
+        Exchange                               
+        StoreI                                 
+        Exchange                               
+        PushD        $mem-array-map-lamb       
+        Exchange                               
+        StoreI                                 
+        Exchange                               
+        PushD        $mem-array-map-new-address 
+        Exchange                               
+        StoreI                                 
+        Exchange                               
+        PushD        $mem-array-map-array-address 
+        Exchange                               
+        StoreI                                 
+        Exchange                               
+        PushD        $mem-array-map-return-address 
+        Exchange                               
+        StoreI                                 
+        PushD        $stack-pointer            
+        PushD        $stack-pointer            
+        LoadI                                  
+        PushI        1                         
+        Add                                    
+        StoreI                                 
+        PushD        $mem-array-map-flag2      
+        LoadI                                  
+        JumpTrue     $mem-array-map-rat2       
+        PushD        $mem-array-map-new-size   
+        LoadI                                  
+        PushI        1                         
+        Subtract                               
+        JumpFalse    $mem-array-map-one-byte2  
+        PushD        $mem-array-map-new-size   
+        LoadI                                  
+        PushI        4                         
+        Subtract                               
+        JumpFalse    $mem-array-map-four-byte2 
+        PushD        $mem-array-map-new-size   
+        LoadI                                  
+        PushI        8                         
+        Subtract                               
+        JumpFalse    $mem-array-map-eight-byte2 
+        Label        $mem-array-map-four-byte1 
+        PushPC                                 
+        PushI        1                         
+        Subtract                               
+        PushD        $mem-array-map-ite        
+        LoadI                                  
+        PushD        $mem-array-map-length     
+        LoadI                                  
+        Subtract                               
+        JumpFalse    $mem-array-map-end        
+        PushD        $mem-array-map-array-address 
+        LoadI                                  
+        PushD        $mem-array-map-ite        
+        LoadI                                  
+        PushI        4                         
+        Multiply                               
+        PushI        16                        
+        Add                                    
+        Add                                    
+        LoadI                                  
+        PushD        $stack-pointer            
+        PushD        $stack-pointer            
+        LoadI                                  
+        PushI        -4                        
+        Add                                    
+        StoreI                                 
+        PushD        $stack-pointer            
+        LoadI                                  
+        Exchange                               
+        StoreI                                 
+        PushD        $mem-array-map-return-address 
+        LoadI                                  
+        PushD        $mem-array-map-array-address 
+        LoadI                                  
+        PushD        $mem-array-map-new-address 
+        LoadI                                  
+        PushD        $mem-array-map-lamb       
+        LoadI                                  
+        PushD        $mem-array-map-flag1      
+        LoadI                                  
+        PushD        $mem-array-map-flag2      
+        LoadI                                  
+        PushD        $mem-array-map-ite        
+        LoadI                                  
+        PushD        $mem-array-map-length     
+        LoadI                                  
+        PushD        $mem-array-map-size       
+        LoadI                                  
+        PushD        $mem-array-map-new-size   
+        LoadI                                  
+        PushI        -1                        
+        PushD        $mem-array-map-lamb       
+        LoadI                                  
+        CallV                                  
+        Exchange                               
+        Duplicate                              
+        JumpNeg      $mem-array-map-normal-four 
+        Exchange                               
+        PushD        $mem-array-map-a          
+        Exchange                               
+        StoreI                                 
+        Exchange                               
+        Label        $mem-array-map-normal-four 
+        Pop                                    
+        Exchange                               
+        PushD        $mem-array-map-new-size   
+        Exchange                               
+        StoreI                                 
+        Exchange                               
+        PushD        $mem-array-map-size       
+        Exchange                               
+        StoreI                                 
+        Exchange                               
+        PushD        $mem-array-map-length     
+        Exchange                               
+        StoreI                                 
+        Exchange                               
+        PushD        $mem-array-map-ite        
+        Exchange                               
+        StoreI                                 
+        Exchange                               
+        PushD        $mem-array-map-flag2      
+        Exchange                               
+        StoreI                                 
+        Exchange                               
+        PushD        $mem-array-map-flag1      
+        Exchange                               
+        StoreI                                 
+        Exchange                               
+        PushD        $mem-array-map-lamb       
+        Exchange                               
+        StoreI                                 
+        Exchange                               
+        PushD        $mem-array-map-new-address 
+        Exchange                               
+        StoreI                                 
+        Exchange                               
+        PushD        $mem-array-map-array-address 
+        Exchange                               
+        StoreI                                 
+        Exchange                               
+        PushD        $mem-array-map-return-address 
+        Exchange                               
+        StoreI                                 
+        PushD        $stack-pointer            
+        PushD        $stack-pointer            
+        LoadI                                  
+        PushI        4                         
+        Add                                    
+        StoreI                                 
+        PushD        $mem-array-map-flag2      
+        LoadI                                  
+        JumpTrue     $mem-array-map-rat2       
+        PushD        $mem-array-map-new-size   
+        LoadI                                  
+        PushI        1                         
+        Subtract                               
+        JumpFalse    $mem-array-map-one-byte2  
+        PushD        $mem-array-map-new-size   
+        LoadI                                  
+        PushI        4                         
+        Subtract                               
+        JumpFalse    $mem-array-map-four-byte2 
+        PushD        $mem-array-map-new-size   
+        LoadI                                  
+        PushI        8                         
+        Subtract                               
+        JumpFalse    $mem-array-map-eight-byte2 
+        Label        $mem-array-map-eight-byte1 
+        PushPC                                 
+        PushI        1                         
+        Subtract                               
+        PushD        $mem-array-map-ite        
+        LoadI                                  
+        PushD        $mem-array-map-length     
+        LoadI                                  
+        Subtract                               
+        JumpFalse    $mem-array-map-end        
+        PushD        $mem-array-map-array-address 
+        LoadI                                  
+        PushD        $mem-array-map-ite        
+        LoadI                                  
+        PushI        8                         
+        Multiply                               
+        PushI        16                        
+        Add                                    
+        Add                                    
+        LoadF                                  
+        PushD        $stack-pointer            
+        PushD        $stack-pointer            
+        LoadI                                  
+        PushI        -8                        
+        Add                                    
+        StoreI                                 
+        PushD        $stack-pointer            
+        LoadI                                  
+        Exchange                               
+        StoreF                                 
+        PushD        $mem-array-map-return-address 
+        LoadI                                  
+        PushD        $mem-array-map-array-address 
+        LoadI                                  
+        PushD        $mem-array-map-new-address 
+        LoadI                                  
+        PushD        $mem-array-map-lamb       
+        LoadI                                  
+        PushD        $mem-array-map-flag1      
+        LoadI                                  
+        PushD        $mem-array-map-flag2      
+        LoadI                                  
+        PushD        $mem-array-map-ite        
+        LoadI                                  
+        PushD        $mem-array-map-length     
+        LoadI                                  
+        PushD        $mem-array-map-size       
+        LoadI                                  
+        PushD        $mem-array-map-new-size   
+        LoadI                                  
+        PushI        -1                        
+        PushD        $mem-array-map-lamb       
+        LoadI                                  
+        CallV                                  
+        Exchange                               
+        Duplicate                              
+        JumpNeg      $mem-array-map-normal-eight 
+        Exchange                               
+        PushD        $mem-array-map-a          
+        Exchange                               
+        StoreI                                 
+        Exchange                               
+        Label        $mem-array-map-normal-eight 
+        Pop                                    
+        Exchange                               
+        PushD        $mem-array-map-new-size   
+        Exchange                               
+        StoreI                                 
+        Exchange                               
+        PushD        $mem-array-map-size       
+        Exchange                               
+        StoreI                                 
+        Exchange                               
+        PushD        $mem-array-map-length     
+        Exchange                               
+        StoreI                                 
+        Exchange                               
+        PushD        $mem-array-map-ite        
+        Exchange                               
+        StoreI                                 
+        Exchange                               
+        PushD        $mem-array-map-flag2      
+        Exchange                               
+        StoreI                                 
+        Exchange                               
+        PushD        $mem-array-map-flag1      
+        Exchange                               
+        StoreI                                 
+        Exchange                               
+        PushD        $mem-array-map-lamb       
+        Exchange                               
+        StoreI                                 
+        Exchange                               
+        PushD        $mem-array-map-new-address 
+        Exchange                               
+        StoreI                                 
+        Exchange                               
+        PushD        $mem-array-map-array-address 
+        Exchange                               
+        StoreI                                 
+        Exchange                               
+        PushD        $mem-array-map-return-address 
+        Exchange                               
+        StoreI                                 
+        PushD        $stack-pointer            
+        PushD        $stack-pointer            
+        LoadI                                  
+        PushI        8                         
+        Add                                    
+        StoreI                                 
+        PushD        $mem-array-map-flag2      
+        LoadI                                  
+        JumpTrue     $mem-array-map-rat2       
+        PushD        $mem-array-map-new-size   
+        LoadI                                  
+        PushI        1                         
+        Subtract                               
+        JumpFalse    $mem-array-map-one-byte2  
+        PushD        $mem-array-map-new-size   
+        LoadI                                  
+        PushI        4                         
+        Subtract                               
+        JumpFalse    $mem-array-map-four-byte2 
+        PushD        $mem-array-map-new-size   
+        LoadI                                  
+        PushI        8                         
+        Subtract                               
+        JumpFalse    $mem-array-map-eight-byte2 
+        Label        $mem-array-map-rat2       
+        PushD        $mem-array-map-new-address 
+        LoadI                                  
+        PushD        $mem-array-map-ite        
+        LoadI                                  
+        PushI        8                         
+        Multiply                               
+        PushI        16                        
+        Add                                    
+        Add                                    
+        PushI        4                         
+        Add                                    
+        PushD        $mem-array-map-a          
+        LoadI                                  
+        StoreI                                 
+        PushD        $mem-array-map-new-address 
+        LoadI                                  
+        PushD        $mem-array-map-ite        
+        LoadI                                  
+        PushI        8                         
+        Multiply                               
+        PushI        16                        
+        Add                                    
+        Add                                    
+        Exchange                               
+        StoreI                                 
+        PushD        $mem-array-map-ite        
+        LoadI                                  
+        PushI        1                         
+        Add                                    
+        PushD        $mem-array-map-ite        
+        Exchange                               
+        StoreI                                 
+        PopPC                                  
+        Label        $mem-array-map-one-byte2  
+        PushD        $mem-array-map-new-address 
+        LoadI                                  
+        PushD        $mem-array-map-ite        
+        LoadI                                  
+        PushI        16                        
+        Add                                    
+        Add                                    
+        Exchange                               
+        StoreC                                 
+        PushD        $mem-array-map-ite        
+        LoadI                                  
+        PushI        1                         
+        Add                                    
+        PushD        $mem-array-map-ite        
+        Exchange                               
+        StoreI                                 
+        PopPC                                  
+        Label        $mem-array-map-four-byte2 
+        PushD        $mem-array-map-new-address 
+        LoadI                                  
+        PushD        $mem-array-map-ite        
+        LoadI                                  
+        PushI        4                         
+        Multiply                               
+        PushI        16                        
+        Add                                    
+        Add                                    
+        Exchange                               
+        StoreI                                 
+        PushD        $mem-array-map-ite        
+        LoadI                                  
+        PushI        1                         
+        Add                                    
+        PushD        $mem-array-map-ite        
+        Exchange                               
+        StoreI                                 
+        PopPC                                  
+        Label        $mem-array-map-eight-byte2 
+        PushD        $mem-array-map-new-address 
+        LoadI                                  
+        PushD        $mem-array-map-ite        
+        LoadI                                  
+        PushI        8                         
+        Multiply                               
+        PushI        16                        
+        Add                                    
+        Add                                    
+        Exchange                               
+        StoreF                                 
+        PushD        $mem-array-map-ite        
+        LoadI                                  
+        PushI        1                         
+        Add                                    
+        PushD        $mem-array-map-ite        
+        Exchange                               
+        StoreI                                 
+        PopPC                                  
+        Label        $mem-array-map-end        
+        Pop                                    
+        PushD        $mem-array-map-new-address 
+        LoadI                                  
+        PushD        $mem-array-map-return-address 
+        LoadI                                  
+        Return                                 
+        Label        -mem-array-reduce         
+        DLabel       $mem-array-reduce-return-address 
+        DataZ        4                         
+        DLabel       $mem-array-reduce-address 
+        DataZ        4                         
+        DLabel       $mem-array-reduce-lamb    
+        DataZ        4                         
+        DLabel       $mem-array-reduce-enflag  
+        DataZ        4                         
+        DLabel       $mem-array-reduce-ite     
+        DataZ        4                         
+        DLabel       $mem-array-reduce-length  
+        DataZ        4                         
+        DLabel       $mem-array-reduce-size    
+        DataZ        4                         
+        DLabel       $mem-array-reduce-true    
+        DataZ        4                         
+        PushD        $mem-array-reduce-return-address 
+        Exchange                               
+        StoreI                                 
+        PushD        $mem-array-reduce-enflag  
+        Exchange                               
+        StoreI                                 
+        PushD        $mem-array-reduce-lamb    
+        Exchange                               
+        StoreI                                 
+        PushD        $mem-array-reduce-address 
+        Exchange                               
+        StoreI                                 
+        PushI        0                         
+        PushD        $mem-array-reduce-ite     
+        Exchange                               
+        StoreI                                 
+        PushI        0                         
+        PushD        $mem-array-reduce-true    
+        Exchange                               
+        StoreI                                 
+        PushD        $mem-array-reduce-address 
+        LoadI                                  
+        PushI        8                         
+        Add                                    
+        LoadI                                  
+        PushD        $mem-array-reduce-size    
+        Exchange                               
+        StoreI                                 
+        PushD        $mem-array-reduce-address 
+        LoadI                                  
+        PushI        12                        
+        Add                                    
+        LoadI                                  
+        PushD        $mem-array-reduce-length  
+        Exchange                               
+        StoreI                                 
+        PushD        $mem-array-reduce-enflag  
+        LoadI                                  
+        JumpTrue     $mem-array-reduce-rat     
+        PushD        $mem-array-reduce-size    
+        LoadI                                  
+        PushI        1                         
+        Subtract                               
+        JumpFalse    $mem-array-reduce-one-byte 
+        PushD        $mem-array-reduce-size    
+        LoadI                                  
+        PushI        4                         
+        Subtract                               
+        JumpFalse    $mem-array-reduce-four-byte 
+        PushD        $mem-array-reduce-size    
+        LoadI                                  
+        PushI        8                         
+        Subtract                               
+        JumpFalse    $mem-array-reduce-eight-byte 
+        Label        $mem-array-reduce-rat     
+        PushD        $mem-array-reduce-ite     
+        LoadI                                  
+        PushD        $mem-array-reduce-length  
+        LoadI                                  
+        Subtract                               
+        JumpFalse    $mem-array-reduce-end     
+        PushD        $mem-array-reduce-address 
+        LoadI                                  
+        PushD        $mem-array-reduce-ite     
+        LoadI                                  
+        PushI        8                         
+        Multiply                               
+        PushI        16                        
+        Add                                    
+        Add                                    
+        Duplicate                              
+        LoadI                                  
+        Exchange                               
+        PushI        4                         
+        Add                                    
+        LoadI                                  
+        PushD        $stack-pointer            
+        PushD        $stack-pointer            
+        LoadI                                  
+        PushI        -8                        
+        Add                                    
+        StoreI                                 
+        PushD        $stack-pointer            
+        LoadI                                  
+        PushI        4                         
+        Add                                    
+        Exchange                               
+        StoreI                                 
+        PushD        $stack-pointer            
+        LoadI                                  
+        Exchange                               
+        StoreI                                 
+        PushD        $mem-array-reduce-return-address 
+        LoadI                                  
+        PushD        $mem-array-reduce-address 
+        LoadI                                  
+        PushD        $mem-array-reduce-lamb    
+        LoadI                                  
+        PushD        $mem-array-reduce-enflag  
+        LoadI                                  
+        PushD        $mem-array-reduce-ite     
+        LoadI                                  
+        PushD        $mem-array-reduce-length  
+        LoadI                                  
+        PushD        $mem-array-reduce-size    
+        LoadI                                  
+        PushD        $mem-array-reduce-true    
+        LoadI                                  
+        PushD        $mem-array-reduce-lamb    
+        LoadI                                  
+        CallV                                  
+        Exchange                               
+        PushD        $mem-array-reduce-true    
+        Exchange                               
+        StoreI                                 
+        Exchange                               
+        PushD        $mem-array-reduce-size    
+        Exchange                               
+        StoreI                                 
+        Exchange                               
+        PushD        $mem-array-reduce-length  
+        Exchange                               
+        StoreI                                 
+        Exchange                               
+        PushD        $mem-array-reduce-ite     
+        Exchange                               
+        StoreI                                 
+        Exchange                               
+        PushD        $mem-array-reduce-enflag  
+        Exchange                               
+        StoreI                                 
+        Exchange                               
+        PushD        $mem-array-reduce-lamb    
+        Exchange                               
+        StoreI                                 
+        Exchange                               
+        PushD        $mem-array-reduce-address 
+        Exchange                               
+        StoreI                                 
+        Exchange                               
+        PushD        $mem-array-reduce-return-address 
+        Exchange                               
+        StoreI                                 
+        PushD        $stack-pointer            
+        PushD        $stack-pointer            
+        LoadI                                  
+        PushI        8                         
+        Add                                    
+        StoreI                                 
+        JumpFalse    $mem-array-reduce-rat-delete 
+        PushD        $mem-array-reduce-address 
+        LoadI                                  
+        PushD        $mem-array-reduce-ite     
+        LoadI                                  
+        PushI        8                         
+        Multiply                               
+        PushI        16                        
+        Add                                    
+        Add                                    
+        Duplicate                              
+        LoadI                                  
+        Exchange                               
+        PushI        4                         
+        Add                                    
+        LoadI                                  
+        PushD        $mem-array-reduce-address 
+        LoadI                                  
+        PushD        $mem-array-reduce-true    
+        LoadI                                  
+        PushI        8                         
+        Multiply                               
+        PushI        16                        
+        Add                                    
+        Add                                    
+        PushI        4                         
+        Add                                    
+        Exchange                               
+        StoreI                                 
+        PushD        $mem-array-reduce-address 
+        LoadI                                  
+        PushD        $mem-array-reduce-true    
+        LoadI                                  
+        PushI        8                         
+        Multiply                               
+        PushI        16                        
+        Add                                    
+        Add                                    
+        Exchange                               
+        StoreI                                 
+        PushD        $mem-array-reduce-true    
+        LoadI                                  
+        PushI        1                         
+        Add                                    
+        PushD        $mem-array-reduce-true    
+        Exchange                               
+        StoreI                                 
+        Label        $mem-array-reduce-rat-delete 
+        PushD        $mem-array-reduce-ite     
+        LoadI                                  
+        PushI        1                         
+        Add                                    
+        PushD        $mem-array-reduce-ite     
+        Exchange                               
+        StoreI                                 
+        Jump         $mem-array-reduce-rat     
+        Label        $mem-array-reduce-one-byte 
+        PushD        $mem-array-reduce-ite     
+        LoadI                                  
+        PushD        $mem-array-reduce-length  
+        LoadI                                  
+        Subtract                               
+        JumpFalse    $mem-array-reduce-end     
+        PushD        $mem-array-reduce-address 
+        LoadI                                  
+        PushD        $mem-array-reduce-ite     
+        LoadI                                  
+        PushI        1                         
+        Multiply                               
+        PushI        16                        
+        Add                                    
+        Add                                    
+        LoadC                                  
+        PushD        $stack-pointer            
+        PushD        $stack-pointer            
+        LoadI                                  
+        PushI        -1                        
+        Add                                    
+        StoreI                                 
+        PushD        $stack-pointer            
+        LoadI                                  
+        Exchange                               
+        StoreC                                 
+        PushD        $mem-array-reduce-return-address 
+        LoadI                                  
+        PushD        $mem-array-reduce-address 
+        LoadI                                  
+        PushD        $mem-array-reduce-lamb    
+        LoadI                                  
+        PushD        $mem-array-reduce-enflag  
+        LoadI                                  
+        PushD        $mem-array-reduce-ite     
+        LoadI                                  
+        PushD        $mem-array-reduce-length  
+        LoadI                                  
+        PushD        $mem-array-reduce-size    
+        LoadI                                  
+        PushD        $mem-array-reduce-true    
+        LoadI                                  
+        PushD        $mem-array-reduce-lamb    
+        LoadI                                  
+        CallV                                  
+        Exchange                               
+        PushD        $mem-array-reduce-true    
+        Exchange                               
+        StoreI                                 
+        Exchange                               
+        PushD        $mem-array-reduce-size    
+        Exchange                               
+        StoreI                                 
+        Exchange                               
+        PushD        $mem-array-reduce-length  
+        Exchange                               
+        StoreI                                 
+        Exchange                               
+        PushD        $mem-array-reduce-ite     
+        Exchange                               
+        StoreI                                 
+        Exchange                               
+        PushD        $mem-array-reduce-enflag  
+        Exchange                               
+        StoreI                                 
+        Exchange                               
+        PushD        $mem-array-reduce-lamb    
+        Exchange                               
+        StoreI                                 
+        Exchange                               
+        PushD        $mem-array-reduce-address 
+        Exchange                               
+        StoreI                                 
+        Exchange                               
+        PushD        $mem-array-reduce-return-address 
+        Exchange                               
+        StoreI                                 
+        PushD        $stack-pointer            
+        PushD        $stack-pointer            
+        LoadI                                  
+        PushI        1                         
+        Add                                    
+        StoreI                                 
+        JumpFalse    $mem-array-reduce-one-byte-delete 
+        PushD        $mem-array-reduce-address 
+        LoadI                                  
+        PushD        $mem-array-reduce-ite     
+        LoadI                                  
+        PushI        1                         
+        Multiply                               
+        PushI        16                        
+        Add                                    
+        Add                                    
+        LoadC                                  
+        PushD        $mem-array-reduce-address 
+        LoadI                                  
+        PushD        $mem-array-reduce-true    
+        LoadI                                  
+        PushI        1                         
+        Multiply                               
+        PushI        16                        
+        Add                                    
+        Add                                    
+        Exchange                               
+        StoreC                                 
+        PushD        $mem-array-reduce-true    
+        LoadI                                  
+        PushI        1                         
+        Add                                    
+        PushD        $mem-array-reduce-true    
+        Exchange                               
+        StoreI                                 
+        Label        $mem-array-reduce-one-byte-delete 
+        PushD        $mem-array-reduce-ite     
+        LoadI                                  
+        PushI        1                         
+        Add                                    
+        PushD        $mem-array-reduce-ite     
+        Exchange                               
+        StoreI                                 
+        Jump         $mem-array-reduce-one-byte 
+        Label        $mem-array-reduce-four-byte 
+        PushD        $mem-array-reduce-ite     
+        LoadI                                  
+        PushD        $mem-array-reduce-length  
+        LoadI                                  
+        Subtract                               
+        JumpFalse    $mem-array-reduce-end     
+        PushD        $mem-array-reduce-address 
+        LoadI                                  
+        PushD        $mem-array-reduce-ite     
+        LoadI                                  
+        PushI        4                         
+        Multiply                               
+        PushI        16                        
+        Add                                    
+        Add                                    
+        LoadI                                  
+        PushD        $stack-pointer            
+        PushD        $stack-pointer            
+        LoadI                                  
+        PushI        -4                        
+        Add                                    
+        StoreI                                 
+        PushD        $stack-pointer            
+        LoadI                                  
+        Exchange                               
+        StoreI                                 
+        PushD        $mem-array-reduce-return-address 
+        LoadI                                  
+        PushD        $mem-array-reduce-address 
+        LoadI                                  
+        PushD        $mem-array-reduce-lamb    
+        LoadI                                  
+        PushD        $mem-array-reduce-enflag  
+        LoadI                                  
+        PushD        $mem-array-reduce-ite     
+        LoadI                                  
+        PushD        $mem-array-reduce-length  
+        LoadI                                  
+        PushD        $mem-array-reduce-size    
+        LoadI                                  
+        PushD        $mem-array-reduce-true    
+        LoadI                                  
+        PushD        $mem-array-reduce-lamb    
+        LoadI                                  
+        CallV                                  
+        Exchange                               
+        PushD        $mem-array-reduce-true    
+        Exchange                               
+        StoreI                                 
+        Exchange                               
+        PushD        $mem-array-reduce-size    
+        Exchange                               
+        StoreI                                 
+        Exchange                               
+        PushD        $mem-array-reduce-length  
+        Exchange                               
+        StoreI                                 
+        Exchange                               
+        PushD        $mem-array-reduce-ite     
+        Exchange                               
+        StoreI                                 
+        Exchange                               
+        PushD        $mem-array-reduce-enflag  
+        Exchange                               
+        StoreI                                 
+        Exchange                               
+        PushD        $mem-array-reduce-lamb    
+        Exchange                               
+        StoreI                                 
+        Exchange                               
+        PushD        $mem-array-reduce-address 
+        Exchange                               
+        StoreI                                 
+        Exchange                               
+        PushD        $mem-array-reduce-return-address 
+        Exchange                               
+        StoreI                                 
+        PushD        $stack-pointer            
+        PushD        $stack-pointer            
+        LoadI                                  
+        PushI        4                         
+        Add                                    
+        StoreI                                 
+        JumpFalse    $mem-array-reduce-four-byte-delete 
+        PushD        $mem-array-reduce-address 
+        LoadI                                  
+        PushD        $mem-array-reduce-ite     
+        LoadI                                  
+        PushI        4                         
+        Multiply                               
+        PushI        16                        
+        Add                                    
+        Add                                    
+        LoadI                                  
+        PushD        $mem-array-reduce-address 
+        LoadI                                  
+        PushD        $mem-array-reduce-true    
+        LoadI                                  
+        PushI        4                         
+        Multiply                               
+        PushI        16                        
+        Add                                    
+        Add                                    
+        Exchange                               
+        StoreI                                 
+        PushD        $mem-array-reduce-true    
+        LoadI                                  
+        PushI        1                         
+        Add                                    
+        PushD        $mem-array-reduce-true    
+        Exchange                               
+        StoreI                                 
+        Label        $mem-array-reduce-four-byte-delete 
+        PushD        $mem-array-reduce-ite     
+        LoadI                                  
+        PushI        1                         
+        Add                                    
+        PushD        $mem-array-reduce-ite     
+        Exchange                               
+        StoreI                                 
+        Jump         $mem-array-reduce-four-byte 
+        Label        $mem-array-reduce-eight-byte 
+        PushD        $mem-array-reduce-ite     
+        LoadI                                  
+        PushD        $mem-array-reduce-length  
+        LoadI                                  
+        Subtract                               
+        JumpFalse    $mem-array-reduce-end     
+        PushD        $mem-array-reduce-address 
+        LoadI                                  
+        PushD        $mem-array-reduce-ite     
+        LoadI                                  
+        PushI        8                         
+        Multiply                               
+        PushI        16                        
+        Add                                    
+        Add                                    
+        LoadF                                  
+        PushD        $stack-pointer            
+        PushD        $stack-pointer            
+        LoadI                                  
+        PushI        -8                        
+        Add                                    
+        StoreI                                 
+        PushD        $stack-pointer            
+        LoadI                                  
+        Exchange                               
+        StoreF                                 
+        PushD        $mem-array-reduce-return-address 
+        LoadI                                  
+        PushD        $mem-array-reduce-address 
+        LoadI                                  
+        PushD        $mem-array-reduce-lamb    
+        LoadI                                  
+        PushD        $mem-array-reduce-enflag  
+        LoadI                                  
+        PushD        $mem-array-reduce-ite     
+        LoadI                                  
+        PushD        $mem-array-reduce-length  
+        LoadI                                  
+        PushD        $mem-array-reduce-size    
+        LoadI                                  
+        PushD        $mem-array-reduce-true    
+        LoadI                                  
+        PushD        $mem-array-reduce-lamb    
+        LoadI                                  
+        CallV                                  
+        Exchange                               
+        PushD        $mem-array-reduce-true    
+        Exchange                               
+        StoreI                                 
+        Exchange                               
+        PushD        $mem-array-reduce-size    
+        Exchange                               
+        StoreI                                 
+        Exchange                               
+        PushD        $mem-array-reduce-length  
+        Exchange                               
+        StoreI                                 
+        Exchange                               
+        PushD        $mem-array-reduce-ite     
+        Exchange                               
+        StoreI                                 
+        Exchange                               
+        PushD        $mem-array-reduce-enflag  
+        Exchange                               
+        StoreI                                 
+        Exchange                               
+        PushD        $mem-array-reduce-lamb    
+        Exchange                               
+        StoreI                                 
+        Exchange                               
+        PushD        $mem-array-reduce-address 
+        Exchange                               
+        StoreI                                 
+        Exchange                               
+        PushD        $mem-array-reduce-return-address 
+        Exchange                               
+        StoreI                                 
+        PushD        $stack-pointer            
+        PushD        $stack-pointer            
+        LoadI                                  
+        PushI        8                         
+        Add                                    
+        StoreI                                 
+        JumpFalse    $mem-array-reduce-eight-byte-delete 
+        PushD        $mem-array-reduce-address 
+        LoadI                                  
+        PushD        $mem-array-reduce-ite     
+        LoadI                                  
+        PushI        8                         
+        Multiply                               
+        PushI        16                        
+        Add                                    
+        Add                                    
+        LoadF                                  
+        PushD        $mem-array-reduce-address 
+        LoadI                                  
+        PushD        $mem-array-reduce-true    
+        LoadI                                  
+        PushI        8                         
+        Multiply                               
+        PushI        16                        
+        Add                                    
+        Add                                    
+        Exchange                               
+        StoreF                                 
+        PushD        $mem-array-reduce-true    
+        LoadI                                  
+        PushI        1                         
+        Add                                    
+        PushD        $mem-array-reduce-true    
+        Exchange                               
+        StoreI                                 
+        Label        $mem-array-reduce-eight-byte-delete 
+        PushD        $mem-array-reduce-ite     
+        LoadI                                  
+        PushI        1                         
+        Add                                    
+        PushD        $mem-array-reduce-ite     
+        Exchange                               
+        StoreI                                 
+        Jump         $mem-array-reduce-eight-byte 
+        Label        $mem-array-reduce-end     
+        PushD        $mem-array-reduce-address 
+        LoadI                                  
+        PushI        12                        
+        Add                                    
+        PushD        $mem-array-reduce-true    
+        LoadI                                  
+        StoreI                                 
+        PushD        $mem-array-reduce-address 
+        LoadI                                  
+        PushD        $mem-array-reduce-return-address 
+        LoadI                                  
+        Return                                 
+        Label        -mem-array-fold-two       
+        DLabel       $mem-array-fold-two-return-address 
+        DataZ        4                         
+        DLabel       $mem-array-fold-two-address 
+        DataZ        4                         
+        DLabel       $mem-array-fold-two-lamb  
+        DataZ        4                         
+        DLabel       $mem-array-fold-two-flag  
+        DataZ        4                         
+        DLabel       $mem-array-fold-two-size  
+        DataZ        4                         
+        DLabel       $mem-array-fold-two-length 
+        DataZ        4                         
+        DLabel       $mem-array-fold-two-ite   
+        DataZ        4                         
+        DLabel       $mem-array-fold-two-tem   
+        DataZ        4                         
+        PushD        $mem-array-fold-two-return-address 
+        Exchange                               
+        StoreI                                 
+        PushD        $mem-array-fold-two-flag  
+        Exchange                               
+        StoreI                                 
+        PushD        $mem-array-fold-two-lamb  
+        Exchange                               
+        StoreI                                 
+        PushD        $mem-array-fold-two-address 
+        Exchange                               
+        StoreI                                 
+        PushI        1                         
+        PushD        $mem-array-fold-two-ite   
+        Exchange                               
+        StoreI                                 
+        PushD        $mem-array-fold-two-address 
+        LoadI                                  
+        PushI        8                         
+        Add                                    
+        LoadI                                  
+        PushD        $mem-array-fold-two-size  
+        Exchange                               
+        StoreI                                 
+        PushD        $mem-array-fold-two-address 
+        LoadI                                  
+        PushI        12                        
+        Add                                    
+        LoadI                                  
+        PushD        $mem-array-fold-two-length 
+        Exchange                               
+        StoreI                                 
+        PushD        $mem-array-fold-two-length 
+        LoadI                                  
+        JumpFalse    $$a-index-exceed          
+        PushD        $mem-array-fold-two-address 
+        LoadI                                  
+        PushI        16                        
+        Add                                    
+        PushD        $mem-array-fold-two-size  
+        LoadI                                  
+        PushD        $mem-array-fold-two-flag  
+        LoadI                                  
+        Call         -mem-load-data            
+        Label        $mem-array-fold-two-loop  
+        PushD        $mem-array-fold-two-ite   
+        LoadI                                  
+        PushD        $mem-array-fold-two-length 
+        LoadI                                  
+        Subtract                               
+        JumpFalse    $mem-array-fold-two-end   
+        PushD        $mem-array-fold-two-address 
+        LoadI                                  
+        PushI        16                        
+        PushD        $mem-array-fold-two-ite   
+        LoadI                                  
+        PushD        $mem-array-fold-two-size  
+        LoadI                                  
+        Multiply                               
+        Add                                    
+        Add                                    
+        PushD        $mem-array-fold-two-size  
+        LoadI                                  
+        PushD        $mem-array-fold-two-flag  
+        LoadI                                  
+        Call         -mem-load-data            
+        PushD        $stack-pointer            
+        PushD        $stack-pointer            
+        LoadI                                  
+        PushI        -2                        
+        PushD        $mem-array-fold-two-size  
+        LoadI                                  
+        Multiply                               
+        Add                                    
+        StoreI                                 
+        PushD        $stack-pointer            
+        LoadI                                  
+        PushD        $mem-array-fold-two-size  
+        LoadI                                  
+        PushD        $mem-array-fold-two-flag  
+        LoadI                                  
+        Call         -mem-store-data           
+        PushD        $stack-pointer            
+        LoadI                                  
+        PushD        $mem-array-fold-two-size  
+        LoadI                                  
+        Add                                    
+        PushD        $mem-array-fold-two-size  
+        LoadI                                  
+        PushD        $mem-array-fold-two-flag  
+        LoadI                                  
+        Call         -mem-store-data           
+        PushD        $mem-array-fold-two-return-address 
+        LoadI                                  
+        PushD        $mem-array-fold-two-address 
+        LoadI                                  
+        PushD        $mem-array-fold-two-lamb  
+        LoadI                                  
+        PushD        $mem-array-fold-two-flag  
+        LoadI                                  
+        PushD        $mem-array-fold-two-size  
+        LoadI                                  
+        PushD        $mem-array-fold-two-length 
+        LoadI                                  
+        PushD        $mem-array-fold-two-ite   
+        LoadI                                  
+        PushI        -1                        
+        PushD        $mem-array-fold-two-lamb  
+        LoadI                                  
+        CallV                                  
+        Exchange                               
+        Duplicate                              
+        JumpNeg      $mem-array-fold-two-normal 
+        Exchange                               
+        PushD        $mem-array-fold-two-tem   
+        Exchange                               
+        StoreI                                 
+        Exchange                               
+        Label        $mem-array-fold-two-normal 
+        Pop                                    
+        Exchange                               
+        PushD        $mem-array-fold-two-ite   
+        Exchange                               
+        StoreI                                 
+        Exchange                               
+        PushD        $mem-array-fold-two-length 
+        Exchange                               
+        StoreI                                 
+        Exchange                               
+        PushD        $mem-array-fold-two-size  
+        Exchange                               
+        StoreI                                 
+        Exchange                               
+        PushD        $mem-array-fold-two-flag  
+        Exchange                               
+        StoreI                                 
+        Exchange                               
+        PushD        $mem-array-fold-two-lamb  
+        Exchange                               
+        StoreI                                 
+        Exchange                               
+        PushD        $mem-array-fold-two-address 
+        Exchange                               
+        StoreI                                 
+        Exchange                               
+        PushD        $mem-array-fold-two-return-address 
+        Exchange                               
+        StoreI                                 
+        PushD        $stack-pointer            
+        PushD        $stack-pointer            
+        LoadI                                  
+        PushD        $mem-array-fold-two-size  
+        LoadI                                  
+        PushI        2                         
+        Multiply                               
+        Add                                    
+        StoreI                                 
+        PushD        $mem-array-fold-two-ite   
+        LoadI                                  
+        PushI        1                         
+        Add                                    
+        PushD        $mem-array-fold-two-ite   
+        Exchange                               
+        StoreI                                 
+        PushD        $mem-array-fold-two-flag  
+        LoadI                                  
+        JumpFalse    $mem-array-fold-two-loop  
+        PushD        $mem-array-fold-two-tem   
+        LoadI                                  
+        Jump         $mem-array-fold-two-loop  
+        Label        $mem-array-fold-two-end   
+        PushD        $mem-array-fold-two-return-address 
+        LoadI                                  
+        Return                                 
+        Label        -mem-array-fold-three     
+        DLabel       $mem-array-fold-three-return-address 
+        DataZ        4                         
+        DLabel       $mem-array-fold-three-address 
+        DataZ        4                         
+        DLabel       $mem-array-fold-three-lamb 
+        DataZ        4                         
+        DLabel       $mem-array-fold-three-base-size 
+        DataZ        4                         
+        DLabel       $mem-array-fold-three-flag1 
+        DataZ        4                         
+        DLabel       $mem-array-fold-three-flag2 
+        DataZ        4                         
+        DLabel       $mem-array-fold-three-size 
+        DataZ        4                         
+        DLabel       $mem-array-fold-three-length 
+        DataZ        4                         
+        DLabel       $mem-array-fold-three-ite 
+        DataZ        4                         
+        DLabel       $mem-array-fold-three-tem 
+        DataZ        4                         
+        PushD        $mem-array-fold-three-return-address 
+        Exchange                               
+        StoreI                                 
+        PushD        $mem-array-fold-three-flag2 
+        Exchange                               
+        StoreI                                 
+        PushD        $mem-array-fold-three-flag1 
+        Exchange                               
+        StoreI                                 
+        PushD        $mem-array-fold-three-base-size 
+        Exchange                               
+        StoreI                                 
+        PushD        $mem-array-fold-three-lamb 
+        Exchange                               
+        StoreI                                 
+        PushD        $mem-array-fold-three-address 
+        Exchange                               
+        StoreI                                 
+        PushI        0                         
+        PushD        $mem-array-fold-three-ite 
+        Exchange                               
+        StoreI                                 
+        PushD        $mem-array-fold-three-address 
+        LoadI                                  
+        PushI        8                         
+        Add                                    
+        LoadI                                  
+        PushD        $mem-array-fold-three-size 
+        Exchange                               
+        StoreI                                 
+        PushD        $mem-array-fold-three-address 
+        LoadI                                  
+        PushI        12                        
+        Add                                    
+        LoadI                                  
+        PushD        $mem-array-fold-three-length 
+        Exchange                               
+        StoreI                                 
+        Label        $mem-array-fold-three-loop 
+        PushD        $mem-array-fold-three-ite 
+        LoadI                                  
+        PushD        $mem-array-fold-three-length 
+        LoadI                                  
+        Subtract                               
+        JumpFalse    $mem-array-fold-three-end 
+        PushD        $mem-array-fold-three-address 
+        LoadI                                  
+        PushI        16                        
+        PushD        $mem-array-fold-three-ite 
+        LoadI                                  
+        PushD        $mem-array-fold-three-size 
+        LoadI                                  
+        Multiply                               
+        Add                                    
+        Add                                    
+        PushD        $mem-array-fold-three-size 
+        LoadI                                  
+        PushD        $mem-array-fold-three-flag2 
+        LoadI                                  
+        Call         -mem-load-data            
+        PushD        $stack-pointer            
+        PushD        $stack-pointer            
+        LoadI                                  
+        PushD        $mem-array-fold-three-size 
+        LoadI                                  
+        PushI        -1                        
+        Multiply                               
+        PushD        $mem-array-fold-three-base-size 
+        LoadI                                  
+        PushI        -1                        
+        Multiply                               
+        Add                                    
+        Add                                    
+        StoreI                                 
+        PushD        $stack-pointer            
+        LoadI                                  
+        PushD        $mem-array-fold-three-size 
+        LoadI                                  
+        PushD        $mem-array-fold-three-flag2 
+        LoadI                                  
+        Call         -mem-store-data           
+        PushD        $stack-pointer            
+        LoadI                                  
+        PushD        $mem-array-fold-three-size 
+        LoadI                                  
+        Add                                    
+        PushD        $mem-array-fold-three-base-size 
+        LoadI                                  
+        PushD        $mem-array-fold-three-flag1 
+        LoadI                                  
+        Call         -mem-store-data           
+        PushD        $mem-array-fold-three-return-address 
+        LoadI                                  
+        PushD        $mem-array-fold-three-address 
+        LoadI                                  
+        PushD        $mem-array-fold-three-lamb 
+        LoadI                                  
+        PushD        $mem-array-fold-three-base-size 
+        LoadI                                  
+        PushD        $mem-array-fold-three-flag1 
+        LoadI                                  
+        PushD        $mem-array-fold-three-flag2 
+        LoadI                                  
+        PushD        $mem-array-fold-three-size 
+        LoadI                                  
+        PushD        $mem-array-fold-three-length 
+        LoadI                                  
+        PushD        $mem-array-fold-three-ite 
+        LoadI                                  
+        PushI        -1                        
+        PushD        $mem-array-fold-three-lamb 
+        LoadI                                  
+        CallV                                  
+        Exchange                               
+        Duplicate                              
+        JumpNeg      $mem-array-fold-three-normal 
+        Exchange                               
+        PushD        $mem-array-fold-three-tem 
+        Exchange                               
+        StoreI                                 
+        Exchange                               
+        Label        $mem-array-fold-three-normal 
+        Pop                                    
+        Exchange                               
+        PushD        $mem-array-fold-three-ite 
+        Exchange                               
+        StoreI                                 
+        Exchange                               
+        PushD        $mem-array-fold-three-length 
+        Exchange                               
+        StoreI                                 
+        Exchange                               
+        PushD        $mem-array-fold-three-size 
+        Exchange                               
+        StoreI                                 
+        Exchange                               
+        PushD        $mem-array-fold-three-flag2 
+        Exchange                               
+        StoreI                                 
+        Exchange                               
+        PushD        $mem-array-fold-three-flag1 
+        Exchange                               
+        StoreI                                 
+        Exchange                               
+        PushD        $mem-array-fold-three-base-size 
+        Exchange                               
+        StoreI                                 
+        Exchange                               
+        PushD        $mem-array-fold-three-lamb 
+        Exchange                               
+        StoreI                                 
+        Exchange                               
+        PushD        $mem-array-fold-three-address 
+        Exchange                               
+        StoreI                                 
+        Exchange                               
+        PushD        $mem-array-fold-three-return-address 
+        Exchange                               
+        StoreI                                 
+        PushD        $stack-pointer            
+        PushD        $stack-pointer            
+        LoadI                                  
+        PushD        $mem-array-fold-three-size 
+        LoadI                                  
+        PushD        $mem-array-fold-three-base-size 
+        LoadI                                  
+        Add                                    
+        Add                                    
+        StoreI                                 
+        PushD        $mem-array-fold-three-ite 
+        LoadI                                  
+        PushI        1                         
+        Add                                    
+        PushD        $mem-array-fold-three-ite 
+        Exchange                               
+        StoreI                                 
+        PushD        $mem-array-fold-three-flag1 
+        LoadI                                  
+        JumpFalse    $mem-array-fold-three-loop 
+        PushD        $mem-array-fold-three-tem 
+        LoadI                                  
+        Jump         $mem-array-fold-three-loop 
+        Label        $mem-array-fold-three-end 
+        PushD        $mem-array-fold-three-return-address 
+        LoadI                                  
+        Return                                 
         Label        -mem-rat-GCD              
         DLabel       $mem-rat-gcd-return-address 
         DataZ        4                         
@@ -3329,6 +5337,279 @@
         BTAnd                                  
         JumpTrue     $$a-record-deleted-error  
         PushD        -mem-arrya-record-valid-return-address 
+        LoadI                                  
+        Return                                 
+        Label        -mem-array-all            
+        DLabel       $mem-array-all-address    
+        DataZ        4                         
+        DLabel       $mem-array-all-flag       
+        DataZ        4                         
+        DLabel       $mem-array-all-return-address 
+        DataZ        4                         
+        DLabel       $mem-array-all-ite        
+        DataZ        4                         
+        DLabel       $mem-array-all-length     
+        DataZ        4                         
+        PushD        $mem-array-all-return-address 
+        Exchange                               
+        StoreI                                 
+        PushD        $mem-array-all-flag       
+        Exchange                               
+        StoreI                                 
+        PushD        $mem-array-all-address    
+        Exchange                               
+        StoreI                                 
+        PushI        0                         
+        PushD        $mem-array-all-ite        
+        Exchange                               
+        StoreI                                 
+        PushD        $mem-array-all-address    
+        LoadI                                  
+        PushI        12                        
+        Add                                    
+        LoadI                                  
+        PushD        $mem-array-all-length     
+        Exchange                               
+        StoreI                                 
+        PushD        $mem-array-all-flag       
+        LoadI                                  
+        JumpTrue     $mem-array-all-rat        
+        PushD        $mem-array-all-address    
+        LoadI                                  
+        PushI        8                         
+        LoadI                                  
+        PushI        1                         
+        Subtract                               
+        JumpFalse    $mem-array-all-one-byte   
+        PushD        $mem-array-all-address    
+        LoadI                                  
+        PushI        8                         
+        LoadI                                  
+        PushI        4                         
+        Subtract                               
+        JumpFalse    $mem-array-all-four-byte  
+        PushD        $mem-array-all-address    
+        LoadI                                  
+        PushI        8                         
+        LoadI                                  
+        PushI        8                         
+        Subtract                               
+        JumpFalse    $mem-array-all-eight-byte 
+        Label        $mem-array-all-one-byte   
+        PushD        $mem-array-all-ite        
+        LoadI                                  
+        PushD        $mem-array-all-length     
+        LoadI                                  
+        Subtract                               
+        JumpFalse    $mem-array-all-end        
+        PushD        $mem-array-all-address    
+        LoadI                                  
+        PushD        $mem-array-all-ite        
+        LoadI                                  
+        PushI        16                        
+        Add                                    
+        Add                                    
+        LoadC                                  
+        PushD        $mem-array-all-ite        
+        LoadI                                  
+        PushI        1                         
+        Add                                    
+        PushD        $mem-array-all-ite        
+        Exchange                               
+        StoreI                                 
+        Jump         $mem-array-all-one-byte   
+        Label        $mem-array-all-four-byte  
+        PushD        $mem-array-all-ite        
+        LoadI                                  
+        PushD        $mem-array-all-length     
+        LoadI                                  
+        Subtract                               
+        JumpFalse    $mem-array-all-end        
+        PushD        $mem-array-all-address    
+        LoadI                                  
+        PushD        $mem-array-all-ite        
+        LoadI                                  
+        PushI        4                         
+        Multiply                               
+        PushI        16                        
+        Add                                    
+        Add                                    
+        LoadI                                  
+        PushD        $mem-array-all-ite        
+        LoadI                                  
+        PushI        1                         
+        Add                                    
+        PushD        $mem-array-all-ite        
+        Exchange                               
+        StoreI                                 
+        Jump         $mem-array-all-four-byte  
+        Label        $mem-array-all-eight-byte 
+        PushD        $mem-array-all-ite        
+        LoadI                                  
+        PushD        $mem-array-all-length     
+        LoadI                                  
+        Subtract                               
+        JumpFalse    $mem-array-all-end        
+        PushD        $mem-array-all-address    
+        LoadI                                  
+        PushD        $mem-array-all-ite        
+        LoadI                                  
+        PushI        8                         
+        Multiply                               
+        PushI        16                        
+        Add                                    
+        Add                                    
+        LoadF                                  
+        PushD        $mem-array-all-ite        
+        LoadI                                  
+        PushI        1                         
+        Add                                    
+        PushD        $mem-array-all-ite        
+        Exchange                               
+        StoreI                                 
+        Jump         $mem-array-all-eight-byte 
+        Label        $mem-array-all-rat        
+        PushD        $mem-array-all-ite        
+        LoadI                                  
+        PushD        $mem-array-all-length     
+        LoadI                                  
+        Subtract                               
+        JumpFalse    $mem-array-all-end        
+        PushD        $mem-array-all-address    
+        LoadI                                  
+        PushD        $mem-array-all-ite        
+        LoadI                                  
+        PushI        8                         
+        Multiply                               
+        PushI        16                        
+        Add                                    
+        Add                                    
+        Duplicate                              
+        LoadI                                  
+        Exchange                               
+        PushI        4                         
+        Add                                    
+        LoadI                                  
+        PushD        $mem-array-all-ite        
+        LoadI                                  
+        PushI        1                         
+        Add                                    
+        PushD        $mem-array-all-ite        
+        Exchange                               
+        StoreI                                 
+        Jump         $mem-array-all-eight-byte 
+        Label        $mem-array-all-end        
+        PushD        $mem-array-all-address    
+        LoadI                                  
+        PushD        $mem-array-all-return-address 
+        LoadI                                  
+        Return                                 
+        Label        -mem-load-data            
+        DLabel       $mem-load-aid-return-address 
+        DataZ        4                         
+        PushD        $mem-load-aid-return-address 
+        Exchange                               
+        StoreI                                 
+        JumpTrue     $mem-load-aid-rat         
+        Duplicate                              
+        PushI        1                         
+        Subtract                               
+        JumpFalse    $mem-load-aid-char        
+        Duplicate                              
+        PushI        4                         
+        Subtract                               
+        JumpFalse    $mem-load-aid-int         
+        Duplicate                              
+        PushI        8                         
+        Subtract                               
+        JumpFalse    $mem-load-aid-float       
+        Label        $mem-load-aid-rat         
+        Pop                                    
+        Duplicate                              
+        LoadI                                  
+        Exchange                               
+        PushI        4                         
+        Add                                    
+        LoadI                                  
+        PushD        $mem-load-aid-return-address 
+        LoadI                                  
+        Return                                 
+        Label        $mem-load-aid-char        
+        Pop                                    
+        LoadC                                  
+        PushD        $mem-load-aid-return-address 
+        LoadI                                  
+        Return                                 
+        Label        $mem-load-aid-int         
+        Pop                                    
+        LoadI                                  
+        PushD        $mem-load-aid-return-address 
+        LoadI                                  
+        Return                                 
+        Label        $mem-load-aid-float       
+        Pop                                    
+        LoadF                                  
+        PushD        $mem-load-aid-return-address 
+        LoadI                                  
+        Return                                 
+        Label        -mem-store-data           
+        DLabel       $mem-store-aid-return-address 
+        DataZ        4                         
+        DLabel       $mem-store-aid-tem        
+        DataZ        4                         
+        PushD        $mem-store-aid-return-address 
+        Exchange                               
+        StoreI                                 
+        JumpTrue     $mem-store-aid-rat        
+        Duplicate                              
+        PushI        1                         
+        Subtract                               
+        JumpFalse    $mem-store-aid-char       
+        Duplicate                              
+        PushI        4                         
+        Subtract                               
+        JumpFalse    $mem-store-aid-int        
+        Duplicate                              
+        PushI        8                         
+        Subtract                               
+        JumpFalse    $mem-store-aid-float      
+        Label        $mem-store-aid-rat        
+        Pop                                    
+        PushD        $mem-store-aid-tem        
+        Exchange                               
+        StoreI                                 
+        PushD        $mem-store-aid-tem        
+        LoadI                                  
+        PushI        4                         
+        Add                                    
+        Exchange                               
+        StoreI                                 
+        PushD        $mem-store-aid-tem        
+        LoadI                                  
+        Exchange                               
+        StoreI                                 
+        PushD        $mem-store-aid-return-address 
+        LoadI                                  
+        Return                                 
+        Label        $mem-store-aid-char       
+        Pop                                    
+        Exchange                               
+        StoreC                                 
+        PushD        $mem-store-aid-return-address 
+        LoadI                                  
+        Return                                 
+        Label        $mem-store-aid-int        
+        Pop                                    
+        Exchange                               
+        StoreI                                 
+        PushD        $mem-store-aid-return-address 
+        LoadI                                  
+        Return                                 
+        Label        $mem-store-aid-float      
+        Pop                                    
+        Exchange                               
+        StoreF                                 
+        PushD        $mem-store-aid-return-address 
         LoadI                                  
         Return                                 
         DLabel       $heap-memory              
