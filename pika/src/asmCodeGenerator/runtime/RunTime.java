@@ -37,6 +37,7 @@ public class RunTime {
 	public static final String RECORD_ARRAY_ERROR = "$$a-record-error";
 	public static final String RECORD_STRING_ERROR = "$$a-string-error";
 	public static final String RECORD_ARRAY_DELETED_ERROR = "$$a-record-deleted-error";
+	public static final String ARRAY_ZIP_ERROR = "$$array-zip-error";
 	
 	private ASMCodeFragment environmentASM() {
 		ASMCodeFragment result = new ASMCodeFragment(GENERATES_VOID);
@@ -170,6 +171,7 @@ public class RunTime {
 		String recordError = "$errors-record-error";
 		String recordDeletedError = "$errors-record-deleted-error";
 		String stringError = "$errors-string-error";
+		String arrayError = "$errors-array-zip-error";
 				
 		frag.add(DLabel, recordError);
 		frag.add(DataS, "array record is not valid.");
@@ -179,6 +181,9 @@ public class RunTime {
 		
 		frag.add(DLabel, stringError);
 		frag.add(DataS, "string record is not valid.");
+		
+		frag.add(DLabel, arrayError);
+		frag.add(DataS, "arrays in zip expression have different length.");
 		
 		frag.add(Label, RECORD_ARRAY_ERROR);
 		frag.add(PushD, recordError);
@@ -190,6 +195,10 @@ public class RunTime {
 		
 		frag.add(Label, RECORD_STRING_ERROR);
 		frag.add(PushD, recordDeletedError);
+		frag.add(Jump, GENERAL_RUNTIME_ERROR);
+		
+		frag.add(Label, ARRAY_ZIP_ERROR);
+		frag.add(PushD, arrayError);
 		frag.add(Jump, GENERAL_RUNTIME_ERROR);
 	}
 	

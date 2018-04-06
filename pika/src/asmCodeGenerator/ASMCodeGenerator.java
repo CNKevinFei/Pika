@@ -1087,6 +1087,74 @@ public class ASMCodeGenerator {
 				code.add(Call, MemoryManager.MEM_ARRAY_FOLD_THREE);
 			}
 		}
+		
+		public void visitLeave(ZipExpressionNode node) {
+			newValueCode(node);
+			
+			code.append(removeValueCode(node.child(0)));
+			code.append(removeValueCode(node.child(1)));
+			//
+			code.add(Duplicate);
+			code.add(Duplicate);
+			code.add(PushI, MemoryManager.MEM_ARRAY_LENGTH_OFFSET);
+			code.add(Add);
+			code.add(LoadI);
+			code.add(PushI, ((LambdaType)node.child(2).getType()).getReturnType().getSize());
+			code.add(Multiply);
+			code.add(PushI, MemoryManager.MEM_ARRAY_HEADER);
+			code.add(Add);
+			code.add(Call, MemoryManager.MEM_MANAGER_ALLOCATE);
+			//[...array1, array2, array2, newAddr]
+			
+			code.add(Exchange);
+			code.add(PushI, MemoryManager.MEM_ARRAY_LENGTH_OFFSET);
+			code.add(Add);
+			code.add(LoadI);
+			code.add(PushI, ((LambdaType)node.child(2).getType()).getReturnType().getSize());
+			code.add(Exchange);
+			
+			if(((LambdaType)node.child(2).getType()).getReturnType() instanceof ArrayType) {
+				code.add(PushI, 4);
+			}
+			else {
+				code.add(PushI, 0);
+			}
+			
+			code.add(Call, MemoryManager.MEM_STORE_ARRAY_HEADER);
+			code.add(Pop);
+			
+			//
+			code.append(removeValueCode(node.child(2)));
+			
+			if(((ArrayType)node.child(0).getType()).getSubType() == PrimitiveType.RATIONAL)
+			{
+				code.add(PushI, 1);
+			}
+			else {
+				code.add(PushI, 0);
+			}
+			
+			if(((ArrayType)node.child(1).getType()).getSubType() == PrimitiveType.RATIONAL)
+			{
+				code.add(PushI, 1);
+			}
+			else {
+				code.add(PushI, 0);
+			}
+			
+			if(((LambdaType)node.child(2).getType()).getReturnType() == PrimitiveType.RATIONAL)
+			{
+				code.add(PushI, 1);
+			}
+			else {
+				code.add(PushI, 0);
+			}
+			
+			code.add(PushI, ((LambdaType)node.child(2).getType()).getReturnType().getSize());
+			
+			//[...array1, array2, newArray, lamb, flag1, flag2, flag3, size]
+			code.add(Call, MemoryManager.MEM_ARRAY_ZIP);
+		}
 		private void visitNewNode(BinaryOperatorNode node) {
 			newValueCode(node);
 			Type type = ((ArrayType)(node.getType())).getSubType();

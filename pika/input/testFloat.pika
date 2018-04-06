@@ -7,7 +7,7 @@ func test<string a, char b>->string{
 }
 
 exec{
-	var str := zip ["a","b"], [^a^, ^b^], test.
+	var str := zip ["nihao","wode"], [^a^, ^b^], test.
 	
 	print str.
 	

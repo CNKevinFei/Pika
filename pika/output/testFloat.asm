@@ -341,6 +341,55 @@
         DataC        100                       
         DataC        46                        
         DataC        0                         
+        DLabel       $errors-array-zip-error   
+        DataC        97                        %% "arrays in zip expression have different length."
+        DataC        114                       
+        DataC        114                       
+        DataC        97                        
+        DataC        121                       
+        DataC        115                       
+        DataC        32                        
+        DataC        105                       
+        DataC        110                       
+        DataC        32                        
+        DataC        122                       
+        DataC        105                       
+        DataC        112                       
+        DataC        32                        
+        DataC        101                       
+        DataC        120                       
+        DataC        112                       
+        DataC        114                       
+        DataC        101                       
+        DataC        115                       
+        DataC        115                       
+        DataC        105                       
+        DataC        111                       
+        DataC        110                       
+        DataC        32                        
+        DataC        104                       
+        DataC        97                        
+        DataC        118                       
+        DataC        101                       
+        DataC        32                        
+        DataC        100                       
+        DataC        105                       
+        DataC        102                       
+        DataC        102                       
+        DataC        101                       
+        DataC        114                       
+        DataC        101                       
+        DataC        110                       
+        DataC        116                       
+        DataC        32                        
+        DataC        108                       
+        DataC        101                       
+        DataC        110                       
+        DataC        103                       
+        DataC        116                       
+        DataC        104                       
+        DataC        46                        
+        DataC        0                         
         Label        $$a-record-error          
         PushD        $errors-record-error      
         Jump         $$general-runtime-error   
@@ -349,6 +398,9 @@
         Jump         $$general-runtime-error   
         Label        $$a-string-error          
         PushD        $errors-record-deleted-error 
+        Jump         $$general-runtime-error   
+        Label        $$array-zip-error         
+        PushD        $errors-array-zip-error   
         Jump         $$general-runtime-error   
         DLabel       $no-retuirn-error         
         DataC        119                       %% "without return statement."
@@ -491,56 +543,149 @@
         PushD        $global-memory-block      
         PushI        4                         
         Add                                    %% str
-        PushI        14                        
+        PushI        18                        
         Call         -mem-manager-allocate     
         Duplicate                              
-        PushI        1                         
+        PushI        5                         
         Call         -mem-store-string-header  
         Duplicate                              
         PushI        0                         
         PushI        12                        
         Add                                    
         Add                                    
-        PushI        104                       
+        PushI        110                       
         StoreC                                 
         Duplicate                              
         PushI        1                         
         PushI        12                        
         Add                                    
         Add                                    
+        PushI        105                       
+        StoreC                                 
+        Duplicate                              
+        PushI        2                         
+        PushI        12                        
+        Add                                    
+        Add                                    
+        PushI        104                       
+        StoreC                                 
+        Duplicate                              
+        PushI        3                         
+        PushI        12                        
+        Add                                    
+        Add                                    
+        PushI        97                        
+        StoreC                                 
+        Duplicate                              
+        PushI        4                         
+        PushI        12                        
+        Add                                    
+        Add                                    
+        PushI        111                       
+        StoreC                                 
+        Duplicate                              
+        PushI        5                         
+        PushI        12                        
+        Add                                    
+        Add                                    
         PushI        0                         
         StoreC                                 
-        PushI        101                       
-        PushI        108                       
-        PushI        108                       
-        PushI        111                       
-        PushI        16                        
+        PushI        17                        
+        Call         -mem-manager-allocate     
+        Duplicate                              
         PushI        4                         
+        Call         -mem-store-string-header  
+        Duplicate                              
+        PushI        0                         
+        PushI        12                        
+        Add                                    
+        Add                                    
+        PushI        119                       
+        StoreC                                 
+        Duplicate                              
+        PushI        1                         
+        PushI        12                        
+        Add                                    
+        Add                                    
+        PushI        111                       
+        StoreC                                 
+        Duplicate                              
+        PushI        2                         
+        PushI        12                        
+        Add                                    
+        Add                                    
+        PushI        100                       
+        StoreC                                 
+        Duplicate                              
+        PushI        3                         
+        PushI        12                        
+        Add                                    
+        Add                                    
+        PushI        101                       
+        StoreC                                 
+        Duplicate                              
+        PushI        4                         
+        PushI        12                        
+        Add                                    
+        Add                                    
+        PushI        0                         
+        StoreC                                 
+        PushI        16                        
+        PushI        8                         
+        Add                                    
+        Call         -mem-manager-allocate     
+        PushI        4                         
+        PushI        2                         
+        PushI        0                         
+        Call         -mem-store-array-header   
+        PushI        1                         
+        Call         -mem-store-array-four-byte 
+        PushI        97                        
+        PushI        98                        
+        PushI        16                        
+        PushI        2                         
         Add                                    
         Call         -mem-manager-allocate     
         PushI        1                         
-        PushI        4                         
+        PushI        2                         
         PushI        0                         
         Call         -mem-store-array-header   
         PushI        1                         
         Call         -mem-store-array-one-byte 
+        Duplicate                              
+        Duplicate                              
+        PushI        12                        
+        Add                                    
+        LoadI                                  
+        PushI        4                         
+        Multiply                               
+        PushI        16                        
+        Add                                    
+        Call         -mem-manager-allocate     
+        Exchange                               
+        PushI        12                        
+        Add                                    
+        LoadI                                  
+        PushI        4                         
+        Exchange                               
+        PushI        0                         
+        Call         -mem-store-array-header   
+        Pop                                    
         PushD        $global-memory-block      
         PushI        0                         
         Add                                    %% test
         LoadI                                  
+        PushI        0                         
+        PushI        0                         
+        PushI        0                         
         PushI        4                         
-        PushI        0                         
-        PushI        0                         
-        Call         -mem-array-fold-three     
+        Call         -mem-array-zip            
         StoreI                                 
         PushD        $global-memory-block      
         PushI        4                         
         Add                                    %% str
         LoadI                                  
-        PushI        12                        
-        Add                                    
-        PushD        $print-format-string      
-        Printf                                 
+        Call         -mem-array-string-print   
         Halt                                   
         Label        -mem-manager-make-tags    
         DLabel       $mmgr-tags-size           
@@ -3956,6 +4101,320 @@
         Jump         $mem-array-fold-three-loop 
         Label        $mem-array-fold-three-end 
         PushD        $mem-array-fold-three-return-address 
+        LoadI                                  
+        Return                                 
+        Label        -mem-array-zip            
+        DLabel       $mem-array-zip-return-address 
+        DataZ        4                         
+        DLabel       $mem-array-zip-array1     
+        DataZ        4                         
+        DLabel       $mem-array-zip-array2     
+        DataZ        4                         
+        DLabel       $mem-array-zip-lamb       
+        DataZ        4                         
+        DLabel       $mem-array-zip-address    
+        DataZ        4                         
+        DLabel       $mem-array-zip-flag1      
+        DataZ        4                         
+        DLabel       $mem-array-zip-flag2      
+        DataZ        4                         
+        DLabel       $mem-array-zip-flag3      
+        DataZ        4                         
+        DLabel       $mem-array-zip-size1      
+        DataZ        4                         
+        DLabel       $mem-array-zip-size2      
+        DataZ        4                         
+        DLabel       $mem-array-zip-size3      
+        DataZ        4                         
+        DLabel       $mem-array-zip-length1    
+        DataZ        4                         
+        DLabel       $mem-array-zip-length2    
+        DataZ        4                         
+        DLabel       $mem-array-zip-length     
+        DataZ        4                         
+        DLabel       $mem-array-zip-ite        
+        DataZ        4                         
+        DLabel       $mem-array-zip-tem        
+        DataZ        4                         
+        PushD        $mem-array-zip-return-address 
+        Exchange                               
+        StoreI                                 
+        PushD        $mem-array-zip-size3      
+        Exchange                               
+        StoreI                                 
+        PushD        $mem-array-zip-flag3      
+        Exchange                               
+        StoreI                                 
+        PushD        $mem-array-zip-flag2      
+        Exchange                               
+        StoreI                                 
+        PushD        $mem-array-zip-flag1      
+        Exchange                               
+        StoreI                                 
+        PushD        $mem-array-zip-lamb       
+        Exchange                               
+        StoreI                                 
+        PushD        $mem-array-zip-address    
+        Exchange                               
+        StoreI                                 
+        PushD        $mem-array-zip-array2     
+        Exchange                               
+        StoreI                                 
+        PushD        $mem-array-zip-array1     
+        Exchange                               
+        StoreI                                 
+        PushI        0                         
+        PushD        $mem-array-zip-ite        
+        Exchange                               
+        StoreI                                 
+        PushD        $mem-array-zip-array1     
+        LoadI                                  
+        PushI        8                         
+        Add                                    
+        LoadI                                  
+        PushD        $mem-array-zip-size1      
+        Exchange                               
+        StoreI                                 
+        PushD        $mem-array-zip-array2     
+        LoadI                                  
+        PushI        8                         
+        Add                                    
+        LoadI                                  
+        PushD        $mem-array-zip-size2      
+        Exchange                               
+        StoreI                                 
+        PushD        $mem-array-zip-array1     
+        LoadI                                  
+        PushI        12                        
+        Add                                    
+        LoadI                                  
+        PushD        $mem-array-zip-length1    
+        Exchange                               
+        StoreI                                 
+        PushD        $mem-array-zip-array2     
+        LoadI                                  
+        PushI        12                        
+        Add                                    
+        LoadI                                  
+        PushD        $mem-array-zip-length2    
+        Exchange                               
+        StoreI                                 
+        PushD        $mem-array-zip-length1    
+        LoadI                                  
+        PushD        $mem-array-zip-length2    
+        LoadI                                  
+        Subtract                               
+        JumpTrue     $$array-zip-error         
+        PushD        $mem-array-zip-length1    
+        LoadI                                  
+        PushD        $mem-array-zip-length     
+        Exchange                               
+        StoreI                                 
+        Label        $mem-array-zip-loop       
+        PushD        $mem-array-zip-ite        
+        LoadI                                  
+        PushD        $mem-array-zip-length     
+        LoadI                                  
+        Subtract                               
+        JumpFalse    $mem-array-zip-end        
+        PushD        $mem-array-zip-array1     
+        LoadI                                  
+        PushD        $mem-array-zip-ite        
+        LoadI                                  
+        PushD        $mem-array-zip-size1      
+        LoadI                                  
+        Multiply                               
+        PushI        16                        
+        Add                                    
+        Add                                    
+        PushD        $mem-array-zip-size1      
+        LoadI                                  
+        PushD        $mem-array-zip-flag1      
+        LoadI                                  
+        Call         -mem-load-data            
+        PushD        $mem-array-zip-array2     
+        LoadI                                  
+        PushD        $mem-array-zip-ite        
+        LoadI                                  
+        PushD        $mem-array-zip-size2      
+        LoadI                                  
+        Multiply                               
+        PushI        16                        
+        Add                                    
+        Add                                    
+        PushD        $mem-array-zip-size2      
+        LoadI                                  
+        PushD        $mem-array-zip-flag2      
+        LoadI                                  
+        Call         -mem-load-data            
+        PushD        $stack-pointer            
+        PushD        $stack-pointer            
+        LoadI                                  
+        PushD        $mem-array-zip-size1      
+        LoadI                                  
+        PushI        -1                        
+        Multiply                               
+        PushD        $mem-array-zip-size2      
+        LoadI                                  
+        PushI        -1                        
+        Multiply                               
+        Add                                    
+        Add                                    
+        StoreI                                 
+        PushD        $stack-pointer            
+        LoadI                                  
+        PushD        $mem-array-zip-size2      
+        LoadI                                  
+        PushD        $mem-array-zip-flag2      
+        LoadI                                  
+        Call         -mem-store-data           
+        PushD        $stack-pointer            
+        LoadI                                  
+        PushD        $mem-array-zip-size2      
+        LoadI                                  
+        Add                                    
+        PushD        $mem-array-zip-size1      
+        LoadI                                  
+        PushD        $mem-array-zip-flag1      
+        LoadI                                  
+        Call         -mem-store-data           
+        PushD        $mem-array-zip-return-address 
+        LoadI                                  
+        PushD        $mem-array-zip-array1     
+        LoadI                                  
+        PushD        $mem-array-zip-array2     
+        LoadI                                  
+        PushD        $mem-array-zip-lamb       
+        LoadI                                  
+        PushD        $mem-array-zip-address    
+        LoadI                                  
+        PushD        $mem-array-zip-flag1      
+        LoadI                                  
+        PushD        $mem-array-zip-flag2      
+        LoadI                                  
+        PushD        $mem-array-zip-flag3      
+        LoadI                                  
+        PushD        $mem-array-zip-size1      
+        LoadI                                  
+        PushD        $mem-array-zip-size2      
+        LoadI                                  
+        PushD        $mem-array-zip-size3      
+        LoadI                                  
+        PushD        $mem-array-zip-length1    
+        LoadI                                  
+        PushD        $mem-array-zip-length2    
+        LoadI                                  
+        PushD        $mem-array-zip-length     
+        LoadI                                  
+        PushD        $mem-array-zip-ite        
+        LoadI                                  
+        PushI        -1                        
+        PushD        $mem-array-zip-lamb       
+        LoadI                                  
+        CallV                                  
+        Exchange                               
+        Duplicate                              
+        JumpNeg      $mem-array-zip-normal     
+        Exchange                               
+        PushD        $mem-array-zip-tem        
+        Exchange                               
+        StoreI                                 
+        Exchange                               
+        Label        $mem-array-zip-normal     
+        Pop                                    
+        Exchange                               
+        PushD        $mem-array-zip-ite        
+        Exchange                               
+        StoreI                                 
+        Exchange                               
+        PushD        $mem-array-zip-length     
+        Exchange                               
+        StoreI                                 
+        Exchange                               
+        PushD        $mem-array-zip-length2    
+        Exchange                               
+        StoreI                                 
+        Exchange                               
+        PushD        $mem-array-zip-length1    
+        Exchange                               
+        StoreI                                 
+        Exchange                               
+        PushD        $mem-array-zip-size3      
+        Exchange                               
+        StoreI                                 
+        Exchange                               
+        PushD        $mem-array-zip-size2      
+        Exchange                               
+        StoreI                                 
+        Exchange                               
+        PushD        $mem-array-zip-size1      
+        Exchange                               
+        StoreI                                 
+        Exchange                               
+        PushD        $mem-array-zip-flag3      
+        Exchange                               
+        StoreI                                 
+        Exchange                               
+        PushD        $mem-array-zip-flag2      
+        Exchange                               
+        StoreI                                 
+        Exchange                               
+        PushD        $mem-array-zip-flag1      
+        Exchange                               
+        StoreI                                 
+        Exchange                               
+        PushD        $mem-array-zip-address    
+        Exchange                               
+        StoreI                                 
+        Exchange                               
+        PushD        $mem-array-zip-lamb       
+        Exchange                               
+        StoreI                                 
+        Exchange                               
+        PushD        $mem-array-zip-array2     
+        Exchange                               
+        StoreI                                 
+        Exchange                               
+        PushD        $mem-array-zip-array1     
+        Exchange                               
+        StoreI                                 
+        Exchange                               
+        PushD        $mem-array-zip-return-address 
+        Exchange                               
+        StoreI                                 
+        PushD        $mem-array-zip-flag3      
+        LoadI                                  
+        JumpFalse    $mem-array-zip-store      
+        PushD        $mem-array-zip-tem        
+        LoadI                                  
+        Label        $mem-array-zip-store      
+        PushD        $mem-array-zip-address    
+        LoadI                                  
+        PushD        $mem-array-zip-ite        
+        LoadI                                  
+        PushD        $mem-array-zip-size3      
+        LoadI                                  
+        Multiply                               
+        PushI        16                        
+        Add                                    
+        Add                                    
+        PushD        $mem-array-zip-size3      
+        LoadI                                  
+        PushD        $mem-array-zip-flag3      
+        LoadI                                  
+        Call         -mem-store-data           
+        PushD        $mem-array-zip-ite        
+        LoadI                                  
+        PushI        1                         
+        Add                                    
+        PushD        $mem-array-zip-ite        
+        Exchange                               
+        StoreI                                 
+        Jump         $mem-array-zip-loop       
+        Label        $mem-array-zip-end        
+        PushD        $mem-array-zip-address    
+        LoadI                                  
+        PushD        $mem-array-zip-return-address 
         LoadI                                  
         Return                                 
         Label        -mem-rat-GCD              
