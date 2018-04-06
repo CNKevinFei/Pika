@@ -1,14 +1,15 @@
-func test<string a, char b>->string{
+func test<int a>->int{
 	
-	return a+b.
+	static var c := 2.
+	var t := <int a>->int{return c.}.
 	
-	
-	
+	return t(a).
 }
 
+static var c := 1.
+
 exec{
-	var str := zip ["nihao","wode"], [^a^, ^b^], test.
+	var c := 2.
 	
-	print str.
-	
+	print test(5).
 }

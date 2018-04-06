@@ -107,7 +107,7 @@ class SemanticAnalysisVisitor extends ParseNodeVisitor.Default {
 		ParseNode variable = node.child(0);
 		ParseNode value = node.child(1);
 		
-		if(!((variable instanceof IdentifierNode)||(variable.getToken().isLextant(Punctuator.ARRAY_INDEX)))) {
+		if(!((variable instanceof IdentifierNode)||(variable.getToken().isLextant(Punctuator.ARRAY_INDEX)&&variable.child(0).getType()instanceof ArrayType))) {
 			logError("left value is not targetable at "+node.getToken().getLocation());
 			node.setType(PrimitiveType.ERROR);
 		}

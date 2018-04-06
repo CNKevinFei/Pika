@@ -110,14 +110,22 @@ public class Scope {
 		symbolTable.errorIfAlreadyDefined(token);
 
 		String lexeme = token.getLexeme();
-		Binding binding = allocateNewBinding(type, token.getLocation(), lexeme, conOrVar, identifierNode.getStatic());	
+		Binding binding = allocateNewBinding(type, token.getLocation(), lexeme, conOrVar, identifierNode.getStatic(), identifierNode.getRoot().getLocalScope());	
 		symbolTable.install(lexeme, binding);
 
 		return binding;
 	}
 	
-	private Binding allocateNewBinding(Type type, TextLocation textLocation, String lexeme, Token conOrVar, boolean flag) {
-		MemoryLocation memoryLocation = allocator.allocate(type.getSize());
+	private Binding allocateNewBinding(Type type, TextLocation textLocation, String lexeme, Token conOrVar, boolean flag, Scope root) {
+		MemoryLocation memoryLocation;
+		
+		if(flag) {
+			memoryLocation = root.allocator.allocate(type.getSize());
+		}
+		else {
+			memoryLocation = allocator.allocate(type.getSize());
+		}
+		
 
 		return new Binding(type, textLocation, memoryLocation, lexeme, conOrVar,flag);
 	}
@@ -128,7 +136,7 @@ public class Scope {
 		symbolTable.errorIfAlreadyDefined(token);
 
 		String lexeme = token.getLexeme();
-		Binding binding = allocateNewBinding(type, token.getLocation(), lexeme, conOrVar, true);	
+		Binding binding = allocateNewBinding(type, token.getLocation(), lexeme, conOrVar, true, identifierNode.getRoot().getLocalScope());	
 		symbolTable.install(lexeme, binding);
 
 		return binding;

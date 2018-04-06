@@ -471,16 +471,51 @@
         Jump         $$general-runtime-error   
         DLabel       $usable-memory-start      
         DLabel       $global-memory-block      
-        DataZ        8                         
+        DataZ        4                         
         DLabel       $frame-stack-pointer      
         DataZ        4                         
         DLabel       $stack-pointer            
         DataZ        4                         
         DLabel       $string-constant-memory   
         Label        $$main                    
-        PushD        $global-memory-block      
-        PushI        0                         
-        Add                                    %% test
+        PushI        0                         %% c
+        PushI        1                         
+        StoreI                                 
+        PushI        0                         %% test
+        PushPC                                 
+        PushI        3                         
+        Add                                    
+        Jump         -function-2-skip          
+        PushD        $stack-pointer            
+        LoadI                                  
+        PushI        -4                        
+        Add                                    
+        Exchange                               
+        StoreI                                 
+        PushD        $stack-pointer            
+        LoadI                                  
+        PushI        -8                        
+        Add                                    
+        PushD        $frame-stack-pointer      
+        LoadI                                  
+        StoreI                                 
+        PushD        $frame-stack-pointer      
+        PushD        $stack-pointer            
+        LoadI                                  
+        StoreI                                 
+        PushD        $stack-pointer            
+        PushD        $frame-stack-pointer      
+        LoadI                                  
+        PushI        -12                       
+        Add                                    
+        StoreI                                 
+        PushI        0                         %% c
+        PushI        2                         
+        StoreI                                 
+        PushD        $frame-stack-pointer      
+        LoadI                                  
+        PushI        -12                       
+        Add                                    %% t
         PushPC                                 
         PushI        3                         
         Add                                    
@@ -508,18 +543,8 @@
         PushI        -8                        
         Add                                    
         StoreI                                 
-        PushD        $frame-stack-pointer      
+        PushI        0                         %% c
         LoadI                                  
-        PushI        1                         
-        Add                                    %% a
-        LoadI                                  
-        PushD        $frame-stack-pointer      
-        LoadI                                  
-        PushI        0                         
-        Add                                    %% b
-        LoadC                                  
-        Exchange                               
-        Call         -mem-string-char          
         PushD        $stack-pointer            
         PushD        $frame-stack-pointer      
         LoadI                                  
@@ -540,152 +565,78 @@
         Jump         $$function-without-return 
         Label        -function-1-skip          
         StoreI                                 
-        PushD        $global-memory-block      
-        PushI        4                         
-        Add                                    %% str
-        PushI        18                        
-        Call         -mem-manager-allocate     
-        Duplicate                              
-        PushI        5                         
-        Call         -mem-store-string-header  
-        Duplicate                              
-        PushI        0                         
-        PushI        12                        
-        Add                                    
-        Add                                    
-        PushI        110                       
-        StoreC                                 
-        Duplicate                              
-        PushI        1                         
-        PushI        12                        
-        Add                                    
-        Add                                    
-        PushI        105                       
-        StoreC                                 
-        Duplicate                              
-        PushI        2                         
-        PushI        12                        
-        Add                                    
-        Add                                    
-        PushI        104                       
-        StoreC                                 
-        Duplicate                              
-        PushI        3                         
-        PushI        12                        
-        Add                                    
-        Add                                    
-        PushI        97                        
-        StoreC                                 
-        Duplicate                              
-        PushI        4                         
-        PushI        12                        
-        Add                                    
-        Add                                    
-        PushI        111                       
-        StoreC                                 
-        Duplicate                              
-        PushI        5                         
-        PushI        12                        
-        Add                                    
-        Add                                    
-        PushI        0                         
-        StoreC                                 
-        PushI        17                        
-        Call         -mem-manager-allocate     
-        Duplicate                              
-        PushI        4                         
-        Call         -mem-store-string-header  
-        Duplicate                              
-        PushI        0                         
-        PushI        12                        
-        Add                                    
-        Add                                    
-        PushI        119                       
-        StoreC                                 
-        Duplicate                              
-        PushI        1                         
-        PushI        12                        
-        Add                                    
-        Add                                    
-        PushI        111                       
-        StoreC                                 
-        Duplicate                              
-        PushI        2                         
-        PushI        12                        
-        Add                                    
-        Add                                    
-        PushI        100                       
-        StoreC                                 
-        Duplicate                              
-        PushI        3                         
-        PushI        12                        
-        Add                                    
-        Add                                    
-        PushI        101                       
-        StoreC                                 
-        Duplicate                              
-        PushI        4                         
-        PushI        12                        
-        Add                                    
-        Add                                    
-        PushI        0                         
-        StoreC                                 
-        PushI        16                        
-        PushI        8                         
-        Add                                    
-        Call         -mem-manager-allocate     
-        PushI        4                         
-        PushI        2                         
-        PushI        0                         
-        Call         -mem-store-array-header   
-        PushI        1                         
-        Call         -mem-store-array-four-byte 
-        PushI        97                        
-        PushI        98                        
-        PushI        16                        
-        PushI        2                         
-        Add                                    
-        Call         -mem-manager-allocate     
-        PushI        1                         
-        PushI        2                         
-        PushI        0                         
-        Call         -mem-store-array-header   
-        PushI        1                         
-        Call         -mem-store-array-one-byte 
-        Duplicate                              
-        Duplicate                              
-        PushI        12                        
-        Add                                    
+        PushD        $stack-pointer            
+        PushD        $stack-pointer            
         LoadI                                  
-        PushI        4                         
-        Multiply                               
-        PushI        16                        
+        PushI        -4                        
         Add                                    
-        Call         -mem-manager-allocate     
-        Exchange                               
-        PushI        12                        
-        Add                                    
+        StoreI                                 
+        PushD        $stack-pointer            
         LoadI                                  
-        PushI        4                         
-        Exchange                               
-        PushI        0                         
-        Call         -mem-store-array-header   
-        Pop                                    
-        PushD        $global-memory-block      
-        PushI        0                         
-        Add                                    %% test
+        PushD        $frame-stack-pointer      
         LoadI                                  
         PushI        0                         
-        PushI        0                         
-        PushI        0                         
+        Add                                    %% a
+        LoadI                                  
+        StoreI                                 
+        PushD        $frame-stack-pointer      
+        LoadI                                  
+        PushI        -12                       
+        Add                                    %% t
+        LoadI                                  
+        CallV                                  
+        PushD        $stack-pointer            
+        PushD        $stack-pointer            
+        LoadI                                  
         PushI        4                         
-        Call         -mem-array-zip            
+        Add                                    
+        StoreI                                 
+        PushD        $stack-pointer            
+        PushD        $frame-stack-pointer      
+        LoadI                                  
+        StoreI                                 
+        PushD        $frame-stack-pointer      
+        PushD        $stack-pointer            
+        LoadI                                  
+        PushI        -8                        
+        Add                                    
+        LoadI                                  
+        StoreI                                 
+        PushD        $stack-pointer            
+        LoadI                                  
+        PushI        -4                        
+        Add                                    
+        LoadI                                  
+        Return                                 
+        Jump         $$function-without-return 
+        Label        -function-2-skip          
         StoreI                                 
         PushD        $global-memory-block      
-        PushI        4                         
-        Add                                    %% str
+        PushI        0                         
+        Add                                    %% c
+        PushI        2                         
+        StoreI                                 
+        PushD        $stack-pointer            
+        PushD        $stack-pointer            
         LoadI                                  
-        Call         -mem-array-string-print   
+        PushI        -4                        
+        Add                                    
+        StoreI                                 
+        PushD        $stack-pointer            
+        LoadI                                  
+        PushI        5                         
+        StoreI                                 
+        PushI        0                         %% test
+        LoadI                                  
+        CallV                                  
+        PushD        $stack-pointer            
+        PushD        $stack-pointer            
+        LoadI                                  
+        PushI        4                         
+        Add                                    
+        StoreI                                 
+        PushD        $print-format-integer     
+        Printf                                 
         Halt                                   
         Label        -mem-manager-make-tags    
         DLabel       $mmgr-tags-size           
